@@ -1,4 +1,5 @@
 <?php
+  session_start();
   header("Content-type: text/html; charset=UTF8");
 ?>
 <?php require("inc-head.html");?>
