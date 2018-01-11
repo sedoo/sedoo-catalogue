@@ -1,7 +1,7 @@
-<!-- colonne de gauche -->
-<!-- Navigation Level 3 -->
 <div class="round-border-topright"></div>
-<h1 class="first"><?php echo MainProject ; ?></h1>
+<h1 class="first">
+	<?php echo MainProject ; ?>
+</h1>
 <dl class="nav3-grid">
 	<dt>
 		<a href="<?php $_SERVER['HTTP_HOST'] ?>/User-Account-Creation">Subscribe</a>
@@ -20,8 +20,7 @@
 	</dt>
 	<dl class="nav4-grid">
 		<dt>
-			<a href="/<?php echo $project_name; ?>/Search-tool"
-				style="border: 0;">Advanced search</a>
+			<a href="/<?php echo $project_name; ?>/Search-tool" style="border: 0;">Advanced search</a>
 		</dt>
 		<?php
 				if(constant(strtolower($project_name).'_HasParameterSearch') == 'true'){
@@ -104,8 +103,8 @@
 				}
 				?>
 		<dl class="nav4-grid">
-		</dl>	
-	<?php
+		</dl>
+		<?php
 	if(isset($MainProjects) && !empty($MainProjects)){
 		if(isset($MainProjects[0]) && !empty($MainProjects[0]))
 			echo "<dt><h1>".MainProject." programs</h1></dt>";
@@ -123,8 +122,5 @@
 		}
 	}
 	?>
-	
+
 </dl>
-
-
-

@@ -1,7 +1,7 @@
-<!-- colonne de gauche -->
-<!-- Navigation Level 3 -->
 <div class="round-border-topright"></div>
-<h1 class="first"><?php echo $project_name; ?></h1>
+<h1 class="first">
+	<?php echo $project_name; ?>
+</h1>
 <dl class="nav3-grid">
 	<?php
 	if(constant(strtolower($project_name).'DataPolicy') != ''){
@@ -11,20 +11,20 @@
 	}
 	?>
 		<h1>Data users</h1>
-	</dt>
-	<dl class="nav3-grid">
-		<dt>
-			<a href="/<?php echo $project_name; ?>/News">News</a>
 		</dt>
-		<dt>
-			<a href="/<?php echo $project_name; ?>/Thematic-search">Search</a>
-		</dt>
-		<dl class="nav4-grid">
-			<?php require("inc-search-menu.php");?>
+		<dl class="nav3-grid">
 			<dt>
-				<a href="/<?php echo $project_name; ?>/Search-tool" style="border: 0;">Advanced search</a>
+				<a href="/<?php echo $project_name; ?>/News">News</a>
 			</dt>
-			<?php
+			<dt>
+				<a href="/<?php echo $project_name; ?>/Thematic-search">Search</a>
+			</dt>
+			<dl class="nav4-grid">
+				<?php require("inc-search-menu.php");?>
+				<dt>
+					<a href="/<?php echo $project_name; ?>/Search-tool" style="border: 0;">Advanced search</a>
+				</dt>
+				<?php
 				if(constant(strtolower($project_name).'_HasParameterSearch') == 'true'){
 					echo "<dt><a href='/".$project_name."/Parameter-search' style='border: 0;'>By parameters</a></dt>";
 				}
@@ -47,19 +47,19 @@
 					echo "<dt><a href='/".$project_name."/Campaign-search' style='border: 0;'>By campaigns</a></dt>";
 				}
 			?>
-		</dl>
-		<?php
+			</dl>
+			<?php
 		   		if(constant(strtolower($project_name).'_HasModelRequest') == 'true' || constant(strtolower($project_name).'_HasSatelliteRequest') == 'true' || constant(strtolower($project_name).'_HasInsituRequest') == 'true'){
 					echo "<dt>
 							<a href='/".$project_name."/Request-data'>Request more datasets</a>
 						 </dt>";
 				}
         ?>
-		
-		<dl class="nav4-grid">
-			<dl class="nav5-grid">
-			</dl>
-		    <?php
+
+				<dl class="nav4-grid">
+					<dl class="nav5-grid">
+					</dl>
+					<?php
 		   		if(constant(strtolower($project_name).'_HasModelRequest') == 'true'){
 					echo "<dt><a href='/".$project_name."/Model-outputs-request' style='border: 0;'>Model outputs</a></dt>";
 					echo "<dl class='nav5-grid'></dl>";
@@ -74,19 +74,19 @@
 					echo "<dl class='nav5-grid'></dl>";
 				}		
 		    ?>
+				</dl>
 		</dl>
-	</dl>
-	<dt>
-		<h1>Data providers</h1>
-	</dt>
-	<dl class="nav3-grid">
 		<dt>
-			<a href="/<?php echo $project_name; ?>/Provide-metadata">Provide metadata</a>
+			<h1>Data providers</h1>
 		</dt>
-		<dl class="nav4-grid">
-			<dl class="nav5-grid">
-			</dl>
-			<?php
+		<dl class="nav3-grid">
+			<dt>
+				<a href="/<?php echo $project_name; ?>/Provide-metadata">Provide metadata</a>
+			</dt>
+			<dl class="nav4-grid">
+				<dl class="nav5-grid">
+				</dl>
+				<?php
 				if(constant(strtolower($project_name).'_HasModelOutputs') == 'true'){
 					echo "<dt><a href='/".$project_name."/Model-Data/?datsId=-10' style='border: 0;'>Model outputs</a></dt>";
 					echo "<dl class='nav5-grid'></dl>";
@@ -108,22 +108,21 @@
 					echo "<dl class='nav5-grid'></dl>";
 				}
 			?>
+			</dl>
+			<dt>
+				<a href="/<?php echo $project_name; ?>/Provide-data">Provide data</a>
+			</dt>
+			<dl class="nav4-grid">
+			</dl>
 		</dl>
 		<dt>
-			<a href="/<?php echo $project_name; ?>/Provide-data">Provide data</a>
+			<h1></h1>
 		</dt>
-		<dl class="nav4-grid">
+		<dl class="nav3-grid">
+			<dl class="nav4-grid">
+			</dl>
+			<dt>
+				<a href="<?php 'http://'.$_SERVER['HTTP_HOST']?>/Database-Content?project=<?php echo $project_name; ?>" target=blank>Database Content</a>
+			</dt>
 		</dl>
-	</dl>
-	<dt>
-		<h1></h1>
-	</dt>
-	<dl class="nav3-grid">
-		<dl class="nav4-grid">
-		</dl>
-		<dt>
-			<a href="<?php 'http://'.$_SERVER['HTTP_HOST']?>/Database-Content?project=<?php echo $project_name; ?>"
-				target=blank>Database Content</a>
-		</dt>
-	</dl>
 </dl>
