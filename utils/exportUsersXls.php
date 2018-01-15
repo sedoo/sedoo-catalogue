@@ -13,12 +13,8 @@ $form = new admin_form;
 $form->createForm();
 
 $project_name = strtolower(explode ( '.', $_SERVER['SERVER_NAME'] )[0]);
-// echo $project_name . '<br>';
-echo '<pre>';
-// var_dump($_SESSION);
+
 $form->registeredUsers = unserialize($_SESSION[$project_name . 'registeredUsers']);
-print_r($form->registeredUsers);
-echo '</pre>';
 
 if ($form->isAdmin($project_name)){
 	$workbook = new Spreadsheet_Excel_Writer();
@@ -58,6 +54,9 @@ if ($form->isAdmin($project_name)){
 		$abstract = preg_replace("/\n+/","\n",$abstract);
 		$worksheet->writeRow($i, 0,array($user->mail,$user->cn,$user->editableGroup->id,$user->affiliation,implode("\n",$address)),$fmt);
 		$worksheet->writeString($i,5,$user->phoneNumber);
+		if ($user->wg == NULL) {
+			$user->wg = [];
+		}
 		$worksheet->writeRow($i, 6,array($abstract,implode("\n",$user->wg),$user->associatedProject,$sup),$fmt);
 		$i++;
 	}
