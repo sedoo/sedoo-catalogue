@@ -31,7 +31,7 @@ function addMark(title,lat,lon,info,pinColor){
 		img = ServerHost+"/gmap/img/point-bleu.png"
 			break;
 	default: 
-		img = ServerHost"/gmap/img/point-rouge.png";
+		img = ServerHost+"/gmap/img/point-rouge.png";
 	break;
 	}
 	var pinImage = new google.maps.MarkerImage(img,new google.maps.Size(12, 12),new google.maps.Point(0, 0),new google.maps.Point(6, 6));  	

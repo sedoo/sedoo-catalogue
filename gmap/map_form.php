@@ -16,7 +16,7 @@ class map_form{
 
 	private function includeScripts(){
 		echo '<link href="/gmap/gmap.css" rel="stylesheet" type="text/css" />';
-		echo '<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>';
+		echo '<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>';
 		echo '<script type="text/javascript" src="/gmap/infobox.js"></script>';
 		echo '<script type="text/javascript" src="/gmap/gmap.js"></script>';
 	}
