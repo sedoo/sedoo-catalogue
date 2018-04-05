@@ -1,9 +1,10 @@
 <?php
-if (!isset($_SESSION))
-        session_start();
-   $project_name = explode ( '.', $_SERVER['SERVER_NAME'] )[0]; //"Cerdanya";
-   $project_url="/";
-   $titreMilieu="Access data";
+  if (!isset($_SESSION)) {
+    session_start();
+  }
+  $project_name = explode ( '.', $_SERVER['SERVER_NAME'] )[0]; //"Cerdanya";
+  $project_url="/";
+  $titreMilieu="Access data";
   ob_start();
 ?>
 <div class="column1-unit">
