@@ -1,13 +1,12 @@
 <?php
 
 if ($project_name == strToLower(MainProject)) {
-	// require("inc-colonne.html");
+	// require "inc-colonne.html";
 	$root_path_menu = "portal";
 	$subscribe_url= "".$_SERVER['HTTP_HOST']."/User-Account-Creation";
-
 }
 else {
-	// require("inc-colonne-project.html");
+	// require "inc-colonne-project.html";
 	$root_path_menu = $project_name;
 	$subscribe_url= "".$_SERVER['HTTP_HOST']."/".$project_name."/Register";
 }
@@ -20,9 +19,11 @@ else {
 	<a href="https://<?php echo $subscribe_url;?>" class="tag"><span>Subscribe</span></a>
 
 	<?php
-	if(( (defined(''.strtolower($project_name).'DataPolicy') ) && (constant(strtolower($project_name).'DataPolicy') != '')) || ( (defined('Portal_DataPolicy') ) && (constant('Portal_DataPolicy') == 'true')) ){
-
-		echo "<a href='/".$root_path_menu."/Data-Policy' class=\"tag\"><span>Data policy</span></a>";
+	if(( (defined(''.strtolower($project_name).'DataPolicy') ) && 
+		(constant(strtolower($project_name).'DataPolicy') != '')) || 
+		( (defined('Portal_DataPolicy') ) && 
+		(constant('Portal_DataPolicy') == 'true')) ){
+			echo "<a href='/".$root_path_menu."/Data-Policy' class=\"tag\"><span>Data policy</span></a>";
 	}
 
 
@@ -33,7 +34,7 @@ else {
 
 <section>
 	<h2>Search</h2>
-	<?php require("inc-search-menu.php");?>
+	<?php require "inc-search-menu.php";?>
 	<!-- <a href="/<?php echo $root_path_menu; ?>/Thematic-search">Thematic search</a> -->
 	<a href="/Data-Search">Advanced search</a>
 	<?php

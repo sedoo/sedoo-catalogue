@@ -1,26 +1,23 @@
 <?php
-  session_start();
-  header("Content-type: text/html; charset=UTF8");
+session_start();
+header("Content-type: text/html; charset=UTF8");
 ?>
-<?php require("inc-head.html");?>
+<?php require "inc-head.html";?>
 <body>
 
-<div id="content-area" class="wrapper leftMenu">
-   <nav role="leftMenu">
-		<?php 
-			require("template-admin-menu.php");
-		?>
+  <div id="content-area" class="wrapper leftMenu">
+    <nav role="leftMenu">
+      <?php require "template-admin-menu.php"; ?>
     </nav>
 
-
     <main role="main">
-        <section role="authUser">
-            <?php include("logout.php"); ?>
-        </section>
-		<?php echo "<h1>".$titreMilieu."</h1>";?>
-        <?php echo $milieu;?>
-    </main>                    
-</div> <!-- end content-area -->
+      <section role="authUser">
+        <?php include "logout.php";?>
+      </section>
+      <?php echo "<h1>" . $titreMilieu . "</h1>"; ?>
+      <?php echo $milieu; ?>
+    </main>
+  </div> <!-- end content-area -->
 
 </body>
 </html>

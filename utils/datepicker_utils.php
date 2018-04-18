@@ -1,22 +1,22 @@
 <?php
 
-class DatePickerUtils{
+class DatePickerUtils {
 
-	function addScriptPeriod($from = 'date_min', $to = 'date_max', $minDate = null, $maxDate = null){
-		
-		if ($minDate){
-			$minDateConf = "minDate: '$minDate',";
-		}else{
-			$minDateConf = "";
-		}
-		
-		if ($maxDate){
-			$maxDateConf = "maxDate: '$maxDate',";
-		}else{
-			$maxDateConf = "maxDate: '0',";
-		}
-		
-		echo " <script>
+  function addScriptPeriod($from = 'date_min', $to = 'date_max', $minDate = null, $maxDate = null) {
+
+    if ($minDate) {
+      $minDateConf = "minDate: '$minDate',";
+    } else {
+      $minDateConf = "";
+    }
+
+    if ($maxDate) {
+      $maxDateConf = "maxDate: '$maxDate',";
+    } else {
+      $maxDateConf = "maxDate: '0',";
+    }
+
+    echo " <script>
 				  $(function() {
 				    $( \"#$from\" ).datepicker({ $minDateConf $maxDateConf
 				        dateFormat: 'yy-mm-dd',
@@ -44,11 +44,11 @@ class DatePickerUtils{
 				        buttonImageOnly: true,
 				        onClose: function( selectedDate ) {
 				        	$( \"#$from\" ).datepicker( 'option', 'maxDate', selectedDate );
-				      	}             
+				      	}
 				    });
 				  });
 				 </script>";
-	}
+  }
 
 }
 

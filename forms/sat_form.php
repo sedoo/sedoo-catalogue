@@ -48,8 +48,8 @@ class sat_form extends base_form {
     $this->getElement('place_alt_min_0')->setLabel("Altitude min");
     $this->getElement('place_alt_max_0')->setLabel("Altitude max");
     $this->getElement('data_format_0')->setLabel("Original data format");
-	}
-	
+  }
+
   function createFormSat($i) {
     $this->addElement('text', 'new_satellite_' . $i, 'Satellite name');
     $this->applyFilter('new_satellite_' . $i, 'trim');
@@ -63,8 +63,8 @@ class sat_form extends base_form {
     ));
     $this->applyFilter('sensor_url_' . $i, 'trim');
     $this->createFormInstru($i);
-	}
-	
+  }
+
   function createFormInstru($i) {
     $array = array();
     $array[0] = "";
@@ -91,16 +91,16 @@ class sat_form extends base_form {
     ));
     $this->addElement('text', 'new_instrument_' . $i, 'Instrument name');
     $this->applyFilter('new_instrument_' . $i, 'trim');
-	}
-	
+  }
+
   function addSat() {
     $this->createFormSat($this->dataset->nbSites - 1);
-	}
-	
+  }
+
   function addProjet() {
     $this->createFormProject($this->dataset->nbProj - 1);
-	}
-	
+  }
+
   function initForm() {
     $this->initFormBase();
     // Coverage
@@ -143,8 +143,8 @@ class sat_form extends base_form {
       $this->getElement('required_data_format')->setSelected(0);
     }
 
-	}
-	
+  }
+
   function saveForm() {
     $this->saveFormBase();
     // Coverage
@@ -198,8 +198,8 @@ class sat_form extends base_form {
       $this->dataset->required_data_formats[0] = new data_format();
       $this->dataset->required_data_formats[0]->data_format_id = $reqDataFormatId;
     }
-	}
-	
+  }
+
   function addValidationRules() {
     $this->registerRule('validDate', 'function', 'validDate');
     $this->registerRule('validPeriod', 'function', 'validPeriod');
@@ -325,8 +325,8 @@ class sat_form extends base_form {
     for ($i = 0; $i < $this->dataset->nbVars; $i++) {
       $this->addValidationRulesVariable($i, $i, 'Parameter ' . ($i + 1));
     }
-	}
-	
+  }
+
   function displayErrorsInstrument($i) {
     $this->displayErrors(array(
       'satellite_' . $i,
@@ -335,8 +335,8 @@ class sat_form extends base_form {
       'new_instrument_' . $i,
       'sensor_url_' . $i,
     ));
-	}
-	
+  }
+
   function displayErrorsCoverage() {
     $this->displayErrors(array(
       'dats_date_begin',
@@ -351,14 +351,14 @@ class sat_form extends base_form {
       'place_alt_min_0',
       'place_alt_max_0',
     ));
-	}
-	
+  }
+
   function displayErrorsSatDataDescr() {
     $this->displayErrors(array(
       'dats_title',
     ));
-	}
-	
+  }
+
   function displayForm() {
     $this->addValidationRules();
     $this->initForm();
@@ -456,6 +456,7 @@ class sat_form extends base_form {
     echo '<tr><td>' . $this->getElement('required_data_format')->getLabel() . '</td><td colspan="3">' . $this->getElement('required_data_format')->toHTML() . '</td></tr>';
     $this->displayFormEnd();
   }
+
 }
 
 ?>

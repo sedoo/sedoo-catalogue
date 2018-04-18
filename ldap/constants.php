@@ -1,9 +1,9 @@
 <?php
-require_once ("conf/conf.php");
+require_once "conf/conf.php";
 
-define("PEOPLE_BASE","ou=People,".LDAP_BASE);
-define("PROJECT_BASE","ou=Project,".LDAP_BASE);
-define("GROUP_BASE","ou=Group,".LDAP_BASE);
+define("PEOPLE_BASE", "ou=People," . LDAP_BASE);
+define("PROJECT_BASE", "ou=Project," . LDAP_BASE);
+define("GROUP_BASE", "ou=Group," . LDAP_BASE);
 define("USER_CLASS", "user");
 define("STUDENT_CLASS", "studentUser");
 define("REGISTERED_USER_CLASS", "registeredUser");

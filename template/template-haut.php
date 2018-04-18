@@ -2,7 +2,7 @@
 if (isset($_REQUEST['project_name']) && !empty($_REQUEST['project_name'])){
 	$project_name = $_REQUEST['project_name'];
 }
-// require("inc-menu_haut.html");
+// require "inc-menu_haut.html";
 ?>
 <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Menu principal / Main menu">
 	<ul id="primary-menu" class="menu nav-menu" >

@@ -12,12 +12,16 @@
 	<a href="/Your-Account?p&pageId=11"><?php echo MainProject; ?> database 
 		<?php 
 			$user = unserialize($_SESSION['loggedUser']); 
-			if (((isset($user->attrs[strtolower(MainProject).'Status']) && (!empty($user->attrs[strtolower(MainProject).'Status'])) && ($user->attrs[strtolower(MainProject).'Status'][0] == 'registered'))) || in_array(strtolower(MainProject),$user->attrs['memberOf'])) 
-				echo "<span style='color:green;'> (registered)</span>";
-			else if ($user->attrs[strtolower(MainProject).'Status'][0] == 'pending')
+			if (((isset($user->attrs[strtolower(MainProject).'Status']) && 
+				(!empty($user->attrs[strtolower(MainProject).'Status'])) && 
+				($user->attrs[strtolower(MainProject).'Status'][0] == 'registered'))) || 
+				in_array(strtolower(MainProject),$user->attrs['memberOf'])) {
+					echo "<span style='color:green;'> (registered)</span>";
+			} else if ($user->attrs[strtolower(MainProject).'Status'][0] == 'pending') {
 				echo "<span style='color:orange; '> (pending)</span>";
-			else if ($user->attrs[strtolower(MainProject).'Status'][0] == 'rejected')
+			} else if ($user->attrs[strtolower(MainProject).'Status'][0] == 'rejected') {
 				echo "<span style='color:red; '> (rejected)</span>";
+			}
 		?>
 	</a>
 	
