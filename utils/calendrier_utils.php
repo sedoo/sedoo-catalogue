@@ -4,16 +4,16 @@ require_once 'bd/data_availability.php';
 
 function afficheListeAnnees($year, $yearMin, $yearMax, $url) {
   echo "<a href='$url'>Back</a><br/><br/>";
-  echo '<center><b>';
+  echo '<center><strong>';
   if ($yearMin < $year) {
     echo "<a href='$url&year=" . ($year - 1) . "'>&lt;&lt;</a>";
   }
 
   for ($y = $yearMin; $y <= $yearMax; $y++) {
     if ($y == $year) {
-      echo "&nbsp;&nbsp;<b>$year</b>&nbsp;&nbsp;";
+      echo "&nbsp;&nbsp;<strong>$year</strong>&nbsp;&nbsp;";
     } else {
-      echo "<a href='$url&year=$y'>&nbsp;$y&nbsp;</a></b>";
+      echo "<a href='$url&year=$y'>&nbsp;$y&nbsp;</a></strong>";
     }
 
     if ($y < $yearMax) {
@@ -23,7 +23,7 @@ function afficheListeAnnees($year, $yearMin, $yearMax, $url) {
   }
 
   if ($yearMax > $year) {
-    echo "<a href='$url&year=" . ($year + 1) . "'>&gt;&gt;</a></b>";
+    echo "<a href='$url&year=" . ($year + 1) . "'>&gt;&gt;</a></strong>";
   }
 
   echo '</center><br/><br/>';
@@ -35,7 +35,7 @@ function afficheCalendriers($ins_dats_id, $var_id, $place_id, $year) {
   $das = $da->getByDatsVarPlace($ins_dats_id, $var_id, $place_id, $year);
 
   if (empty($das)) {
-    echo '<b>No data</b>';
+    echo '<strong>No data</strong>';
   } else {
 
     $da = reset($das);

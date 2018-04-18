@@ -35,8 +35,8 @@ class duplicate_dataset_form extends base_form {
     }
     echo '<form action="' . $reqUri . '" method="post" id="frmjnl" name="frmjnl" >';
     echo '<table>';
-    echo '<tr><td><b>' . $this->getElement('dataset')->getLabel() . '</b></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
-    echo '<tr><td><b>' . $this->getElement('title')->getLabel() . '</b></td><td>' . $this->getElement('title')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('dataset')->getLabel() . '</strong></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('title')->getLabel() . '</strong></td><td>' . $this->getElement('title')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_duplicate')->toHTML() . '</td></tr>';
     echo '</table>';
     echo '</form>';

@@ -27,11 +27,11 @@ div.zone_over
 <page style="font-size: 10pt">
     <span style="font-size: 16pt ; font-weight: bold">Démonstration des images</span><br>
     <br>
-    <b>Dans un tableau :</b><br>
+    <strong>Dans un tableau :</strong><br>
     <table style="width: 50%;border: solid 3px #5544DD" align="center">
         <tr>
             <td style="width: 30%; text-align: left; ">Text à gauche<br>avec retour à<br>la ligne</td>
-            <td style="width: 40%; text-align: center;"><img src="./res/logo.gif" alt="" ><br><i>légende</i></td>
+            <td style="width: 40%; text-align: center;"><img src="./res/logo.gif" alt="" ><br><em>légende</em></td>
             <td style="width: 30%; text-align: right; ">Texte à droite</td>
         </tr>
     </table>
@@ -41,7 +41,7 @@ div.zone_over
     texte <span style="text-decoration: line-through">barré</span>,
     texte <span style="text-decoration: underline overline line-through">avec les trois</span>.<br>
     <br>
-    <b>Dans un texte :</b><br>
+    <strong>Dans un texte :</strong><br>
     texte à la suite d'une image, <img src="./res/logo.gif" alt="" style="height: 10mm">
     texte à la suite d'une image, répétitif car besoin d'un retour à la ligne
     texte à la suite d'une image, répétitif car besoin d'un retour à la ligne
@@ -60,7 +60,7 @@ div.zone_over
     Test différentes tailles texte, répétitif car besoin d'un retour à la ligne
     <br>
     <br>
-    <b>Exemple de couleur : </b><br>
+    <strong>Exemple de couleur : </strong><br>
     <span style="color: RGB(255, 0, 0)">Texte de couleur</span><br>
     <span style="color: RGB(0., 1., 0.)">Texte de couleur</span><br>
     <span style="color: RGB(0, 0, 100%)">Texte de couleur</span><br>

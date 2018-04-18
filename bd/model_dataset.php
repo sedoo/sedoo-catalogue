@@ -151,65 +151,65 @@ class model_dataset extends base_dataset {
       }
     }
 
-    echo '<table><tr><th colspan="4" align="center"><b>General information</b></th></tr>';
-    echo "<tr><td><b>Dataset name</b></td><td colspan='3'>" . $this->dats_title . "</td></tr>";
+    echo '<table><tr><th colspan="4" align="center"><strong>General information</strong></th></tr>';
+    echo "<tr><td><strong>Dataset name</strong></td><td colspan='3'>" . $this->dats_title . "</td></tr>";
     displayUtils::displayDOI($this->dats_doi);
-    echo "<tr><td><b>Created on</b></td><td colspan='3'>" . $this->dats_pub_date . "</td></tr>";
+    echo "<tr><td><strong>Created on</strong></td><td colspan='3'>" . $this->dats_pub_date . "</td></tr>";
     if ($this->dats_version) {
-      echo "<tr><td><b>Version</b></td><td colspan='3'>" . $this->dats_version . "</td></tr>";
+      echo "<tr><td><strong>Version</strong></td><td colspan='3'>" . $this->dats_version . "</td></tr>";
     }
 
     displayUtils::displayProjects($this->projects);
 
-    echo "<tr><td><b>Dataset Contact(s)</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Dataset Contact(s)</strong></td><td colspan='3'>";
     displayUtils::displayContacts($this->dats_originators);
     echo '</td></tr>';
 
     displayUtils::displayDataAvailability($this, $project_name);
 
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Model information</b></th></tr>';
-    echo "<tr><td><b>Type</b></td><td colspan='3'>" . $this->dataType->place_name . "</td></tr>";
-    echo "<tr><td><b>Model</b></td><td colspan='3'>" . $this->model->place_name . "</td></tr>";
-    echo "<tr><td><b>Simulation</b></td><td colspan='3'>" . $this->dats_sensors[0]->sensor->sensor_model . "</td></tr>";
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Model information</strong></th></tr>';
+    echo "<tr><td><strong>Type</strong></td><td colspan='3'>" . $this->dataType->place_name . "</td></tr>";
+    echo "<tr><td><strong>Model</strong></td><td colspan='3'>" . $this->model->place_name . "</td></tr>";
+    echo "<tr><td><strong>Simulation</strong></td><td colspan='3'>" . $this->dats_sensors[0]->sensor->sensor_model . "</td></tr>";
 
     if ($this->dats_abstract) {
-      echo "<tr><td><b>Model / simulation description</b></td><td colspan='3'>" . $this->dats_abstract . "</td></tr>";
+      echo "<tr><td><strong>Model / simulation description</strong></td><td colspan='3'>" . $this->dats_abstract . "</td></tr>";
     }
     if ($this->dats_purpose) {
-      echo "<tr><td><b>Purpose</b></td><td colspan='3'>" . $this->dats_purpose . "</td></tr>";
+      echo "<tr><td><strong>Purpose</strong></td><td colspan='3'>" . $this->dats_purpose . "</td></tr>";
     }
     if ($this->dats_reference) {
-      echo "<tr><td><b>References</b></td><td colspan='3'>" . $this->dats_reference . "</td></tr>";
+      echo "<tr><td><strong>References</strong></td><td colspan='3'>" . $this->dats_reference . "</td></tr>";
     }
 
     if (isset($this->attFile) && !empty($this->attFile)) {
-      echo "<tr><td><b>Attached document</b></td><td colspan='3'>";
+      echo "<tr><td><strong>Attached document</strong></td><td colspan='3'>";
       echo "<a href='/downAttFile.php?file=" . $this->attFile . "' >" . $this->attFile . "</a>";
       echo "</td></tr>";
     }
 
     if (isset($this->dats_variables) && !empty($this->dats_variables)) {
-      echo '</td></tr><tr><th colspan="4" align="center"><b>Parameters</b></th></tr>';
+      echo '</td></tr><tr><th colspan="4" align="center"><strong>Parameters</strong></th></tr>';
       $cpt = 1;
       foreach ($this->dats_variables as $dats_var) {
         if (count($this->dats_variables) > 1) {
-          echo '<tr><td colspan="4" align="center"><b>Parameter ' . ($cpt++) . '</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Parameter ' . ($cpt++) . '</strong></td></tr>';
         }
         displayUtils::displayParameter($dats_var, false, false, true);
       }
     }
 
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Coverage</b></th></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Coverage</strong></th></tr>';
 
     if ($this->dats_date_begin || $this->dats_date_end) {
-      echo '<tr><td colspan="4" align="center"><b>Temporal Coverage</b></td></tr>';
-      echo "<tr><td><b>Date begin</b></td><td>" . $this->dats_date_begin . "</td>";
-      echo "<td><b>Date end</b></td><td>" . $this->dats_date_end . "</td></tr>";
+      echo '<tr><td colspan="4" align="center"><strong>Temporal Coverage</strong></td></tr>';
+      echo "<tr><td><strong>Date begin</strong></td><td>" . $this->dats_date_begin . "</td>";
+      echo "<td><strong>Date end</strong></td><td>" . $this->dats_date_end . "</td></tr>";
     }
 
-    echo '<tr><td colspan="4" align="center"><b>Geographic Coverage</b></td></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
     if (isset($this->sites) && isset($this->sites[0]) && !empty($this->sites[0])) {
-      echo "<tr><td><b>Area name</b></td><td colspan='3'>" . $this->sites[0]->place_name . "</td></tr>";
+      echo "<tr><td><strong>Area name</strong></td><td colspan='3'>" . $this->sites[0]->place_name . "</td></tr>";
       displayUtils::displaySiteBoundings($this->sites[0]);
     }
 

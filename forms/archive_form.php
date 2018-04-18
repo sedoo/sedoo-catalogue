@@ -103,8 +103,8 @@ class archive_form extends login_form {
     echo '<form action="' . $reqUri . '" method="post" id="frmarc" name="frmarc" >';
 
     echo '<table>';
-    echo '<tr><td><b>' . $this->getElement('dataset')->getLabel() . '</b></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
-    echo '<tr><td><b>' . $this->getElement('comment')->getLabel() . '</b></td><td>' . $this->getElement('comment')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('dataset')->getLabel() . '</strong></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('comment')->getLabel() . '</strong></td><td>' . $this->getElement('comment')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_add')->toHTML() . '</td></tr>';
 
     echo '</table>';

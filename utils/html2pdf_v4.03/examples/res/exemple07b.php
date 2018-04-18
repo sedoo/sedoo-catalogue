@@ -22,12 +22,12 @@
                         <td style="width: 100%; font-size: 12pt;">
                             <span style="font-size: 15pt; font-weight: bold;">ADRESSE DE RETOUR<br></span>
                             <br>
-                            <b>Entrepot des Bois</b><br>
+                            <strong>Entrepot des Bois</strong><br>
                             sur une grande route<br>
                             00000 - Spipu Ville<br>
                             <br>
                             Date : <?php echo date('d/m/Y'); ?><br>
-                            Dossier suivi par <b>Mle Jesuis CELIBATAIRE</b><br>
+                            Dossier suivi par <strong>Mle Jesuis CELIBATAIRE</strong><br>
                             Tel : 33 (0) 1 00 00 00 00<br>
                             Email : on_va@chez.moi<br>
                         </td>
@@ -104,7 +104,7 @@ for ($i; $i<12; $i++) {
                 <table cellspacing="0" style="width: 100%; text-align: left; font-size: 8pt">
                     <tr>
                         <td style="width: 100%">
-                            <b><u>Conditions des Retours</u></b><br>
+                            <strong><u>Conditions des Retours</u></strong><br>
                             1 - il faut des conditions<br>
                             2 - encore des conditions<br>
                             3 - toujours des conditions<br>
@@ -168,7 +168,7 @@ for ($i; $i<12; $i++) {
                 </table>
                 <br>
                 <br>
-                <span style="font-size: 13pt"><b><u>A COLLER IMPERATIVEMENT SUR LES COLIS</u></b></span>
+                <span style="font-size: 13pt"><strong><u>A COLLER IMPERATIVEMENT SUR LES COLIS</u></strong></span>
             </td>
             <td style="width: 4%"></td>
         </tr>

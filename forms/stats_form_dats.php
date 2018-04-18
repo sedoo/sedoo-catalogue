@@ -89,7 +89,7 @@ class stats_form_dats extends login_form {
 
       }
     } else {
-      echo "<font size=\"3\" color='red'><b>You cannot access this page.</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>You cannot access this page.</strong></font><br>";
     }
   }
 
@@ -113,7 +113,7 @@ class stats_form_dats extends login_form {
     $journal = $journal->getByDataset($this->dats->dats_id, TYPE_NEW . ',' . TYPE_UPDATE);
     echo '<table>';
     foreach ($journal as $jEntry) {
-      echo '<tr><td style="white-space:nowrap;"><b>' . $jEntry->date->format('Y-m-d') . '</b></td><td>' . $jEntry->comment . '</td></tr>';
+      echo '<tr><td style="white-space:nowrap;"><strong>' . $jEntry->date->format('Y-m-d') . '</strong></td><td>' . $jEntry->comment . '</td></tr>';
     }
     echo '</table>';
   }

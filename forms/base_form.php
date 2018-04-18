@@ -451,7 +451,7 @@ class base_form extends login_form {
 	}
 	
   function displayGridForm() {
-    echo '<tr><td colspan="4" align="center"><b>Grid type</b><br></td></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Grid type</strong><br></td></tr>';
     echo '<tr><td>' . $this->getElement('grid_original')->getLabel() . '</td><td colspan="3">' . $this->getElement('grid_original')->toHTML() . '</td></tr>';
     echo '<tr><td>' . $this->getElement('grid_process')->getLabel() . '</td><td colspan="3">' . $this->getElement('grid_process')->toHTML() . '</td></tr>';
 	}
@@ -1068,7 +1068,7 @@ class base_form extends login_form {
 	
   function displayDataDescrForm($withTitle = false, $withPurpose = true) {
     if ($withTitle) {
-      echo '<tr><th colspan="4" align="center"><a name="a_descr" ></a><b>Data description</b>' . $this->getHideShow('gen_desc') . '</td></tr>';
+      echo '<tr><th colspan="4" align="center"><a name="a_descr" ></a><strong>Data description</strong>' . $this->getHideShow('gen_desc') . '</td></tr>';
     }
 
     echo '<tr name="gen_desc"><td>' . $this->getElement('dats_abstract')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_abstract')->toHTML() . '</td></tr>';
@@ -1118,7 +1118,7 @@ class base_form extends login_form {
 	}
 	
   function displayDataResolutionForm($simpleVersion = false) {
-    echo '<tr><td colspan="4" align="center"><b>Data resolution</b><br></td></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Data resolution</strong><br></td></tr>';
     echo '<tr><td>' . $this->getElement('sensor_lon_resolution')->getLabel() . '</td><td>' . $this->getElement('sensor_lon_resolution')->toHTML() . '</td>';
     echo '<td>' . $this->getElement('sensor_lat_resolution')->getLabel() . '</td><td>' . $this->getElement('sensor_lat_resolution')->toHTML() . '</td></tr>';
 
@@ -1136,7 +1136,7 @@ class base_form extends login_form {
 	}
 	
   function displayGeoCoverageForm($withAlt = true) {
-    echo '<tr><td colspan="4" align="center"><b>Geographic Coverage</b></td></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('area')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('area')->toHTML();
     echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_area')->toHTML() . '</td></tr>';
 

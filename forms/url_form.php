@@ -27,7 +27,7 @@ class url_form extends login_form {
     if ($this->isAdmin($projectName)) {
       $this->createAddUrlForm();
     } else {
-      echo "<font size=\"3\" color='red'><b>You cannot view this part of the site.</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>You cannot view this part of the site.</strong></font><br>";
     }
 	}
 	
@@ -121,7 +121,7 @@ class url_form extends login_form {
               $this->addElement('submit', 'bouton_delete_' . $url->url_id, 'Delete');
             }
           }
-          echo '<tr><td><b>' . $url->url_type . '</b></td><td>' . $this->getElement('url_' . $url->url_id)->toHTML() . '</td><td>' . $this->getElement('bouton_update_' . $url->url_id)->toHTML() . '&nbsp;&nbsp;';
+          echo '<tr><td><strong>' . $url->url_type . '</strong></td><td>' . $this->getElement('url_' . $url->url_id)->toHTML() . '</td><td>' . $this->getElement('bouton_update_' . $url->url_id)->toHTML() . '&nbsp;&nbsp;';
           if ($isDataLink) {
           } else {
             echo $this->getElement('bouton_delete_' . $url->url_id)->toHTML();
@@ -144,7 +144,7 @@ class url_form extends login_form {
           echo $this->getElement('bouton_update_roles_' . $dats_id)->toHTML();
         }
       } else {
-        echo '<b>No data for this dataset</b><br>';
+        echo '<strong>No data for this dataset</strong><br>';
       }
 
     }
@@ -279,7 +279,7 @@ class url_form extends login_form {
     if ($this->type == 0) {
       echo '<form action="' . $reqUri . '" method="post" id="frmjnl" name="frmjnl" >';
       echo '<table>';
-      echo '<tr><td><b>' . $this->getElement('dataset')->getLabel() . '</b></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
+      echo '<tr><td><strong>' . $this->getElement('dataset')->getLabel() . '</strong></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
       echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_ok')->toHTML() . '</td></tr>';
       echo '</table>';
       $this->displayUrls();
@@ -311,12 +311,12 @@ class url_form extends login_form {
       echo '<span name="data_policy_errors" style="color: red;"></span>';
       echo '<form action="' . $reqUri . '" method="post" id="frmjnl" name="frmjnl" >';
       echo '<table>';
-      echo '<tr><td><b>' . $this->getElement('dataset')->getLabel() . '</b></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
-      echo '<tr><td><b>' . $this->getElement('comment')->getLabel() . '</b></td><td>' . $this->getElement('comment')->toHTML() . '</td></tr>';
-      echo '<tr><td><b>' . $this->getElement('emplacement')->getLabel() . '</b></td><td>' . $this->getElement('emplacement')->toHTML() . '</td></tr>';
+      echo '<tr><td><strong>' . $this->getElement('dataset')->getLabel() . '</strong></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
+      echo '<tr><td><strong>' . $this->getElement('comment')->getLabel() . '</strong></td><td>' . $this->getElement('comment')->toHTML() . '</td></tr>';
+      echo '<tr><td><strong>' . $this->getElement('emplacement')->getLabel() . '</strong></td><td>' . $this->getElement('emplacement')->toHTML() . '</td></tr>';
       if (($this->type == ADD_URL_LOCAL) || ($this->type == ADD_URL_IPSL)) {
-        echo '<tr name="data_policy_tr" ><td><b>Data policy</b></td><td name="data_policy_td">&nbsp;</td></tr>';
-        echo '<tr><td><b>' . $this->getElement('roles')->getLabel() . '</b></td><td>' . $this->getElement('roles')->toHTML() . '</td></tr>';
+        echo '<tr name="data_policy_tr" ><td><strong>Data policy</strong></td><td name="data_policy_td">&nbsp;</td></tr>';
+        echo '<tr><td><strong>' . $this->getElement('roles')->getLabel() . '</strong></td><td>' . $this->getElement('roles')->toHTML() . '</td></tr>';
       }
       echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_add')->toHTML() . '</td></tr>';
       echo '</table>';

@@ -367,7 +367,7 @@ if (isset($datsId) && !empty($datsId)) {
         include 'frmresult.php';
       } else {
         echo "<h1>Data search</h1>";
-        echo '<br><br><font size="3" color="red"><b>No dataset is matching your criteria.</b></font>';
+        echo '<br><br><font size="3" color="red"><strong>No dataset is matching your criteria.</strong></font>';
         $form->displayForm();
       }
     } else {

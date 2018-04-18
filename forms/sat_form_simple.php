@@ -387,22 +387,22 @@ class sat_form_simple extends base_form {
     $this->displayFormBegin('frmsat', $simpleVersion);
 
     if ($simpleVersion) {
-      echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><b>Enter your contact details</b><br></th></tr>';
+      echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><strong>Enter your contact details</strong><br></th></tr>';
     } else {
-      echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><b>Contact information</b><br></th></tr>';
+      echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><strong>Contact information</strong><br></th></tr>';
     }
 
     for ($i = 0; $i < $this->dataset->nbPis; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Contact ' . ($i + 1) . '</b><br>'; //</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Contact ' . ($i + 1) . '</strong><br>'; //</td></tr>';
       $this->displayErrorsContact($i);
       $this->displayPersonForm($i);
     }
     echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_add_pi')->toHTML() . '</td></tr>';
 
     if ($simpleVersion) {
-      echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><b>Describe your data request</b></td></tr>';
+      echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><strong>Describe your data request</strong></td></tr>';
     } else {
-      echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><b>Data description</b></td></tr>';
+      echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><strong>Data description</strong></td></tr>';
     }
 
     $this->displayErrorsSatDataDescr();
@@ -431,10 +431,10 @@ class sat_form_simple extends base_form {
       echo '<tr name="gen_desc"><td>' . $this->getElement('dats_reference')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_reference')->toHTML() . '</td></tr>';
     }
 
-    echo '<tr><th colspan="4" align="center"><a name="a_site" ></a><a name="a_instru" ></a><b>Provide instrument information if you know it</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_site" ></a><a name="a_instru" ></a><strong>Provide instrument information if you know it</strong></td></tr>';
     for ($i = 0; $i < $this->dataset->nbSites; $i++) {
       if ($this->dataset->nbSites > 1) {
-        echo '<tr><td colspan="4" align="center"><b>Instrument ' . ($i + 1) . '</b></td></tr>';
+        echo '<tr><td colspan="4" align="center"><strong>Instrument ' . ($i + 1) . '</strong></td></tr>';
       }
       $this->displayErrorsInstrument($i);
       if (!$simpleVersion && ($i == 0)) {
@@ -457,19 +457,19 @@ class sat_form_simple extends base_form {
     }
     echo '<tr><td colspan="4" align="center">In case of multi-instrument product : ' . $this->getElement('bouton_add_instru')->toHTML() . '</td></tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_param" ></a><b>Parameters</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_param" ></a><strong>Parameters</strong></td></tr>';
     //$this->displayErrorsParams(0);
     //$this->displayParamForm(0,false,false,true);
     for ($i = 0; $i < $this->dataset->nbVars; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Parameter ' . ($i + 1) . '</b>' . $this->getElement('var_id_' . $i)->toHTML() . '</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Parameter ' . ($i + 1) . '</strong>' . $this->getElement('var_id_' . $i)->toHTML() . '</td></tr>';
       $this->displayErrorsParams($i);
       $this->displayParamForm($i, false, false, !$simpleVersion, !$simpleVersion);
     }
     echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_add_variable')->toHTML() . '</td></tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_cover" ></a><b>Coverage</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_cover" ></a><strong>Coverage</strong></td></tr>';
     $this->displayErrorsCoverage();
-    echo '<tr><td colspan="4" align="center"><b>Temporal Coverage</b><br></td></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Temporal Coverage</strong><br></td></tr>';
     echo '<tr><td>' . $this->getElement('dats_date_begin')->getLabel() . '</td><td>' . $this->getElement('dats_date_begin')->toHTML() . "</td>";
     echo '<td>' . $this->getElement('dats_date_end')->getLabel() . '</td><td>' . $this->getElement('dats_date_end')->toHTML() . '</td></tr>';
     $this->displayGeoCoverageForm(!$simpleVersion);
@@ -480,7 +480,7 @@ class sat_form_simple extends base_form {
     }
 
     if (!$simpleVersion) {
-      echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><b>Data use information</b></td></tr>';
+      echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><strong>Data use information</strong></td></tr>';
       $this->displayErrorsUseInfo();
       echo '<tr><td>' . $this->getElement('dats_use_constraints')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_use_constraints')->toHTML() . '</td></tr>';
       echo '<tr><td>' . $this->getElement('data_policy')->getLabel() . '</td><td colspan="3">' . $this->getElement('data_policy')->toHTML();

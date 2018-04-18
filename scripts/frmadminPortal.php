@@ -26,12 +26,12 @@ if ($form->isPortalAdmin()) {
         // Suppression user enregistré
         if ($form->updateUser($reqId)) {
         } else {
-          echo "<font size=\"3\" color='red'><b>An error occurred during the update.</b></font><br>";
+          echo "<font size=\"3\" color='red'><strong>An error occurred during the update.</strong></font><br>";
         }
       } else if (isset($_POST["bouton_unregister_$reqId"])) {
         if ($form->unregisterUser($reqId)) {
         } else {
-          echo "<font size=\"3\" color='red'><b>An error occurred during the update.</b></font><br>";
+          echo "<font size=\"3\" color='red'><strong>An error occurred during the update.</strong></font><br>";
         }
       }
     }
@@ -53,12 +53,12 @@ if ($form->isPortalAdmin()) {
       if (isset($_POST["bouton_register_$reqId"])) {
         if ($form->registerUser($reqId)) {
         } else {
-          echo "<font size=\"3\" color='red'><b>Registration failure.</b></font><br>";
+          echo "<font size=\"3\" color='red'><strong>Registration failure.</strong></font><br>";
         }
       } else if (isset($_POST["bouton_reject_$reqId"])) {
         if ($form->rejectUser($reqId)) {
         } else {
-          echo "<font size=\"3\" color='red'><b>An error occured.</b></font><br>";
+          echo "<font size=\"3\" color='red'><strong>An error occured.</strong></font><br>";
         }
       }
     }
@@ -69,12 +69,12 @@ if ($form->isPortalAdmin()) {
       if (isset($_POST["bouton_restore_$reqId"])) {
         if ($form->restoreUser($reqId)) {
         } else {
-          echo "<font size=\"3\" color='red'><b>Restoration failure.</b></font><br>";
+          echo "<font size=\"3\" color='red'><strong>Restoration failure.</strong></font><br>";
         }
       } else if (isset($_POST["bouton_delete_$reqId"])) {
         if ($form->deleteUser($reqId)) {
         } else {
-          echo "<font size=\"3\" color='red'><b>An eror occurred</b></font><br>";
+          echo "<font size=\"3\" color='red'><strong>An eror occurred</strong></font><br>";
         }
       }
     }
@@ -99,7 +99,7 @@ if ($form->isPortalAdmin()) {
   }
 } else if ($form->isLogged()) {
   echo "<h1>Admin Corner</h1>";
-  echo "<font size=\"3\" color='red'><b>You cannot view this part of the site.</b></font><br>";
+  echo "<font size=\"3\" color='red'><strong>You cannot view this part of the site.</strong></font><br>";
 } else {
   $form->displayLGForm("", true);
 }

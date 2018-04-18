@@ -510,7 +510,7 @@ class site_form_simple extends base_form {
      * *** General info ****
      */
 
-    echo '<tr><th colspan="4" align="center"><a name="a_general" ></a><b>General information</b></th></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_general" ></a><strong>General information</strong></th></tr>';
     $this->displayErrorsGeneralInfo();
     echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
     echo '<tr><td><font>' . $this->getElement('dats_doi')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_doi')->toHTML() . '</td></tr>';
@@ -533,9 +533,9 @@ class site_form_simple extends base_form {
      * *** Contacts ****
      */
 
-    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><b>Contact information</b></td></tr><tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><strong>Contact information</strong></td></tr><tr>';
     for ($i = 0; $i < $this->dataset->nbPis; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Contact ' . ($i + 1) . '</b><br>'; // </td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Contact ' . ($i + 1) . '</strong><br>'; // </td></tr>';
       $this->displayErrorsContact($i); // base_form ok
       $this->displayPersonForm($i); // base_form ok
     }
@@ -544,7 +544,7 @@ class site_form_simple extends base_form {
     /**
      * *** Site ****
      */
-    echo '<tr><th colspan="4" align="center"><a name="a_site" ></a><b>Site information</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_site" ></a><strong>Site information</strong></td></tr>';
     $this->displayErrorsSite(0);
     echo '<tr><td>' . $this->getElement('locationByLev0')->getLabel() . '</td><td colspan="3">' . $this->getElement('locationByLev0')->toHTML() . '</td></tr>';
     echo '<tr><td>' . $this->getElement('new_place_0')->getLabel() . '</td><td>' . $this->getElement('new_place_0')->toHTML() . '</td>';
@@ -569,7 +569,7 @@ class site_form_simple extends base_form {
       if ($i == $this->dataset->nbSensors - 1) {
         echo '<a name="a_sensor_last" ></a>';
       }
-      echo '<b>Instrument ' . ($i + 1) . '</b></th></tr>';
+      echo '<strong>Instrument ' . ($i + 1) . '</strong></th></tr>';
       $this->displayErrorsInstru($i);
       echo '<tr><td>' . $this->getElement('sensor_gcmd_' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('sensor_gcmd_' . $i)->toHTML() . '</td></tr>';
 
@@ -594,7 +594,7 @@ class site_form_simple extends base_form {
         if ($j == $this->dataset->dats_sensors[$i]->nbVars - 1) {
           echo "<a name='a_param_$i' ></a>";
         }
-        echo '<b>Parameter ' . ($j + 1) . ' measured by instrument ' . ($i + 1) . '</b>' . $this->getElement('var_id_' . $i . '_' . $j)->toHTML() . '</td></tr>';
+        echo '<strong>Parameter ' . ($j + 1) . ' measured by instrument ' . ($i + 1) . '</strong>' . $this->getElement('var_id_' . $i . '_' . $j)->toHTML() . '</td></tr>';
         $this->displayErrorsParamsSensor($i, $j); // déplacé ici
         $this->displayParamSensorForm($i, $j); // déplacé ici
       }
@@ -607,7 +607,7 @@ class site_form_simple extends base_form {
      * *** Data Use information *****
      */
 
-    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><b>Data use information</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><strong>Data use information</strong></td></tr>';
     $this->displayErrorsUseInfo(); // base_form ok
     echo '<tr><td>' . $this->getElement('dats_use_constraints')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_use_constraints')->toHTML() . '</td></tr>';
     echo '<tr><td>' . $this->getElement('data_policy')->getLabel() . '</td><td colspan="3">' . $this->getElement('data_policy')->toHTML();

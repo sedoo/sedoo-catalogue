@@ -151,7 +151,7 @@ class download_form extends login_form {
   function initForm() {
     $jeuId = $_REQUEST['datsId'];
     if (!isset($jeuId) || empty($jeuId)) {
-      echo "<font size=\"3\" color='red'><b>No dataset specified.</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>No dataset specified.</strong></font><br>";
       return false;
     }
     $this->initJeu($jeuId);
@@ -161,7 +161,7 @@ class download_form extends login_form {
       if ((strpos($jeuUrl, 'file://localhost' . $this->dataPath . '/') === 0)) {
         $this->pathJeu = str_replace('file://localhost' . $this->dataPath . '/', '', $jeuUrl);
       } else {
-        echo "<font size=\"3\" color='red'><b>Data not found.</b></font><br>";
+        echo "<font size=\"3\" color='red'><strong>Data not found.</strong></font><br>";
         return false;
       }
       if (isset($this->pathJeu) && !empty($this->pathJeu)) {
@@ -214,13 +214,13 @@ class download_form extends login_form {
           $this->getElement('email_notif_hidden')->setValue($this->mailNotif);
           return true;
         } else {
-          echo "<font size=\"3\" color='red'><b>Unable to find data corresponding to this dataset.</b></font><br>";
+          echo "<font size=\"3\" color='red'><strong>Unable to find data corresponding to this dataset.</strong></font><br>";
         }
       } else {
-        echo "<font size=\"3\" color='red'><b>No directory specified</b></font><br>";
+        echo "<font size=\"3\" color='red'><strong>No directory specified</strong></font><br>";
       }
     } else {
-      echo "<font size=\"3\" color='red'><b>You cannot access this dataset.</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>You cannot access this dataset.</strong></font><br>";
     }
     return false;
 	}
@@ -248,11 +248,11 @@ class download_form extends login_form {
   function displayForm($archive = null) {
     echo '<div id="blanket" style="display:none;">';
     echo '</div><div id="popUpDiv" style="display:none;text-align:center;">';
-    echo "<p><p><p><p><font size=\"3\" color='orange'><b>We are processing your request. Please Wait...</b></font></div>";
+    echo "<p><p><p><p><font size=\"3\" color='orange'><strong>We are processing your request. Please Wait...</strong></font></div>";
     echo '<div id="popUpFilePreviewDiv" style="display:none;text-align:left;word-break:break-all;overflow:scroll;">';
     echo '</div>';
     if ($archive) {
-      echo '<br><font size=\"3\" color="green"><b>Request successfull.&nbsp;Click <a href="/download.php?file=' . $archive . '">here</a>&nbsp;to download.</b></font><br><br>';
+      echo '<br><font size=\"3\" color="green"><strong>Request successfull.&nbsp;Click <a href="/download.php?file=' . $archive . '">here</a>&nbsp;to download.</strong></font><br><br>';
     }
     echo '<form action="' . $reqUri . '" method="post" name="frmdl" id="frmdl" >';
     echo '<div style="float: left;position: relative;max-width:380px;">';
@@ -293,9 +293,9 @@ class download_form extends login_form {
     $onclick = 'onclick="document.forms[\'frmdl\'].submit();"';
 
     if ($this->path != $this->pathJeu) {
-      echo '<th colspan = "4" ><a href="' . $reqUriNoPath . '&path=' . $parent . '&project_name=' . $this->projectName . '"><img src="/img/folder_up_petit.png" style="border:0px;" /></a>&nbsp;&nbsp;<b>Current Directory:&nbsp;' . $this->getRelativepath($this->path, $this->pathJeu) . '</b></th></tr>';
+      echo '<th colspan = "4" ><a href="' . $reqUriNoPath . '&path=' . $parent . '&project_name=' . $this->projectName . '"><img src="/img/folder_up_petit.png" style="border:0px;" /></a>&nbsp;&nbsp;<strong>Current Directory:&nbsp;' . $this->getRelativepath($this->path, $this->pathJeu) . '</strong></th></tr>';
     } else {
-      echo '<th colspan = "4" ><b>Current Directory:&nbsp;/</b></th></tr>';
+      echo '<th colspan = "4" ><strong>Current Directory:&nbsp;/</strong></th></tr>';
     }
     echo '<tr><th colspan = "4" align="center" >';
     echo $this->getElement('bouton_addAll')->toHTML();
@@ -428,7 +428,7 @@ class download_form extends login_form {
     $reqUri = $this->getReqUri();
     echo $this->getElement('email_notif_hidden')->toHTML();
     echo '<table style="table-layout:auto;" >';
-    echo '<tr><th colspan="3"><b>Data Basket</b></th></tr>';
+    echo '<tr><th colspan="3"><strong>Data Basket</strong></th></tr>';
     if (!$archive) {
       if (count($this->selection) == 0) {
         echo '<tr><th colspan="3" ></th></tr>';

@@ -72,7 +72,7 @@
     <br>
     <ul class="main">
         <li>&lt;a&gt; : Ceci est un lien vers <a href="http://html2pdf.fr">le site de HTML2PDF</a></li>
-        <li>&lt;b&gt;, &lt;strong&gt; : Ecrire en <b>gras</b>.</li>
+        <li>&lt;b&gt;, &lt;strong&gt; : Ecrire en <strong>gras</strong>.</li>
         <li>&lt;big&gt; : Ecrire plus <big>gros</big>.</li>
         <li>&lt;br&gt; : Permet d'aller à la ligne</li>
         <li>&lt;cite&gt; : <cite>Ceci est une citation</cite></li>

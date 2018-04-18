@@ -73,7 +73,7 @@ class admin_form extends login_form {
     if ($group) {
       if ($group == -1) {
         $this->_errors[] = "Please select a group in the list";
-        echo "<font size=\"3\" color='red'><b>Please select a group in the list.</b></font><br>";
+        echo "<font size=\"3\" color='red'><strong>Please select a group in the list.</strong></font><br>";
         return true;
       }
       $nvAttrs["memberOf"] = $group;
@@ -135,7 +135,7 @@ class admin_form extends login_form {
             }
             $this->readPendingRequestsList();
             $this->readRegisteredUsersList();
-            echo "<font size=\"3\" color='green'><b>The user has been registered successfully.</b></font><br>";
+            echo "<font size=\"3\" color='green'><strong>The user has been registered successfully.</strong></font><br>";
             return true;
           } else {
             log_error('Echec modif');
@@ -175,7 +175,7 @@ class admin_form extends login_form {
         $this->sendMailRejet($user->mail, $this->getProjectAdminEmail($project_name));
         $this->readPendingRequestsList();
         $this->readRejectedRequestsList();
-        echo "<font size=\"3\" color='green'><b>The request has been rejected successfully.</b></font><br>";
+        echo "<font size=\"3\" color='green'><strong>The request has been rejected successfully.</strong></font><br>";
         return true;
       } else {
         return false;
@@ -196,7 +196,7 @@ class admin_form extends login_form {
       if ($ldapConn->modifyAttribute($user->dn, strtolower($project_name) . "Status", STATUS_PENDING)) {
         $this->readPendingRequestsList();
         $this->readRejectedRequestsList();
-        echo "<font size=\"3\" color='green'><b>The request has been restored successfully.</b></font><br>";
+        echo "<font size=\"3\" color='green'><strong>The request has been restored successfully.</strong></font><br>";
         return true;
       } else {
         return false;
@@ -246,7 +246,7 @@ class admin_form extends login_form {
               }
               $ldapConn->addAttributes($user->dn, $nvAttrs);
             }
-            echo "<font size=\"3\" color='green'><b>The user has been updated successfully.</b></font><br>";
+            echo "<font size=\"3\" color='green'><strong>The user has been updated successfully.</strong></font><br>";
             $this->readRegisteredUsersList();
             return true;
           } else {
@@ -258,7 +258,7 @@ class admin_form extends login_form {
           return false;
         }
       } else {
-        echo "<font size=\"3\" color='red'><b>No modifications to save.</b></font><br>";
+        echo "<font size=\"3\" color='red'><strong>No modifications to save.</strong></font><br>";
         return true;
       }
     } else {
@@ -293,7 +293,7 @@ class admin_form extends login_form {
         $this->readRegisteredUsersList();
         $this->readPendingRequestsList();
         $this->readRejectedRequestsList();
-        echo "<font size=\"3\" color='green'><b>The user has been deleted successfully.</b></font><br>";
+        echo "<font size=\"3\" color='green'><strong>The user has been deleted successfully.</strong></font><br>";
         return true;
       }
       $ldapConn->close();
@@ -311,7 +311,7 @@ class admin_form extends login_form {
       if ($ldapConn->deleteEntry($user->dn)) {
         $this->readPendingRequestsList();
         $this->readRejectedRequestsList();
-        echo "<font size=\"3\" color='green'><b>The request has been deleted successfully.</b></font><br>";
+        echo "<font size=\"3\" color='green'><strong>The request has been deleted successfully.</strong></font><br>";
         return true;
       } else {
         return false;
@@ -487,7 +487,7 @@ class admin_form extends login_form {
   function displayUser($i, $user, $registered = false, $rejected = false, $project = null) {
     global $MainProjects, $project_name;
     if (isset($user)) {
-      echo '<tr><td align="left" colspan="2"><b>' . $user->cn . '</b><br/>';
+      echo '<tr><td align="left" colspan="2"><strong>' . $user->cn . '</strong><br/>';
       if ($registered) {
         echo 'Registration Date:&nbsp;';
         $this->displayDate($user->registrationDate);
@@ -498,37 +498,37 @@ class admin_form extends login_form {
       echo '</td></tr>';
       echo "<tr>";
       echo '<td valign="top">';
-      echo "<b>Affiliation:</b>&nbsp;$user->affiliation<br>";
-      echo "<b>Mail:</b>&nbsp;$user->mail<br>";
-      echo "<b>Postal Address:</b>&nbsp;$user->street<br>";
-      echo "<b>Zip Code:</b>&nbsp;$user->zipCode<br>";
-      echo "<b>City:</b>&nbsp;$user->city<br>";
-      echo "<b>Country:</b>&nbsp;" . countries::getDisplayName($user->country) . "<br>";
-      echo "<b>Telephone:</b>&nbsp;$user->phoneNumber<br>";
+      echo "<strong>Affiliation:</strong>&nbsp;$user->affiliation<br>";
+      echo "<strong>Mail:</strong>&nbsp;$user->mail<br>";
+      echo "<strong>Postal Address:</strong>&nbsp;$user->street<br>";
+      echo "<strong>Zip Code:</strong>&nbsp;$user->zipCode<br>";
+      echo "<strong>City:</strong>&nbsp;$user->city<br>";
+      echo "<strong>Country:</strong>&nbsp;" . countries::getDisplayName($user->country) . "<br>";
+      echo "<strong>Telephone:</strong>&nbsp;$user->phoneNumber<br>";
       echo '</td><td valign="top">';
-      echo "<b>Abstract:</b><br>$user->abstract";
+      echo "<strong>Abstract:</strong><br>$user->abstract";
       if ($MainProjects !== null) {
         foreach ($MainProjects as $pro) {
           if (isset($user->attrs[strtolower($pro) . 'Abstract'][0]) && $user->attrs[strtolower($pro) . 'Abstract'][0] != $user->abstract) {
-            echo "<br><b>" . strtolower($pro) . " Abstract:</b><br>" . $user->attrs[strtolower($pro) . 'Abstract'][0];
+            echo "<br><strong>" . strtolower($pro) . " Abstract:</strong><br>" . $user->attrs[strtolower($pro) . 'Abstract'][0];
           }
         }
       }
       if (isset($user->supervisor_name) && !empty($user->supervisor_name)) {
-        echo "<br><b>Supervisor:</b>&nbsp;$user->supervisor_name - $user->supervisor_affiliation";
+        echo "<br><strong>Supervisor:</strong>&nbsp;$user->supervisor_name - $user->supervisor_affiliation";
       }
       if (isset($user->wg) && !empty($user->wg)) {
-        echo "<br><b>WG:</b>";
+        echo "<br><strong>WG:</strong>";
         foreach ($user->wg as $wg) {
           echo "<br>-&nbsp;$wg";
         }
       }
       if (isset($user->associatedProject) && !empty($user->associatedProject)) {
-        echo "<br><b>Associated Project:</b>&nbsp;$user->associatedProject";
+        echo "<br><strong>Associated Project:</strong>&nbsp;$user->associatedProject";
       }
       if (!$registered) {
         if (isset($user->memberOf) && !empty($user->memberOf)) {
-          echo '<br><b>Groups:</b>';
+          echo '<br><strong>Groups:</strong>';
           foreach ($user->memberOf as $group) {
             echo "<br>- $group";
           }
@@ -603,11 +603,11 @@ class admin_form extends login_form {
           $ligne1 = '<tr>';
           $ligne2 = '<tr>';
         }
-        $ligne1 .= '<th><b>' . $participant->cn . '</b></th>';
+        $ligne1 .= '<th><strong>' . $participant->cn . '</strong></th>';
         $ligne2 .= '<td>';
-        $ligne2 .= "<b>Mail:</b>&nbsp;$participant->mail<br>";
-        $ligne2 .= "<b>Affiliation:</b>&nbsp;$participant->affiliation<br>";
-        $ligne2 .= "<b>Country:</b>&nbsp;" . countries::getDisplayName($participant->country) . "</td>";
+        $ligne2 .= "<strong>Mail:</strong>&nbsp;$participant->mail<br>";
+        $ligne2 .= "<strong>Affiliation:</strong>&nbsp;$participant->affiliation<br>";
+        $ligne2 .= "<strong>Country:</strong>&nbsp;" . countries::getDisplayName($participant->country) . "</td>";
         if ($cpt % 2 == 0) {
           $ligne1 .= '</tr>';
           $ligne2 .= '</tr>';

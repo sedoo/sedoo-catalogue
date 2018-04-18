@@ -33,16 +33,16 @@
             <td colspan="2" style="width: 100%">
                 <div class="zone" style="height: 34mm;position: relative;font-size: 5mm;">
                     <div style="position: absolute; right: 3mm; top: 3mm; text-align: right; font-size: 4mm; ">
-                        <b><?php echo $nom; ?></b><br>
+                        <strong><?php echo $nom; ?></strong><br>
                     </div>
                     <div style="position: absolute; right: 3mm; bottom: 3mm; text-align: right; font-size: 4mm; ">
-                        <b>1</b> place <b>plein tarif</b><br>
-                        Prix unitaire TTC : <b>45,00&euro;</b><br>
-                        N° commande : <b><?php echo $num; ?></b><br>
-                        Date d'achat : <b><?php echo date('d/m/Y à H:i:s'); ?></b><br>
+                        <strong>1</strong> place <strong>plein tarif</strong><br>
+                        Prix unitaire TTC : <strong>45,00&euro;</strong><br>
+                        N° commande : <strong><?php echo $num; ?></strong><br>
+                        Date d'achat : <strong><?php echo date('d/m/Y à H:i:s'); ?></strong><br>
                     </div>
                     <h1>Billet soirée spécial HTML2PDF</h1>
-                    &nbsp;&nbsp;&nbsp;&nbsp;<b>Valable le <?php echo $date; ?> à 20h30</b><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<strong>Valable le <?php echo $date; ?> à 20h30</strong><br>
                     <img src="./res/logo.gif" alt="logo" style="margin-top: 3mm; margin-left: 20mm">
                 </div>
             </td>
@@ -55,7 +55,7 @@
             </td>
             <td style="width: 75%">
                 <div class="zone" style="height: 40mm;vertical-align: middle; text-align: justify">
-                    <b>Conditions d'utilisation du billet</b><br>
+                    <strong>Conditions d'utilisation du billet</strong><br>
                     Le billet est soumis aux conditions générales de vente que vous avez
                     acceptées avant l'achat du billet. Le billet d'entrée est uniquement
                     valable s'il est imprimé sur du papier A4 blanc, vierge recto et verso.
@@ -71,9 +71,9 @@
                     cas de non respect de l'ensemble des règles précisées ci-dessus, ce billet
                     sera considéré comme non valable.<br>
                     <br>
-                    <i>Ce billet est reconnu électroniquement lors de votre
+                    <em>Ce billet est reconnu électroniquement lors de votre
                     arrivée sur site. A ce titre, il ne doit être ni dupliqué, ni photocopié.
-                    Toute reproduction est frauduleuse et inutile.</i>
+                    Toute reproduction est frauduleuse et inutile.</em>
                 </div>
             </td>
         </tr>

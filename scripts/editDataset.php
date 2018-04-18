@@ -54,7 +54,7 @@ function editContact(&$pis) {
 
 function editDOI($doi) {
   if (isset($doi) && !empty($doi)) {
-    echo "<tr><td><b>Dataset DOI</b></td><td colspan='3'>$doi";
+    echo "<tr><td><strong>Dataset DOI</strong></td><td colspan='3'>$doi";
     $f = fopen(DATACITE_CITATION . $doi, 'r');
     if ($f) {
       echo '<p><strong>How to cite: </strong>' . fgets($f) . '</p>';
@@ -67,7 +67,7 @@ function editDOI($doi) {
 function editDataAvailability(&$dataset, $projectName, $queryArgs = array()) {
   $liens = getAvailableDataLinks($dataset, $projectName, $queryArgs);
   if (isset($liens) && !empty($liens)) {
-    echo '<tr><td rowspan="' . count($liens) . '"><b>Data access</b></td>';
+    echo '<tr><td rowspan="' . count($liens) . '"><strong>Data access</strong></td>';
     foreach ($liens as $lien) {
       echo "<td colspan='3'>$lien</td></tr>";
     }
@@ -75,7 +75,7 @@ function editDataAvailability(&$dataset, $projectName, $queryArgs = array()) {
     $journal = new journal();
     $journal = $journal->getByDataset($dataset->dats_id, TYPE_NEW . ',' . TYPE_UPDATE);
     if (isset($journal) && !empty($journal)) {
-      echo '<tr><td><b>History</b></td><td colspan="3" style="padding-right:0px;">';
+      echo '<tr><td><strong>History</strong></td><td colspan="3" style="padding-right:0px;">';
       if (count($journal) > 3) {
         echo '<div style="overflow:auto;height:150px;">';
       }
@@ -98,7 +98,7 @@ function editDataAvailability(&$dataset, $projectName, $queryArgs = array()) {
       echo '</td></tr>';
     }
   } else {
-    echo '<tr><td><b>Data availability</b></td>';
+    echo '<tr><td><strong>Data availability</strong></td>';
     echo '<td colspan="3">No data are currently available for this dataset.&nbsp;';
     $suscribeUrl = '/Your-Account?p&pageId=6&datsId=' . $dataset->dats_id;
     if (isset($_SESSION['loggedUserAbos'])) {
@@ -132,41 +132,41 @@ function tmp_format_abstract($string) {
 }
 
 function editDataDescr(&$dataset) {
-  echo '<tr><th colspan="4" align="center"><b>Data description</b></th></tr>';
-  echo "<tr><td><b>Abstract</b></td><td colspan='3'>" . tmp_format_abstract($dataset->dats_abstract) . "</td></tr>";
+  echo '<tr><th colspan="4" align="center"><strong>Data description</strong></th></tr>';
+  echo "<tr><td><strong>Abstract</strong></td><td colspan='3'>" . tmp_format_abstract($dataset->dats_abstract) . "</td></tr>";
   if (isset($dataset->dats_purpose)) {
-    echo "<tr><td><b>Observing strategy</b></td><td colspan='3'>" . tmp_format_abstract($dataset->dats_purpose) . "</td></tr>";
+    echo "<tr><td><strong>Observing strategy</strong></td><td colspan='3'>" . tmp_format_abstract($dataset->dats_purpose) . "</td></tr>";
   }
-  echo "<tr><td><b>References</b></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
+  echo "<tr><td><strong>References</strong></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
 }
 
 // add by Lolo
 function editSiteDescr(&$dataset) {
-  echo '</td></tr><tr><th colspan="4" align="center"><b>Site description</b></th></tr>';
-  echo "<tr><td><b>Abstract</b></td><td colspan='3'>" . tmp_format_abstract($dataset->dats_abstract) . "</td></tr>";
-  echo "<tr><td><b>Observing strategy</b></td><td colspan='3'>" . tmp_format_abstract($dataset->dats_purpose) . "</td></tr>";
-  echo "<tr><td><b>References</b></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
+  echo '</td></tr><tr><th colspan="4" align="center"><strong>Site description</strong></th></tr>';
+  echo "<tr><td><strong>Abstract</strong></td><td colspan='3'>" . tmp_format_abstract($dataset->dats_abstract) . "</td></tr>";
+  echo "<tr><td><strong>Observing strategy</strong></td><td colspan='3'>" . tmp_format_abstract($dataset->dats_purpose) . "</td></tr>";
+  echo "<tr><td><strong>References</strong></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
 }
 
 function editParameter(&$dats_var, $withPrecision = true, $withDates = true, $withLevelType = false) {
   if (isset($dats_var->variable->var_name) && !empty($dats_var->variable->var_name)) {
-    echo "<tr><td><b>Parameter name</b></td><td colspan='3'>" . $dats_var->variable->var_name . "</td></tr>";
+    echo "<tr><td><strong>Parameter name</strong></td><td colspan='3'>" . $dats_var->variable->var_name . "</td></tr>";
   } else {
-    echo "<tr><td><b>Parameter name</b></td><td colspan='3'>" . $dats_var->variable->gcmd->gcmd_name . "</td></tr>";
+    echo "<tr><td><strong>Parameter name</strong></td><td colspan='3'>" . $dats_var->variable->gcmd->gcmd_name . "</td></tr>";
   }
 
-  echo "<tr><td><b>Parameter keyword</b></td><td colspan='3'>" . printGcmdScience($dats_var->variable->gcmd) . "</td></tr>";
-  echo "<tr><td><b>Unit</b></td><td colspan='3'>" . ((isset($dats_var->unit) && !empty($dats_var->unit)) ? $dats_var->unit->toString() : "") . "</td></tr>";
-  echo "<tr><td><b>Acquisition methodology and quality</b></td><td colspan='3'>" . $dats_var->methode_acq . "</td></tr>";
+  echo "<tr><td><strong>Parameter keyword</strong></td><td colspan='3'>" . printGcmdScience($dats_var->variable->gcmd) . "</td></tr>";
+  echo "<tr><td><strong>Unit</strong></td><td colspan='3'>" . ((isset($dats_var->unit) && !empty($dats_var->unit)) ? $dats_var->unit->toString() : "") . "</td></tr>";
+  echo "<tr><td><strong>Acquisition methodology and quality</strong></td><td colspan='3'>" . $dats_var->methode_acq . "</td></tr>";
   if ($withDates) {
-    echo "<tr><td><b>Date begin (yyyy-mm-jj)</b></td><td>" . $dats_var->date_min . "</td>";
-    echo "<td><b>Date end (yyyy-mm-jj)</b></td><td>" . $dats_var->date_max . "</td></tr>";
+    echo "<tr><td><strong>Date begin (yyyy-mm-jj)</strong></td><td>" . $dats_var->date_min . "</td>";
+    echo "<td><strong>Date end (yyyy-mm-jj)</strong></td><td>" . $dats_var->date_max . "</td></tr>";
   }
   if ($withPrecision) {
-    echo "<tr><td><b>Sensor precision / incertainty</b></td><td colspan='3'>" . $dats_var->variable->sensor_precision . "</td></tr>";
+    echo "<tr><td><strong>Sensor precision / incertainty</strong></td><td colspan='3'>" . $dats_var->variable->sensor_precision . "</td></tr>";
   }
   if ($withLevelType) {
-    echo "<tr><td><b>Vertical level type</b></td><td colspan='3'>" . $dats_var->level_type . "</td></tr>";
+    echo "<tr><td><strong>Vertical level type</strong></td><td colspan='3'>" . $dats_var->level_type . "</td></tr>";
 
   }
 }
@@ -174,25 +174,25 @@ function editParameter(&$dats_var, $withPrecision = true, $withDates = true, $wi
 //add by lolo
 function editParameterFromSensorVar(&$sensor_var) {
   if (isset($sensor_var->variable->var_name) && !empty($sensor_var->variable->var_name)) {
-    echo "<tr><td><b>Parameter name</b></td><td colspan='3'>" . $sensor_var->variable->var_name . "</td></tr>";
+    echo "<tr><td><strong>Parameter name</strong></td><td colspan='3'>" . $sensor_var->variable->var_name . "</td></tr>";
   } else {
-    echo "<tr><td><b>Parameter name</b></td><td colspan='3'>" . $sensor_var->variable->gcmd->gcmd_name . "</td></tr>";
+    echo "<tr><td><strong>Parameter name</strong></td><td colspan='3'>" . $sensor_var->variable->gcmd->gcmd_name . "</td></tr>";
   }
 
-  echo "<tr><td><b>Parameter keyword</b></td><td colspan='3'>" . printGcmdScience($sensor_var->variable->gcmd) . "</td></tr>";
-  echo "<tr><td><b>Unit</b></td><td colspan='3'>" . ((isset($sensor_var->unit) && !empty($sensor_var->unit)) ? $sensor_var->unit->toString() : "") . "</td></tr>";
-  echo "<tr><td><b>Acquisition methodology and quality</b></td><td colspan='3'>" . $sensor_var->methode_acq . "</td></tr>";
-  echo "<tr><td><b>Date begin (yyyy-mm-jj)</b></td><td>" . $sensor_var->date_min . "</td>";
-  echo "<td><b>Date end (yyyy-mm-jj)</b></td><td>" . $sensor_var->date_max . "</td></tr>";
-  echo "<tr><td><b>Sensor precision / incertainty</b></td><td colspan='3'>" . $sensor_var->sensor_precision . "</td></tr>";
+  echo "<tr><td><strong>Parameter keyword</strong></td><td colspan='3'>" . printGcmdScience($sensor_var->variable->gcmd) . "</td></tr>";
+  echo "<tr><td><strong>Unit</strong></td><td colspan='3'>" . ((isset($sensor_var->unit) && !empty($sensor_var->unit)) ? $sensor_var->unit->toString() : "") . "</td></tr>";
+  echo "<tr><td><strong>Acquisition methodology and quality</strong></td><td colspan='3'>" . $sensor_var->methode_acq . "</td></tr>";
+  echo "<tr><td><strong>Date begin (yyyy-mm-jj)</strong></td><td>" . $sensor_var->date_min . "</td>";
+  echo "<td><strong>Date end (yyyy-mm-jj)</strong></td><td>" . $sensor_var->date_max . "</td></tr>";
+  echo "<tr><td><strong>Sensor precision / incertainty</strong></td><td colspan='3'>" . $sensor_var->sensor_precision . "</td></tr>";
 }
 
 function editDataUse(&$dataset, $withRequiredFormat = true) {
-  echo '</td></tr><tr><th colspan="4" align="center"><b>Data use information</b></th></tr>';
-  echo "<tr><td><b>Use constraints</b></td><td colspan='3'>" . $dataset->dats_use_constraints . "</td></tr>";
-  echo "<tr><td><b>Data policy</b></td><td colspan='3'>" . $dataset->data_policy->data_policy_name . "</td></tr>";
-  echo "<tr><td><b>Database</b></td><td colspan='3'>" . $dataset->database->database_name . "</td></tr>";
-  echo "<tr><td><b>Original data format(s)</b></td><td colspan='3'>";
+  echo '</td></tr><tr><th colspan="4" align="center"><strong>Data use information</strong></th></tr>';
+  echo "<tr><td><strong>Use constraints</strong></td><td colspan='3'>" . $dataset->dats_use_constraints . "</td></tr>";
+  echo "<tr><td><strong>Data policy</strong></td><td colspan='3'>" . $dataset->data_policy->data_policy_name . "</td></tr>";
+  echo "<tr><td><strong>Database</strong></td><td colspan='3'>" . $dataset->database->database_name . "</td></tr>";
+  echo "<tr><td><strong>Original data format(s)</strong></td><td colspan='3'>";
   foreach ($dataset->data_formats as $format) {
     echo $format->data_format_name . "<br>";
   }
@@ -202,7 +202,7 @@ function editDataUse(&$dataset, $withRequiredFormat = true) {
     $labelReqFormat = 'Distribution data format(s)';
   }
   if (isset($dataset->required_data_formats) && !empty($dataset->required_data_formats)) {
-    echo "<tr><td><b>$labelReqFormat</b></td><td colspan='3'>";
+    echo "<tr><td><strong>$labelReqFormat</strong></td><td colspan='3'>";
     foreach ($dataset->required_data_formats as $format) {
       echo $format->data_format_name . "<br>";
     }
@@ -215,48 +215,48 @@ function editSiteBoundings(&$site) {
     || (isset($site->north_bounding_coord) && strlen($site->north_bounding_coord))
     || (isset($site->south_bounding_coord) && strlen($site->south_bounding_coord))
   ) {
-    echo "<tr><td><b>West bounding coordinate (°)</b></td><td>" . $site->west_bounding_coord . "</td>";
-    echo "<td><b>East bounding coordinate (°)</b></td><td>" . $site->east_bounding_coord . "</td></tr>";
-    echo "<tr><td><b>North bounding coordinate (°)</b></td><td>" . $site->north_bounding_coord . "</td>";
-    echo "<td><b>South bounding coordinate (°)</b></td><td>" . $site->south_bounding_coord . "</td></tr>";
+    echo "<tr><td><strong>West bounding coordinate (°)</strong></td><td>" . $site->west_bounding_coord . "</td>";
+    echo "<td><strong>East bounding coordinate (°)</strong></td><td>" . $site->east_bounding_coord . "</td></tr>";
+    echo "<tr><td><strong>North bounding coordinate (°)</strong></td><td>" . $site->north_bounding_coord . "</td>";
+    echo "<td><strong>South bounding coordinate (°)</strong></td><td>" . $site->south_bounding_coord . "</td></tr>";
   }
   if ((isset($site->place_elevation_min) && strlen($site->place_elevation_min) > 0)
     || (isset($site->place_elevation_max) && strlen($site->place_elevation_max) > 0)
   ) {
-    echo "<tr><td><b>Altitude min</b></td><td>" . $site->place_elevation_min . "</td>";
-    echo "<td><b>Altitude max</b></td><td>" . $site->place_elevation_max . "</td></tr>";
+    echo "<tr><td><strong>Altitude min</strong></td><td>" . $site->place_elevation_min . "</td>";
+    echo "<td><strong>Altitude max</strong></td><td>" . $site->place_elevation_max . "</td></tr>";
   }
 }
 
 function editGrid(&$ds) {
   editSensorResolution($ds, true);
-  echo '<tr><td colspan="4" align="center"><b>Grid type</b></td></tr>';
-  echo "<tr><td><b>Original Grid type</b></td><td colspan='3'>" . $ds->grid_original . "</td></tr>";
-  echo "<tr><td><b>Required grid processing</b></td><td colspan='3'>" . $ds->grid_process . "</td></tr>";
+  echo '<tr><td colspan="4" align="center"><strong>Grid type</strong></td></tr>';
+  echo "<tr><td><strong>Original Grid type</strong></td><td colspan='3'>" . $ds->grid_original . "</td></tr>";
+  echo "<tr><td><strong>Required grid processing</strong></td><td colspan='3'>" . $ds->grid_process . "</td></tr>";
 
 }
 
 //Renvoie true si qqch a été écrit
 function editSensorResolution(&$ds, $isGrid = false) {
   if ($isGrid) {
-    echo '<tr><td colspan="4" align="center"><b>Data resolution</b></td></tr>';
-    echo "<tr><td><b>Temporal resolution</b></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
-    echo "<tr><td><b>Latitude resolution</b></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
-    echo "<tr><td><b>Longitude resolution</b></td><td colspan='3'>" . $ds->sensor_lon_resolution . "</td></tr>";
-    echo "<tr><td><b>Vertical resolution</b></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
+    echo '<tr><td colspan="4" align="center"><strong>Data resolution</strong></td></tr>';
+    echo "<tr><td><strong>Temporal resolution</strong></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
+    echo "<tr><td><strong>Latitude resolution</strong></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
+    echo "<tr><td><strong>Longitude resolution</strong></td><td colspan='3'>" . $ds->sensor_lon_resolution . "</td></tr>";
+    echo "<tr><td><strong>Vertical resolution</strong></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
     return true;
   } else {
     $infoTrouve = false;
     if (isset($ds->sensor_resol_temp)) {
-      echo "<tr><td><b>Observation frequency</b></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
+      echo "<tr><td><strong>Observation frequency</strong></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
       $infoTrouve = true;
     }
     if (isset($ds->sensor_lat_resolution)) {
-      echo "<tr><td><b>Horizontal coverage</b></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
+      echo "<tr><td><strong>Horizontal coverage</strong></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
       $infoTrouve = true;
     }
     if (isset($ds->sensor_vert_resolution)) {
-      echo "<tr><td><b>Vertical coverage</b></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
+      echo "<tr><td><strong>Vertical coverage</strong></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
       $infoTrouve = true;
     }
     return $infoTrouve;
@@ -279,52 +279,52 @@ function editSatelliteDataset(&$dataset, $project_name, $queryArgs = array()) {
       }
 
     }
-    echo '<table><tr><th colspan="4" align="center"><b>General information</b></th></tr>';
-    echo "<tr><td><b>Dataset name</b></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
+    echo '<table><tr><th colspan="4" align="center"><strong>General information</strong></th></tr>';
+    echo "<tr><td><strong>Dataset name</strong></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
     editDOI($dataset->dats_doi);
-    echo "<tr><td><b>Created on</b></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
-    echo "<tr><td><b>Version</b></td><td colspan='3'>" . $dataset->dats_version . "</td></tr>";
-    echo "<tr><td><b>Useful in the framework of</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Created on</strong></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
+    echo "<tr><td><strong>Version</strong></td><td colspan='3'>" . $dataset->dats_version . "</td></tr>";
+    echo "<tr><td><strong>Useful in the framework of</strong></td><td colspan='3'>";
     foreach ($dataset->projects as $proj) {
       echo $proj->toString() . "<br>";
     }
     echo "</td></tr>";
-    echo "<tr><td><b>Dataset Contact(s)</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Dataset Contact(s)</strong></td><td colspan='3'>";
     editContact($dataset->dats_originators);
     echo '</td></tr>';
     editDataAvailability($dataset, $project_name, $queryArgs);
-    echo "<tr><td><b>Purpose</b></td><td colspan='3'>" . $dataset->dats_purpose . "</td></tr>";
-    echo "<tr><td><b>References</b></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Instrument' . ((count($dataset->dats_sensors) > 1) ? 's' : '') . '</b></th></tr>';
+    echo "<tr><td><strong>Purpose</strong></td><td colspan='3'>" . $dataset->dats_purpose . "</td></tr>";
+    echo "<tr><td><strong>References</strong></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Instrument' . ((count($dataset->dats_sensors) > 1) ? 's' : '') . '</strong></th></tr>';
     for ($i = 0; $i < count($dataset->dats_sensors); $i++) {
       if (count($dataset->dats_sensors) > 1) {
-        echo '<tr><td colspan="4" align="center"><b>Instrument ' . ($i + 1) . '</b></td></tr>';
+        echo '<tr><td colspan="4" align="center"><strong>Instrument ' . ($i + 1) . '</strong></td></tr>';
       }
 
       $dataset->dats_sensors[$i]->sensor->get_sensor_places();
-      echo "<tr><td><b>Satellite</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_places[0]->place->place_name . "</td></tr>";
-      echo "<tr><td><b>Instrument</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
-      echo "<tr><td><b>Instrument type</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
+      echo "<tr><td><strong>Satellite</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_places[0]->place->place_name . "</td></tr>";
+      echo "<tr><td><strong>Instrument</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
+      echo "<tr><td><strong>Instrument type</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
       if (isset($dataset->dats_sensors[$i]->sensor->sensor_url) && !empty($dataset->dats_sensors[$i]->sensor->sensor_url)) {
-        echo "<tr><td><b>Reference</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
+        echo "<tr><td><strong>Reference</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
       }
 
     }
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Parameters</b></th></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Parameters</strong></th></tr>';
     $cpt = 1;
     foreach ($dataset->dats_variables as $dats_var) {
       if (count($dataset->dats_variables) > 1) {
-        echo '<tr><td colspan="4" align="center"><b>Parameter ' . ($cpt++) . '</b></td></tr>';
+        echo '<tr><td colspan="4" align="center"><strong>Parameter ' . ($cpt++) . '</strong></td></tr>';
       }
       editParameter($dats_var, false, false, true);
     }
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Coverage</b></th></tr>';
-    echo '<tr><td colspan="4" align="center"><b>Temporal Coverage</b></td></tr>';
-    echo "<tr><td><b>Date begin (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_begin . "</td>";
-    echo "<td><b>Date end (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_end . "</td></tr>";
-    echo '<tr><td colspan="4" align="center"><b>Geographic Coverage</b></td></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Coverage</strong></th></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Temporal Coverage</strong></td></tr>';
+    echo "<tr><td><strong>Date begin (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_begin . "</td>";
+    echo "<td><strong>Date end (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_end . "</td></tr>";
+    echo '<tr><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
     if (isset($dataset->sites) && isset($dataset->sites[0]) && !empty($dataset->sites[0])) {
-      echo "<tr><td><b>Area name</b></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
+      echo "<tr><td><strong>Area name</strong></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
       editSiteBoundings($dataset->sites[0]);
     }
     editGrid($dataset->dats_sensors[0]);
@@ -342,43 +342,43 @@ function editValueDataset(&$dataset, $project_name, $queryArgs = array()) {
   }
 
   if (isset($dataset) && !empty($dataset)) {
-    echo '<table><tr><th colspan="4" align="center"><b>General information</b></th></tr>';
-    echo "<tr><td><b>Dataset name</b></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
+    echo '<table><tr><th colspan="4" align="center"><strong>General information</strong></th></tr>';
+    echo "<tr><td><strong>Dataset name</strong></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
     editDOI($dataset->dats_doi);
-    echo "<tr><td><b>Created on</b></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
-    echo "<tr><td><b>Useful in the framework of</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Created on</strong></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
+    echo "<tr><td><strong>Useful in the framework of</strong></td><td colspan='3'>";
     foreach ($dataset->projects as $proj) {
       echo $proj->toString() . "<br>";
     }
     echo "</td></tr>";
-    echo "<tr><td><b>Dataset Contact</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Dataset Contact</strong></td><td colspan='3'>";
     editContact($dataset->dats_originators);
     echo '</td></tr>';
     editDataAvailability($dataset, $project_name, $queryArgs);
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Data description</b></th></tr>';
-    echo "<tr><td><b>Dataset description</b></td><td colspan='3'>" . $dataset->dats_abstract . "</td></tr>";
-    echo "<tr><td><b>Purpose</b></td><td colspan='3'>" . $dataset->dats_purpose . "</td></tr>";
-    echo "<tr><td><b>References</b></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Data description</strong></th></tr>';
+    echo "<tr><td><strong>Dataset description</strong></td><td colspan='3'>" . $dataset->dats_abstract . "</td></tr>";
+    echo "<tr><td><strong>Purpose</strong></td><td colspan='3'>" . $dataset->dats_purpose . "</td></tr>";
+    echo "<tr><td><strong>References</strong></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
     if (isset($dataset->attFile) && !empty($dataset->attFile)) {
-      echo "<tr><td><b>Attached document</b></td><td colspan='3'>";
+      echo "<tr><td><strong>Attached document</strong></td><td colspan='3'>";
       echo "<a href='/downAttFile.php?file=" . $dataset->attFile . "' >" . $dataset->attFile . "</a>";
       echo "</td></tr>";
     }
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</b></th></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</strong></th></tr>';
     $cpt = 1;
     foreach ($dataset->dats_variables as $dats_var) {
       if (count($dataset->dats_variables) > 1) {
-        echo '<tr><td colspan="4" align="center"><b>Parameter ' . ($cpt++) . '</b></td></tr>';
+        echo '<tr><td colspan="4" align="center"><strong>Parameter ' . ($cpt++) . '</strong></td></tr>';
       }
       editParameter($dats_var, false, false, true);
     }
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Coverage</b></th></tr>';
-    echo '<tr><td colspan="4" align="center"><b>Temporal Coverage</b></td></tr>';
-    echo "<tr><td><b>Date begin (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_begin . "</td>";
-    echo "<td><b>Date end (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_end . "</td></tr>";
-    echo '<tr><td colspan="4" align="center"><b>Geographic Coverage</b></td></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Coverage</strong></th></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Temporal Coverage</strong></td></tr>';
+    echo "<tr><td><strong>Date begin (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_begin . "</td>";
+    echo "<td><strong>Date end (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_end . "</td></tr>";
+    echo '<tr><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
     if (isset($dataset->sites) && isset($dataset->sites[0]) && !empty($dataset->sites[0])) {
-      echo "<tr><td><b>Area name</b></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
+      echo "<tr><td><strong>Area name</strong></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
       editSiteBoundings($dataset->sites[0]);
     }
     editGrid($dataset->dats_sensors[0]);
@@ -396,62 +396,62 @@ function editValueAddedDataset(&$dataset, $project_name, $queryArgs = array()) {
   }
 
   if (isset($dataset) && !empty($dataset)) {
-    echo '<table><tr><th colspan="4" align="center"><b>General information</b></th></tr>';
-    echo "<tr><td><b>Dataset name</b></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
+    echo '<table><tr><th colspan="4" align="center"><strong>General information</strong></th></tr>';
+    echo "<tr><td><strong>Dataset name</strong></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
     if (isset($dataset->dats_doi) && !empty($dataset->dats_doi)) {
-      echo "<tr><td><b>Dataset DOI</b></td><td colspan='3'>" . $dataset->dats_doi . "</td></tr>";
+      echo "<tr><td><strong>Dataset DOI</strong></td><td colspan='3'>" . $dataset->dats_doi . "</td></tr>";
     }
 
-    echo "<tr><td><b>Created on</b></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
-    echo "<tr><td><b>Useful in the framework of</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Created on</strong></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
+    echo "<tr><td><strong>Useful in the framework of</strong></td><td colspan='3'>";
     foreach ($dataset->projects as $proj) {
       echo $proj->toString() . "<br>";
     }
     echo "</td></tr>";
-    echo "<tr><td><b>Dataset Contact</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Dataset Contact</strong></td><td colspan='3'>";
     editContact($dataset->dats_originators);
     echo '</td></tr>';
     editDataAvailability($dataset, $project_name, $queryArgs);
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Data description</b></th></tr>';
-    echo "<tr><td><b>Dataset description</b></td><td colspan='3'>" . $dataset->dats_abstract . "</td></tr>";
-    echo "<tr><td><b>Purpose</b></td><td colspan='3'>" . $dataset->dats_purpose . "</td></tr>";
-    echo "<tr><td><b>References</b></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Data description</strong></th></tr>';
+    echo "<tr><td><strong>Dataset description</strong></td><td colspan='3'>" . $dataset->dats_abstract . "</td></tr>";
+    echo "<tr><td><strong>Purpose</strong></td><td colspan='3'>" . $dataset->dats_purpose . "</td></tr>";
+    echo "<tr><td><strong>References</strong></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
     if (isset($dataset->attFile) && !empty($dataset->attFile)) {
-      echo "<tr><td><b>Attached document</b></td><td colspan='3'>";
+      echo "<tr><td><strong>Attached document</strong></td><td colspan='3'>";
       echo "<a href='/downAttFile.php?file=" . $dataset->attFile . "' >" . $dataset->attFile . "</a>";
       echo "</td></tr>";
     }
-    echo '<tr><th colspan="4" align="center"><b>Coverage</b></th></tr>';
-    echo '<tr><td colspan="4" align="center"><b>Temporal Coverage</b></td></tr>';
-    echo "<tr><td><b>Date begin (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_begin . "</td>";
-    echo "<td><b>Date end (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_end . "</td></tr>";
-    echo '<tr><td colspan="4" align="center"><b>Geographic Coverage</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><strong>Coverage</strong></th></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Temporal Coverage</strong></td></tr>';
+    echo "<tr><td><strong>Date begin (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_begin . "</td>";
+    echo "<td><strong>Date end (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_end . "</td></tr>";
+    echo '<tr><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
     if (isset($dataset->sites)) {
-      echo "<tr><td><b>Area name</b></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
+      echo "<tr><td><strong>Area name</strong></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
       editSiteBoundings($dataset->sites[0]);
     }
     editGrid($dataset->dats_sensors[0]);
-    echo '<tr><th colspan="4" align="center"><b>Sources Information</b></th></tr>';
+    echo '<tr><th colspan="4" align="center"><strong>Sources Information</strong></th></tr>';
     if ($dataset->nbModFormSensor > 0) {
       for ($i = $dataset->nbSatFormSensor + 1; $i < ($dataset->nbModFormSensor + $dataset->nbSatFormSensor + 1); $i++) {
         if ($dataset->nbModFormSensor > 1) {
-          echo '<tr><td colspan="4" align="center"><b>Model ' . ($i - $dataset->nbSatFormSensor) . '</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Model ' . ($i - $dataset->nbSatFormSensor) . '</strong></td></tr>';
         } else {
-          echo '<tr><td colspan="4" align="center"><b>Model</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Model</strong></td></tr>';
         }
 
         if (isset($dataset->sites) && isset($dataset->sites[$i]) && !empty($dataset->sites[$i])) {
 
           if (isset($dataset->sites[$i]->parent_place)) {
-            echo "<tr><td><b>Type</b></td><td colspan='3'>"
+            echo "<tr><td><strong>Type</strong></td><td colspan='3'>"
             . $dataset->sites[$i]->parent_place->gcmd_plateform_keyword->gcmd_plat_name
             . ' > ' . $dataset->sites[$i]->parent_place->place_name . "</td></tr>";
           }
-          echo "<tr><td><b>Model</b></td><td colspan='3'>" . $dataset->sites[$i]->place_name . "</td></tr>";
+          echo "<tr><td><strong>Model</strong></td><td colspan='3'>" . $dataset->sites[$i]->place_name . "</td></tr>";
         }
-        echo "<tr><td><b>Simulation</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
+        echo "<tr><td><strong>Simulation</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
         if (isset($dataset->dats_sensors[$i + 1]->sensor_resol_temp) && !empty($dataset->dats_sensors[$i + 1]->sensor_resol_temp)) {
-          echo "<tr><td><b>Temporal Resolution</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor_resol_temp . "</td></tr>";
+          echo "<tr><td><strong>Temporal Resolution</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor_resol_temp . "</td></tr>";
         }
 
       }
@@ -459,21 +459,21 @@ function editValueAddedDataset(&$dataset, $project_name, $queryArgs = array()) {
     if ($dataset->nbSatFormSensor > 0) {
       for ($i = 0; $i < $dataset->nbSatFormSensor; $i++) {
         if ($dataset->nbSatFormSensor > 1) {
-          echo '<tr><td colspan="4" align="center"><b>Satellite ' . ($i + 1) . '</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Satellite ' . ($i + 1) . '</strong></td></tr>';
         } else {
-          echo '<tr><td colspan="4" align="center"><b>Satellite</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Satellite</strong></td></tr>';
         }
 
         $dataset->dats_sensors[$i + 1]->sensor->get_sensor_places();
-        echo "<tr><td><b>Satellite</b></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor->sensor_places[0]->place->place_name . "</td></tr>";
-        echo "<tr><td><b>Instrument</b></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor->sensor_model . "</td></tr>";
-        echo "<tr><td><b>Instrument type</b></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
+        echo "<tr><td><strong>Satellite</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor->sensor_places[0]->place->place_name . "</td></tr>";
+        echo "<tr><td><strong>Instrument</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor->sensor_model . "</td></tr>";
+        echo "<tr><td><strong>Instrument type</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
         if (isset($dataset->dats_sensors[$i + 1]->sensor_resol_temp) && !empty($dataset->dats_sensors[$i + 1]->sensor_resol_temp)) {
-          echo "<tr><td><b>Temporal Resolution</b></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor_resol_temp . "</td></tr>";
+          echo "<tr><td><strong>Temporal Resolution</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor_resol_temp . "</td></tr>";
         }
 
         if (isset($dataset->dats_sensors[$i + 1]->sensor->sensor_url) && !empty($dataset->dats_sensors[$i + 1]->sensor->sensor_url)) {
-          echo "<tr><td><b>Reference</b></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor->sensor_url . "</td></tr>";
+          echo "<tr><td><strong>Reference</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i + 1]->sensor->sensor_url . "</td></tr>";
         }
 
       }
@@ -483,41 +483,41 @@ function editValueAddedDataset(&$dataset, $project_name, $queryArgs = array()) {
     if ($dataset->nbInstruFormSensor > 0) {
       for ($i = $ind; $i < $nbsensors; $i++) {
         if ($dataset->nbInstruFormSensor > 1) {
-          echo '<tr><td colspan="4" align="center"><b>Instrument ' . ($i - $ind + 1) . '</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Instrument ' . ($i - $ind + 1) . '</strong></td></tr>';
         } else {
-          echo '<tr><td colspan="4" align="center"><b>Instrument</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Instrument</strong></td></tr>';
         }
 
         $dataset->dats_sensors[$i]->sensor->get_sensor_places();
-        echo "<tr><td><b>Instrument type</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
+        echo "<tr><td><strong>Instrument type</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
         if (isset($dataset->dats_sensors[$i]->sensor->sensor_model) && !empty($dataset->dats_sensors[$i]->sensor->sensor_model)) {
-          echo "<tr><td><b>Model</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
+          echo "<tr><td><strong>Model</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
         }
 
         if (isset($dataset->dats_sensors[$i]->sensor_resol_temp) && !empty($dataset->dats_sensors[$i]->sensor_resol_temp)) {
-          echo "<tr><td><b>Temporal Resolution</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor_resol_temp . "</td></tr>";
+          echo "<tr><td><strong>Temporal Resolution</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor_resol_temp . "</td></tr>";
         }
 
         if (isset($dataset->dats_sensors[$i]->sensor->sensor_url) && !empty($dataset->dats_sensors[$i]->sensor->sensor_url)) {
-          echo "<tr><td><b>Reference</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
+          echo "<tr><td><strong>Reference</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
         }
 
         if (isset($dataset->dats_sensors[$i]->sensor->sensor_environment) && !empty($dataset->dats_sensors[$i]->sensor->sensor_environment)) {
-          echo "<tr><td><b>Instrument environment</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_environment . "</td></tr>";
+          echo "<tr><td><strong>Instrument environment</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_environment . "</td></tr>";
         }
 
         if (isset($dataset->sites[$i]->place_name) && !empty($dataset->sites[$i]->place_name)) {
-          echo "<tr><td><b>Location name</b></td><td colspan='3'>" . $dataset->sites[$i]->place_name . "</td></tr>";
+          echo "<tr><td><strong>Location name</strong></td><td colspan='3'>" . $dataset->sites[$i]->place_name . "</td></tr>";
         }
 
-        echo "<tr><td><b>Plateform type</b></td><td colspan='3'>" . $dataset->sites[$i]->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
+        echo "<tr><td><strong>Plateform type</strong></td><td colspan='3'>" . $dataset->sites[$i]->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
       }
     }
-    echo '<tr><th colspan="4" align="center"><b>Parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</b></th></tr>';
+    echo '<tr><th colspan="4" align="center"><strong>Parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</strong></th></tr>';
     $cpt = 1;
     foreach ($dataset->dats_variables as $dats_var) {
       if (count($dataset->dats_variables) > 1) {
-        echo '<tr><td colspan="4" align="center"><b>Parameter ' . ($cpt++) . '</b></td></tr>';
+        echo '<tr><td colspan="4" align="center"><strong>Parameter ' . ($cpt++) . '</strong></td></tr>';
       }
       editParameter($dats_var, false, false, true);
     }
@@ -543,53 +543,53 @@ function editModelDataset(&$dataset, $project_name, $queryArgs = array()) {
 
   }
   if (isset($dataset) && !empty($dataset)) {
-    echo '<table><tr><th colspan="4" align="center"><b>General information</b></th></tr>';
-    echo "<tr><td><b>Dataset name</b></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
+    echo '<table><tr><th colspan="4" align="center"><strong>General information</strong></th></tr>';
+    echo "<tr><td><strong>Dataset name</strong></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
     editDOI($dataset->dats_doi);
-    echo "<tr><td><b>Created on</b></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
-    echo "<tr><td><b>Useful in the framework of</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Created on</strong></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
+    echo "<tr><td><strong>Useful in the framework of</strong></td><td colspan='3'>";
     foreach ($dataset->projects as $proj) {
       echo $proj->toString() . "<br>";
     }
     echo "</td></tr>";
-    echo "<tr><td><b>Dataset Contact</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Dataset Contact</strong></td><td colspan='3'>";
     editContact($dataset->dats_originators);
     echo '</td></tr>';
     editDataAvailability($dataset, $project_name, $queryArgs);
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Model information</b></th></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Model information</strong></th></tr>';
     if (isset($dataset->sites) && isset($dataset->sites[1]) && !empty($dataset->sites[1])) {
       if (isset($dataset->sites[1]->parent_place)) {
-        echo "<tr><td><b>Type</b></td><td colspan='3'>"
+        echo "<tr><td><strong>Type</strong></td><td colspan='3'>"
         . $dataset->sites[1]->parent_place->gcmd_plateform_keyword->gcmd_plat_name
         . ' > ' . $dataset->sites[1]->parent_place->place_name . "</td></tr>";
       }
-      echo "<tr><td><b>Model</b></td><td colspan='3'>" . $dataset->sites[1]->place_name . "</td></tr>";
+      echo "<tr><td><strong>Model</strong></td><td colspan='3'>" . $dataset->sites[1]->place_name . "</td></tr>";
     }
-    echo "<tr><td><b>Simulation</b></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_model . "</td></tr>";
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Data description</b></th></tr>';
-    echo "<tr><td><b>Model / simulation description</b></td><td colspan='3'>" . $dataset->dats_abstract . "</td></tr>";
-    echo "<tr><td><b>Purpose</b></td><td colspan='3'>" . $dataset->dats_purpose . "</td></tr>";
-    echo "<tr><td><b>References</b></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
+    echo "<tr><td><strong>Simulation</strong></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_model . "</td></tr>";
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Data description</strong></th></tr>';
+    echo "<tr><td><strong>Model / simulation description</strong></td><td colspan='3'>" . $dataset->dats_abstract . "</td></tr>";
+    echo "<tr><td><strong>Purpose</strong></td><td colspan='3'>" . $dataset->dats_purpose . "</td></tr>";
+    echo "<tr><td><strong>References</strong></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
     if (isset($dataset->attFile) && !empty($dataset->attFile)) {
-      echo "<tr><td><b>Attached document</b></td><td colspan='3'>";
+      echo "<tr><td><strong>Attached document</strong></td><td colspan='3'>";
       echo "<a href='/downAttFile.php?file=" . $dataset->attFile . "' >" . $dataset->attFile . "</a>";
       echo "</td></tr>";
     }
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</b></th></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</strong></th></tr>';
     $cpt = 1;
     foreach ($dataset->dats_variables as $dats_var) {
       if (count($dataset->dats_variables) > 1) {
-        echo '<tr><td colspan="4" align="center"><b>Parameter ' . ($cpt++) . '</b></td></tr>';
+        echo '<tr><td colspan="4" align="center"><strong>Parameter ' . ($cpt++) . '</strong></td></tr>';
       }
       editParameter($dats_var, false, false, true);
     }
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Coverage</b></th></tr>';
-    echo '<tr><td colspan="4" align="center"><b>Temporal Coverage</b></td></tr>';
-    echo "<tr><td><b>Date begin (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_begin . "</td>";
-    echo "<td><b>Date end (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_end . "</td></tr>";
-    echo '<tr><td colspan="4" align="center"><b>Geographic Coverage</b></td></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Coverage</strong></th></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Temporal Coverage</strong></td></tr>';
+    echo "<tr><td><strong>Date begin (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_begin . "</td>";
+    echo "<td><strong>Date end (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_end . "</td></tr>";
+    echo '<tr><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
     if (isset($dataset->sites) && isset($dataset->sites[0]) && !empty($dataset->sites[0])) {
-      echo "<tr><td><b>Area name</b></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
+      echo "<tr><td><strong>Area name</strong></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
       editSiteBoundings($dataset->sites[0]);
     }
     editGrid($dataset->dats_sensors[0]);
@@ -605,7 +605,7 @@ function editDataset($datsId, $project_name, $display_archived = false, $queryAr
     $dataset = $dataset->getById($datsId);
     if (isset($dataset) && !empty($dataset)) {
       if ($dataset->is_archived && !$display_archived) {
-        echo "<font size=\"3\" color='red'><b>This dataset has been archived. </b></font>";
+        echo "<font size=\"3\" color='red'><strong>This dataset has been archived. </strong></font>";
         return;
       }
       if ($display_archived) {
@@ -656,21 +656,21 @@ function editInSituDatasetSite(&$dataset, $project_name, $queryArgs = array()) {
 
   if (isset($dataset) && !empty($dataset)) {
 
-    echo '<table><tr><th colspan="4" align="center"><b>General information</b></th></tr>';
-    echo "<tr><td><b>Dataset name</b></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
+    echo '<table><tr><th colspan="4" align="center"><strong>General information</strong></th></tr>';
+    echo "<tr><td><strong>Dataset name</strong></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
     editDOI($dataset->dats_doi);
-    echo "<tr><td><b>Created on</b></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
+    echo "<tr><td><strong>Created on</strong></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
     editSiteBoundings($dataset->sites[0]);
-    echo "<tr><td><b>Project(s)</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Project(s)</strong></td><td colspan='3'>";
     foreach ($dataset->projects as $proj) {
       echo $proj->toString() . "<br>";
     }
     echo "</td></tr>";
-    echo "<tr><td><b>Period</b></td><td colspan='3'>" . $dataset->period->period_name . "</td></tr>";
-    echo "<tr><td><b>Date begin (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_begin . "</td>";
-    echo "<td><b>Date end (yyyy-mm-jj)</b></td><td>" . (($dataset->dats_date_end_not_planned) ? 'not planned' : $dataset->dats_date_end) . "</td></tr>";
+    echo "<tr><td><strong>Period</strong></td><td colspan='3'>" . $dataset->period->period_name . "</td></tr>";
+    echo "<tr><td><strong>Date begin (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_begin . "</td>";
+    echo "<td><strong>Date end (yyyy-mm-jj)</strong></td><td>" . (($dataset->dats_date_end_not_planned) ? 'not planned' : $dataset->dats_date_end) . "</td></tr>";
 
-    echo "<tr><td><b>Contacts</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Contacts</strong></td><td colspan='3'>";
     editContact($dataset->dats_originators);
     echo '</td></tr>';
 
@@ -678,13 +678,13 @@ function editInSituDatasetSite(&$dataset, $project_name, $queryArgs = array()) {
 
     editSiteDescr($dataset);
 
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Site information</b></th></tr>';
-    echo '<tr><td colspan="4" align="center"><b>Site</b></td></tr>';
-    echo "<tr><td><b>Site name</b></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
-    echo "<tr><td><b>Plateform type</b></td><td colspan='3'>" . $dataset->sites[0]->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Site information</strong></th></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Site</strong></td></tr>';
+    echo "<tr><td><strong>Site name</strong></td><td colspan='3'>" . $dataset->sites[0]->place_name . "</td></tr>";
+    echo "<tr><td><strong>Plateform type</strong></td><td colspan='3'>" . $dataset->sites[0]->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
     if (isset($dataset->sites[0]->parent_place) && !empty($dataset->sites[0]->parent_place)) {
-      echo "<tr><td><b>Predefined site</b></td><td colspan='3'>" . printPredefinedSite($dataset->sites[0]->parent_place) . "</td></tr>";
-      echo "<tr><td><b>Site type</b></td><td colspan='3'>" . $dataset->sites[0]->parent_place->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
+      echo "<tr><td><strong>Predefined site</strong></td><td colspan='3'>" . printPredefinedSite($dataset->sites[0]->parent_place) . "</td></tr>";
+      echo "<tr><td><strong>Site type</strong></td><td colspan='3'>" . $dataset->sites[0]->parent_place->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
     }
 
     editSiteBoundings($dataset->sites[0]);
@@ -705,36 +705,36 @@ function editInSituDatasetSite(&$dataset, $project_name, $queryArgs = array()) {
     }
 
     if (isset($dataset->image) && !empty($dataset->image)) {
-      echo "<tr><td><b>Photo</b></td>";
+      echo "<tr><td><strong>Photo</strong></td>";
       echo '<td><a href="' . $dataset->image . '" target=_blank><img src="' . $dataset->image . '" width="50" /></a></td><td colspan="2">';
     }
 
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Instrument information</b></th></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Instrument information</strong></th></tr>';
     for ($i = 0; $i < count($dataset->dats_sensors); $i++) {
       $nb = $i + 1;
-      echo '</td></tr><tr><th colspan="4" align="center"><b>Instrument ' . $nb . '</b></th></tr>';
+      echo '</td></tr><tr><th colspan="4" align="center"><strong>Instrument ' . $nb . '</strong></th></tr>';
       //echo 'TEST';
       print_r($dataset->dats_sensors[0]->gcmd_instrument_keyword);
-      echo "<tr><td><b>Instrument type</b></td><td colspan='3'>" . printGcmdInstrument($dataset->dats_sensors[0]->gcmd_instrument_keyword) . "</td></tr>";
-      echo "<tr><td><b>Manufacturer</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->manufacturer->manufacturer_name;
+      echo "<tr><td><strong>Instrument type</strong></td><td colspan='3'>" . printGcmdInstrument($dataset->dats_sensors[0]->gcmd_instrument_keyword) . "</td></tr>";
+      echo "<tr><td><strong>Manufacturer</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->manufacturer->manufacturer_name;
       if (isset($dataset->dats_sensors[$i]->sensor->manufacturer->manufacturer_url) && !empty($dataset->dats_sensors[$i]->sensor->manufacturer->manufacturer_url)) {
         echo " - <a href=\"" . $dataset->dats_sensors[$i]->sensor->manufacturer->manufacturer_url . "\" >" . $dataset->dats_sensors[$i]->sensor->manufacturer->manufacturer_url . "</a>";
       } else {
         echo "</td></tr>";
       }
-      echo "<tr><td><b>Model</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
-      echo "<tr><td><b>Reference</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
-      echo "<tr><td><b>Instrument features / Calibration</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_calibration . "</td></tr>";
+      echo "<tr><td><strong>Model</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
+      echo "<tr><td><strong>Reference</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
+      echo "<tr><td><strong>Instrument features / Calibration</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_calibration . "</td></tr>";
       editSensorResolution($dataset->dats_sensors[$i]);
-      echo "<tr><td><b>Longitude (°)</b></td><td>" . $dataset->dats_sensors[$i]->sensor->boundings->west_bounding_coord . "</td><td><b>Latitude (°)</b></td><td>" . $dataset->dats_sensors[$i]->sensor->boundings->north_bounding_coord . "</td></tr>";
-      echo "<tr><td><b>Sensor altitude (m)</b></td><td>" . $dataset->dats_sensors[$i]->sensor->sensor_elevation . "</td>";
-      echo "<td><b>Height above ground (m)</b></td><td>" . $dataset->dats_sensors[$i]->sensor->sensor_height . "</td></tr>";
-      echo "<tr><td><b>Instrument environment</b></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_environment . "</td></tr>";
+      echo "<tr><td><strong>Longitude (°)</strong></td><td>" . $dataset->dats_sensors[$i]->sensor->boundings->west_bounding_coord . "</td><td><strong>Latitude (°)</strong></td><td>" . $dataset->dats_sensors[$i]->sensor->boundings->north_bounding_coord . "</td></tr>";
+      echo "<tr><td><strong>Sensor altitude (m)</strong></td><td>" . $dataset->dats_sensors[$i]->sensor->sensor_elevation . "</td>";
+      echo "<td><strong>Height above ground (m)</strong></td><td>" . $dataset->dats_sensors[$i]->sensor->sensor_height . "</td></tr>";
+      echo "<tr><td><strong>Instrument environment</strong></td><td colspan='3'>" . $dataset->dats_sensors[$i]->sensor->sensor_environment . "</td></tr>";
 
       $cpt = 1;
       foreach ($dataset->dats_sensors[$i]->sensor->sensor_vars as $sensor_var) {
         if ($sensor_var->flag_param_calcule != 1) {
-          echo '<tr><td colspan="4" align="center"><b>Instrument ' . $nb . ', parameter ' . ($cpt++) . '</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Instrument ' . $nb . ', parameter ' . ($cpt++) . '</strong></td></tr>';
           editParameterFromSensorVar($sensor_var);
         }
       }
@@ -757,40 +757,40 @@ function editInSituDataset(&$dataset, $project_name, $queryArgs = array()) {
     $url_cible = $rubrique_cible . '?datsId=' . $dataset->dats_id;
     echo '<table>';
     echo "</tr><th colspan=\"4\" align=\"right\"><input type=\"submit\" value=\"Update this dataset\" onclick=\"location.href='" . $url_cible . "'\"/></th></tr>";
-    echo '<tr><th colspan="4" align="center"><b>General information</b></th></tr>';
-    echo "<tr><td><b>Dataset name</b></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
+    echo '<tr><th colspan="4" align="center"><strong>General information</strong></th></tr>';
+    echo "<tr><td><strong>Dataset name</strong></td><td colspan='3'>" . $dataset->dats_title . "</td></tr>";
     editDOI($dataset->dats_doi);
-    echo "<tr><td><b>Created on</b></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
-    echo "<tr><td><b>Project(s)</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Created on</strong></td><td colspan='3'>" . $dataset->dats_pub_date . "</td></tr>";
+    echo "<tr><td><strong>Project(s)</strong></td><td colspan='3'>";
     foreach ($dataset->projects as $proj) {
       echo $proj->toString() . "<br>";
     }
     echo "</td></tr>";
     if (isset($dataset->period)) {
-      echo "<tr><td><b>Period</b></td><td colspan='3'>" . $dataset->period->period_name . "</td></tr>";
+      echo "<tr><td><strong>Period</strong></td><td colspan='3'>" . $dataset->period->period_name . "</td></tr>";
     }
-    echo "<tr><td><b>Date begin (yyyy-mm-jj)</b></td><td>" . $dataset->dats_date_begin . "</td>";
-    echo "<td><b>Date end (yyyy-mm-jj)</b></td><td>" . (($dataset->dats_date_end_not_planned) ? 'not planned' : $dataset->dats_date_end) . "</td></tr>";
+    echo "<tr><td><strong>Date begin (yyyy-mm-jj)</strong></td><td>" . $dataset->dats_date_begin . "</td>";
+    echo "<td><strong>Date end (yyyy-mm-jj)</strong></td><td>" . (($dataset->dats_date_end_not_planned) ? 'not planned' : $dataset->dats_date_end) . "</td></tr>";
 
-    echo "<tr><td><b>Contacts</b></td><td colspan='3'>";
+    echo "<tr><td><strong>Contacts</strong></td><td colspan='3'>";
     editContact($dataset->dats_originators);
     echo '</td></tr>';
     editDataAvailability($dataset, $project_name, $queryArgs);
     editDataDescr($dataset);
     echo '</td></tr>';
     if (isset($dataset->attFile) && !empty($dataset->attFile)) {
-      echo "<tr><td><b>Attached document</b></td><td colspan='3'>";
+      echo "<tr><td><strong>Attached document</strong></td><td colspan='3'>";
       echo "<a href='/downAttFile.php?file=" . $dataset->attFile . "' >" . $dataset->attFile . "</a>";
       echo "</td></tr>";
     }
-    echo '<tr><th colspan="4" align="center"><b>Instrument information</b></th></tr>';
+    echo '<tr><th colspan="4" align="center"><strong>Instrument information</strong></th></tr>';
     $sectionVide = true;
     if (isset($dataset->dats_sensors[0]->sensor->gcmd_instrument_keyword)) {
-      echo "<tr><td><b>Instrument type</b></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
+      echo "<tr><td><strong>Instrument type</strong></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
       $sectionVide = false;
     }
     if (isset($dataset->dats_sensors[0]->sensor->manufacturer)) {
-      echo "<tr><td><b>Manufacturer</b></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->manufacturer->manufacturer_name;
+      echo "<tr><td><strong>Manufacturer</strong></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->manufacturer->manufacturer_name;
       $sectionVide = false;
       if (isset($dataset->dats_sensors[0]->sensor->manufacturer->manufacturer_url) && !empty($dataset->dats_sensors[0]->sensor->manufacturer->manufacturer_url)) {
         echo " - <a href=\"" . $dataset->dats_sensors[0]->sensor->manufacturer->manufacturer_url . "\" >" . $dataset->dats_sensors[0]->sensor->manufacturer->manufacturer_url . "</a>";
@@ -798,36 +798,36 @@ function editInSituDataset(&$dataset, $project_name, $queryArgs = array()) {
       echo "</td></tr>";
     }
     if (isset($dataset->dats_sensors[0]->sensor->sensor_model)) {
-      echo "<tr><td><b>Model</b></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_model . "</td></tr>";
+      echo "<tr><td><strong>Model</strong></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_model . "</td></tr>";
       $sectionVide = false;
     }
     if (isset($dataset->dats_sensors[0]->sensor->sensor_url)) {
-      echo "<tr><td><b>Reference</b></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_url . "</td></tr>";
+      echo "<tr><td><strong>Reference</strong></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_url . "</td></tr>";
       $sectionVide = false;
     }
     if (isset($dataset->dats_sensors[0]->sensor->sensor_calibration)) {
-      echo "<tr><td><b>Instrument features / Calibration</b></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_calibration . "</td></tr>";
+      echo "<tr><td><strong>Instrument features / Calibration</strong></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_calibration . "</td></tr>";
       $sectionVide = false;
     }
     if (editSensorResolution($dataset->dats_sensors[0], false)) {
       $sectionVide = false;
     }
     if (isset($dataset->dats_sensors[0]->sensor->boundings)) {
-      echo "<tr><td><b>Longitude (°)</b></td><td>" . $dataset->dats_sensors[0]->sensor->boundings->west_bounding_coord . "</td><td><b>Latitude (°)</b></td><td>" . $dataset->dats_sensors[0]->sensor->boundings->north_bounding_coord . "</td></tr>";
+      echo "<tr><td><strong>Longitude (°)</strong></td><td>" . $dataset->dats_sensors[0]->sensor->boundings->west_bounding_coord . "</td><td><strong>Latitude (°)</strong></td><td>" . $dataset->dats_sensors[0]->sensor->boundings->north_bounding_coord . "</td></tr>";
       $sectionVide = false;
     }
     if (isset($dataset->dats_sensors[0]->sensor->sensor_elevation)) {
-      echo "<tr><td><b>Height above ground (m)</b></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_elevation . "</td></tr>";
+      echo "<tr><td><strong>Height above ground (m)</strong></td><td colspan='3'>" . $dataset->dats_sensors[0]->sensor->sensor_elevation . "</td></tr>";
       $sectionVide = false;
     }
     if (isset($dataset->image) && !empty($dataset->image)) {
-      echo "<tr><td><b>Photo</b></td>";
+      echo "<tr><td><strong>Photo</strong></td>";
       echo '<td><a href="' . $dataset->image . '" target=_blank><img src="' . $dataset->image . '" width="50" /></a></td><td colspan="2"></td></tr>';
       $sectionVide = false;
     }
 
     if ($sectionVide) {
-      echo '<tr><td colspan="4"><i>No information available</i></td></tr>';
+      echo '<tr><td colspan="4"><em>No information available</em></td></tr>';
     }
     //Map
     $mapForm = new map_form();
@@ -841,21 +841,21 @@ function editInSituDataset(&$dataset, $project_name, $queryArgs = array()) {
         echo '</td></tr>';
       }
     }
-    echo '<tr><th colspan="4" align="center"><b>Geographic information</b></th></tr>';
+    echo '<tr><th colspan="4" align="center"><strong>Geographic information</strong></th></tr>';
     $cpt = 1;
     foreach ($dataset->sites as $site) {
-      echo '<tr><td colspan="4" align="center"><b>Location ' . ($cpt++) . '</b></td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Location ' . ($cpt++) . '</strong></td></tr>';
       if (isset($site->parent_place) && !empty($site->parent_place)) {
-        echo "<tr><td><b>Predefined site</b></td><td colspan='3'>" . printPredefinedSite($site->parent_place) . "</td></tr>";
-        echo "<tr><td><b>Site type</b></td><td colspan='3'>" . $site->parent_place->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
+        echo "<tr><td><strong>Predefined site</strong></td><td colspan='3'>" . printPredefinedSite($site->parent_place) . "</td></tr>";
+        echo "<tr><td><strong>Site type</strong></td><td colspan='3'>" . $site->parent_place->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
       }
       if (isset($site->place_name) && !empty($site->place_name)) {
-        echo "<tr><td><b>Location name</b></td><td colspan='3'>" . $site->place_name . "</td></tr>";
-        echo "<tr><td><b>Plateform type</b></td><td colspan='3'>" . $site->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
+        echo "<tr><td><strong>Location name</strong></td><td colspan='3'>" . $site->place_name . "</td></tr>";
+        echo "<tr><td><strong>Plateform type</strong></td><td colspan='3'>" . $site->gcmd_plateform_keyword->gcmd_plat_name . "</td></tr>";
       }
       editSiteBoundings($site);
       if (isset($site->sensor_environment) && !empty($site->sensor_environment)) {
-        echo "<tr><td><b>Instrument environment</b></td><td colspan='3'>" . $site->sensor_environment . "</td></tr>";
+        echo "<tr><td><strong>Instrument environment</strong></td><td colspan='3'>" . $site->sensor_environment . "</td></tr>";
       }
     }
     if (isset($map) && !empty($map)) {
@@ -867,12 +867,12 @@ function editInSituDataset(&$dataset, $project_name, $queryArgs = array()) {
       }
     } else {
     }
-    echo '</td></tr><tr><th colspan="4" align="center"><b>Measured parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</b></th></tr>';
+    echo '</td></tr><tr><th colspan="4" align="center"><strong>Measured parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</strong></th></tr>';
     $cpt = 1;
     foreach ($dataset->dats_variables as $dats_var) {
       if ($dats_var->flag_param_calcule != 1) {
         if (count($dataset->dats_variables) > 1) {
-          echo '<tr><td colspan="4" align="center"><b>Measured parameter ' . ($cpt++) . '</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Measured parameter ' . ($cpt++) . '</strong></td></tr>';
         }
         editParameter($dats_var);
       }
@@ -883,12 +883,12 @@ function editInSituDataset(&$dataset, $project_name, $queryArgs = array()) {
       if ($dats_var->flag_param_calcule == 1) {
       }
     }
-    echo '<tr><th colspan="4" align="center"><b>Derived parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</b></th></tr>';
+    echo '<tr><th colspan="4" align="center"><strong>Derived parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</strong></th></tr>';
     $cpt = 1;
     foreach ($dataset->dats_variables as $dats_var) {
       if ($dats_var->flag_param_calcule == 1) {
         if (count($dataset->dats_variables) > 1) {
-          echo '<tr><td colspan="4" align="center"><b>Derived parameter ' . ($cpt++) . '</b></td></tr>';
+          echo '<tr><td colspan="4" align="center"><strong>Derived parameter ' . ($cpt++) . '</strong></td></tr>';
         }
         editParameter($dats_var);
       }

@@ -41,7 +41,7 @@ Ceci est un exemple de génération de PDF via un bouton :)<br>
 <?php
     if ($generate) {
 ?>
-Bonjour <b><?php echo $nom; ?></b>, ton nom peut s'écrire : <br>
+Bonjour <strong><?php echo $nom; ?></strong>, ton nom peut s'écrire : <br>
 <barcode type="C39" value="<?php echo strtoupper($nom); ?>" style="color: #770000" ></barcode><hr>
 <br>
 <?php

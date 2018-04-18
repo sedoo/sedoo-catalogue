@@ -105,7 +105,7 @@ class displayUtils {
       } else {
         $cit = "doi:$doi";
       }
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Dataset DOI</b></td><td colspan='3'><a href='" . DATACITE_WEB . $doi . "' target='_blank'>$doi</a>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Dataset DOI</strong></td><td colspan='3'><a href='" . DATACITE_WEB . $doi . "' target='_blank'>$doi</a>";
       echo '<a class="lightblue_tag" href="' . DATACITE_CITATION . $doi . '" style="color: white;margin-right:0px;" title="How to cite">Citation</a>';
       echo '<a class="lightblue_tag" href="' . DATACITE_BIBTEX . $doi . '" style="color: white;" title="Export to BibTeX">BibTeX</a>';
       echo "</td></tr>";
@@ -121,7 +121,7 @@ class displayUtils {
       } else {
         $cit = "doi:$doi";
       }
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Dataset DOI</b></td><td colspan='3'><a href='" . DATACITE_WEB . $doi . "' target='_blank'>$doi</a>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Dataset DOI</strong></td><td colspan='3'><a href='" . DATACITE_WEB . $doi . "' target='_blank'>$doi</a>";
       $infos .= '<a class="lightblue_tag" href="' . DATACITE_CITATION . $doi . '" style="color: white;margin-right:0px;" title="How to cite">Citation</a>';
       $infos .= '<a class="lightblue_tag" href="' . DATACITE_BIBTEX . $doi . '" style="color: white;" title="Export to BibTeX">BibTeX</a>';
       $infos .= "</td></tr>";
@@ -131,25 +131,25 @@ class displayUtils {
 
   public static function displayParameter(&$dats_var, $withPrecision = true, $withDates = true, $withLevelType = false) {
     if (isset($dats_var->variable->var_name) && !empty($dats_var->variable->var_name)) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Parameter name</b></td><td colspan='3'>" . $dats_var->variable->var_name . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Parameter name</strong></td><td colspan='3'>" . $dats_var->variable->var_name . "</td></tr>";
     } else {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Parameter name</b></td><td colspan='3'>" . $dats_var->variable->gcmd->gcmd_name . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Parameter name</strong></td><td colspan='3'>" . $dats_var->variable->gcmd->gcmd_name . "</td></tr>";
     }
 
-    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Parameter keyword</b></td><td colspan='3'>" . printGcmdScience($dats_var->variable->gcmd) . "</td></tr>";
-    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Unit</b></td><td colspan='3'>" . ((isset($dats_var->unit) && !empty($dats_var->unit)) ? $dats_var->unit->toString() : "") . "</td></tr>";
+    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Parameter keyword</strong></td><td colspan='3'>" . printGcmdScience($dats_var->variable->gcmd) . "</td></tr>";
+    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Unit</strong></td><td colspan='3'>" . ((isset($dats_var->unit) && !empty($dats_var->unit)) ? $dats_var->unit->toString() : "") . "</td></tr>";
     if ($dats_var->methode_acq) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Acquisition methodology and quality</b></td><td colspan='3'>" . $dats_var->methode_acq . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Acquisition methodology and quality</strong></td><td colspan='3'>" . $dats_var->methode_acq . "</td></tr>";
     }
     if ($withDates) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Date begin</b></td><td style = \'page-break-inside: avoid;\'>" . $dats_var->date_min . "</td>";
-      echo "<td style = \'page-break-inside: avoid;\'><b>Date end</b></td><td style = \'page-break-inside: avoid;\'>" . $dats_var->date_max . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Date begin</strong></td><td style = \'page-break-inside: avoid;\'>" . $dats_var->date_min . "</td>";
+      echo "<td style = \'page-break-inside: avoid;\'><strong>Date end</strong></td><td style = \'page-break-inside: avoid;\'>" . $dats_var->date_max . "</td></tr>";
     }
     if ($withPrecision && $dats_var->variable->sensor_precision) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Sensor precision / incertainty</b></td><td colspan='3'>" . $dats_var->variable->sensor_precision . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Sensor precision / incertainty</strong></td><td colspan='3'>" . $dats_var->variable->sensor_precision . "</td></tr>";
     }
     if ($withLevelType && $dats_var->level_type) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Vertical level type</b></td><td colspan='3'>" . $dats_var->level_type . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Vertical level type</strong></td><td colspan='3'>" . $dats_var->level_type . "</td></tr>";
 
     }
   }
@@ -157,32 +157,32 @@ class displayUtils {
   public static function getParameter(&$dats_var, $withPrecision = true, $withDates = true, $withLevelType = false) {
     $infos = null;
     if (isset($dats_var->variable->var_name) && !empty($dats_var->variable->var_name)) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Parameter name</b></td><td colspan='3'>" . $dats_var->variable->var_name . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Parameter name</strong></td><td colspan='3'>" . $dats_var->variable->var_name . "</td></tr>";
     } else {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Parameter name</b></td><td colspan='3'>" . $dats_var->variable->gcmd->gcmd_name . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Parameter name</strong></td><td colspan='3'>" . $dats_var->variable->gcmd->gcmd_name . "</td></tr>";
     }
 
-    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Parameter keyword</b></td><td colspan='3'>" . printGcmdScience($dats_var->variable->gcmd) . "</td></tr>";
-    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Unit</b></td><td colspan='3'>" . ((isset($dats_var->unit) && !empty($dats_var->unit)) ? $dats_var->unit->toString() : "") . "</td></tr>";
+    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Parameter keyword</strong></td><td colspan='3'>" . printGcmdScience($dats_var->variable->gcmd) . "</td></tr>";
+    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Unit</strong></td><td colspan='3'>" . ((isset($dats_var->unit) && !empty($dats_var->unit)) ? $dats_var->unit->toString() : "") . "</td></tr>";
     if ($dats_var->methode_acq) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Acquisition methodology and quality</b></td><td colspan='3'>" . $dats_var->methode_acq . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Acquisition methodology and quality</strong></td><td colspan='3'>" . $dats_var->methode_acq . "</td></tr>";
     }
     if ($withDates) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Date begin</b></td><td style = \'page-break-inside: avoid;\'>" . $dats_var->date_min . "</td>";
-      $infos .= "<td style = \'page-break-inside: avoid;\'><b>Date end</b></td><td style = \'page-break-inside: avoid;\'>" . $dats_var->date_max . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Date begin</strong></td><td style = \'page-break-inside: avoid;\'>" . $dats_var->date_min . "</td>";
+      $infos .= "<td style = \'page-break-inside: avoid;\'><strong>Date end</strong></td><td style = \'page-break-inside: avoid;\'>" . $dats_var->date_max . "</td></tr>";
     }
     if ($withPrecision && $dats_var->variable->sensor_precision) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Sensor precision / incertainty</b></td><td colspan='3'>" . $dats_var->variable->sensor_precision . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Sensor precision / incertainty</strong></td><td colspan='3'>" . $dats_var->variable->sensor_precision . "</td></tr>";
     }
     if ($withLevelType && $dats_var->level_type) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Vertical level type</b></td><td colspan='3'>" . $dats_var->level_type . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Vertical level type</strong></td><td colspan='3'>" . $dats_var->level_type . "</td></tr>";
     }
     return $infos;
   }
 
   public static function displayProjects(&$projects) {
     if (isset($projects) && !empty($projects)) {
-      echo "<tr><td><b>Useful in the framework of</b></td><td colspan='3'>";
+      echo "<tr><td><strong>Useful in the framework of</strong></td><td colspan='3'>";
       foreach ($projects as $proj) {
         echo $proj->toString() . "<br>";
       }
@@ -196,16 +196,16 @@ class displayUtils {
       || (isset($site->north_bounding_coord) && strlen($site->north_bounding_coord))
       || (isset($site->south_bounding_coord) && strlen($site->south_bounding_coord))
     ) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>West bounding coordinate (°)</b></td><td style = \'page-break-inside: avoid;\'>" . $site->west_bounding_coord . "</td>";
-      echo "<td style = \'page-break-inside: avoid;\'><b>East bounding coordinate (°)</b></td><td style = \'page-break-inside: avoid;\'>" . $site->east_bounding_coord . "</td></tr>";
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>North bounding coordinate (°)</b></td><td style = \'page-break-inside: avoid;\'>" . $site->north_bounding_coord . "</td>";
-      echo "<td style = \'page-break-inside: avoid;\'><b>South bounding coordinate (°)</b></td><td style = \'page-break-inside: avoid;\'>" . $site->south_bounding_coord . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>West bounding coordinate (°)</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->west_bounding_coord . "</td>";
+      echo "<td style = \'page-break-inside: avoid;\'><strong>East bounding coordinate (°)</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->east_bounding_coord . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>North bounding coordinate (°)</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->north_bounding_coord . "</td>";
+      echo "<td style = \'page-break-inside: avoid;\'><strong>South bounding coordinate (°)</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->south_bounding_coord . "</td></tr>";
     }
     if ((isset($site->place_elevation_min) && strlen($site->place_elevation_min) > 0)
       || (isset($site->place_elevation_max) && strlen($site->place_elevation_max) > 0)
     ) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Altitude min</b></td><td style = \'page-break-inside: avoid;\'>" . $site->place_elevation_min . "</td>";
-      echo "<td style = \'page-break-inside: avoid;\'><b>Altitude max</b></td><td style = \'page-break-inside: avoid;\'>" . $site->place_elevation_max . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Altitude min</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->place_elevation_min . "</td>";
+      echo "<td style = \'page-break-inside: avoid;\'><strong>Altitude max</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->place_elevation_max . "</td></tr>";
     }
   }
 
@@ -216,16 +216,16 @@ class displayUtils {
       || (isset($site->north_bounding_coord) && strlen($site->north_bounding_coord))
       || (isset($site->south_bounding_coord) && strlen($site->south_bounding_coord))
     ) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>West bounding coordinate (°)</b></td><td style = \'page-break-inside: avoid;\'>" . $site->west_bounding_coord . "</td>";
-      $infos .= "<td style = \'page-break-inside: avoid;\'><b>East bounding coordinate (°)</b></td><td style = \'page-break-inside: avoid;\'>" . $site->east_bounding_coord . "</td></tr>";
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>North bounding coordinate (°)</b></td><td style = \'page-break-inside: avoid;\'>" . $site->north_bounding_coord . "</td>";
-      $infos .= "<td style = \'page-break-inside: avoid;\'><b>South bounding coordinate (°)</b></td><td style = \'page-break-inside: avoid;\'>" . $site->south_bounding_coord . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>West bounding coordinate (°)</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->west_bounding_coord . "</td>";
+      $infos .= "<td style = \'page-break-inside: avoid;\'><strong>East bounding coordinate (°)</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->east_bounding_coord . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>North bounding coordinate (°)</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->north_bounding_coord . "</td>";
+      $infos .= "<td style = \'page-break-inside: avoid;\'><strong>South bounding coordinate (°)</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->south_bounding_coord . "</td></tr>";
     }
     if ((isset($site->place_elevation_min) && strlen($site->place_elevation_min) > 0)
       || (isset($site->place_elevation_max) && strlen($site->place_elevation_max) > 0)
     ) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Altitude min</b></td><td style = \'page-break-inside: avoid;\'>" . $site->place_elevation_min . "</td>";
-      $infos .= "<td style = \'page-break-inside: avoid;\'><b>Altitude max</b></td><td style = \'page-break-inside: avoid;\'>" . $site->place_elevation_max . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Altitude min</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->place_elevation_min . "</td>";
+      $infos .= "<td style = \'page-break-inside: avoid;\'><strong>Altitude max</strong></td><td style = \'page-break-inside: avoid;\'>" . $site->place_elevation_max . "</td></tr>";
     }
     return $infos;
   }
@@ -233,13 +233,13 @@ class displayUtils {
   public static function displayGrid(&$ds) {
     self::displaySensorResolution($ds, true);
     if ($ds->grid_original || $ds->grid_process) {
-      echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Grid type</b></td></tr>';
+      echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Grid type</strong></td></tr>';
     }
     if ($ds->grid_original) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Original Grid type</b></td><td colspan='3'>" . $ds->grid_original . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Original Grid type</strong></td><td colspan='3'>" . $ds->grid_original . "</td></tr>";
     }
     if ($ds->grid_process) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Grid processing</b></td><td colspan='3'>" . $ds->grid_process . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Grid processing</strong></td><td colspan='3'>" . $ds->grid_process . "</td></tr>";
     }
 
   }
@@ -248,13 +248,13 @@ class displayUtils {
     $infos = null;
     $infos .= self::getSensorResolution($ds, true);
     if ($ds->grid_original || $ds->grid_process) {
-      $infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Grid type</b></td></tr>';
+      $infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Grid type</strong></td></tr>';
     }
     if ($ds->grid_original) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Original Grid type</b></td><td colspan='3'>" . $ds->grid_original . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Original Grid type</strong></td><td colspan='3'>" . $ds->grid_original . "</td></tr>";
     }
     if ($ds->grid_process) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Grid processing</b></td><td colspan='3'>" . $ds->grid_process . "</td></tr>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Grid processing</strong></td><td colspan='3'>" . $ds->grid_process . "</td></tr>";
     }
     return $infos;
   }
@@ -266,33 +266,33 @@ class displayUtils {
         || $ds->sensor_lat_resolution
         || $ds->sensor_lon_resolution
         || $ds->sensor_vert_resolution) {
-        echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Data resolution</b></td></tr>';
+        echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Data resolution</strong></td></tr>';
       }
       if ($ds->sensor_resol_temp) {
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Temporal resolution</b></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Temporal resolution</strong></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
       }
       if ($ds->sensor_lat_resolution) {
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Latitude resolution</b></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Latitude resolution</strong></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
       }
       if ($ds->sensor_lon_resolution) {
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Longitude resolution</b></td><td colspan='3'>" . $ds->sensor_lon_resolution . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Longitude resolution</strong></td><td colspan='3'>" . $ds->sensor_lon_resolution . "</td></tr>";
       }
       if ($ds->sensor_vert_resolution) {
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Vertical resolution</b></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Vertical resolution</strong></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
       }
       return true;
     } else {
       $infoTrouve = false;
       if (isset($ds->sensor_resol_temp)) {
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Observation frequency</b></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Observation frequency</strong></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
         $infoTrouve = true;
       }
       if (isset($ds->sensor_lat_resolution)) {
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Horizontal coverage</b></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Horizontal coverage</strong></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
         $infoTrouve = true;
       }
       if (isset($ds->sensor_vert_resolution)) {
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Vertical coverage</b></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Vertical coverage</strong></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
         $infoTrouve = true;
       }
       return $infoTrouve;
@@ -306,36 +306,36 @@ class displayUtils {
         || $ds->sensor_lat_resolution
         || $ds->sensor_lon_resolution
         || $ds->sensor_vert_resolution) {
-        $infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Data resolution</b></td></tr>';
+        $infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Data resolution</strong></td></tr>';
       }
       if ($ds->sensor_resol_temp) {
-        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Temporal resolution</b></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
+        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Temporal resolution</strong></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
       }
       if ($ds->sensor_lat_resolution) {
-        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Latitude resolution</b></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
+        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Latitude resolution</strong></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
       }
       if ($ds->sensor_lon_resolution) {
-        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Longitude resolution</b></td><td colspan='3'>" . $ds->sensor_lon_resolution . "</td></tr>";
+        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Longitude resolution</strong></td><td colspan='3'>" . $ds->sensor_lon_resolution . "</td></tr>";
       }
       if ($ds->sensor_vert_resolution) {
-        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Vertical resolution</b></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
+        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Vertical resolution</strong></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
       }
     } else {
       if (isset($ds->sensor_resol_temp)) {
-        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Observation frequency</b></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
+        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Observation frequency</strong></td><td colspan='3'>" . $ds->sensor_resol_temp . "</td></tr>";
       }
       if (isset($ds->sensor_lat_resolution)) {
-        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Horizontal coverage</b></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
+        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Horizontal coverage</strong></td><td colspan='3'>" . $ds->sensor_lat_resolution . "</td></tr>";
       }
       if (isset($ds->sensor_vert_resolution)) {
-        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Vertical coverage</b></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
+        $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Vertical coverage</strong></td><td colspan='3'>" . $ds->sensor_vert_resolution . "</td></tr>";
       }
     }
     return $infos;
   }
 
   public static function displayDatabase(&$db) {
-    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Database</b></td><td colspan='3'>";
+    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Database</strong></td><td colspan='3'>";
     if (isset($db->database_url) && !empty($db->database_url)) {
       echo '<a target="_blank" href="' . $db->database_url . '">' . $db->database_name . "</a>";
     } else {
@@ -346,7 +346,7 @@ class displayUtils {
 
   public static function getDatabase(&$db) {
     $infos = null;
-    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Database</b></td><td colspan='3'>";
+    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Database</strong></td><td colspan='3'>";
     if (isset($db->database_url) && !empty($db->database_url)) {
       $infos .= '<a target="_blank" href="' . $db->database_url . '">' . $db->database_name . "</a>";
     } else {
@@ -357,9 +357,9 @@ class displayUtils {
   }
 
   public static function displayDataUse(&$dataset) {
-    echo '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>Data use information</b></th></tr>';
-    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Use constraints</b></td><td colspan='3'>" . $dataset->dats_use_constraints . "</td></tr>";
-    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Data policy</b></td><td colspan='3'>" . $dataset->data_policy->data_policy_name . "</td></tr>";
+    echo '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Data use information</strong></th></tr>';
+    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Use constraints</strong></td><td colspan='3'>" . $dataset->dats_use_constraints . "</td></tr>";
+    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Data policy</strong></td><td colspan='3'>" . $dataset->data_policy->data_policy_name . "</td></tr>";
     if (isset($dataset->database)) {
       self::displayDatabase($dataset->database);
     }
@@ -367,7 +367,7 @@ class displayUtils {
     $lblDF = "Data format(s)";
 
     if (isset($dataset->required_data_formats) && !empty($dataset->required_data_formats)) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Data format(s)</b></td><td colspan='3'>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Data format(s)</strong></td><td colspan='3'>";
       foreach ($dataset->required_data_formats as $format) {
         echo $format->data_format_name . "<br>";
       }
@@ -375,7 +375,7 @@ class displayUtils {
       echo "</tr>";
     }
     if (isset($dataset->data_formats) && !empty($dataset->data_formats)) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>$lblDF</b></td><td colspan='3'>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>$lblDF</strong></td><td colspan='3'>";
       foreach ($dataset->data_formats as $format) {
         echo $format->data_format_name . "<br>";
       }
@@ -385,9 +385,9 @@ class displayUtils {
 	
   public static function getDataUse(&$dataset) {
     $infos = null;
-    $infos .= '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>Data use information</b></th></tr>';
-    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Use constraints</b></td><td colspan='3'>" . $dataset->dats_use_constraints . "</td></tr>";
-    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Data policy</b></td><td colspan='3'>" . $dataset->data_policy->data_policy_name . "</td></tr>";
+    $infos .= '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Data use information</strong></th></tr>';
+    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Use constraints</strong></td><td colspan='3'>" . $dataset->dats_use_constraints . "</td></tr>";
+    $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Data policy</strong></td><td colspan='3'>" . $dataset->data_policy->data_policy_name . "</td></tr>";
     if (isset($dataset->database)) {
       $infos .= self::getDatabase($dataset->database);
     }
@@ -395,7 +395,7 @@ class displayUtils {
     $lblDF = "Data format(s)";
 
     if (isset($dataset->required_data_formats) && !empty($dataset->required_data_formats)) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Data format(s)</b></td><td colspan='3'>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Data format(s)</strong></td><td colspan='3'>";
       foreach ($dataset->required_data_formats as $format) {
         $infos .= $format->data_format_name . "<br>";
       }
@@ -403,7 +403,7 @@ class displayUtils {
       $infos .= "</tr>";
     }
     if (isset($dataset->data_formats) && !empty($dataset->data_formats)) {
-      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>$lblDF</b></td><td colspan='3'>";
+      $infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>$lblDF</strong></td><td colspan='3'>";
       foreach ($dataset->data_formats as $format) {
         $infos .= $format->data_format_name . "<br>";
       }
@@ -416,7 +416,7 @@ class displayUtils {
     $liens = getAvailableDataLinks($dataset, $project_name);
 
     if (isset($liens) && !empty($liens)) {
-      echo '<tr style = \'page-break-inside: avoid;\'><td rowspan="' . count($liens) . '"><b>Data access</b></td>';
+      echo '<tr style = \'page-break-inside: avoid;\'><td rowspan="' . count($liens) . '"><strong>Data access</strong></td>';
       foreach ($liens as $lien) {
         echo "<td colspan='3'>$lien</td></tr>";
       }
@@ -425,7 +425,7 @@ class displayUtils {
       $journal = new journal();
       $journal = $journal->getByDataset($dataset->dats_id, TYPE_NEW . ',' . TYPE_UPDATE);
       if (isset($journal) && !empty($journal)) {
-        echo '<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>History</b></td><td colspan="3" style="padding-right:0px;">';
+        echo '<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>History</strong></td><td colspan="3" style="padding-right:0px;">';
 
         if (count($journal) > 3) {
           echo '<div style="overflow:auto;height:150px;">';
@@ -437,7 +437,7 @@ class displayUtils {
           } else if ($jEntry->type_id == TYPE_UPDATE) {
             echo '<span class="lightpink_tag" style="font-size: 10px;">UPDATE</span>';
           }
-          echo '<b>' . $jEntry->date->format('Y-m-d') . '</b>';
+          echo '<strong>' . $jEntry->date->format('Y-m-d') . '</strong>';
           if (isset($jEntry->comment) && !empty($jEntry->comment)) {
             echo '<br/>' . $jEntry->comment;
           }
@@ -449,7 +449,7 @@ class displayUtils {
         echo '</td></tr>';
       }
     } else {
-      echo '<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Data availability</b></td>';
+      echo '<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Data availability</strong></td>';
       echo '<td colspan="3">No data are currently available for this dataset.&nbsp;';
       $suscribeUrl = '/Your-Account?p&pageId=6&datsId=' . $dataset->dats_id;
       if (isset($_SESSION['loggedUserAbos'])) {
@@ -475,7 +475,7 @@ class displayUtils {
     $liens = getAvailableDataLinks($dataset, $project_name);
 
     if (isset($liens) && !empty($liens)) {
-      $infos .= '<tr style = \'page-break-inside: avoid;\'><td rowspan="' . count($liens) . '"><b>Data access</b></td>';
+      $infos .= '<tr style = \'page-break-inside: avoid;\'><td rowspan="' . count($liens) . '"><strong>Data access</strong></td>';
       foreach ($liens as $lien) {
         $infos .= "<td colspan='3'>$lien</td></tr>";
       }
@@ -484,7 +484,7 @@ class displayUtils {
       $journal = new journal();
       $journal = $journal->getByDataset($dataset->dats_id, TYPE_NEW . ',' . TYPE_UPDATE);
       if (isset($journal) && !empty($journal)) {
-        $infos .= '<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>History</b></td><td colspan="3" style="padding-right:0px;">';
+        $infos .= '<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>History</strong></td><td colspan="3" style="padding-right:0px;">';
 
         if (count($journal) > 3) {
           $infos .= '<div style="overflow:auto;">';
@@ -496,7 +496,7 @@ class displayUtils {
           } else if ($jEntry->type_id == TYPE_UPDATE) {
             $infos .= '<span class="lightpink_tag" style="font-size: 10px;">UPDATE</span>';
           }
-          $infos .= '<b>' . $jEntry->date->format('Y-m-d') . '</b>';
+          $infos .= '<strong>' . $jEntry->date->format('Y-m-d') . '</strong>';
           if (isset($jEntry->comment) && !empty($jEntry->comment)) {
             $infos .= '<br/>' . $jEntry->comment;
           }
@@ -508,7 +508,7 @@ class displayUtils {
         $infos .= '</td></tr>';
       }
     } else {
-      $infos .= '<tr><td style = \'page-break-inside: avoid;\'><b>Data availability</b></td>';
+      $infos .= '<tr><td style = \'page-break-inside: avoid;\'><strong>Data availability</strong></td>';
       $infos .= '<td colspan="3">No data are currently available for this dataset.&nbsp;';
       $suscribeUrl = '/Your-Account?p&pageId=6&datsId=' . $dataset->dats_id;
       if (isset($_SESSION['loggedUserAbos'])) {

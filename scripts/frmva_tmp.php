@@ -98,12 +98,12 @@ if ($form->isCat()) {
       }
 
       if ($insertionOk) {
-        echo "<font size=\"3\" color='green'><b>The dataset has been succesfully inserted in the database</b></font><br>";
+        echo "<font size=\"3\" color='green'><strong>The dataset has been succesfully inserted in the database</strong></font><br>";
 
         $_SESSION['datasetMod'] = null;
         editDataset($form->dataset->dats_id, $project_name);
       } else {
-        echo "<font size=\"3\" color='red'><b>An error occured during the insertion process.</b></font><br>";
+        echo "<font size=\"3\" color='red'><strong>An error occured during the insertion process.</strong></font><br>";
 
         $dts = new dataset();
         $dts->dats_id = $form->dataset->dats_id;

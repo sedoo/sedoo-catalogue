@@ -97,19 +97,19 @@ class profile_form extends login_form {
     global $project_name, $MainProjects;
     echo '<table>';
     if (isset($this->user->affiliation) && !empty($this->user->affiliation)) {
-      echo '<tr><th colspan="4" align="center"><b>Institution</b></th></tr>';
-      echo "<tr><td><b>Affiliation</b></td><td colspan='3'>" . $this->user->affiliation . "</td></tr>";
-      echo "<tr><td><b>Address</b></td><td colspan='3'>" . $this->user->street . "</td></tr>";
-      echo "<tr><td><b>Zip Code</b></td><td>" . $this->user->zipCode . "</td><td><b>City</b></td><td>" . $this->user->city . "</td></tr>";
-      echo "<tr><td><b>Country</b></td><td colspan='3'>" . countries::getDisplayName($this->user->country) . "</td></tr>";
+      echo '<tr><th colspan="4" align="center"><strong>Institution</strong></th></tr>';
+      echo "<tr><td><strong>Affiliation</strong></td><td colspan='3'>" . $this->user->affiliation . "</td></tr>";
+      echo "<tr><td><strong>Address</strong></td><td colspan='3'>" . $this->user->street . "</td></tr>";
+      echo "<tr><td><strong>Zip Code</strong></td><td>" . $this->user->zipCode . "</td><td><strong>City</strong></td><td>" . $this->user->city . "</td></tr>";
+      echo "<tr><td><strong>Country</strong></td><td colspan='3'>" . countries::getDisplayName($this->user->country) . "</td></tr>";
     }
-    echo '<tr><th colspan="4" align="center"><b>Contact</b></th></tr>';
+    echo '<tr><th colspan="4" align="center"><strong>Contact</strong></th></tr>';
     if (isset($this->user->phoneNumber) && !empty($this->user->phoneNumber)) {
-      echo "<tr><td><b>Telephone</b></td><td colspan='3'>" . $this->user->phoneNumber . "</td></tr>";
+      echo "<tr><td><strong>Telephone</strong></td><td colspan='3'>" . $this->user->phoneNumber . "</td></tr>";
     }
-    echo "<tr><td><b>Mail</b></td><td colspan='3'>" . $this->user->mail . "</td></tr>";
+    echo "<tr><td><strong>Mail</strong></td><td colspan='3'>" . $this->user->mail . "</td></tr>";
     if (isset($this->user->memberOf) && !empty($this->user->memberOf)) {
-      echo '<tr><th colspan="4" align="center"><b>Group(s)</b></th></tr>';
+      echo '<tr><th colspan="4" align="center"><strong>Group(s)</strong></th></tr>';
       echo "<td colspan='4'>";
       foreach ($this->user->memberOf as $group) {
         echo $this->groups[$group] . '<br>';
@@ -117,27 +117,27 @@ class profile_form extends login_form {
       echo "</td>";
     }
     if (isset($this->user->abstract) && !empty($this->user->abstract)) {
-      echo '<tr><th colspan="4" align="center"><b>Planned Work</b></th></tr>';
-      echo "<tr><td><b>Description</b></td><td colspan='3'>" . $this->user->abstract . "</td></tr>";
+      echo '<tr><th colspan="4" align="center"><strong>Planned Work</strong></th></tr>';
+      echo "<tr><td><strong>Description</strong></td><td colspan='3'>" . $this->user->abstract . "</td></tr>";
       if ($MainProjects != NULL) {
         foreach ($MainProjects as $project) {
           if (isset($this->user->attrs[strtolower($project) . 'Abstract']) && !empty($this->user->attrs[strtolower($project) . 'Abstract'])) {
             if (is_array($this->user->attrs[strtolower($project) . 'Abstract'])) {
-              echo "<tr><td><b>Work in $project</b></td><td colspan='3'>" . $this->user->attrs[strtolower($project) . 'Abstract'][0] . "</td></tr>";
+              echo "<tr><td><strong>Work in $project</strong></td><td colspan='3'>" . $this->user->attrs[strtolower($project) . 'Abstract'][0] . "</td></tr>";
             } else {
-              echo "<tr><td><b>Work in $project</b></td><td colspan='3'>" . $this->user->attrs[strtolower($project) . 'Abstract'] . "</td></tr>";
+              echo "<tr><td><strong>Work in $project</strong></td><td colspan='3'>" . $this->user->attrs[strtolower($project) . 'Abstract'] . "</td></tr>";
             }
 
           }
         }
       }
       if (isset($this->user->associatedProject) && !empty($this->user->associatedProject)) {
-        echo "<tr><td><b>Member of</b></td><td colspan='3'>" . $this->user->associatedProject . "</td></tr>";
+        echo "<tr><td><strong>Member of</strong></td><td colspan='3'>" . $this->user->associatedProject . "</td></tr>";
       }
     }
     if (isset($this->user->supervisor_name) && !empty($this->user->supervisor_name)) {
-      echo '<tr><th colspan="4" align="center"><b>Supervisor</b></th></tr>';
-      echo "<tr><td><b>name</b></td><td>" . $this->user->supervisor_name . "</td><td><b>Affiliation</b></td><td>" . $this->user->supervisor_affiliation . "</td></tr>";
+      echo '<tr><th colspan="4" align="center"><strong>Supervisor</strong></th></tr>';
+      echo "<tr><td><strong>name</strong></td><td>" . $this->user->supervisor_name . "</td><td><strong>Affiliation</strong></td><td>" . $this->user->supervisor_affiliation . "</td></tr>";
     }
     echo "</table>";
 	}

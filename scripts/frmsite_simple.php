@@ -106,12 +106,12 @@ if ($form->isCat($form->dataset, $project_name)) {
           $insertionOk = $form->dataset->update();
         }
         if ($insertionOk) {
-          echo "<font size=\"3\" color='green'><b>The dataset has been succesfully inserted in the database</b></font><br>";
+          echo "<font size=\"3\" color='green'><strong>The dataset has been succesfully inserted in the database</strong></font><br>";
           $_SESSION['dataset_multi'] = null;
           $dts = dataset_factory::createMultiInstrumentDatasetById($form->dataset->dats_id);
           $dts->display($project_name);
         } else {
-          echo "<font size=\"3\" color='red'><b>An error occured during the insertion process.</b></font><br>";
+          echo "<font size=\"3\" color='red'><strong>An error occured during the insertion process.</strong></font><br>";
 
           $dts = new dataset();
           $dts->dats_id = $form->dataset->dats_id;
@@ -134,7 +134,7 @@ if ($form->isCat($form->dataset, $project_name)) {
 } else if ($form->isLogged()) {
   echo "<a href='/$project_name/'>&lt;&lt;&nbsp;Return</a><br/>";
   echo "<center><img src='/img/interdit.png' heigth='50' width='50' /></center>";
-  echo "<br/><font size=\"3\" color='red'><center><b>You cannot modify this dataset.</b></center></font><br/>";
+  echo "<br/><font size=\"3\" color='red'><center><strong>You cannot modify this dataset.</strong></center></font><br/>";
 } else {
   $form->displayLGForm("", true);
 }

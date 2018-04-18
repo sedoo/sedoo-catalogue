@@ -74,7 +74,7 @@ class ElasticSearchUtils {
 			}
 			self::printLegende($projectName, $searchDatsIds, $queryArgs);
 			
-			echo '<b>' . $result ['hits'] ['total'] . ' dataset(s) found</b><br/>';
+			echo '<strong>' . $result ['hits'] ['total'] . ' dataset(s) found</strong><br/>';
 			
 			echo "<ul>";
 			foreach ( $result ['hits'] ['hits'] as $hit ) {

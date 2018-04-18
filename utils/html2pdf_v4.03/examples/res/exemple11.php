@@ -6,7 +6,7 @@
     <tr>
         <td id="mon_td_trop_grand" style="width:100%;">
             Test de TD très grand, en désactivant le test de TD ne devant pas depasser une page<br>
-            via la méthode <b>setTestTdInOnePage</b>.<br>
+            via la méthode <strong>setTestTdInOnePage</strong>.<br>
             <table style="width:100%;">
 <?php
     for ($i=0; $i<=40; $i++) {

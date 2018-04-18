@@ -46,9 +46,9 @@ if ($form->isLogged()) {
     if (isset($_POST["bouton_change_password"])) {
       if ($form->validate()) {
         if ($form->changePassword($project_name)) {
-          echo "<font size=\"3\" color='green'><b>The password has been updated successfully.</b></font><br>";
+          echo "<font size=\"3\" color='green'><strong>The password has been updated successfully.</strong></font><br>";
         } else {
-          echo "<font size=\"3\" color='red'><b>Sorry, the system was unable to change your password.</b></font><br>";
+          echo "<font size=\"3\" color='red'><strong>Sorry, the system was unable to change your password.</strong></font><br>";
           $form->displayChangePasswordForm();
         }
       } else {
@@ -131,7 +131,7 @@ if ($form->isLogged()) {
       strtolower(MainProject),
       strtolower(MainProject) . 'Adm',
     ))) {
-      echo "<font size=\"3\" color='green'><b>You are already registered to access " . MainProject . " data.</b></font><br>";
+      echo "<font size=\"3\" color='green'><strong>You are already registered to access " . MainProject . " data.</strong></font><br>";
     } else {
       if (isset($_POST['bouton_save'])) {
         if ($form_user->validate() && $form_user->validateChart(true)) {
@@ -139,7 +139,7 @@ if ($form->isLogged()) {
           $form_user->requestPortalDataAccess();
           $milieu = ob_get_clean();
           echo "<h1>" . MainProject . " data access registration</h1><br/>";
-          echo "<font size=\"3\" color='green'><b>The request has been registered, please wait for the administrator confirmation (you will receive a mail).</b></font><br>";
+          echo "<font size=\"3\" color='green'><strong>The request has been registered, please wait for the administrator confirmation (you will receive a mail).</strong></font><br>";
         } else {
           if (!empty($form_user->_errors)) {
             foreach ($form_user->_errors as $error) {
@@ -178,12 +178,12 @@ if ($form->isLogged()) {
       strtolower($form_user->project[0]) . 'Core',
       strtolower($form_user->project[0]) . 'Asso',
     ))) {
-      echo "<font size=\"3\" color='green'><b>You are already registered to access " . $form_user->project[0] . "data.</b></font><br>";
+      echo "<font size=\"3\" color='green'><strong>You are already registered to access " . $form_user->project[0] . "data.</strong></font><br>";
     } else if ((array_key_exists(strtolower($form_user->project[0]) . 'ApplicationDate', $form->user->attrs[strtolower($form_user->project[0])]) && $form->user->attrs[strtolower($form_user->project[0]) . 'Status'][0] == 'pending') || (array_key_exists(strtolower($form_user->project[0]) . 'ApplicationDate', $form->user->attrs) && $form->user->attrs[strtolower($form_user->project[0]) . 'Status'][0] == 'pending')) {
-      echo "<font size=\"3\" color='orange'><b>You have already submitted a request, please wait for the administrator confirmation (you will receive a mail).</b></font><br>";
+      echo "<font size=\"3\" color='orange'><strong>You have already submitted a request, please wait for the administrator confirmation (you will receive a mail).</strong></font><br>";
     } else if ((array_key_exists(strtolower($form_user->project[0]) . 'ApplicationDate', $form->user->attrs[strtolower($form_user->project[0])]) && $form->user->attrs[strtolower($form_user->project[0]) . 'Status'][0] == 'rejected') || (array_key_exists(strtolower($form_user->project[0]) . 'ApplicationDate', $form->user->attrs) && $form->user->attrs[strtolower($form_user->project[0]) . 'Status'][0] == 'rejected')) {
-      echo "<font size=\"3\" color='red'><b>We have received your request for an access to the " . $form_user->project[0] . " database. Considering the details you provided, your request has been rejected.\n If you think that your request should have been agreed or if you would like to collaborate with some " . $form_user->project[0] . " scientists, please contact
-" . constant(strtolower($form_user->project[0]) . _AdminGroup_Email) . " .</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>We have received your request for an access to the " . $form_user->project[0] . " database. Considering the details you provided, your request has been rejected.\n If you think that your request should have been agreed or if you would like to collaborate with some " . $form_user->project[0] . " scientists, please contact
+" . constant(strtolower($form_user->project[0]) . _AdminGroup_Email) . " .</strong></font><br>";
     } else {
       $form_user->addProjectDataPolicy();
       if (isset($_POST['bouton_save'])) {
@@ -192,7 +192,7 @@ if ($form->isLogged()) {
           $form_user->addProjectUser();
           $milieu = ob_get_clean();
           echo "<h1>" . $form_user->project[0] . " data access registration</h1><br/>";
-          echo "<font size=\"3\" color='green'><b>The request has been registered, please wait for the administrator confirmation (you will receive a mail).</b></font><br>";
+          echo "<font size=\"3\" color='green'><strong>The request has been registered, please wait for the administrator confirmation (you will receive a mail).</strong></font><br>";
         } else {
           if (!empty($form_user->_errors)) {
             foreach ($form_user->_errors as $error) {
@@ -219,7 +219,7 @@ if ($form->isLogged()) {
     unset($_SESSION['init']);
   }
 } else if ($form->isCat()) {
-  echo "<font size=\"3\" color='red'><b>You cannot modify the account " . $form->user->cn . "</b></font><br>";
+  echo "<font size=\"3\" color='red'><strong>You cannot modify the account " . $form->user->cn . "</strong></font><br>";
 } else {
   $form->displayLGForm("", true);
 }

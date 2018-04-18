@@ -22,7 +22,7 @@ if (isset($datsId) && !empty($datsId)) {
 		}else{
 			if (isset($_POST['bouton_forgot'])){
 				if ($form->forgottenPassword()){
-					echo "<font size=\"3\" color='green'><b>A new password has been generated and sent to you by email.</b></font><br>";
+					echo "<font size=\"3\" color='green'><strong>A new password has been generated and sent to you by email.</strong></font><br>";
 				}
 				$form->saveErrors();
 				$form->displayLoginForm("Download",true,true);

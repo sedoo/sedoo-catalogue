@@ -306,15 +306,15 @@ class user_form_new extends login_form {
     echo '<tr><td><font color="#467AA7">' . $this->getElement('lastname')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('lastname')->toHTML() . '</td></tr>';
 
     echo '<tr><td><font color="#467AA7">' . $this->getElement('affiliation')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('affiliation')->toHTML() . '</td></tr>';
-    echo '<tr><td colspan="3" align="center"><b>Place of Work</b></td></tr>';
+    echo '<tr><td colspan="3" align="center"><strong>Place of Work</strong></td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('street')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('street')->toHTML() . '</td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('zip')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('zip')->toHTML() . '</td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('city')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('city')->toHTML() . '</td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('country')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('country')->toHTML() . '</td></tr>';
-    echo '<tr><td colspan="3" align="center"><b>Contact</b></td></tr>';
+    echo '<tr><td colspan="3" align="center"><strong>Contact</strong></td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('phone')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('phone')->toHTML() . '</td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('mail')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('mail')->toHTML() . '</td></tr>';
-    echo '<tr><td colspan="3" align="center"><b>Planned Work</b></font></td></tr>';
+    echo '<tr><td colspan="3" align="center"><strong>Planned Work</strong></font></td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('abstract')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('abstract')->toHTML() . '</td></tr>';
     if ($update == true) {
       // foreach ( $MainProjects as $proj ) {
@@ -323,7 +323,7 @@ class user_form_new extends login_form {
       //   }
       // }
     }
-    echo '<tr><td colspan="3" align="center"><b>Supervisor</b></td></tr>';
+    echo '<tr><td colspan="3" align="center"><strong>Supervisor</strong></td></tr>';
     echo '<tr><td colspan="3" >If you are a student, please indicate the name and the affiliation of your supervisor.</td></tr>';
     echo '<tr><td>' . $this->getElement('supervisor_name')->getLabel() . '</td><td colspan="2">' . $this->getElement('supervisor_name')->toHTML() . '</td></tr>';
     echo '<tr><td>' . $this->getElement('supervisor_affiliation')->getLabel() . '</td><td colspan="2">' . $this->getElement('supervisor_affiliation')->toHTML() . '</td></tr>';
@@ -390,7 +390,7 @@ class user_form_new extends login_form {
             }
           } else {
             if ($isPortalForm == false) {
-              echo '<tr><td colspan="3" align="center" class="ui-state-highlight"><b>Planned Work</b></font></td></tr>';
+              echo '<tr><td colspan="3" align="center" class="ui-state-highlight"><strong>Planned Work</strong></font></td></tr>';
 
               if (!isset($user->abstract) && !isset($user->attrs[strtolower($proj) . 'Abstract'][0])) {
                 echo '<tr  class="ui-state-highlight"><td><font color="#467AA7">' . $this->getElement($proj . '_abstract')->getLabel() . '</font></td><td colspan="2">' . $this->getElement($proj . '_abstract')->toHTML() . '</td></tr>';
@@ -608,7 +608,7 @@ class user_form_new extends login_form {
       }
 
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><b>The user directory is temporarily unavailable. Please contact the administrator.</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
       $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande[$proj]);
       return false;
     }
@@ -642,7 +642,7 @@ class user_form_new extends login_form {
         return false;
       }
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><b>The user directory is temporarily unavailable. Please contact the administrator.</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
       $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande[$proj]);
       return false;
     }
@@ -675,7 +675,7 @@ class user_form_new extends login_form {
         return false;
       }
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><b>The user directory is temporarily unavailable. Please contact the administrator.</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
       $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande[$proj]);
       return false;
     }
@@ -693,7 +693,7 @@ class user_form_new extends login_form {
       }
       return true;
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><b>The user directory is temporarily unavailable. Please contact the administrator.</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
       return false;
     }
 	}
@@ -761,7 +761,7 @@ class user_form_new extends login_form {
         return false;
       }
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><b>The user directory is temporarily unavailable. Please contact the administrator.</b></font><br>";
+      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
       $this->mailAdmin('ERREUR', "Erreur lors de la mise d'1 utilisateur.", $e, $this->demande);
       return false;
     }

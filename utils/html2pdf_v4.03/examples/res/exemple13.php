@@ -69,10 +69,10 @@ Exemple de caracteres :<br>
 </table>
 <br>
 <?php
-    $phrase = "ceci est un exemple avec <b>du gras</b>, ";
-    $phrase.= "<i>de l'italique</i>, ";
+    $phrase = "ceci est un exemple avec <strong>du gras</strong>, ";
+    $phrase.= "<em>de l'italique</em>, ";
     $phrase.= "<u>du souligné</u>, ";
-    $phrase.= "<u><i><b>et une image</b></i></u> : ";
+    $phrase.= "<u><em><strong>et une image</strong></em></u> : ";
     $phrase.= "<img src='./res/logo.gif' alt='logo' style='width: 15mm'>";
 ?>
 Table :<br>

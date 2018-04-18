@@ -147,11 +147,11 @@ class map_form {
       }
 
       $info = '"<div id=\"map_window_info\">'
-      . '<b>Latitude:</b> ' . round($lat, 3)
-      . '<br/><b>Longitude:</b> ' . round($lon, 3)
-      . '<br/><br/><b>Instrument type:</b> ' . $sensor->gcmd_instrument_keyword->gcmd_sensor_name
-      . '<br/><b>Manufacturer:</b> ' . $sensor->manufacturer->manufacturer_name
-      . '<br/><b>Model:</b> ' . $sensor->sensor_model
+      . '<strong>Latitude:</strong> ' . round($lat, 3)
+      . '<br/><strong>Longitude:</strong> ' . round($lon, 3)
+      . '<br/><br/><strong>Instrument type:</strong> ' . $sensor->gcmd_instrument_keyword->gcmd_sensor_name
+      . '<br/><strong>Manufacturer:</strong> ' . $sensor->manufacturer->manufacturer_name
+      . '<br/><strong>Model:</strong> ' . $sensor->sensor_model
         . '</div>"';
 
       $color = 'red';
@@ -203,11 +203,11 @@ class map_form {
         $alt = $infos[4];
 
         $info = '"<div id=\"map_window_info\">'
-        . '<b>' . $infos[1] . '</b>'
-        . '<br/><br/><b>Station id:</b> ' . $infos[0]
-        . '<br/><b>Latitude:</b> ' . round($lat, 3)
-        . '<br/><b>Longitude:</b> ' . round($lon, 3)
-          . (($alt == MISSING_VALUE) ? '' : '<br/><b>Altitude (m):</b> ' . round($alt, 3))
+        . '<strong>' . $infos[1] . '</strong>'
+        . '<br/><br/><strong>Station id:</strong> ' . $infos[0]
+        . '<br/><strong>Latitude:</strong> ' . round($lat, 3)
+        . '<br/><strong>Longitude:</strong> ' . round($lon, 3)
+          . (($alt == MISSING_VALUE) ? '' : '<br/><strong>Altitude (m):</strong> ' . round($alt, 3))
           . '</div>"';
 
         $color = 'red';

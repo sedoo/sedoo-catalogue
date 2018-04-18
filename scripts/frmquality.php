@@ -47,7 +47,7 @@ if ($datsId > 0) {
         printTd(round($qual->getScoreVar(), 0), 20, $qual->commentVar);
         $score = $qual->getScore();
         $color = getCouleurScore($score, 100);
-        echo "<td><b><font color='$color'>$score %</font></b></td></tr>";
+        echo "<td><strong><font color='$color'>$score %</font></strong></td></tr>";
       }
       echo '</table>';
     } else {
@@ -67,7 +67,7 @@ if ($datsId > 0) {
         printTd(round($qual->getScoreVar(), 0), 20, $qual->commentVar);
         $score = $qual->getScore();
         $color = getCouleurScore($score, 100);
-        echo "<td><b><font color='$color'>$score %</font></b></td></tr>";
+        echo "<td><strong><font color='$color'>$score %</font></strong></td></tr>";
       }
       echo '</table>';
     }

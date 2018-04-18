@@ -861,9 +861,9 @@ class va_dataset_form extends base_form {
 
   function displayModForm($i) {
     if ($this->dataset->nbModForm > 1) {
-      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_model' colspan='4'  align='center'><b>Model " . ($i + 1) . "</b> " . $this->getElement('mod_button_delete_' . $i)->toHTML() . "</td></tr>";
+      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_model' colspan='4'  align='center'><strong>Model " . ($i + 1) . "</strong> " . $this->getElement('mod_button_delete_' . $i)->toHTML() . "</td></tr>";
     } else {
-      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_model' colspan='4' align='center'><b>Model</b>" . $this->getElement('mod_button_delete_' . $i)->toHTML() . "</td></tr>";
+      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_model' colspan='4' align='center'><strong>Model</strong>" . $this->getElement('mod_button_delete_' . $i)->toHTML() . "</td></tr>";
     }
 
     $this->displayErrorsMod($i);
@@ -877,9 +877,9 @@ class va_dataset_form extends base_form {
 
   function displaySatForm($i) {
     if ($this->dataset->nbSatForm > 1) {
-      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_satellite' colspan='4' align='center'><b>Satellite " . ($i + 1) . "</b> " . $this->getElement('sat_button_delete_' . $i)->toHTML() . "</td></tr>";
+      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_satellite' colspan='4' align='center'><strong>Satellite " . ($i + 1) . "</strong> " . $this->getElement('sat_button_delete_' . $i)->toHTML() . "</td></tr>";
     } else {
-      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_satellite' colspan='4' align='center'><b>Satellite</b>" . $this->getElement('sat_button_delete_' . $i)->toHTML() . "</td></tr>";
+      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_satellite' colspan='4' align='center'><strong>Satellite</strong>" . $this->getElement('sat_button_delete_' . $i)->toHTML() . "</td></tr>";
     }
 
     $this->displayErrorsSat($i);
@@ -899,9 +899,9 @@ class va_dataset_form extends base_form {
 
   function displayInstruForm($i) {
     if ($this->dataset->nbInstruForm > 1) {
-      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_instrument' colspan='4' align='center'><b>Instrument " . ($i + 1) . "</b> " . $this->getElement('instru_button_delete_' . $i)->toHTML() . "</td></tr>";
+      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_instrument' colspan='4' align='center'><strong>Instrument " . ($i + 1) . "</strong> " . $this->getElement('instru_button_delete_' . $i)->toHTML() . "</td></tr>";
     } else {
-      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_instrument' colspan='4' align='center'><b>Instrument</b>" . $this->getElement('instru_button_delete_' . $i)->toHTML() . "</td></tr>";
+      echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_instrument' colspan='4' align='center'><strong>Instrument</strong>" . $this->getElement('instru_button_delete_' . $i)->toHTML() . "</td></tr>";
     }
 
     $this->displayErrorsInstru($i);
@@ -915,7 +915,7 @@ class va_dataset_form extends base_form {
   }
 
   function displayVaResolutionForm($simpleVersion = false) {
-    echo '<tr><td colspan="4" align="center"><b>Data resolution</b><br></td></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Data resolution</strong><br></td></tr>';
     echo '<tr><td>' . $this->getElement('sensor_lon_res')->getLabel() . '</td><td>' . $this->getElement('sensor_lon_res')->toHTML() . '</td>';
     echo '<td>' . $this->getElement('sensor_lat_res')->getLabel() . '</td><td>' . $this->getElement('sensor_lat_res')->toHTML() . '</td></tr>';
 
@@ -963,7 +963,7 @@ class va_dataset_form extends base_form {
     }
     $this->displayFormBegin('frmvadataset', false, true);
     //----------------------------------------------------------Data description's form------------------------------------------------------------------------------------------------
-    echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><b>Data description</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><strong>Data description</strong></td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
     for ($i = 0; $i < $this->dataset->nbProj; $i++) {
       echo '<tr>';
@@ -986,9 +986,9 @@ class va_dataset_form extends base_form {
     echo '</td></tr>';
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------Coverage's form-----------------------------------------------------------------------------------------------------
-    echo '<tr><th colspan="4" align="center"><a name="a_cover" ></a><b>Coverage</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_cover" ></a><strong>Coverage</strong></td></tr>';
     $this->displayErrorsCoverage();
-    echo '<tr><td colspan="4" align="center"><b>Temporal Coverage</b><br></td></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Temporal Coverage</strong><br></td></tr>';
     echo '<tr><td>' . $this->getElement('dats_date_begin')->getLabel() . '</td><td>' . $this->getElement('dats_date_begin')->toHTML() . "</td>";
     echo '<td>' . $this->getElement('dats_date_end')->getLabel() . '</td><td>' . $this->getElement('dats_date_end')->toHTML() . '</td></tr>';
     $this->displayGeoCoverageForm();
@@ -996,10 +996,10 @@ class va_dataset_form extends base_form {
     $this->displayGridForm();
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------Contact's form-----------------------------------------------------------------------------------------------------
-    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><b>Contact information</b><br></th></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><strong>Contact information</strong><br></th></tr>';
 
     for ($i = 0; $i < $this->dataset->nbPis; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Contact ' . ($i + 1) . '</b><br>'; //</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Contact ' . ($i + 1) . '</strong><br>'; //</td></tr>';
       $this->displayErrorsContact($i);
       $this->displayPersonForm($i);
     }
@@ -1008,7 +1008,7 @@ class va_dataset_form extends base_form {
     //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
     //----------------------------------------------------------Source's form------------------------------------------------------------------------------------------------
-    echo '<tr><th colspan="4" align="center"><a name="a_source" ></a><b>Sources</b><br></th></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_source" ></a><strong>Sources</strong><br></th></tr>';
     echo '<tr><td colspan="4" align="center"> Source type ' . $this->getElement('source_type')->toHTML() . ' ' .
     $this->getElement('bouton_add_source')->toHTML() . '</td></tr>';
 
@@ -1037,9 +1037,9 @@ class va_dataset_form extends base_form {
 
     //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------Parameters's form------------------------------------------------------------------------------------------------
-    echo '<tr><th colspan="4" align="center"><a name="a_param" ></a><b>Parameters</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_param" ></a><strong>Parameters</strong></td></tr>';
     for ($i = 0; $i < $this->dataset->nbVars; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Parameter ' . ($i + 1) . '</b>' . $this->getElement('var_id_' . $i)->toHTML() . '</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Parameter ' . ($i + 1) . '</strong>' . $this->getElement('var_id_' . $i)->toHTML() . '</td></tr>';
       $this->displayErrorsParams($i);
       $this->displayParamForm($i, false, false, true);
     }
@@ -1047,7 +1047,7 @@ class va_dataset_form extends base_form {
 
     //--------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //----------------------------------------------------------Data use form---------------------------------------------------------------------------------------------------
-    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><b>Data use information</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><strong>Data use information</strong></td></tr>';
     $this->displayErrorsUseInfo();
     echo '<tr><td>' . $this->getElement('dats_use_constraints')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_use_constraints')->toHTML() . '</td></tr>';
     echo '<tr><td>' . $this->getElement('data_policy')->getLabel() . '</td><td colspan="3">' . $this->getElement('data_policy')->toHTML();

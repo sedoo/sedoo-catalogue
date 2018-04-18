@@ -371,7 +371,7 @@ class instrument_form extends base_form {
     echo '<table><tr><th class="top" colspan="3" align="left"><font color="#467AA7">Required fields are in blue</font></td><th class="top" align="right">';
     echo '</td></tr>';
     echo '<tr><td colspan="4" align="center"><a href="' . $reqUri . '?datsId=-10">Reset</a></td></tr>';
-    echo '<tr><th colspan="4" align="center"><a name="a_general" ></a><b>General information</b></th></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_general" ></a><strong>General information</strong></th></tr>';
     $this->displayErrorsGeneralInfo();
     echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
     echo '<tr><td rowspan="2">' . $this->getElement('period')->getLabel() . '</td><td rowspan="2">' . $this->getElement('period')->toHTML() . '</td><td>' . $this->getElement('dats_date_begin')->getLabel() . '</td><td>' . $this->getElement('dats_date_end')->getLabel() . "</td></tr>";
@@ -396,18 +396,18 @@ class instrument_form extends base_form {
 
     echo '<div id="PersonHelp" title="Help">
 				<p>
-				- A <b>Principal Investigator</b> or <b>Lead Scientist</b> is the scientist responsible for the in-situ instrument or site, or model simulations or forecasts, or satellite product provided by the dataset. He/She will receive an email every time the dataset is downloaded.'
-      . '<br/><br/>- A <b>Dataset Contact</b> is a scientist who may be contacted regarding the dataset, but not necessarily responsible for the dataset.'
-      . '<br/><br/>- A <b>Database Contact</b> is just responsible for providing the data to ' . $project_name . ' users.'
+				- A <strong>Principal Investigator</strong> or <strong>Lead Scientist</strong> is the scientist responsible for the in-situ instrument or site, or model simulations or forecasts, or satellite product provided by the dataset. He/She will receive an email every time the dataset is downloaded.'
+      . '<br/><br/>- A <strong>Dataset Contact</strong> is a scientist who may be contacted regarding the dataset, but not necessarily responsible for the dataset.'
+      . '<br/><br/>- A <strong>Database Contact</strong> is just responsible for providing the data to ' . $project_name . ' users.'
       . '<br/><br/>If you are using the form to put a data request, choose User as contact type.
 				</p>
 			</div>';
     echo '</tr><tr>';
-    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><b>Contact information</b>';
+    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><strong>Contact information</strong>';
     echo "&nbsp;<input src='/img/aide-icone-16.png' type='image' onmouseover=\"javascript: $('#PersonHelp').dialog('open');\" onmouseout=\"javascript: $( '#PersonHelp' ).dialog('close');\" />";
     echo '</th></tr><tr>';
     for ($i = 0; $i < $this->dataset->nbPis; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Contact ' . ($i + 1) . '</b><br>'; //</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Contact ' . ($i + 1) . '</strong><br>'; //</td></tr>';
       $this->displayErrorsContact($i);
       $this->displayPersonForm($i);
     }
@@ -425,7 +425,7 @@ class instrument_form extends base_form {
     }
     echo '</td></tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_instru" ></a><b>Instrument information</b>' . $this->getHideShow('row_sensor');
+    echo '<tr><th colspan="4" align="center"><a name="a_instru" ></a><strong>Instrument information</strong>' . $this->getHideShow('row_sensor');
     echo "</th></tr>";
     $this->displayErrorsInstru();
 
@@ -455,10 +455,10 @@ class instrument_form extends base_form {
     }
     echo '</tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_site" ></a><b>Geographic information</b>';
+    echo '<tr><th colspan="4" align="center"><a name="a_site" ></a><strong>Geographic information</strong>';
     echo '</td></tr>';
     for ($i = 0; $i < $nb_site; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Location ' . ($i + 1) . '</b>' . $this->getHideShow('row_site_' . $i) . '</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Location ' . ($i + 1) . '</strong>' . $this->getHideShow('row_site_' . $i) . '</td></tr>';
       $this->displayErrorsSite($i);
 
       echo '<tr name="row_site_' . $i . '"><td>' . $this->getElement('locationByLev' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('locationByLev' . $i)->toHTML() . '</td></tr>';
@@ -469,17 +469,17 @@ class instrument_form extends base_form {
       echo '<tr name="row_site_' . $i . '"><td>' . $this->getElement('sensor_environment_' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('sensor_environment_' . $i)->toHTML() . '</td></tr>';
     }
     echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_add_site')->toHTML() . '</td></tr>';
-    echo '<tr><th colspan="4" align="center"><a name="a_param" ></a><b>Measured parameters</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_param" ></a><strong>Measured parameters</strong></td></tr>';
 
     for ($i = 0; $i < $this->dataset->nbVars; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Measured parameter ' . ($i + 1) . '</b>' . $this->getElement('var_id_' . $i)->toHTML() . '</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Measured parameter ' . ($i + 1) . '</strong>' . $this->getElement('var_id_' . $i)->toHTML() . '</td></tr>';
       $this->displayErrorsParams($i);
       $this->displayParamForm($i, true, true);
     }
     echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_add_variable')->toHTML() . '</td></tr>';
-    echo '<tr><th colspan="4" align="center"><a name="a_param_calcul" ></a><b>Derived parameters (if relevant)</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_param_calcul" ></a><strong>Derived parameters (if relevant)</strong></td></tr>';
     for ($i = 0; $i < $this->dataset->nbCalcVars; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Derived parameter ' . ($i + 1) . '</b>' . $this->getElement('var_id_calcul' . $i)->toHTML() . '</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Derived parameter ' . ($i + 1) . '</strong>' . $this->getElement('var_id_calcul' . $i)->toHTML() . '</td></tr>';
       $this->displayErrorsParams('calcul' . $i);
       $this->displayParamForm('calcul' . $i, true, true);
     }
@@ -495,11 +495,11 @@ class instrument_form extends base_form {
 
     echo '<div id="UseHelp" title="Help">
 				<p>
-				- <b>Use constraint</b> encourages people to mention you, when using your data.<br/><br/><u>For example</u>: <i>"Permission is granted to use these data and images in research and publications when accompanied by the following statement: ... . </i>at you to complete the following"
+				- <strong>Use constraint</strong> encourages people to mention you, when using your data.<br/><br/><u>For example</u>: <em>"Permission is granted to use these data and images in research and publications when accompanied by the following statement: ... . </em>at you to complete the following"
 				</p>
 			</div>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><b>Data use information</b>';
+    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><strong>Data use information</strong>';
     echo '</td></tr>';
     $this->displayErrorsUseInfo();
     echo '<tr><td>' . $this->getElement('dats_use_constraints')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_use_constraints')->toHTML() . "&nbsp;<input src='/img/aide-icone-16.png' type='image' onmouseover=\"javascript: $('#UseHelp').dialog('open');\" onmouseout=\"javascript: $( '#UseHelp' ).dialog('close');\" /></td></tr>";

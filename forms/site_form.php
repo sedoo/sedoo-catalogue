@@ -322,7 +322,7 @@ class site_form extends base_site_form {
     echo '<table><tr><th class="top" colspan="3" align="left"><font color="#467AA7">Required fields are in blue</font></td><th class="top" align="right">';
     echo $this->getElement('reset')->toHTML() . '</td></tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_general" ></a><b>General information</b></th></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_general" ></a><strong>General information</strong></th></tr>';
     $this->displayErrorsGeneralInfo();
     echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
 
@@ -339,16 +339,16 @@ class site_form extends base_site_form {
     echo '<tr><td colspan="3" align="center">' . $this->getElement('bouton_add_projet')->toHTML() . '</td></tr>';
 
     echo '</tr><tr>';
-    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><b>Contact information</b></td></tr><tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><strong>Contact information</strong></td></tr><tr>';
     for ($i = 0; $i < $this->dataset->nbPis; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Contact ' . ($i + 1) . '</b><br>'; //</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Contact ' . ($i + 1) . '</strong><br>'; //</td></tr>';
       $this->displayErrorsContact($i);
       $this->displayPersonForm($i);
     }
     echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_add_pi')->toHTML() . '</td></tr>';
     $this->displayDataDescrForm();
 
-    echo '<tr><th colspan="4" align="center"><a name="a_site" ></a><b>Site information</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_site" ></a><strong>Site information</strong></td></tr>';
 
     $this->displayErrorsSite();
     echo '<tr><td>' . $this->getElement('placeByLev')->getLabel() . '</td><td colspan="3">' . $this->getElement('placeByLev')->toHTML() . '</td></tr>';
@@ -367,9 +367,9 @@ class site_form extends base_site_form {
     }
     echo '</tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_instru" ></a><b>Instrument information</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_instru" ></a><strong>Instrument information</strong></td></tr>';
     for ($i = 0; $i < $nb_sensors; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Instrument ' . ($i + 1) . ' </b></td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Instrument ' . ($i + 1) . ' </strong></td></tr>';
       $this->displayErrorsInstru($i);
       echo '<tr><td>' . $this->getElement('sensor_gcmd_' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('sensor_gcmd_' . $i)->toHTML() . '</td></tr>';
 
@@ -387,17 +387,17 @@ class site_form extends base_site_form {
       echo '<tr><td>' . $this->getElement('sensor_altitude_' . $i)->getLabel() . '</td><td>' . $this->getElement('sensor_altitude_' . $i)->toHTML() . '</td>';
       echo '<td>' . $this->getElement('sensor_url_' . $i)->getLabel() . '</td><td>' . $this->getElement('sensor_url_' . $i)->toHTML() . '</td></tr>';
       echo '<tr><td>' . $this->getElement('sensor_environment_' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('sensor_environment_' . $i)->toHTML() . '</td></tr>';
-      echo '<tr><th colspan="4" align="center"><a name="a_param_' . $i . '" ></a><b>Measured parameters</b></td></tr>';
+      echo '<tr><th colspan="4" align="center"><a name="a_param_' . $i . '" ></a><strong>Measured parameters</strong></td></tr>';
 
       for ($j = 0; $j < $tab_nbVars[$i]; $j++) {
-        echo '<tr><td colspan="4" align="center"><b>Measured parameter ' . ($j + 1) . ' by instrument ' . ($i + 1) . '</b>' . $this->getElement('var_id_' . $i . '_' . $j)->toHTML() . '</td></tr>';
+        echo '<tr><td colspan="4" align="center"><strong>Measured parameter ' . ($j + 1) . ' by instrument ' . ($i + 1) . '</strong>' . $this->getElement('var_id_' . $i . '_' . $j)->toHTML() . '</td></tr>';
         $this->displayErrorsParams($i, $j);
         $this->displayParamForm($i, $j, true);
       }
       echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_add_variable_' . $i)->toHTML() . '</td></tr>';
-      echo '<tr><th colspan="4" align="center"><a name="a_param_calcul_' . $i . '" ></a><b>Derived parameters (if relevant)</b></td></tr>';
+      echo '<tr><th colspan="4" align="center"><a name="a_param_calcul_' . $i . '" ></a><strong>Derived parameters (if relevant)</strong></td></tr>';
       for ($j = 0; $j < $tab_nbCalcVars[$i]; $j++) {
-        echo '<tr><td colspan="4" align="center"><b>Derived parameter ' . ($j + 1) . ' for instrument ' . ($i + 1) . '</b>' . $this->getElement('var_id_calcul' . $i . '_' . $j)->toHTML() . '</td></tr>';
+        echo '<tr><td colspan="4" align="center"><strong>Derived parameter ' . ($j + 1) . ' for instrument ' . ($i + 1) . '</strong>' . $this->getElement('var_id_calcul' . $i . '_' . $j)->toHTML() . '</td></tr>';
         $this->displayErrorsParams('calcul' . $i, $j);
         $this->displayParamForm('calcul' . $i, $j, true);
       }
@@ -405,7 +405,7 @@ class site_form extends base_site_form {
     }
     echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_add_sensor')->toHTML() . '</td></tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><b>Data use information</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><strong>Data use information</strong></td></tr>';
     $this->displayErrorsUseInfo();
     echo '<tr><td>' . $this->getElement('dats_use_constraints')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_use_constraints')->toHTML() . '</td></tr>';
     echo '<tr><td>' . $this->getElement('data_policy')->getLabel() . '</td><td colspan="3">' . $this->getElement('data_policy')->toHTML();

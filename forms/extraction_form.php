@@ -313,26 +313,26 @@ class extraction_form extends map_form {
       echo '<font size="3" color="red">' . $error . '</font><br>';
     }
     if (isset($this->msg)) {
-      echo "<font size=\"3\" color='green'><b>$this->msg</b></font><br>";
+      echo "<font size=\"3\" color='green'><strong>$this->msg</strong></font><br>";
     }
 
     echo '<form action="" method="post" name="frmmap" id="frmmap" >';
     echo "<table>";
     echo "<tr><th colspan='4' align='center'>Data</th></tr>";
-    echo '<tr><td><b>' . $this->getElement('dataset')->getLabel() . '</b></td><td colspan="3">' . $this->getElement('dataset')->toHTML() . '</td></tr>';
-    echo '<tr><td><b>' . $this->getElement('param')->getLabel() . '</b></td><td colspan="3">' . $this->getElement('param')->toHTML() . '</td></tr>';
-    echo '<tr><td><b>' . $this->getElement('flag')->getLabel() . '</b></td><td>' . $this->getElement('flag')->toHTML() . '</td>';
-    echo '<td><b>' . $this->getElement('delta')->getLabel() . '</b></td><td>' . $this->getElement('delta')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('dataset')->getLabel() . '</strong></td><td colspan="3">' . $this->getElement('dataset')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('param')->getLabel() . '</strong></td><td colspan="3">' . $this->getElement('param')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('flag')->getLabel() . '</strong></td><td>' . $this->getElement('flag')->toHTML() . '</td>';
+    echo '<td><strong>' . $this->getElement('delta')->getLabel() . '</strong></td><td>' . $this->getElement('delta')->toHTML() . '</td></tr>';
     echo "<tr><th colspan='4' align='center'>Period</th></tr>";
-    echo '<tr><td><b>' . $this->getElement('date_min')->getLabel() . '</b></td><td align="right">' . $this->getElement('date_min')->toHTML() . '</td>';
-    echo '<td><b>' . $this->getElement('date_max')->getLabel() . '</b></td><td align="right">' . $this->getElement('date_max')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('date_min')->getLabel() . '</strong></td><td align="right">' . $this->getElement('date_min')->toHTML() . '</td>';
+    echo '<td><strong>' . $this->getElement('date_max')->getLabel() . '</strong></td><td align="right">' . $this->getElement('date_max')->toHTML() . '</td></tr>';
     echo "<tr><th colspan='4' align='center'>Zone</th></tr>";
     echo "<tr><td colspan='4'>";
     $this->displayFormMap();
     echo '</td></tr>';
     echo "<tr><th colspan='4' align='center'>Options</th></tr>";
-    echo '<tr><td><b>' . $this->getElement('format')->getLabel() . '</b></td><td colspan="3">' . $this->getElement('format')->toHTML() . '</td></tr>';
-    echo '<tr><td><b>' . $this->getElement('compression')->getLabel() . '</b></td><td colspan="3">' . $this->getElement('compression')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('format')->getLabel() . '</strong></td><td colspan="3">' . $this->getElement('format')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('compression')->getLabel() . '</strong></td><td colspan="3">' . $this->getElement('compression')->toHTML() . '</td></tr>';
     echo '<tr><th colspan="4" align="center">' . $this->getElement('bouton_submit')->toHTML() . '</th></tr>';
     echo "</table>";
     echo '</form>';

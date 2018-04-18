@@ -22,12 +22,12 @@ table.morpion td.j2 { color: #A00; }
 </style>
 <page style="font-size: 10pt">
     <span style="font-weight: bold; font-size: 20pt; color: #F00">Bonjour, voici quelques exemples</span><br>
-    Bonjour, ceci est un test <b>de gras</b>, <i>d'italic</i>, <b><i>et des 2 ensembles</i></b>.<br>
+    Bonjour, ceci est un test <strong>de gras</strong>, <em>d'italic</em>, <strong><em>et des 2 ensembles</em></strong>.<br>
     <br>
     <span style="background: red; color: white;">Ceci est un message important</span><br>
     <br>
     <small>Texte écrit avec small</small>, Texte écrit normalement, <big>Texte écrit avec big</big><br>
-    <span style="font-size: 20px">A<sub>test d'<b>indice</b></sub> et N<sup>test d'<b>exposant</b></sup>,
+    <span style="font-size: 20px">A<sub>test d'<strong>indice</strong></sub> et N<sup>test d'<strong>exposant</strong></sup>,
         test<sub>test<sub>test</sub></sub>,
         test<sup>test<sup>test</sup></sup>,
         test<sub>test<sup>test</sup></sub>.

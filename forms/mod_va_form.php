@@ -314,17 +314,17 @@ class mod_va_form extends base_form {
     }
 
     $this->displayFormBegin('frmmodva', false, true);
-    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><b>Contact information</b><br></th></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_contact" ></a><strong>Contact information</strong><br></th></tr>';
 
     for ($i = 0; $i < $this->dataset->nbPis; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Contact ' . ($i + 1) . '</b><br>'; //</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Contact ' . ($i + 1) . '</strong><br>'; //</td></tr>';
       $this->displayErrorsContact($i);
       $this->displayPersonForm($i);
     }
     echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_add_pi')->toHTML() . '</td></tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_model" ></a><b>Sources</b></td></tr>';
-    echo '<tr><td colspan="4" align="center"><b>Model' . '</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_model" ></a><strong>Sources</strong></td></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Model' . '</strong></td></tr>';
     $this->displayErrorsModel();
     echo '<tr><td><font color="#467AA7">' . $this->getElement('model')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('model')->toHTML();
     echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_model')->toHTML() . '</td></tr>';
@@ -332,7 +332,7 @@ class mod_va_form extends base_form {
     echo '<tr><td><font color="#467AA7">' . $this->getElement('simu')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('simu')->toHTML();
     echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_simu')->toHTML() . '</td></tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><b>Data description</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><strong>Data description</strong></td></tr>';
     $this->displayErrorsModDataDescr();
     echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
 
@@ -358,18 +358,18 @@ class mod_va_form extends base_form {
     }
     echo '</td></tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_param" ></a><b>Parameters</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_param" ></a><strong>Parameters</strong></td></tr>';
 
     for ($i = 0; $i < $this->dataset->nbVars; $i++) {
-      echo '<tr><td colspan="4" align="center"><b>Parameter ' . ($i + 1) . '</b>' . $this->getElement('var_id_' . $i)->toHTML() . '</td></tr>';
+      echo '<tr><td colspan="4" align="center"><strong>Parameter ' . ($i + 1) . '</strong>' . $this->getElement('var_id_' . $i)->toHTML() . '</td></tr>';
       $this->displayErrorsParams($i);
       $this->displayParamForm($i, false, false, true);
     }
     echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_add_variable')->toHTML() . '</td></tr>';
 
-    echo '<tr><th colspan="4" align="center"><a name="a_cover" ></a><b>Coverage</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_cover" ></a><strong>Coverage</strong></td></tr>';
     $this->displayErrorsCoverage();
-    echo '<tr><td colspan="4" align="center"><b>Temporal Coverage</b><br></td></tr>';
+    echo '<tr><td colspan="4" align="center"><strong>Temporal Coverage</strong><br></td></tr>';
     echo '<tr><td>' . $this->getElement('dats_date_begin')->getLabel() . '</td><td>' . $this->getElement('dats_date_begin')->toHTML() . "</td>";
     echo '<td>' . $this->getElement('dats_date_end')->getLabel() . '</td><td>' . $this->getElement('dats_date_end')->toHTML() . '</td></tr>';
 
@@ -377,7 +377,7 @@ class mod_va_form extends base_form {
     $this->displayDataResolutionForm();
     $this->displayGridForm();
 
-    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><b>Data use information</b></td></tr>';
+    echo '<tr><th colspan="4" align="center"><a name="a_use" ></a><strong>Data use information</strong></td></tr>';
     $this->displayErrorsUseInfo();
     echo '<tr><td>' . $this->getElement('dats_use_constraints')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_use_constraints')->toHTML() . '</td></tr>';
     echo '<tr><td>' . $this->getElement('data_policy')->getLabel() . '</td><td colspan="3">' . $this->getElement('data_policy')->toHTML();

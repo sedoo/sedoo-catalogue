@@ -14,9 +14,9 @@ div.special table { width:100%; border:1px solid #000000; font-size:10px; border
 <page style="font-size: 16px" >
     Vous pouvez choisir le format et l'orientation de votre document, en utilisant ceci :<br>
     <br>
-    &lt;page orientation="portrait" format="A5" &gt; <i>A5 en portrait</i> &lt;/page&gt; <br>
+    &lt;page orientation="portrait" format="A5" &gt; <em>A5 en portrait</em> &lt;/page&gt; <br>
     <br>
-    &lt;page orientation="paysage" format="100x200" &gt; <i>100mm x 200mm en paysage</i> &lt;/page&gt;<br>
+    &lt;page orientation="paysage" format="100x200" &gt; <em>100mm x 200mm en paysage</em> &lt;/page&gt;<br>
     <br>
     En voici un petit exemple !
 </page>

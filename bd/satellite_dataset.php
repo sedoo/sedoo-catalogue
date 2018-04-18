@@ -177,72 +177,72 @@ class satellite_dataset extends base_dataset {
   //TODO affichage différent pour les requested dataset
   public function display($project_name) {
 
-    echo '<table style = \'page-break-inside: auto;\'><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>General information</b></th></tr>';
-    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Dataset name</b></td><td colspan='3'>" . $this->dats_title . "</td></tr>";
-    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Data type</b></td><td colspan='3'>" . $this->dataType->place_name . "</td></tr>";
+    echo '<table style = \'page-break-inside: auto;\'><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>General information</strong></th></tr>';
+    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Dataset name</strong></td><td colspan='3'>" . $this->dats_title . "</td></tr>";
+    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Data type</strong></td><td colspan='3'>" . $this->dataType->place_name . "</td></tr>";
     displayUtils::displayDOI($this->dats_doi);
-    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Created on</b></td><td colspan='3'>" . $this->dats_pub_date . "</td></tr>";
+    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Created on</strong></td><td colspan='3'>" . $this->dats_pub_date . "</td></tr>";
     if ($this->dats_version) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Version</b></td><td colspan='3'>" . $this->dats_version . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Version</strong></td><td colspan='3'>" . $this->dats_version . "</td></tr>";
     }
     if (isset($this->projects) && !empty($this->projects)) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Useful in the framework of</b></td><td colspan='3'>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Useful in the framework of</strong></td><td colspan='3'>";
       foreach ($this->projects as $proj) {
         echo $proj->toString() . "<br>";
       }
       echo "</td></tr>";
     }
 
-    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Dataset Contact(s)</b></td><td colspan='3'>";
+    echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Dataset Contact(s)</strong></td><td colspan='3'>";
     displayUtils::displayContacts($this->dats_originators);
     echo '</td></tr>';
 
     displayUtils::displayDataAvailability($this, $project_name);
 
     if ($this->dats_purpose) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Purpose</b></td><td colspan='3'>" . $this->dats_purpose . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Purpose</strong></td><td colspan='3'>" . $this->dats_purpose . "</td></tr>";
     }
     if ($this->dats_reference) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>References</b></td><td colspan='3'>" . $this->dats_reference . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>References</strong></td><td colspan='3'>" . $this->dats_reference . "</td></tr>";
     }
 
     if (isset($this->dats_sensors) && !empty($this->dats_sensors)) {
-      echo '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>Instrument' . ((count($this->dats_sensors) > 1) ? 's' : '') . '</b></th></tr>';
+      echo '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Instrument' . ((count($this->dats_sensors) > 1) ? 's' : '') . '</strong></th></tr>';
       for ($i = 0; $i < count($this->dats_sensors); $i++) {
         if (count($this->dats_sensors) > 1) {
-          echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Instrument ' . ($i + 1) . '</b></td></tr>';
+          echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Instrument ' . ($i + 1) . '</strong></td></tr>';
         }
         $this->dats_sensors[$i]->sensor->get_sensor_places();
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Satellite</b></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_places[0]->place->place_name . "</td></tr>";
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Instrument</b></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
-        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Instrument type</b></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Satellite</strong></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_places[0]->place->place_name . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Instrument</strong></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
+        echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Instrument type</strong></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
         if (isset($this->dats_sensors[$i]->sensor->sensor_url) && !empty($this->dats_sensors[$i]->sensor->sensor_url)) {
-          echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Reference</b></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
+          echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Reference</strong></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
         }
       }
     }
 
     if (isset($this->dats_variables) && !empty($this->dats_variables)) {
-      echo '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>Parameters</b></th></tr>';
+      echo '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Parameters</strong></th></tr>';
       $cpt = 1;
       foreach ($this->dats_variables as $dats_var) {
         if (count($this->dats_variables) > 1) {
-          echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Parameter ' . ($cpt++) . '</b></td></tr>';
+          echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Parameter ' . ($cpt++) . '</strong></td></tr>';
         }
         displayUtils::displayParameter($dats_var, false, false, true);
       }
     }
 
-    echo '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>Coverage</b></th></tr>';
+    echo '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Coverage</strong></th></tr>';
 
     if ($this->dats_date_begin || $this->dats_date_end) {
-      echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Temporal Coverage</b></td></tr>';
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Date begin</b></td><td style = \'page-break-inside: avoid;\'>" . $this->dats_date_begin . "</td>";
-      echo "<td style = \'page-break-inside: avoid;\'><b>Date end</b></td><td style = \'page-break-inside: avoid;\'>" . $this->dats_date_end . "</td></tr>";
+      echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Temporal Coverage</strong></td></tr>';
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Date begin</strong></td><td style = \'page-break-inside: avoid;\'>" . $this->dats_date_begin . "</td>";
+      echo "<td style = \'page-break-inside: avoid;\'><strong>Date end</strong></td><td style = \'page-break-inside: avoid;\'>" . $this->dats_date_end . "</td></tr>";
     }
-    echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Geographic Coverage</b></td></tr>';
+    echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
     if (isset($this->sites) && isset($this->sites[0]) && !empty($this->sites[0])) {
-      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Area name</b></td><td colspan='3'>" . $this->sites[0]->place_name . "</td></tr>";
+      echo "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Area name</strong></td><td colspan='3'>" . $this->sites[0]->place_name . "</td></tr>";
       displayUtils::displaySiteBoundings($this->sites[0]);
     }
 
@@ -266,72 +266,72 @@ class satellite_dataset extends base_dataset {
       }
     }
 
-    $dataset_infos .= '<table style = \'page-break-inside: auto;\'><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>General information</b></th></tr>';
-    $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Dataset name</b></td><td colspan='3'>" . $this->dats_title . "</td></tr>";
-    $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Data type</b></td><td colspan='3'>" . $this->dataType->place_name . "</td></tr>";
+    $dataset_infos .= '<table style = \'page-break-inside: auto;\'><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>General information</strong></th></tr>';
+    $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Dataset name</strong></td><td colspan='3'>" . $this->dats_title . "</td></tr>";
+    $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Data type</strong></td><td colspan='3'>" . $this->dataType->place_name . "</td></tr>";
     $dataset_infos .= displayUtils::getDOI($this->dats_doi);
-    $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Created on</b></td><td colspan='3'>" . $this->dats_pub_date . "</td></tr>";
+    $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Created on</strong></td><td colspan='3'>" . $this->dats_pub_date . "</td></tr>";
     if ($this->dats_version) {
-      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Version</b></td><td colspan='3'>" . $this->dats_version . "</td></tr>";
+      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Version</strong></td><td colspan='3'>" . $this->dats_version . "</td></tr>";
     }
     if (isset($this->projects) && !empty($this->projects)) {
-      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Useful in the framework of</b></td><td colspan='3'>";
+      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Useful in the framework of</strong></td><td colspan='3'>";
       foreach ($this->projects as $proj) {
         $dataset_infos .= $proj->toString() . "<br>";
       }
       $dataset_infos .= "</td></tr>";
     }
 
-    $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Dataset Contact(s)</b></td><td colspan='3'>";
+    $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Dataset Contact(s)</strong></td><td colspan='3'>";
     $dataset_infos .= displayUtils::getContacts($this->dats_originators);
     $dataset_infos .= '</td></tr>';
 
     $dataset_infos .= displayUtils::getDataAvailability($this, $project_name);
 
     if ($this->dats_purpose) {
-      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Purpose</b></td><td colspan='3'>" . $this->dats_purpose . "</td></tr>";
+      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Purpose</strong></td><td colspan='3'>" . $this->dats_purpose . "</td></tr>";
     }
     if ($this->dats_reference) {
-      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>References</b></td><td colspan='3'>" . $this->dats_reference . "</td></tr>";
+      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>References</strong></td><td colspan='3'>" . $this->dats_reference . "</td></tr>";
     }
 
     if (isset($this->dats_sensors) && !empty($this->dats_sensors)) {
-      $dataset_infos .= '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>Instrument' . ((count($this->dats_sensors) > 1) ? 's' : '') . '</b></th></tr>';
+      $dataset_infos .= '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Instrument' . ((count($this->dats_sensors) > 1) ? 's' : '') . '</strong></th></tr>';
       for ($i = 0; $i < count($this->dats_sensors); $i++) {
         if (count($this->dats_sensors) > 1) {
-          $dataset_infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Instrument ' . ($i + 1) . '</b></td></tr>';
+          $dataset_infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Instrument ' . ($i + 1) . '</strong></td></tr>';
         }
         $this->dats_sensors[$i]->sensor->get_sensor_places();
-        $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Satellite</b></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_places[0]->place->place_name . "</td></tr>";
-        $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Instrument</b></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
-        $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Instrument type</b></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
+        $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Satellite</strong></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_places[0]->place->place_name . "</td></tr>";
+        $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Instrument</strong></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_model . "</td></tr>";
+        $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Instrument type</strong></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . "</td></tr>";
         if (isset($this->dats_sensors[$i]->sensor->sensor_url) && !empty($this->dats_sensors[$i]->sensor->sensor_url)) {
-          $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Reference</b></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
+          $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Reference</strong></td><td colspan='3'>" . $this->dats_sensors[$i]->sensor->sensor_url . "</td></tr>";
         }
       }
     }
 
     if (isset($this->dats_variables) && !empty($this->dats_variables)) {
-      $dataset_infos .= '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>Parameters</b></th></tr>';
+      $dataset_infos .= '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Parameters</strong></th></tr>';
       $cpt = 1;
       foreach ($this->dats_variables as $dats_var) {
         if (count($this->dats_variables) > 1) {
-          $dataset_infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Parameter ' . ($cpt++) . '</b></td></tr>';
+          $dataset_infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Parameter ' . ($cpt++) . '</strong></td></tr>';
         }
         $dataset_infos .= displayUtils::getParameter($dats_var, false, false, true);
       }
     }
 
-    $dataset_infos .= '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><b>Coverage</b></th></tr>';
+    $dataset_infos .= '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Coverage</strong></th></tr>';
 
     if ($this->dats_date_begin || $this->dats_date_end) {
-      $dataset_infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Temporal Coverage</b></td></tr>';
-      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Date begin</b></td><td style = \'page-break-inside: avoid;\'>" . $this->dats_date_begin . "</td>";
-      $dataset_infos .= "<td style = \'page-break-inside: avoid;\'><b>Date end</b></td><td style = \'page-break-inside: avoid;\'>" . $this->dats_date_end . "</td></tr>";
+      $dataset_infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Temporal Coverage</strong></td></tr>';
+      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Date begin</strong></td><td style = \'page-break-inside: avoid;\'>" . $this->dats_date_begin . "</td>";
+      $dataset_infos .= "<td style = \'page-break-inside: avoid;\'><strong>Date end</strong></td><td style = \'page-break-inside: avoid;\'>" . $this->dats_date_end . "</td></tr>";
     }
-    $dataset_infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><b>Geographic Coverage</b></td></tr>';
+    $dataset_infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
     if (isset($this->sites) && isset($this->sites[0]) && !empty($this->sites[0])) {
-      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><b>Area name</b></td><td colspan='3'>" . $this->sites[0]->place_name . "</td></tr>";
+      $dataset_infos .= "<tr style = \'page-break-inside: avoid;\'><td style = \'page-break-inside: avoid;\'><strong>Area name</strong></td><td colspan='3'>" . $this->sites[0]->place_name . "</td></tr>";
       $dataset_infos .= displayUtils::getSiteBoundings($this->sites[0]);
     }
 

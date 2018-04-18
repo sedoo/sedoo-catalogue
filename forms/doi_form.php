@@ -223,10 +223,10 @@ class doi_form extends login_form {
     echo '<SCRIPT LANGUAGE="Javascript" SRC="/js/functions.js"> </SCRIPT>';
     echo '<form action="' . $reqUri . '" method="post" id="frmdoi" name="frmdoi" >';
     echo '<table>';
-    echo '<tr><td><b>' . $this->getElement('dataset')->getLabel() . '</b></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
-    echo '<tr><td><b>' . $this->getElement('doi')->getLabel() . '</b></td><td>' . DOI_PREFIX . $this->getElement('doi')->toHTML() . '</td></tr>';
-    echo '<tr><td><b>' . $this->getElement('metadata')->getLabel() . '</b></td><td>' . $this->getElement('metadata')->toHTML() . '</td></tr>';
-    echo '<tr><td><b>' . $this->getElement('error')->getLabel() . '</b></td><td>' . $this->getElement('error')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('dataset')->getLabel() . '</strong></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('doi')->getLabel() . '</strong></td><td>' . DOI_PREFIX . $this->getElement('doi')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('metadata')->getLabel() . '</strong></td><td>' . $this->getElement('metadata')->toHTML() . '</td></tr>';
+    echo '<tr><td><strong>' . $this->getElement('error')->getLabel() . '</strong></td><td>' . $this->getElement('error')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_ok')->toHTML() . '</td></tr>';
     echo '</table>';
     echo '</form>';
