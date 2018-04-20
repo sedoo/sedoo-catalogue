@@ -76,9 +76,11 @@ function getDataNodeConf($dts, $projectName, $queryArgs = array()) {
 }
 
 function addDataset(&$node, $dts, $projectName) {
+	$color = getFolderColor(); // todo
   $nodeConf = getDataNodeConf($dts, $projectName);
   // ajout de l'icône à côté du nom du dataset
   $nodeConf['extDataIcon'] = '<span class="icon-folder-open" data-color="<?= $color; ?>"></span>';
+  $nodeConf['extDataTitle'] = 'Edit dataset';
   $nodeConf['dataLink'] = $nodeConf['link'];
   $subnode = new HTML_TreeNode($nodeConf);
   $node->addItem($subnode);
@@ -93,8 +95,43 @@ function get_av_datasets(&$node, &$datasets) {
     if (!empty($node->bdLink)) {
       $datasets[] = $node->datsId;
     }
-
   }
 }
+
+/**
+ * Légende pour les couleurs des dossiers
+ *
+ * @return array
+ */
+function getFolderLegend() {
+
+	$legende = array();
+	if (constant(strtolower(MainProject) . '_HasBlueTag') == 'true') {
+		$legende['Blue'] = 'the dataset provided by the principal investigator.';
+	}
+	
+	if (constant(strtolower(MainProject) . '_HasGreenTag') == 'true') {
+		$legende['Green'] = 'the homogenized dataset.';
+	}
+	
+	if (constant(strtolower(MainProject) . '_HasPurpleTag') == 'true') {
+		$legende['Purple'] = 'data in another database.';
+	}
+	
+	if (constant(strtolower(MainProject) . '_HasOrangeTag') == 'true') {
+		$legende['Orange'] = 'the campaign website quicklook charts.';
+	}	
+
+	return $legende;
+}
+
+/**
+ * Determine the folder color to display
+ * Used in addDataset()
+ *
+ * @todo Trouver la logique pour afficher la bonne couleur
+ * @return string
+ */
+function getFolderColor() {}
 
 ?>
