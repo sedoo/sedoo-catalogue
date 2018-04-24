@@ -79,21 +79,21 @@ if ($form->isPortalAdmin()) {
       }
     }
     $form->displayRejectedRequestsList();
-  } else if ($pageId == 16) {
-    echo "<h1>Registered Users in all " . MainProject . " projects</h1><br>";
-    $form->displayRegisteredUsersListByProject($MainProjects);
   } else if (($pageId == 5)) {
     include 'frmjournal.php';
-  } else if (($pageId == 7)) {
-    include 'frmstats.php';
-  } else if (($pageId == 14)) {
-    include 'frmdoi.php';
   } else if (($pageId == 6)) {
     include 'frmurl.php';
+  } else if (($pageId == 7)) {
+    include 'frmstats.php';
   } else if (($pageId == 11)) {
     include 'frmroles.php';
   } else if (($pageId == 13)) {
     include 'frmquality.php';
+  } else if (($pageId == 14)) {
+    include 'frmdoi.php';
+  } else if ($pageId == 16) {
+    echo "<h1>Registered Users in all " . MainProject . " projects</h1><br>";
+    $form->displayRegisteredUsersListByProject($MainProjects);
   } else if (($pageId == 19)) {
     include 'utils/elastic/frmElastic.php';
   }

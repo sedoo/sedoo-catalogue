@@ -7,13 +7,13 @@ require_once "bd/dataset.php";
 require_once "bd/type_journal.php";
 require_once "scripts/mail.php";
 
-define('TYPE_ARCHIVE', 6);
-define('TYPE_UNARCHIVE', 7);
-define('TYPE_DL', 3);
 define('TYPE_ABO', 1);
 define('TYPE_NEW', 2);
+define('TYPE_DL', 3);
 define('TYPE_UPDATE', 4);
 define('TYPE_CHANGES', 5);
+define('TYPE_ARCHIVE', 6);
+define('TYPE_UNARCHIVE', 7);
 define('EXCLUDE_USERS', "'laurence.mastrorillo@obs-mip.fr','guillaume.brissebrat@obs-mip.fr','karim.ramage@ipsl.polytechnique.fr','Karim.Ramage@ipsl.polytechnique.fr','laurence.fleury@obs-mip.fr','sbcipsl@ipsl.jussieu.fr','laurent.labatut@meteo.fr','arnaud.miere@obs-mip.fr','helene.ferre@obs-mip.fr','brissebr@sedoo.fr','nizar.belmahfoud@obs-mip.fr'");
 
 class journal {
@@ -47,10 +47,6 @@ class journal {
     if (!isset($this->publier) || !$this->publier) {
       $this->publier = false;
     }
-	}
-	
-  static function test() {
-    echo "Test OK";
 	}
 	
   static function deleteAbo($id, $contact) {

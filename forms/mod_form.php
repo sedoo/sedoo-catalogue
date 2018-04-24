@@ -140,10 +140,6 @@ class mod_form extends base_form {
     $this->dataset->model = new place;
     $this->dataset->model->place_id = $this->exportValue('model');
     $this->dataset->model->place_name = $this->exportValue('new_model');
-    echo '$this : <br>';
-    echo '<pre>';
-    var_dump($this);
-    echo '</pre>';
     $this->dataset->model->bound_id = -1;
 
     $categ_modele = $this->exportValue('model_categ');

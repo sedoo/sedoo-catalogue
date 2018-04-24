@@ -24,8 +24,11 @@ if (defined(strtolower($project_name) . 'ListRoles')) {
 $roles = $r->getByQuery("SELECT * FROM role WHERE role_name IN ($listeRoles)");
 
 $dts = new dataset;
-$query = "";
-$liste_dats = $dts->getOnlyTitles("SELECT dats_id, dats_title FROM dataset WHERE dats_id IN ($projects) AND dats_id IN (SELECT DISTINCT dats_id FROM url WHERE url_type != 'map') AND dats_id IN (SELECT DISTINCT dats_id FROM dats_role) ORDER BY dats_title");
+
+$query = "SELECT dats_id, dats_title FROM dataset WHERE dats_id IN ($projects) 
+  AND dats_id IN (SELECT DISTINCT dats_id FROM url WHERE url_type != 'map') 
+  AND dats_id IN (SELECT DISTINCT dats_id FROM dats_role) ORDER BY dats_title";
+$liste_dats = $dts->getOnlyTitles($query);
 
 echo '<table><tr><th align="center">Dataset</th>';
 foreach ($roles as $role) {
