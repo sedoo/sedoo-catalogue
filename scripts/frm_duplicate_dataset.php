@@ -13,7 +13,7 @@ if ($dupli_dataset_form->isLogged()) {
   if (isset($_POST['bouton_duplicate'])) {
     if ($dupli_dataset_form->validate()) {
       if ($dupli_dataset_form->duplicate_dataset()) {
-        echo "<font size=\"3\" color='green'><strong>Dataset is succesfully duplicated, you can view it using the following link : <a href='http://" . $_SERVER['HTTP_HOST'] . "/?editDatsId=" . $dupli_dataset_form->get_id() . "&datsId=" . $dupli_dataset_form->get_id() . "'>here</a></strong></font><br>";
+        echo "<font size=\"3\" color='green'><strong>Dataset is succesfully duplicated, you can view it using the following link : <a href='/?editDatsId=" . $dupli_dataset_form->get_id() . "&datsId=" . $dupli_dataset_form->get_id() . "'>here</a></strong></font><br>";
         $dupli_dataset_form->reset_form();
       } else {
         echo "<font size=\"3\" color='red'><strong>An error occurred.</strong></font><br>";

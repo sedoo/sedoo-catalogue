@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
   session_start();
 }
 require_once 'conf/conf.php';
-$project_name = explode('.', $_SERVER['SERVER_NAME'])[0]; //Cerdanya
+require_once 'conf/define-project.php'; //Cerdanya
 $project_url = "/";
 $titreMilieu = "Provide metadata";
 ob_start();

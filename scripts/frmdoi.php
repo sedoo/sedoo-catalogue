@@ -1,7 +1,7 @@
 <?php
 require_once "bd/dataset.php";
 require_once 'filtreProjets.php';
-// require_once ('conf/doi.conf.php');
+require_once ('conf/doi.conf.php');
 
 if (isset($_REQUEST['newDoi'])) {
   require_once 'forms/doi_form.php';

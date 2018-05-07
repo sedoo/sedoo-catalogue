@@ -138,11 +138,14 @@ class journal_form extends login_form {
   function deleteAbo($id) {
     journal::deleteAbo($id, $this->user->mail);
 	}
-	
+  
+  /**
+   * @param string $proj 'SELECT project_id FROM project'
+   */  
   function displayListAbo($proj) {
     echo "<h1>Email notifications</h1>";
     $liste = new journal();
-
+    
     if ($this->filterUser) {
       $liste = $liste->getByUser($this->user->mail, TYPE_ABO);
       uasort($liste, array(
@@ -188,7 +191,10 @@ class journal_form extends login_form {
     echo '</table>';
     echo '</form>';
 	}
-	
+  
+  /**
+   * @param string $proj 'SELECT project_id FROM project'
+   */
   function displayListDl($proj) {
     echo "<h1>Download history</h1>";
     $liste = new journal();

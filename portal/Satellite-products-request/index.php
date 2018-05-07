@@ -4,7 +4,7 @@ if (!isset($_SESSION)) {
 }
 
 require_once 'conf/conf.php';
-$project_name = explode('.', $_SERVER['SERVER_NAME'])[0]; //"Cerdanya";;
+require_once 'conf/define-project.php'; ;
 $project_url = "/Cerdanya";
 $titreMilieu = "Satellite products request";
 ob_start();

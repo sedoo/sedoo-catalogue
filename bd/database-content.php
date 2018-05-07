@@ -14,12 +14,14 @@ $Dats_Projects = array();
 // Projects Ids
 $Projects = array();
 
-foreach ($MainProjects as $pro) {
-  $Projects[$pro] = get_filtre_projets($pro);
-}
-foreach ($OtherProjects as $pro) {
-  $Projects[$pro] = get_filtre_projets($pro);
-}
+// foreach ($MainProjects as $pro) {
+//   $Projects[$pro] = get_filtre_projets($pro);
+// }
+// foreach ($OtherProjects as $pro) {
+//   $Projects[$pro] = get_filtre_projets($pro);
+// }
+$pro = MainProject;
+$Projects[$pro] = get_filtre_projets($pro);
 
 class _Dataset {
   var $dats_id;
@@ -214,7 +216,8 @@ function getDatasetsByProject($Project, $isPDF = false) {
   }
   reset($elements);
   $plateformes = lirePlateforme($db);
-  $requete = "SELECT dats_id, dats_title, dats_date_begin, dats_date_end FROM dataset WHERE dats_id IN (SELECT DISTINCT dats_id FROM url WHERE url_type !='map') AND dats_id IN (SELECT DISTINCT dats_id FROM dats_proj WHERE project_id IN (" . $Project . "));";
+  echo $project_name;
+  $requete = "SELECT dats_id, dats_title, dats_date_begin, dats_date_end FROM dataset WHERE dats_id IN (SELECT DISTINCT dats_id FROM url WHERE url_type !='map') AND dats_id IN (SELECT DISTINCT dats_id FROM dats_proj WHERE project_id IN (" . $Projects[MainProject] . "));";
   if ($res = pg_query($db, $requete)) {
     for ($i = 0; $i < pg_num_rows($res); $i++) {
       $result = pg_fetch_row($res);

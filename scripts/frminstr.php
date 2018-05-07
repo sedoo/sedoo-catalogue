@@ -7,7 +7,7 @@ require_once 'conf/conf.php';
 require_once "forms/validation.php";
 require_once "forms/doi_form.php";
 require_once 'xml/DoiXml.php';
-//require_once ('conf/doi.conf.php');
+require_once ('conf/doi.conf.php');
 require_once 'scripts/doiUtils.php';
 require_once 'mail.php';
 
@@ -73,10 +73,9 @@ function existInDb($element, $value, $args) {
  * Teste qu'un champ texte est saisi si une option a été choisie dans un select element: element liste sur lequel s'applique la regle value: valeur choisie dans la liste (0 => rien) args: array(0 => formulaire, 1 => champ texte à considérer
  */
 function required_if_not_void($element, $value, $args) {
-
   $arg_value = $args[0]->exportValue($args[1]);
-
-  if (empty($arg_value) && $value != 0) {
+  
+  if (empty($arg_value) && $value[0] != 0) {
     return false;
   } else {
     return true;
@@ -90,7 +89,7 @@ function required_if_not_void($element, $value, $args) {
 function required_if_not_void2($element, $value, $args) {
   $arg_value = $args[0]->exportValue($args[1]);
 
-  if (!empty($arg_value) && $value == 0) {
+  if (!empty($arg_value) && $value[0] == 0) {
     return false;
   } else {
     return true;
@@ -247,62 +246,62 @@ if ($form->isCat($form->dataset, $project_name)) {
 
       if ($insertionOk) {
 
-        $xml_save = createDoiXml($form->dataset->dats_id, $xmlstr, $project_name);
-        $dom = new DOMDocument('1.0', 'UTF-8');
-        $dom->preserveWhiteSpace = false;
-        $dom->formatOutput = true;
-        $dom->loadXML($xml_save->asXML());
-        $xmld = $dom->saveXML();
+        // $xml_save = createDoiXml($form->dataset->dats_id, $xmlstr, $project_name);
+        // $dom = new DOMDocument('1.0', 'UTF-8');
+        // $dom->preserveWhiteSpace = false;
+        // $dom->formatOutput = true;
+        // $dom->loadXML($xml_save->asXML());
+        // $xmld = $dom->saveXML();
 
-        if ($xmld != $_SESSION['doi'] && isset($form->dataset->dats_doi) && !empty($form->dataset->dats_doi)) {
+        // if ($xmld != $_SESSION['doi'] && isset($form->dataset->dats_doi) && !empty($form->dataset->dats_doi)) {
 
-          $doi = $form->dataset->dats_doi;
-          $dats_id = $form->dataset->dats_id;
-          $url = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $project_name . "/?editDatsId=$dats_id";
-          $xml = simplexml_load_string($xmld);
-          if ($xml === false) {
-            echo 'Erreur lors de l\'analyse du document';
-            return;
-          }
+        //   $doi = $form->dataset->dats_doi;
+        //   $dats_id = $form->dataset->dats_id;
+        //   $url = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $project_name . "/?editDatsId=$dats_id";
+        //   $xml = simplexml_load_string($xmld);
+        //   if ($xml === false) {
+        //     echo 'Erreur lors de l\'analyse du document';
+        //     return;
+        //   }
 
-          $domElt = dom_import_simplexml($xml);
-          if (!$domElt) {
-            echo 'Erreur lors de la conversion du XML';
-            return;
-          }
-          $dom = new DOMDocument('1.0', 'UTF-8');
-          $domElt = $dom->importNode($domElt, true);
-          $domElt = $dom->appendChild($domElt);
-          // Validation du document XML
-          libxml_disable_entity_loader(false);
-          $validate = $dom->schemaValidate("http://schema.datacite.org/meta/kernel-3/metadata.xsd");
+        //   $domElt = dom_import_simplexml($xml);
+        //   if (!$domElt) {
+        //     echo 'Erreur lors de la conversion du XML';
+        //     return;
+        //   }
+        //   $dom = new DOMDocument('1.0', 'UTF-8');
+        //   $domElt = $dom->importNode($domElt, true);
+        //   $domElt = $dom->appendChild($domElt);
+        //   // Validation du document XML
+        //   libxml_disable_entity_loader(false);
+        //   $validate = $dom->schemaValidate("http://schema.datacite.org/meta/kernel-3/metadata.xsd");
 
-          if ($validate) {
-            echo '<br/>' . '<br/>';
-            echo "Le fichier respecte le schema XML<br/>";
-          } else {
-            echo '<br/>' . '<br/>';
-            echo "Le fichier ne respecte pas le schema XML<br/>";
+        //   if ($validate) {
+        //     echo '<br/>' . '<br/>';
+        //     echo "Le fichier respecte le schema XML<br/>";
+        //   } else {
+        //     echo '<br/>' . '<br/>';
+        //     echo "Le fichier ne respecte pas le schema XML<br/>";
 
-            return;
-          }
-          $d = new doi_form();
-          if ($d->isNotValid($xmld, $project_name, $dats_id) == false) {
-            // Enregistrement dans la base datacite
-            createDoi($doi, $url, $xmld);
-          } else {
-            $messageError = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $project_name . "/?editDatsId=$dats_id" . "\r\n";
-            $messageError .= $d->isNotValid($xmld, $project_name, $dats_id);
-            $mailsAdmins = Portal_Contact_Email;
-            $sujet = 'DOI XML - Errors were found during the update dataset';
-            $text = $messageError;
-            $doms->save("/tmp/current_" . MainProject . "-" . $project_name . "." . $dats_id . ".xml");
-            $dom->save("/tmp/new_" . MainProject . "-" . $project_name . "." . $dats_id . ".xml");
-            $attachments = array("/tmp/current_" . MainProject . "-" . $project_name . "." . $dats_id . ".xml", "/tmp/new_" . MainProject . "-" . $project_name . "." . $dats_id . ".xml");
-            sendMail($mailsAdmins, $sujet, $text, $attachments);
-          }
+        //     return;
+        //   }
+        //   $d = new doi_form();
+        //   if ($d->isNotValid($xmld, $project_name, $dats_id) == false) {
+        //     // Enregistrement dans la base datacite
+        //     createDoi($doi, $url, $xmld);
+        //   } else {
+        //     $messageError = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $project_name . "/?editDatsId=$dats_id" . "\r\n";
+        //     $messageError .= $d->isNotValid($xmld, $project_name, $dats_id);
+        //     $mailsAdmins = Portal_Contact_Email;
+        //     $sujet = 'DOI XML - Errors were found during the update dataset';
+        //     $text = $messageError;
+        //     $doms->save("/tmp/current_" . MainProject . "-" . $project_name . "." . $dats_id . ".xml");
+        //     $dom->save("/tmp/new_" . MainProject . "-" . $project_name . "." . $dats_id . ".xml");
+        //     $attachments = array("/tmp/current_" . MainProject . "-" . $project_name . "." . $dats_id . ".xml", "/tmp/new_" . MainProject . "-" . $project_name . "." . $dats_id . ".xml");
+        //     sendMail($mailsAdmins, $sujet, $text, $attachments);
+        //   }
 
-        }
+        // }
         echo "<font size=\"3\" color='green'><strong>Registration succesfull</strong></font><br>";
         $_SESSION['dataset'] = null;
         editDataset($form->dataset->dats_id, $project_name);

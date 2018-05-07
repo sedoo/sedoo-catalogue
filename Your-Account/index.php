@@ -3,7 +3,7 @@ if (!isset($_SESSION)) {
   session_start();
 }
 
-$project_name = explode('.', $_SERVER['SERVER_NAME'])[0];
+require_once 'conf/define-project.php';
 $project_url = "/";
 $titreMilieu = "";
 ob_start();

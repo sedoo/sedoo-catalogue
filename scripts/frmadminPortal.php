@@ -85,15 +85,24 @@ if ($form->isPortalAdmin()) {
     include 'frmurl.php';
   } else if (($pageId == 7)) {
     include 'frmstats.php';
+  } else if (($pageId == 9)) {
+    include 'frmInsDats.php';
+  } else if (($pageId == 10)) {
+    include 'frmInsParams.php';    
   } else if (($pageId == 11)) {
     include 'frmroles.php';
+  } else if (($pageId == 12)) {
+    include 'frmdbrequests.php';    
   } else if (($pageId == 13)) {
     include 'frmquality.php';
   } else if (($pageId == 14)) {
     include 'frmdoi.php';
+  } else if (($pageId == 15)) {
+    include 'database-content-admin.php';    
   } else if ($pageId == 16) {
-    echo "<h1>Registered Users in all " . MainProject . " projects</h1><br>";
-    $form->displayRegisteredUsersListByProject($MainProjects);
+    include 'archive-dataset.php';
+  } else if (($pageId == 17)) {
+    include 'ContactProjectUsers.php';    
   } else if (($pageId == 19)) {
     include 'utils/elastic/frmElastic.php';
   }

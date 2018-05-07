@@ -5,7 +5,7 @@ require_once "bd/journal.php";
 require_once "sortie/print_utils.php";
 require_once "bd/dataset_factory.php";
 require_once "scripts/lstDataUtils.php";
-// require_once ("conf/doi.conf.php");
+require_once ("conf/doi.conf.php");
 
 function editContact(&$pis) {
   foreach ($pis as $pi) {

@@ -2,7 +2,7 @@
   if (!isset($_SESSION)) {
     session_start();
   }
-  $project_name = explode('.', $_SERVER['SERVER_NAME'])[0]; //"Cerdanya";
+  require_once 'conf/define-project.php'; 
   $project_url = "/";
   $titreMilieu = "Access data";
   ob_start();
