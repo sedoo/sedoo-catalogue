@@ -30,20 +30,6 @@ class bdConnect {
     }
   }
 
-  function get_data2($requete) // ?
-  {
-    if ($res = pg_query($this->conn, $requete)) {
-      for ($i = 0; $i < pg_num_rows($res); $i++) {
-        $tab_res[$i] = pg_fetch_row($res);
-      }
-    }
-    if (!isset($tab_res) || empty($tab_res)) {
-      return null;
-    }
-
-    return $tab_res;
-  }
-
   function get_data($requete) {
     $this->db_open();
     if ($res = pg_query($this->conn, $requete)) {

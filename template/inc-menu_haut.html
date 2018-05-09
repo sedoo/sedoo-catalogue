@@ -1,7 +1,7 @@
 <nav class="nav2">
 	<ul>
 		<?php
-			if(constant(strtolower($project_name).'_DisplayOnlyProjectOnTopBar') === 'true'){
+			if(constant('DisplayOnlyProjectOnTopBar') === 'true'){
 				echo "<li>
 						<a href='/".$project_name."/'>".$project_name."</a>
 					 </li>";

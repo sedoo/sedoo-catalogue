@@ -33,31 +33,31 @@ if (((defined('' . strtolower($project_name) . 'DataPolicy')) &&
 	<!-- <a href="/<?php echo $root_path_menu; ?>/Thematic-search">Thematic search</a> -->
 	<a href="/Data-Search">Advanced search</a>
 	<?php
-	if (constant(strtolower($project_name) . '_HasParameterSearch') == 'true') {
+	if (constant('HasParameterSearch') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Parameter-search'>By parameters</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasInstrumentSearch') == 'true') {
+	if (constant('HasInstrumentSearch') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Instrument-search'>By instruments</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasCountrySearch') == 'true') {
+	if (constant('HasCountrySearch') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Country-search'>By countries</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasPlatformSearch') == 'true') {
+	if (constant('HasPlatformSearch') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Plateform-search'>By platform types</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasProjectSearch') == 'true') {
+	if (constant('HasProjectSearch') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Project-search'>By projects</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasEventSearch') == 'true') {
+	if (constant('HasEventSearch') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Events'>By events</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasCampaignSearch') == 'true') {
+	if (constant('HasCampaignSearch') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Campaign-search'>By campaigns</a>";
 	}
 
-	if (constant(strtolower($project_name) . '_HasModelRequest') == 'true' || 
-		constant(strtolower($project_name) . '_HasSatelliteRequest') == 'true' || 
-		constant(strtolower($project_name) . '_HasInsituRequest') == 'true') {
+	if (constant('HasModelRequest') == 'true' || 
+		constant('HasSatelliteRequest') == 'true' || 
+		constant('HasInsituRequest') == 'true') {
   ?>
 		<hr>
 		<a href='/<?php echo $root_path_menu; ?>/Request-data'>Request more datasets</a>
@@ -65,15 +65,15 @@ if (((defined('' . strtolower($project_name) . 'DataPolicy')) &&
 	<?php
 	}
 
-if (constant(strtolower($project_name) . '_HasModelRequest') == 'true') {
+if (constant('HasModelRequest') == 'true') {
   echo "<a href='/" . $root_path_menu . "/Model-outputs-request' class=\"subitem\">Model outputs</a>";
 }
 
-if (constant(strtolower($project_name) . '_HasSatelliteRequest') == 'true') {
+if (constant('HasSatelliteRequest') == 'true') {
   echo "<a href='/" . $root_path_menu . "/Satellite-products-request' class=\"subitem\">Satellite products</a>";
 }
 
-if (constant(strtolower($project_name) . '_HasInsituRequest') == 'true') {
+if (constant('HasInsituRequest') == 'true') {
   echo "<a href='/" . $root_path_menu . "/In-situ-data-request' class=\"subitem\">In situ data</a>";
 }
 ?>
@@ -85,19 +85,19 @@ if (constant(strtolower($project_name) . '_HasInsituRequest') == 'true') {
 	<a href="/<?php echo $root_path_menu; ?>/Provide-metadata">Provide metadata</a>
 
 	<?php
-	if (constant(strtolower($project_name) . '_HasModelOutputs') == 'true') {
+	if (constant('HasModelOutputs') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Model-Data/?datsId=-10' class=\"subitem\">Model outputs</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasSatelliteProducts') == 'true') {
+	if (constant('HasSatelliteProducts') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Satellite-Data/?datsId=-10' class=\"subitem\">Satellite products</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasInsituProducts') == 'true') {
+	if (constant('HasInsituProducts') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/In-Situ-Instrument-Registration/?datsId=-10' class=\"subitem\">Instrument</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasMultiInsituProducts') == 'true') {
+	if (constant('HasMultiInsituProducts') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/In-Situ-Site-Registration/?datsId=-10' class=\"subitem\">Multi-instrumented platform</a>";
 	}
-	if (constant(strtolower($project_name) . '_HasValueAddedProducts') == 'true') {
+	if (constant('HasValueAddedProducts') == 'true') {
 		echo "<a href='/" . $root_path_menu . "/Value-Added-Dataset/?datsId=-10' class=\"subitem\">Value-added dataset</a>";
 	}
 	?>

@@ -21,8 +21,8 @@ class stats_form extends login_form {
       $this->user = unserialize($_SESSION['loggedUser']);
     }
 
-    if (defined(strtolower($project_name) . 'yDeb') && constant(strtolower($project_name) . 'yDeb') != '') {
-      $this->yDeb = constant(strtolower($project_name) . 'yDeb');
+    if (defined('yDeb') && constant('yDeb') != '') {
+      $this->yDeb = constant('yDeb');
     }
 
     if ((($projectName != MainProject) && $this->isProjectAdmin())

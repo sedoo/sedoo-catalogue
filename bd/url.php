@@ -68,7 +68,7 @@ class url {
 
   static function addUrl(&$bd, $url, $datsId, $type) {
     $queryExists = "select * from url where url_type = '$type' and dats_id = $datsId";
-    if ($resultat = $bd->get_data2($queryExists)) {
+    if ($resultat = $bd->get_data($queryExists)) {
       echo 'URL déjà présente<br>';
       return false;
     } else {

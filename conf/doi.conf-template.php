@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * créer un doi.conf.php à partir de ce template
+ */
 require_once ("conf/conf.php");
 
 define('DOI_RESOLVER','http://dx.doi.org/');

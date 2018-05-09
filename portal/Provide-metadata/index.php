@@ -23,7 +23,7 @@ ob_start();
 			To <strong>add new metadata description</strong>, please fill the relevant online form:
 		</p>
 		<ul>
-			<?php if (constant(strtolower($project_name) . '_HasInsituProducts') == 'true'):?>
+			<?php if (constant('HasInsituProducts') == 'true'):?>
 				<li>
 					<a href='/portal/In-Situ-Instrument-Registration'>Instrument form</a>
 					if you are responsible for an observation dataset. If you need to
@@ -33,19 +33,19 @@ ob_start();
 				</li>
 			<?php endif; ?>
 
-			<?php if (constant(strtolower($project_name) . '_HasMultiInsituProducts') == 'true') : ?>
+			<?php if (constant('HasMultiInsituProducts') == 'true') : ?>
 				<li><a href='/portal/In-Situ-Site-Registration'>Site or multi-instrumented platform form</a>: if you have installed several instruments on one single location.</li>
 			<?php endif; ?>
 
-			<?php if (constant(strtolower($project_name) . '_HasModelOutputs') == 'true') : ?>
+			<?php if (constant('HasModelOutputs') == 'true') : ?>
 				<li><a href='/portal/Model-Data'>Model outputs</a> if you would like to share model outputs</li>
 			<?php endif; ?>
 
-			<?php if (constant(strtolower($project_name) . '_HasSatelliteProducts') == 'true') : ?>
+			<?php if (constant('HasSatelliteProducts') == 'true') : ?>
 				<li><a href='/portal/Satellite-Data'>Satellite products</a>: describe your satellite data</li>
 			<?php endif; ?>
 
-			<?php if (constant(strtolower($project_name) . '_HasValueAddedProducts') == 'true') : ?>
+			<?php if (constant('HasValueAddedProducts') == 'true') : ?>
 				<li>
 					<a href='/portal/Value-Added-Dataset'>Value-added dataset</a> if you would like to share a product, that results from the combination of many data sources.
 				</li>

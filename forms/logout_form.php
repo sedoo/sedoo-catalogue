@@ -19,7 +19,7 @@ class logout_form extends HTML_QuickForm {
     if (get_class($user) == 'portalUser') {
       echo "<a href='/Your-Account'>$user->cn</a>";
       if ($project_name != strtolower(MainProject)) {
-        if ($user->isAdmin() && constant(strtolower($project_name) . '_HasAdminCorner') == 'true') {
+        if ($user->isAdmin() && constant('HasAdminCorner') == 'true') {
           echo "&nbsp;<a href= '/" . $project_name . "/Admin-Corner' style='color:green;'>(Admin)</a>";
         }
 

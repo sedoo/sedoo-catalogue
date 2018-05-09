@@ -79,12 +79,21 @@ if ($form->isPortalAdmin()) {
       }
     }
     $form->displayRejectedRequestsList();
+  } else if ($pageId == 4) {
+    echo "<h1$project_name participants";
+    if (constant('PORTAL_WebSite') != '') {
+      echo "(" . constant('PORTAL_WebSite') . " users)";
+    }
+    echo "</h1>";
+    $form->displayParticipantsList();    
   } else if (($pageId == 5)) {
     include 'frmjournal.php';
   } else if (($pageId == 6)) {
     include 'frmurl.php';
   } else if (($pageId == 7)) {
     include 'frmstats.php';
+  } else if (($pageId == 8)) {
+    include 'frmgroups.php';    
   } else if (($pageId == 9)) {
     include 'frmInsDats.php';
   } else if (($pageId == 10)) {

@@ -8,7 +8,6 @@ $project_url = "/";
 $titreMilieu = "Value Added Dataset";
 ob_start();
 include "loginCat.php";
-/*  include("frmva.php");*/
 include "frmvadataset.php";
 
 $milieu = ob_get_clean();

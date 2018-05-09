@@ -7,7 +7,7 @@ if (isset($_REQUEST['project_name']) && !empty($_REQUEST['project_name'])){
 <nav id="site-navigation" class="main-navigation" role="navigation" aria-label="Menu principal / Main menu">
 	<ul id="primary-menu" class="menu nav-menu" >
 		<?php
-			if(constant(strtolower($project_name).'_DisplayOnlyProjectOnTopBar') === 'true'){
+			if(constant('DisplayOnlyProjectOnTopBar') === 'true'){
 				echo "<li>
 						<a href='/".$project_name."/'>".$project_name."</a>
 					 </li>";

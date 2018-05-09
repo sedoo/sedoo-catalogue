@@ -8,3 +8,4 @@ conf/conf.php
 /graphs
 /bd/test_jlb.php
 .vscode
+conf/doi.conf.php

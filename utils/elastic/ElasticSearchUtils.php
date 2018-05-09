@@ -136,22 +136,22 @@ class ElasticSearchUtils {
 	
 	static function printLegende($projectName, $searchDatsIds = array(), $queryArg = array()) {
 		$legende = array ();
-		if (constant ( strtolower ( $projectName ) . '_HasBlueTag' ) == 'true'){
+		if (constant ('HasBlueTag' ) == 'true'){
 			$legende ['Blue'] = 'Dataset files';
 		}
-		if (constant ( strtolower ( $projectName ) . '_HasGreenTag' ) == 'true'){
+		if (constant ('HasGreenTag' ) == 'true'){
 			$legende ['Green'] = 'Data and output format selection';
 		}
-		if (constant ( strtolower ( $projectName ) . '_HasPurpleTag' ) == 'true'){
+		if (constant ('HasPurpleTag' ) == 'true'){
 			$legende ['Purple'] = 'Data in another database';
 		}
-		if (constant ( strtolower ( $projectName ) . '_HasOrangeTag' ) == 'true'){
+		if (constant ('HasOrangeTag' ) == 'true'){
 			$legende ['Orange'] = 'Charts from the campaign website';
 		}
-		/*if (constant ( strtolower ( $projectName ) . '_HasPinkTag' ) == 'true'){
+		/*if (constant ('HasPinkTag' ) == 'true'){
 			$legende ['Pink'] = 'Quicklooks';
 		}
-		if (constant ( strtolower ( $projectName ) . '_HasLightBlueTag' ) == 'true'){
+		if (constant ('HasLightBlueTag' ) == 'true'){
 			$legende ['LightBlue'] = 'Data preview';
 		}*/
 				

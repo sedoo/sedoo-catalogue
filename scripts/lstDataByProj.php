@@ -7,7 +7,7 @@ require_once 'conf/conf.php';
 
 $tree = new HTML_TreeMenu();
 
-if (constant(strtolower($project_name) . '_HasCampaignSearch') == 'true' || in_array($project_name, $MainProjects)) {
+if (constant('HasCampaignSearch') == 'true' || in_array($project_name, $MainProjects)) {
   echo '<h1>Campaigns list</h1>';
 } else {
   echo '<h1>Projects list</h1>';

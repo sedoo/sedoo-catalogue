@@ -23,79 +23,79 @@
 			<a href="/<?php echo $project_name; ?>/Search-tool" style="border: 0;">Advanced search</a>
 		</dt>
 		<?php
-				if(constant(strtolower($project_name).'_HasParameterSearch') == 'true'){
+				if(constant('HasParameterSearch') == 'true'){
 					echo "<dt><a href='/portal/Parameter-search' style='border: 0;'>By parameters</a></dt>";
 				}
-				if(constant(strtolower($project_name).'_HasInstrumentSearch') == 'true'){
+				if(constant('HasInstrumentSearch') == 'true'){
 					echo "<dt><a href='/portal/Instrument-search' style='border: 0;'>By instruments</a></dt>";
 				}
-				if(constant(strtolower($project_name).'_HasCountrySearch') == 'true'){
+				if(constant('HasCountrySearch') == 'true'){
 					echo "<dt><a href='/portal/Country-search' style='border: 0;'>By countries</a></dt>";
 				}
-				if(constant(strtolower($project_name).'_HasPlatformSearch') == 'true'){
+				if(constant('HasPlatformSearch') == 'true'){
 					echo "<dt><a href='/portal/Plateform-search' style='border: 0;'>By platform types</a></dt>";
 				}
-				if(constant(strtolower($project_name).'_HasProjectSearch') == 'true'){
+				if(constant('HasProjectSearch') == 'true'){
 					echo "<dt><a href='/portal/Project-search' style='border: 0;'>By projects</a></dt>";
 				}
-				if(constant(strtolower($project_name).'_HasEventSearch') == 'true'){
+				if(constant('HasEventSearch') == 'true'){
 					echo "<dt><a href='/portal/Events' style='border: 0;'>By events</a></dt>";
 				}
-				if(constant(strtolower($project_name).'_HasCampaignSearch') == 'true'){
+				if(constant('HasCampaignSearch') == 'true'){
 					echo "<dt><a href='/portal/Campaign-search' style='border: 0;'>By campaigns</a></dt>";
 				}
 			?>
 	</dl>
 	<?php
-		   		if(constant(strtolower($project_name).'_HasModelRequest') == 'true' || constant(strtolower($project_name).'_HasSatelliteRequest') == 'true' || constant(strtolower($project_name).'_HasInsituRequest') == 'true'){
+		   		if(constant('HasModelRequest') == 'true' || constant('HasSatelliteRequest') == 'true' || constant('HasInsituRequest') == 'true'){
 					echo "<dt>
 							<a href='/portal/Request-data'>Request more datasets</a>
 						 </dt>";
 				}
       
-   				if(constant(strtolower($project_name).'_HasRequestData') == 'true'){
+   				if(constant('HasRequestData') == 'true'){
 					echo "<dl class='nav4-grid'>
 							<dl class='nav5-grid'>
 							</dl>";
-		   			if(constant(strtolower($project_name).'_HasModelRequest') == 'true'){
+		   			if(constant('HasModelRequest') == 'true'){
 						echo "<dt><a href='/portal/Model-outputs-request' style='border: 0;'>Model outputs</a></dt>";
 						echo "<dl class='nav5-grid'></dl>";
 					}
 				
-					if(constant(strtolower($project_name).'_HasSatelliteRequest') == 'true'){
+					if(constant('HasSatelliteRequest') == 'true'){
 						echo "<dt><a href='/portal/Satellite-products-request' style='border: 0;'>Satellite products</a></dt>";
 						echo "<dl class='nav5-grid'></dl>";
 					}
-					if(constant(strtolower($project_name).'_HasInsituRequest') == 'true'){
+					if(constant('HasInsituRequest') == 'true'){
 						echo "<dt><a href='/portal/In-situ-data-request' style='border: 0;'>In situ data</a></dt>";
 						echo "<dl class='nav5-grid'></dl>";
 					}
 		 		echo "</dl>";
 		    	}
 				
-				if(constant(strtolower($project_name).'_HasProvideData') == 'true'){
+				if(constant('HasProvideData') == 'true'){
 
 					echo "<dt><h1>Data providers</h1></dt>";
 					echo "<dl class='nav3-grid'><dt><a href='/portal/Provide-metadata'>Provide metadata</a></dt>";
 					echo "<dl class='nav4-grid'><dl class='nav5-grid'></dl>";
 
-					if(constant(strtolower($project_name).'_HasModelOutputs') == 'true'){
+					if(constant('HasModelOutputs') == 'true'){
 						echo "<dt><a href='/portal/Model-Data/?datsId=-10' style='border: 0;'>Model outputs</a></dt>";
 						echo "<dl class='nav5-grid'></dl>";
 					}
-					if(constant(strtolower($project_name).'_HasSatelliteProducts') == 'true'){
+					if(constant('HasSatelliteProducts') == 'true'){
 						echo "<dt><a href='/portal/Satellite-Data/?datsId=-10' style='border: 0;'>Satellite products</a></dt>";
 						echo "<dl class='nav5-grid'></dl>";
 					}
-					if(constant(strtolower($project_name).'_HasInsituProducts') == 'true'){
+					if(constant('HasInsituProducts') == 'true'){
 						echo "<dt><a href='/portal/In-Situ-Instrument-Registration/?datsId=-10' style='border: 0;'>Instrument</a></dt>";
 						echo "<dl class='nav5-grid'></dl>";
 					}
-					if(constant(strtolower($project_name).'_HasMultiInsituProducts') == 'true'){
+					if(constant('HasMultiInsituProducts') == 'true'){
 						echo "<dt><a href='/portal/In-Situ-Site-Registration/?datsId=-10' style='border: 0;'>Multi-instrumented platform</a></dt>";
 						echo "<dl class='nav5-grid'></dl>";
 					}
-					if(constant(strtolower($project_name).'_HasValueAddedProducts') == 'true'){
+					if(constant('HasValueAddedProducts') == 'true'){
 						echo "<dt><a href='/portal/Value-Added-Dataset/?datsId=-10' style='border: 0;'>Value-added dataset</a></dt>";
 						echo "<dl class='nav5-grid'></dl>";
 					}

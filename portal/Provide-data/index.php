@@ -37,7 +37,7 @@ ob_start();
     <ul>
       <li>The name of the FTP directory where you uploaded your data
       <li>The title of the metadata form describing your dataset
-      <li>Which data policy (Public, <?php echo MainProject;if (constant(strtolower($project_name) . '_HasAssociatedUsers') == 'true') {echo ", " . $project_name . " Core or Associated Users";} else {echo " or " . $project_name . " Core Users";} ?> Access)
+      <li>Which data policy (Public, <?php echo MainProject;if (constant('HasAssociatedUsers') == 'true') {echo ", " . $project_name . " Core or Associated Users";} else {echo " or " . $project_name . " Core Users";} ?> Access)
       and "use constraints" should be applied to your data.
       Use contraints example: Permission is granted to use these data and images in research and publications when accompanied by the following statement:
       "Data were obtained from the <?php echo MainProject; ?> program, sponsored by Grants <?php echo MainProject . "/" . $project_name; ?> [ and the relevant project or Institution or Lab]."

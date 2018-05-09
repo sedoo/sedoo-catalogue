@@ -1,20 +1,17 @@
 <?php
-require_once ("conf/conf.php");
-if (! isset ( $_SESSION ))
-	session_start ();
-$project_name = $_REQUEST ['project_name'];
-if ($project_name != strtolower(MainProject))
-	$project_url = "/" . $project_name;
-else
-	$project_url = "/";
+require_once "conf/conf.php";
+if (!isset($_SESSION)) {
+  session_start();
+}
+
+require_once 'conf/define-project.php';
+
+$project_url = "/";
 $titreMilieu = "";
-ob_start ();
+ob_start();
 
-include ("loginAdm.php");
-include ("frmdownload.php");
-?>
-<?php
+include "loginAdm.php";
+include "frmdownload.php";
 
-$milieu = ob_get_clean ();
-include ("template.php");
-?>
+$milieu = ob_get_clean();
+include "template.php";

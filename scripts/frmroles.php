@@ -11,8 +11,8 @@ $projects = 'SELECT DISTINCT dats_id FROM dats_proj WHERE project_id IN (' . get
 
 $r = new role;
 $listeRoles = "'" . PUBLIC_DATA_ROLE . "'";
-if (defined(strtolower($project_name) . 'ListRoles')) {
-  $roles = explode(',', constant(strtolower($project_name) . 'ListRoles'));
+if (defined('ListRoles')) {
+  $roles = explode(',', constant('ListRoles'));
   $string_roles = null;
   foreach ($roles as $rol) {
     $string_roles .= "'" . $rol . "'";
