@@ -25,8 +25,6 @@ class Contact_Users_form extends HTML_QuickForm {
     $reqUri = $_SERVER['REQUEST_URI'];
 
     echo '<form action="' . $reqUri . '" method="post" name="frmContactUsers" id="frmContactUsers" >';
-    echo '<SCRIPT LANGUAGE="Javascript" SRC="/js/functions.js"> </SCRIPT>';
-    echo '<SCRIPT LANGUAGE="Javascript" SRC="/utils/ckeditor/ckeditor.js"> </SCRIPT>';
     echo '<table><tr><td colspan="3" align="center"><font color="#467AA7">Mandatory fields are in blue</font></td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('Subject')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('Subject')->toHTML() . '</td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('EditionArea')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('EditionArea')->toHTML() . '</td></tr>';
