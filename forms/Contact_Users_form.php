@@ -30,11 +30,8 @@ class Contact_Users_form extends HTML_QuickForm {
     echo '<table><tr><td colspan="3" align="center"><font color="#467AA7">Mandatory fields are in blue</font></td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('Subject')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('Subject')->toHTML() . '</td></tr>';
     echo '<tr><td><font color="#467AA7">' . $this->getElement('EditionArea')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('EditionArea')->toHTML() . '</td></tr>';
-    echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_send')->toHTML() . '</td></tr>';
+    echo '<tr><td colspan="3" align="center">' . $this->getElement('bouton_send')->toHTML() . '</td></tr>';
     echo '</table></form>';
-    echo '<SCRIPT LANGAGE="Javascript">' .
-      'CKEDITOR.replace("EditionArea");' .
-      '</SCRIPT>';
 	}
 	
   function getProjectUsers($project) {
