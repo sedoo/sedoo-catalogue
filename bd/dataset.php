@@ -603,8 +603,8 @@ class dataset {
       log_debug('dataset.update - Maj réussie, dats_id = ' . $this->dats_id);
 
       try {
-        $client = new ElasticClient();
-        $client->indexDataset($this);
+        $client = new ElasticClient ();
+        $client->indexAllDatasets (false);
       } catch (Exception $ex) {
         log_error('dataset index update - ' . $ex->getMessage());
       }
@@ -768,8 +768,8 @@ class dataset {
       log_debug('dataset.insert - Insertion réussie, dats_id = ' . $this->dats_id);
 
       try {
-        $client = new ElasticClient();
-        $client->indexDataset($this);
+        $client = new ElasticClient ();
+        $client->indexAllDatasets (false);
       } catch (Exception $ex) {
         log_error('dataset index update - ' . $ex->getMessage());
       }

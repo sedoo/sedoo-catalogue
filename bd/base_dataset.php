@@ -397,7 +397,7 @@ abstract class base_dataset implements iDataset {
 
       try {
         $client = new ElasticClient();
-        $client->indexDataset($this);
+        $client->indexAllDatasets (false);
       } catch (Exception $ex) {
         log_error('dataset index update - ' . $ex->getMessage());
       }
@@ -582,7 +582,7 @@ abstract class base_dataset implements iDataset {
 
       try {
         $client = new ElasticClient();
-        $client->indexDataset($this);
+        $client->indexAllDatasets (false);
       } catch (Exception $ex) {
         log_error('dataset index update - ' . $ex->getMessage());
       }
