@@ -12,7 +12,8 @@ class instrument_form extends base_form {
   function createForm() {
     global $project_name;
     $this->createFormBase();
-    $this->addElement('reset', 'reset', 'Reset');
+    $this->setDefaults(array('project_0' => '1'));
+    $this->addElement('reset', 'reset', 'Reset');    
     $this->addElement('checkbox', 'dats_date_end_not_planned', 'not planned');
     $this->addElement('submit', 'bouton_add_projet', 'Add a project', array('onclick' => "document.getElementById('frminstr').action += '#a_general'"));
     $this->addElement('submit', 'bouton_add_format', 'Add a data format', array('onclick' => "document.getElementById('frminstr').action += '#a_data_format'"));

@@ -16,9 +16,10 @@ class va_dataset_form extends base_form {
 
   function createForm() {
     $this->createFormBase();
-    $this->addElement('reset', 'reset', 'Reset');
     $tab['seeker_0'] = '0';
+    $tab['project_0'] = '1';
     $this->setDefaults($tab);
+    $this->addElement('reset', 'reset', 'Reset');
     $this->addElement('submit', 'bouton_add_pi', 'Add a contact', array('onclick' => "document.getElementById('frmvadataset').action += '#a_contact'"));
     $this->createVaFormResolution();
     $this->createFormGeoCoverage();
