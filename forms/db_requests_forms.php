@@ -26,17 +26,17 @@ class db_requests_forms extends login_form {
 
   private function printStatus($etat, $killed, $values = 0) {
     if ($etat == requete::CODE_EN_COURS && !$killed) {
-      return "<font color='yellow'>Running ($values)</font>";
+      return "<span color='yellow'>Running ($values)</span>";
     } else if ($etat == requete::CODE_EN_COURS && $killed) {
-      return "<font color='orange'>Stop asked</font>";
+      return "<span class='warning'>Stop asked</span>";
     } else if ($etat == requete::CODE_ECHEC) {
-      return "<font color='red'>Failed</font>";
+      return "<span class='danger'>Failed</span>";
     } else if ($etat == requete::CODE_SUCCES && !$killed) {
-      return "<font color='green'>Completed ($values)</font>";
+      return "<span class='success'>Completed ($values)</span>";
     } else if ($etat == requete::CODE_SUCCES && $killed) {
-      return "<font color='green'>Stopped ($values)</font>";
+      return "<span class='success'>Stopped ($values)</span>";
     } else if ($etat == requete::CODE_VIDE) {
-      return "<font color='red'>Empty result</font>";
+      return "<span class='danger'>Empty result</span>";
     }
 
   }
@@ -70,14 +70,14 @@ class db_requests_forms extends login_form {
         if (send_to_cgi($r->xml, $retour)) {
           $elts = explode(':', $retour);
           if ($elts[0] == '00') {
-            echo "<font size=\"3\" color='green'>Extraction successfully launched. The result will be send to you by email.</font>";
+            echo "<span class='success'>Extraction successfully launched. The result will be send to you by email.</span>";
           } else {
             echo "$retour<br>";
           }
 
           $this->loadRequetes();
         } else {
-          echo "<font size='3' color='red'>$retour</font>";
+          echo "<span class='danger'>$retour</span>";
         }
       }
     }

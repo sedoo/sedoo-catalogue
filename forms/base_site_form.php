@@ -773,7 +773,7 @@ class base_site_form extends login_form {
   function displayErrors($elementNames) {
     $messages = $this->getErrorMessages($elementNames);
     if (isset($messages) && !empty($messages)) {
-      echo '<tr><td colspan="4"><font color="red" >' . $messages . '</font></td></tr>';
+      echo '<tr><td colspan="4"><span class="danger" >' . $messages . '</span></td></tr>';
     }
   }
 
@@ -807,11 +807,11 @@ class base_site_form extends login_form {
   }
 
   function displayPersonForm($i) {
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('contact_type_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('contact_type_' . $i)->toHTML();
+    echo '<tr><td><span class="info">' . $this->getElement('contact_type_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('contact_type_' . $i)->toHTML();
     if ($i == 0) {
-      echo '<tr><td><font color="#467AA7">' . $this->getElement('pi_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('pi_' . $i)->toHTML();
-      echo '<font color="#467AA7">&nbsp;&nbsp;or add ' . $this->getElement('pi_name_' . $i)->getLabel() . '</font>' . $this->getElement('pi_name_' . $i)->toHTML() . '</td></tr>';
-      echo '<tr><td><font color="#467AA7">' . $this->getElement('email1_' . $i)->getLabel() . '</font></td><td>' . $this->getElement('email1_' . $i)->toHTML() . '</td>';
+      echo '<tr><td><span class="info">' . $this->getElement('pi_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('pi_' . $i)->toHTML();
+      echo '<span class="info">&nbsp;&nbsp;or add ' . $this->getElement('pi_name_' . $i)->getLabel() . '</span>' . $this->getElement('pi_name_' . $i)->toHTML() . '</td></tr>';
+      echo '<tr><td><span class="info">' . $this->getElement('email1_' . $i)->getLabel() . '</span></td><td>' . $this->getElement('email1_' . $i)->toHTML() . '</td>';
     } else {
       echo '<tr><td>' . $this->getElement('pi_' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('pi_' . $i)->toHTML();
       echo '&nbsp;&nbsp;or add ' . $this->getElement('pi_name_' . $i)->getLabel() . '' . $this->getElement('pi_name_' . $i)->toHTML() . '</td></tr>';
@@ -819,7 +819,7 @@ class base_site_form extends login_form {
     }
     echo '<td>' . $this->getElement('email2_' . $i)->getLabel() . '</td><td>' . $this->getElement('email2_' . $i)->toHTML() . '</td></tr>';
 
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('organism_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('organism_' . $i)->toHTML();
+    echo '<tr><td><span class="info">' . $this->getElement('organism_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('organism_' . $i)->toHTML();
 
     echo '&nbsp;&nbsp;or add ' . $this->getElement('org_sname_' . $i)->getLabel() . '' . $this->getElement('org_sname_' . $i)->toHTML() . '</td></tr>';
     echo '<tr><td>' . $this->getElement('org_fname_' . $i)->getLabel() . '</td><td>' . $this->getElement('org_fname_' . $i)->toHTML() . '</td>';
@@ -844,7 +844,7 @@ class base_site_form extends login_form {
 	
   function displayGeoCoverageForm() {
     echo '<tr><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('area')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('area')->toHTML();
+    echo '<tr><td><span class="info">' . $this->getElement('area')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('area')->toHTML();
     echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_area')->toHTML() . '</td></tr>';
 
     $this->displaySiteBoundingsForm(0);
@@ -866,7 +866,7 @@ class base_site_form extends login_form {
   }
 
   function displayFormBegin($frmname) {
-    echo '<div id="errors" color="red"></div><br>';
+    echo '<div id="errors" class="danger"></div><br>';
     if (strpos($_SERVER['REQUEST_URI'], '?datsId')) {
       $reqUri = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '?datsId'));
     } else {
@@ -876,7 +876,7 @@ class base_site_form extends login_form {
     echo '<SCRIPT LANGUAGE="Javascript" SRC="/js/functions.js"> </SCRIPT>';
 
     echo $this->getElement('dats_id')->toHTML();
-    echo '<table><tr><td colspan="4"><font color="#467AA7">Required fields are in blue</font></td></tr>';
+    echo '<table><tr><td colspan="4"><span class="info">Required fields are in blue</span></td></tr>';
 
     echo '<tr><td colspan="4" align="center"><a href="?datsId=-10">Reset</a></td></tr>';
   }

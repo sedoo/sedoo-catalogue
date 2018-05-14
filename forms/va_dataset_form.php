@@ -868,10 +868,10 @@ class va_dataset_form extends base_form {
     }
 
     $this->displayErrorsMod($i);
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('model_categ_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('model_categ_' . $i)->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('model_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('model_' . $i)->toHTML();
+    echo '<tr><td><span class="info">' . $this->getElement('model_categ_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('model_categ_' . $i)->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('model_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('model_' . $i)->toHTML();
     echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_model_' . $i)->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('simu_' . $i)->getLabel() . '</font></td><td colspan="1">' . $this->getElement('simu_' . $i)->toHTML();
+    echo '<tr><td><span class="info">' . $this->getElement('simu_' . $i)->getLabel() . '</span></td><td colspan="1">' . $this->getElement('simu_' . $i)->toHTML();
     echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_simu_' . $i)->toHTML() . '</td>';
     echo '<td>' . $this->getElement('sensor_resol_temp__' . $i)->getLabel() . '</td><td colspan="1">' . $this->getElement('sensor_resol_temp__' . $i)->toHTML() . '</td></tr>';
   }
@@ -884,16 +884,16 @@ class va_dataset_form extends base_form {
     }
 
     $this->displayErrorsSat($i);
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('satellite_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('satellite_' . $i)->toHTML();
+    echo '<tr><td><span class="info">' . $this->getElement('satellite_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('satellite_' . $i)->toHTML();
     echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_satellite_' . $i)->toHTML() . '</td></tr>';
     if ($i == 0) {
-      echo '<tr><td><font color="#467AA7">' . $this->getElement('instrument_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('instrument_' . $i)->toHTML();
+      echo '<tr><td><span class="info">' . $this->getElement('instrument_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('instrument_' . $i)->toHTML();
       echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_instrument_' . $i)->toHTML() . '</td></tr>';
     } else {
-      echo '<tr><td><font color="#467AA7">' . $this->getElement('instrument_' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('instrument_' . $i)->toHTML();
+      echo '<tr><td><span class="info">' . $this->getElement('instrument_' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('instrument_' . $i)->toHTML();
       echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_instrument_' . $i)->toHTML() . '</td></tr>';
     }
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('sensor_gcmd_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('sensor_gcmd_' . $i)->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('sensor_gcmd_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('sensor_gcmd_' . $i)->toHTML() . '</td></tr>';
     echo '<tr name="row_sensor"><td>' . $this->getElement('sensor_resol_temp' . $i)->getLabel() . '</td><td>' . $this->getElement('sensor_resol_temp' . $i)->toHTML() . '</td>';
     echo '<td>' . $this->getElement('sat_sensor_url_' . $i)->getLabel() . '</td><td colspan="4">' . $this->getElement('sat_sensor_url_' . $i)->toHTML() . '</td></tr>';
   }
@@ -906,9 +906,9 @@ class va_dataset_form extends base_form {
     }
 
     $this->displayErrorsInstru($i);
-    echo '<tr name="row_sensor"><td><font color="#467AA7">' . $this->getElement('sensor_gcmd' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('sensor_gcmd' . $i)->toHTML() . '</td></tr>';
-    echo '<tr name="row_sensor"><td><font color="#467AA7">' . $this->getElement('gcmd_plat_key_' . $i)->getLabel() . '</font></td><td>' . $this->getElement('gcmd_plat_key_' . $i)->toHTML() . '</td>';
-    echo '<td><font color="#467AA7">' . $this->getElement('new_place_' . $i)->getLabel() . '</font></td><td>' . $this->getElement('new_place_' . $i)->toHTML() . '</td></tr>';
+    echo '<tr name="row_sensor"><td><span class="info">' . $this->getElement('sensor_gcmd' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('sensor_gcmd' . $i)->toHTML() . '</td></tr>';
+    echo '<tr name="row_sensor"><td><span class="info">' . $this->getElement('gcmd_plat_key_' . $i)->getLabel() . '</span></td><td>' . $this->getElement('gcmd_plat_key_' . $i)->toHTML() . '</td>';
+    echo '<td><span class="info">' . $this->getElement('new_place_' . $i)->getLabel() . '</span></td><td>' . $this->getElement('new_place_' . $i)->toHTML() . '</td></tr>';
     echo '<tr name="row_sensor"><td>' . $this->getElement('sensor_resol_temp_' . $i)->getLabel() . '</td><td>' . $this->getElement('sensor_resol_temp_' . $i)->toHTML() . '</td>';
     echo '<td>' . $this->getElement('sensor_url_' . $i)->getLabel() . '</td><td>' . $this->getElement('sensor_url_' . $i)->toHTML() . '</td></tr>';
     echo '<tr><td>' . $this->getElement('sensor_model_' . $i)->getLabel() . '</td><td>' . $this->getElement('sensor_model_' . $i)->toHTML() . '</td>';
@@ -940,32 +940,32 @@ class va_dataset_form extends base_form {
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
         if (strpos($error, 'Data descr') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_general"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_general"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Contact') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Model') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_model"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_model"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Satellite') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_satellite"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_satellite"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Instrument') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_instrument"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_instrument"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Source') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_source"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_source"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Coverage') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_cover"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_cover"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Param') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Data') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_use"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_use"><span class="danger">' . $error . '</span></a><br>';
         } else {
-          echo '<font size="3" color="red">' . $error . '</font><br>';
+          echo '<span class="danger">' . $error . '</span><br>';
         }
       }
     }
     $this->displayFormBegin('frmvadataset', false, true);
     //----------------------------------------------------------Data description's form------------------------------------------------------------------------------------------------
     echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><strong>Data description</strong></td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('dats_title')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
     for ($i = 0; $i < $this->dataset->nbProj; $i++) {
       echo '<tr>';
       if ($i == 0) {

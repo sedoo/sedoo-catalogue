@@ -367,19 +367,19 @@ class sat_form_simple extends base_form {
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
         if (strpos($error, 'Data descr') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_descr"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_descr"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Contact') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Instru') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_instru"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_instru"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Coverage') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_cover"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_cover"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Param') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Data') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_use"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_use"><span class="danger">' . $error . '</span></a><br>';
         } else {
-          echo '<font size="3" color="red">' . $error . '</font><br>';
+          echo '<span class="danger">' . $error . '</span><br>';
         }
       }
     }
@@ -406,13 +406,13 @@ class sat_form_simple extends base_form {
     }
 
     $this->displayErrorsSatDataDescr();
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font>';
+    echo '<tr><td><span class="info">' . $this->getElement('dats_title')->getLabel() . '</span>';
     echo '</td><td colspan="3">' . $this->getElement('dats_title')->toHTML();
     echo "&nbsp;<img src='/img/aide-icone-16.png' onmouseout='kill()' onmouseover=\"javascript:bulle('','<br>Enter the title you want to give to your request')\" style='border:0px; margin-right:10px;' />";
     echo '</td></tr>';
 
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('sat_categ')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('sat_categ')->toHTML() . '</td></tr>';
-    echo '<tr><td><font>' . $this->getElement('dats_doi')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_doi')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('sat_categ')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('sat_categ')->toHTML() . '</td></tr>';
+    echo '<tr><td><span>' . $this->getElement('dats_doi')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('dats_doi')->toHTML() . '</td></tr>';
     if (!$simpleVersion) {
       echo '<tr><td>' . $this->getElement('dats_version')->getLabel() . '</td><td>' . $this->getElement('dats_version')->toHTML() . '</td><td colspan="2" /></tr>';
     }
@@ -425,7 +425,7 @@ class sat_form_simple extends base_form {
       echo '<td colspan="3">' . $this->getElement('project_' . $i)->toHTML() . '</td></tr>';
     }
     echo '<tr><td colspan="3" align="center">' . $this->getElement('bouton_add_projet')->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_purpose')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_purpose')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('dats_purpose')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('dats_purpose')->toHTML() . '</td></tr>';
 
     if (!$simpleVersion) {
       echo '<tr name="gen_desc"><td>' . $this->getElement('dats_reference')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_reference')->toHTML() . '</td></tr>';
@@ -438,9 +438,9 @@ class sat_form_simple extends base_form {
       }
       $this->displayErrorsInstrument($i);
       if (!$simpleVersion && ($i == 0)) {
-        echo '<tr><td><font color="#467AA7">' . $this->getElement('satellite_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('satellite_' . $i)->toHTML();
+        echo '<tr><td><span class="info">' . $this->getElement('satellite_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('satellite_' . $i)->toHTML();
         echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_satellite_' . $i)->toHTML() . '</td></tr>';
-        echo '<tr><td><font color="#467AA7">' . $this->getElement('instrument_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('instrument_' . $i)->toHTML();
+        echo '<tr><td><span class="info">' . $this->getElement('instrument_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('instrument_' . $i)->toHTML();
         echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_instrument_' . $i)->toHTML() . '</td></tr>';
       } else {
         echo '<tr><td>' . $this->getElement('satellite_' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('satellite_' . $i)->toHTML();

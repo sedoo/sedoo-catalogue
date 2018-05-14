@@ -605,7 +605,7 @@ function editDataset($datsId, $project_name, $display_archived = false, $queryAr
     $dataset = $dataset->getById($datsId);
     if (isset($dataset) && !empty($dataset)) {
       if ($dataset->is_archived && !$display_archived) {
-        echo "<font size=\"3\" color='red'><strong>This dataset has been archived. </strong></font>";
+        echo "<span class='danger'><strong>This dataset has been archived. </strong></span>";
         return;
       }
       if ($display_archived) {

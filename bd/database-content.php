@@ -14,14 +14,7 @@ $Dats_Projects = array();
 // Projects Ids
 $Projects = array();
 
-// foreach ($MainProjects as $pro) {
-//   $Projects[$pro] = get_filtre_projets($pro);
-// }
-// foreach ($OtherProjects as $pro) {
-//   $Projects[$pro] = get_filtre_projets($pro);
-// }
-$pro = MainProject;
-$Projects[$pro] = get_filtre_projets($pro);
+$Projects[MainProject] = get_filtre_projets(MainProject);
 
 class _Dataset {
   var $dats_id;
@@ -135,7 +128,7 @@ function ecrireEtat($db, $plateformes, $isPDF = false) {
         $server_response .= "<div class='panel panel-info' style = 'page-break-inside: auto;'>" . "<div class='panel-heading' style = 'page-break-inside: avoid;'><h3 class='panel-title' style = 'page-break-inside: avoid;'>" . $p->name . "</h3></div>" . "<div class='panel-body' style = 'page-break-inside: auto;'>" . "<table class='table table-striped' style = 'page-break-inside: auto;'>";
         $server_response .= "<thead style = 'page-break-inside: avoid;'>" . "<tr style = 'page-break-inside: avoid;'>" . "<th style = 'page-break-inside: avoid;'>Dataset Name</th>" . "<th style = 'page-break-inside: avoid;'>PIs Name</th>" . "<th style = 'page-break-inside: avoid;'>Period Begin</th>" . "<th style = 'page-break-inside: avoid;'>Period End</th>" . "<th style = 'page-break-inside: avoid;'></th>" . "</tr>" . "</thead>" . "<tbody style = 'page-break-inside: auto;'>";
       } else {
-        $server_response .= "<br><center  style='border-width:1px;border-style:dashed;border-color:#31708f;'><h1>" . $p->name . "</h1><br></center><br>" . "<div style='border-width:1px;border-style:dashed;border-color:#31708f;'><table>";
+        $server_response .= "<br><div class='aligncenter'  style='border-width:1px;border-style:dashed;border-color:#31708f;'><h1>" . $p->name . "</h1><br></div><br>" . "<div style='border-width:1px;border-style:dashed;border-color:#31708f;'><table>";
         $server_response .= "<thead>" . "<tr>" . "<th max-width = 30% width = 30% >Name</th>" . "<th width = 5% >ID</th>" . "<th width = 15% >Insertion/last update</th>" . "<th width = 10% >PIs Name</th>" . "<th width = 10% >PIs Role</th>" . "<th width = 10% >Period Begin</th>" . "<th width = 10% >Period End</th>" . "<th width = 10% ></th>" . "</tr>" . "</thead>" . "<tbody>";
       }
       foreach ($p->ds as $ds) {
@@ -216,7 +209,6 @@ function getDatasetsByProject($Project, $isPDF = false) {
   }
   reset($elements);
   $plateformes = lirePlateforme($db);
-  echo $project_name;
   $requete = "SELECT dats_id, dats_title, dats_date_begin, dats_date_end FROM dataset WHERE dats_id IN (SELECT DISTINCT dats_id FROM url WHERE url_type !='map') AND dats_id IN (SELECT DISTINCT dats_id FROM dats_proj WHERE project_id IN (" . $Projects[MainProject] . "));";
   if ($res = pg_query($db, $requete)) {
     for ($i = 0; $i < pg_num_rows($res); $i++) {
@@ -316,11 +308,11 @@ function displayPageByProject() {
   $root = '';
   $Dats_Projects[$project_name] = getDatasetsByProject($Projects[$project_name]);
   echo "<div class='container'>
-			<center>
+			<div class='aligncenter'>
 				<p class='navbar-text navbar-left'>
 				<h2 style='color: #31708f;'>$project_name Database Content</h2>
 				</p>
-			</center>
+			</div>
 			<br>
 		 <div id='content'><br>";
   echo "<form action='' method='post'>
@@ -346,11 +338,11 @@ function displayPage() {
 	<div class='container'>
 		<nav class='navbar navbar-default' style='background: transparent;'
 			role='navigation'>
-			<center>
+			<div class='aligncenter'>
 				<p class='navbar-text navbar-left'>
 				<h2 style='color: #31708f;'>" . MainProject . " Database Content</h2>
 				</p>
-			</center>
+			</div>
 			<br>
 		</nav>
 		<div id='content'>

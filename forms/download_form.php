@@ -151,7 +151,7 @@ class download_form extends login_form {
   function initForm() {
     $jeuId = $_REQUEST['datsId'];
     if (!isset($jeuId) || empty($jeuId)) {
-      echo "<font size=\"3\" color='red'><strong>No dataset specified.</strong></font><br>";
+      echo "<span class='danger'><strong>No dataset specified.</strong></span><br>";
       return false;
     }
     $this->initJeu($jeuId);
@@ -161,7 +161,7 @@ class download_form extends login_form {
       if ((strpos($jeuUrl, 'file://localhost' . $this->dataPath . '/') === 0)) {
         $this->pathJeu = str_replace('file://localhost' . $this->dataPath . '/', '', $jeuUrl);
       } else {
-        echo "<font size=\"3\" color='red'><strong>Data not found.</strong></font><br>";
+        echo "<span class='danger'><strong>Data not found.</strong></span><br>";
         return false;
       }
       if (isset($this->pathJeu) && !empty($this->pathJeu)) {
@@ -214,13 +214,13 @@ class download_form extends login_form {
           $this->getElement('email_notif_hidden')->setValue($this->mailNotif);
           return true;
         } else {
-          echo "<font size=\"3\" color='red'><strong>Unable to find data corresponding to this dataset.</strong></font><br>";
+          echo "<span class='danger'><strong>Unable to find data corresponding to this dataset.</strong></span><br>";
         }
       } else {
-        echo "<font size=\"3\" color='red'><strong>No directory specified</strong></font><br>";
+        echo "<span class='danger'><strong>No directory specified</strong></span><br>";
       }
     } else {
-      echo "<font size=\"3\" color='red'><strong>You cannot access this dataset.</strong></font><br>";
+      echo "<span class='danger'><strong>You cannot access this dataset.</strong></span><br>";
     }
     return false;
 	}
@@ -248,11 +248,11 @@ class download_form extends login_form {
   function displayForm($archive = null) {
     echo '<div id="blanket" style="display:none;">';
     echo '</div><div id="popUpDiv" style="display:none;text-align:center;">';
-    echo "<p><p><p><p><font size=\"3\" color='orange'><strong>We are processing your request. Please Wait...</strong></font></div>";
+    echo "<p><p><p><p><span class='warning'><strong>We are processing your request. Please Wait...</strong></span></div>";
     echo '<div id="popUpFilePreviewDiv" style="display:none;text-align:left;word-break:break-all;overflow:scroll;">';
     echo '</div>';
     if ($archive) {
-      echo '<br><font size=\"3\" color="green"><strong>Request successfull.&nbsp;Click <a href="/download.php?file=' . $archive . '">here</a>&nbsp;to download.</strong></font><br><br>';
+      echo '<br><span class="success"><strong>Request successfull.&nbsp;Click <a href="/download.php?file=' . $archive . '">here</a>&nbsp;to download.</strong></span><br><br>';
     }
     echo '<form action="' . $reqUri . '" method="post" name="frmdl" id="frmdl" >';
     echo '<div style="float: left;position: relative;max-width:380px;">';
@@ -566,17 +566,17 @@ class download_form extends login_form {
     if (send_to_cgi_fichiers($requete->toXml(), $retour)) {
       $elts = explode(':', $retour, 2);
       if ($elts[0] == '00') {
-        $msg = "<font size=\"3\" color='green'>Request successfully sent. The result will be send to you by email.</font>";
+        $msg = "<span class='success'>Request successfully sent. The result will be send to you by email.</span>";
       } else if ($elts[0] == '01') {
         $archiveName = null;
         $downloadUrl = trim($elts[1]);
         header("Location: $downloadUrl");
-        $msg = "<font size=\"3\" color='green'>Request successfully sent. Click <a href='$downloadUrl'>here</a> if you are no automatically redirected to the download page.</font>";
+        $msg = "<span class='success'>Request successfully sent. Click <a href='$downloadUrl'>here</a> if you are no automatically redirected to the download page.</span>";
       } else {
-        $msg = '<font size="3" color="red">Your Request was not processed due to technical reasons. Please contact the database administrator (' . ROOT_EMAIL . ').</font>';
+        $msg = '<span class="danger">Your Request was not processed due to technical reasons. Please contact the database administrator (' . ROOT_EMAIL . ').</span>';
       }
     } else {
-      $msg = '<font size="3" color="red">Your Request was not processed due to technical reasons. Please contact the database administrator (' . ROOT_EMAIL . ').</font>';
+      $msg = '<span class="danger">Your Request was not processed due to technical reasons. Please contact the database administrator (' . ROOT_EMAIL . ').</span>';
     }
     $this->clearSelection();
     return $msg;

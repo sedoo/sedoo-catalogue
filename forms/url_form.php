@@ -27,7 +27,7 @@ class url_form extends login_form {
     if ($this->isAdmin($projectName)) {
       $this->createAddUrlForm();
     } else {
-      echo "<font size=\"3\" color='red'><strong>You cannot view this part of the site.</strong></font><br>";
+      echo "<span class='danger'><strong>You cannot view this part of the site.</strong></span><br>";
     }
 	}
 	
@@ -304,7 +304,7 @@ class url_form extends login_form {
       // Affichage des erreurs
       if (!empty($this->_errors)) {
         foreach ($this->_errors as $error) {
-          echo '<font size="3" color="red">' . $error . '</font><br>';
+          echo '<span class="danger">' . $error . '</span><br>';
         }
       }
       // Pour l'affichage de la datapolicy et des use constraints

@@ -310,10 +310,10 @@ class extraction_form extends map_form {
       ElasticSearchUtils::addBackToSearchResultLink();
     }
     foreach ($this->_errors as $error) {
-      echo '<font size="3" color="red">' . $error . '</font><br>';
+      echo '<span class="danger">' . $error . '</span><br>';
     }
     if (isset($this->msg)) {
-      echo "<font size=\"3\" color='green'><strong>$this->msg</strong></font><br>";
+      echo "<span class='success'><strong>$this->msg</strong></span><br>";
     }
 
     echo '<form action="" method="post" name="frmmap" id="frmmap" >';

@@ -33,35 +33,35 @@ class stats_form_dats extends login_form {
       $selectedStyle = 'style="font-size:110%;font-weight:bold;"';
       echo '<table><tr><th>';
       if ($type == 0) {
-        echo "<font $selectedStyle >Metadata</font>";
+        echo "<span $selectedStyle >Metadata</span>";
       } else {
         echo '<a href="' . self::getUrl(0, $this->dats->dats_id) . '">Metadata</a>';
       }
 
       echo '</th><th>';
       if ($type == 1) {
-        echo "<font $selectedStyle >Updates</font>";
+        echo "<span $selectedStyle >Updates</span>";
       } else {
         echo '<a href="' . self::getUrl(1, $this->dats->dats_id) . '">Updates</a>';
       }
 
       echo '</th><th>';
       if ($type == 2) {
-        echo "<font $selectedStyle>Downloads</font>";
+        echo "<span $selectedStyle>Downloads</span>";
       } else {
         echo '<a href="' . self::getUrl(2, $this->dats->dats_id) . '">Downloads</a>';
       }
 
       echo '</th><th>';
       if ($type == 3) {
-        echo "<font $selectedStyle>Subscriptions</font>";
+        echo "<span $selectedStyle>Subscriptions</span>";
       } else {
         echo '<a href="' . self::getUrl(3, $this->dats->dats_id) . '">Subscriptions</a>';
       }
 
       echo '</th><th>';
       if ($type == 4) {
-        echo "<font $selectedStyle>Metadata quality</font>";
+        echo "<span $selectedStyle>Metadata quality</span>";
       } else {
         echo '<a href="' . self::getUrl(4, $this->dats->dats_id) . '">Metadata quality</a>';
       }
@@ -89,7 +89,7 @@ class stats_form_dats extends login_form {
 
       }
     } else {
-      echo "<font size=\"3\" color='red'><strong>You cannot access this page.</strong></font><br>";
+      echo "<span class='danger'><strong>You cannot access this page.</strong></span><br>";
     }
   }
 
@@ -126,7 +126,7 @@ class stats_form_dats extends login_form {
       $date = $resultat[0][0];
       $datax[0] = strtotime($date);
       $datay[0] = 0;
-      echo '<font size="3">Online since: ' . substr($date, 0, 10) . '</font><br/><br/>';
+      echo '<span>Online since: ' . substr($date, 0, 10) . '</span><br/><br/>';
       $startI = 1;
     }
     $query = 'select date from journal inner join dataset using (dats_id) where type_journal_id = ' . TYPE_DL . ' and dats_id = ' . $this->dats->dats_id . " order by date;";
@@ -138,7 +138,7 @@ class stats_form_dats extends login_form {
         $datay[$i] = $i + 1 - $startI;
       }
       $total = $i - $startI;
-      echo "<font size='3'>Total downloads: $total</font><br/><br/>";
+      echo "<span>Total downloads: $total</span><br/><br/>";
       $datax[$i] = time();
       $datay[$i] = $total;
       $graph = getGraphRequetesByDataset($datax, $datay);

@@ -106,7 +106,7 @@ class journal_form extends login_form {
     // Affichage des erreurs
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     }
 

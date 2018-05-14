@@ -146,14 +146,14 @@ class profile_form extends login_form {
     // Affichage des erreurs
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     }
     $reqUri = $_SERVER['REQUEST_URI'];
     echo '<form action="' . $reqUri . '" method="post" name="frmpasswd" id="frmpasswd" >';
     echo '<table>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('password_1')->getLabel() . '</font></td><td>' . $this->getElement('password_1')->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('password_2')->getLabel() . '</font></td><td>' . $this->getElement('password_2')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('password_1')->getLabel() . '</span></td><td>' . $this->getElement('password_1')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('password_2')->getLabel() . '</span></td><td>' . $this->getElement('password_2')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_change_password')->toHTML() . '</td></tr></table>';
     echo '</table>';
     echo '</form>';
@@ -163,14 +163,14 @@ class profile_form extends login_form {
     // Affichage des erreurs
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     }
     $reqUri = $_SERVER['REQUEST_URI'];
     echo '<form action="' . $reqUri . '" method="post" name="frmmail" id="frmmail" >';
     echo '<table>';
-    echo '<tr><td><font color="#467AA7">Current Mail</font></td><td>' . $this->user->mail . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('new_mail')->getLabel() . '</font></td><td>' . $this->getElement('new_mail')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">Current Mail</span></td><td>' . $this->user->mail . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('new_mail')->getLabel() . '</span></td><td>' . $this->getElement('new_mail')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_change_mail')->toHTML() . '</td></tr></table>';
     echo '</table>';
     echo '</form>';

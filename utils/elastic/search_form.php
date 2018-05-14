@@ -201,25 +201,25 @@ class search_form extends HTML_QuickForm {
 		if (! empty ( $this->_errors )) {
 			foreach ( $this->_errors as $error ) {
 				if (strpos ( $error, 'General' ) === 0) {
-					echo '<a href="#a_general"><font size="3" color="red">' . $error . '</font></a><br>';
+					echo '<a href="#a_general"><span class="danger">' . $error . '</span></a><br>';
 				} else if (strpos ( $error, 'Contact' ) === 0) {
-					echo '<a href="#a_contact"><font size="3" color="red">' . $error . '</font></a><br>';
+					echo '<a href="#a_contact"><span class="danger">' . $error . '</span></a><br>';
 				} else if (strpos ( $error, 'Instru' ) === 0) {
-					echo '<a href="#a_instru"><font size="3" color="red">' . $error . '</font></a><br>';
+					echo '<a href="#a_instru"><span class="danger">' . $error . '</span></a><br>';
 				} else if (strpos ( $error, 'Site' ) === 0) {
-					echo '<a href="#a_site"><font size="3" color="red">' . $error . '</font></a><br>';
+					echo '<a href="#a_site"><span class="danger">' . $error . '</span></a><br>';
 				} else if (strpos ( $error, 'Measured' ) === 0) {
-					echo '<a href="#a_param"><font size="3" color="red">' . $error . '</font></a><br>';
+					echo '<a href="#a_param"><span class="danger">' . $error . '</span></a><br>';
 				} else if (strpos ( $error, 'Derived' ) === 0) {
-					echo '<a href="#a_param_calcul"><font size="3" color="red">' . $error . '</font></a><br>';
+					echo '<a href="#a_param_calcul"><span class="danger">' . $error . '</span></a><br>';
 				} else if (strpos ( $error, 'Data' ) === 0) {
-					echo '<a href="#a_use"><font size="3" color="red">' . $error . '</font></a><br>';
+					echo '<a href="#a_use"><span class="danger">' . $error . '</span></a><br>';
 				} else {
-					echo '<font size="3" color="red">' . $error . '</font><br>';
+					echo '<span class="danger">' . $error . '</span><br>';
 				}
 			}
 		}
-		echo '<div id="errors" color="red"></div><br>';
+		echo '<div id="errors" class="danger"></div><br>';
 		
 		$reqUri = $_SERVER ['REQUEST_URI'];
 		

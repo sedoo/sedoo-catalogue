@@ -7,7 +7,7 @@ $ContactUsersform->createForm($project_name);
 if (isset($_POST['bouton_send'])) {
   if ($ContactUsersform->validate()) {
     $ContactUsersform->sendMessageToAllUsers($project_name);
-    echo "<h1 color='green'><font color='green'>Your message has been sent successfully</font></h1><br>";
+    echo "<h1><span class='success'>Your message has been sent successfully</span></h1><br>";
   } else {
     echo "<h1>Contact all $project_name users</h1><br>";
     $ContactUsersform->display();

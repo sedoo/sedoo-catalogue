@@ -23,12 +23,12 @@ if (isset($datsId) && !empty($datsId)){
 			if ( $form->reponse->isPublic() ){
 				$form->displayPublicLogin('Public data access');
 			}else{
-				echo "<font size='3' color='red'>Not a public dataset. Click <a href='/extract/download.php?project_name=$project_name&resultId=$resultId'>here</a> to access this dataset.</font><br>";
+				echo "<span class='danger'>Not a public dataset. Click <a href='/extract/download.php?project_name=$project_name&resultId=$resultId'>here</a> to access this dataset.</span><br>";
 				header("Location: /extract/download.php?project_name=$project_name&resultId=$resultId");
 			}
 		}
 	}else{
-		echo '<font size="3" color="red">No result to load.</font><br>';
+		echo '<span class="danger">No result to load.</span><br>';
 	}
 }
 

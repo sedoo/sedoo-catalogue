@@ -94,7 +94,7 @@ if ($form->isPortalUser()) {
         <li>If you download the data from a web browser or other URL-based tool, you can find the requested data at:</li>
       </ul>
 
-      <center><a href="<?= $openUri; ?>"><?= $LnkFTP; ?></a></center><br/>
+      <div class="aligncenter"><a href="<?= $openUri; ?>"><?= $LnkFTP; ?></a></div><br/>
 
       <ul>
         <li>If you connect to the FTP server from the command line or a FTP client:
@@ -107,7 +107,7 @@ if ($form->isPortalUser()) {
   } else {
 ?>
         <p>The requested data can be downloaded directly from you browser at the followin address:</p>
-        <center><a target="_blank" href="<?= $LnkFTPFull; ?>"><?= $LnkFTPFull; ?></a></center><br/>
+        <div class="aligncenter"><a target="_blank" href="<?= $LnkFTPFull; ?>"><?= $LnkFTPFull; ?></a></div><br/>
 <?php
     }
   }

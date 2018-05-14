@@ -61,7 +61,7 @@ function lstQueryData($query, $queryArgs = array()) {
   $dts_list = $dts->getOnlyTitles($query);
 
   if (empty($dts_list)) {
-    echo "<font style='font-size:110%;font-weight:bold;' color='red'>No dataset found</font>";
+    echo "<span class='danger'>No dataset found</span>";
   } else {
     echo "<ul>";
     foreach ($dts_list as $dt) {

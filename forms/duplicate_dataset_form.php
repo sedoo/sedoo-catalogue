@@ -30,7 +30,7 @@ class duplicate_dataset_form extends base_form {
     echo '<h1>Duplicate dataset</h1>';
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     }
     echo '<form action="' . $reqUri . '" method="post" id="frmjnl" name="frmjnl" >';

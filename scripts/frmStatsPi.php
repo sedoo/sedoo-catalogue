@@ -29,7 +29,7 @@ if ($form->isAdmin($project_name) || $form->isPortalUser()) {
       }
       echo '</ul>';
     } else {
-      echo "<font size=\"3\" color='red'><strong>No dataset found.</strong></font><br>";
+      echo "<span class='danger'><strong>No dataset found.</strong></span><br>";
     }
 
   }

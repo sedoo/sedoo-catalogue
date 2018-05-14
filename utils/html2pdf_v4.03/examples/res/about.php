@@ -79,7 +79,7 @@
         <li>&lt;code&gt;, &lt;pre&gt;</li>
         <li>&lt;div&gt; :&nbsp;<div style="border: solid 1px #AADDAA; background: #DDFFDD; text-align: center; width: 50mm">exemple de DIV</div></li>
         <li>&lt;em&gt;, &lt;i&gt;, &lt;samp&gt; : Ecrire en <em>italique</em>.</li>
-        <li>&lt;font&gt;, &lt;span&gt; : <font style="color: #000066; font-family: times">Exemple d'utilisation</font></li>
+        <li>&lt;font&gt;, &lt;span&gt; : <span style="color: #000066; font-family: times">Exemple d'utilisation</span></li>
         <li>&lt;h1&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;h4&gt;, &lt;h5&gt;, &lt;h6&gt;</li>
         <li>&lt;hr&gt; : barre horizontale</li>
         <li>&lt;img&gt; : <img src="./res/tcpdf_logo.jpg" style="width: 10mm"></li>

@@ -47,7 +47,7 @@ if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
     //   if ($formReg->validate () && $formReg->validateChart ()) {
     //     if ($formReg->addUser ( true )) {
     //       $formReg->addProjectUser ( true );
-    //       echo "<font size=\"3\" color='green'><strong>\n\nYour portal account was created.\n</strong><br><strong>Your access privileges will be temporarily limited to public datasets until your identity is verified and approved by the administrator.\n</strong>" . "<br><strong>Once your registration to access $project_name data will be approved, you will receive a confirmation mail.\n</strong></font><br>";
+    //       echo "<span class='success'><strong>\n\nYour portal account was created.\n</strong><br><strong>Your access privileges will be temporarily limited to public datasets until your identity is verified and approved by the administrator.\n</strong>" . "<br><strong>Once your registration to access $project_name data will be approved, you will receive a confirmation mail.\n</strong></span><br>";
     //       return;
     //     }
     //   }
@@ -55,7 +55,7 @@ if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
     $formReg->saveForm();
     if ($formReg->validate() && $formReg->validateChart(true)) {
       if ($formReg->addUser(true)) {
-        echo "<font size=\"3\" color='green'><strong>\n\nYour portal account was created.\n</strong><br><strong>Your access privileges will be temporarily limited to public datasets until your identity is verified and approved by the administrator.\n</strong>" . "<br><strong>Once your registration to access $project_name data will be approved, you will receive a confirmation mail.\n</strong></font><br>";
+        echo "<span class='success'><strong>\n\nYour portal account was created.\n</strong><br><strong>Your access privileges will be temporarily limited to public datasets until your identity is verified and approved by the administrator.\n</strong>" . "<br><strong>Once your registration to access $project_name data will be approved, you will receive a confirmation mail.\n</strong></span><br>";
         return;
       }
     }
@@ -65,7 +65,7 @@ if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
       $formReg->saveForm(true);
       if ($formReg->validate() && $formReg->validateChart()) {
         if ($formReg->updateUser()) {
-          echo "<font size=\"3\" color='green'><strong>The request has been registered.</strong></font><br>";
+          echo "<span class='success'><strong>The request has been registered.</strong></span><br>";
           return;
         }
       }
@@ -73,7 +73,7 @@ if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
       $formReg->saveForm();
       if ($formReg->validate() && $formReg->validateChart(true)) {
         if ($formReg->updateUser()) {
-          echo "<font size=\"3\" color='green'><strong>The request has been registered.</strong></font><br>";
+          echo "<span class='success'><strong>The request has been registered.</strong></span><br>";
           return;
         }
       }
@@ -84,7 +84,7 @@ if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
     }
   } else if (isset($_POST['bouton_forgot'])) {
     if ($formReg->doForgot()) {
-      echo "<font size=\"3\" color='green'><strong>A new password has been generated and sent to you by email.</strong></font><br>";
+      echo "<span class='success'><strong>A new password has been generated and sent to you by email.</strong></span><br>";
     }
   }
   global $project_name;

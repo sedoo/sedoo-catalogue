@@ -24,16 +24,16 @@ class check_registration_form extends HTML_QuickForm {
     //Affichage des erreurs
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     } else if ($this->msg) {
-      echo "<font size=\"3\" color='green'>$this->msg</font><br>";
+      echo "<span class='success'>$this->msg</span><br>";
     }
 
     $reqUri = $_SERVER['REQUEST_URI'];
     echo '<form action="' . $reqUri . '" method="post" name="frmchk" id="frmchk" >';
     echo '<table>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('email_check')->getLabel() . '</font></td><td>' . $this->getElement('email_check')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('email_check')->getLabel() . '</span></td><td>' . $this->getElement('email_check')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_check')->toHTML() . '</td></tr>';
     echo '</table>';
     echo '</form>';

@@ -37,7 +37,7 @@ if (isset($datsId) && !empty($datsId)) {
     include 'legende.php';
     $treeMenu->printMenu(array('filterData' => 0));
   } else {
-    echo '<br><br><font style="font-size:110%;font-weight:bold;">No dataset found</font>';
+    echo '<br><br><strong>No dataset found</strong>';
 
     echo "<br/><br/><a href='/$project_name/Search-tool'>&lt;&lt;&nbsp;New search</a><br/>";
 

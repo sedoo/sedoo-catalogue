@@ -337,13 +337,13 @@ class login_form extends HTML_QuickForm {
     echo "<h1>$titre</h1><p/>";
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     }
     $reqUri = $_SERVER['REQUEST_URI'];
     echo '<form action="' . $reqUri . '" method="post" name="frmlogin" id="frmlogin" >';
     echo '<table>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('login')->getLabel() . '</font></td><td>' . $this->getElement('login')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('login')->getLabel() . '</span></td><td>' . $this->getElement('login')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_public')->toHTML();
     echo '</td></tr></table>';
     echo '</form>';
@@ -357,7 +357,7 @@ class login_form extends HTML_QuickForm {
 	
   function displayLGForm($titre, $withForgot = false, $displayForgot = false, $withForgotPass = false) {
     global $project_name;
-    echo "<center style = 'padding-left : 120px ; padding-right: 120px;' >";
+    echo "<div class='aligncenter' style = 'padding-left : 120px ; padding-right: 120px;' >";
     echo "<table>";
     echo "<br><h5>If you are already registered to the " . MainProject . " database, please use your ids to login in the following form:</h5>";
     if ($withForgotPass == true) {
@@ -372,7 +372,7 @@ class login_form extends HTML_QuickForm {
     }
 
     echo "<a href='" . $reqUri . "'><h5 style ='color:rgb(70,122,167);'>If you are a new user, please click here to register.</h5></a> <br>";
-    echo "</table></center>";
+    echo "</table></div>";
 	}
 	
   function displayLoginForm($titre, $withForgot = false, $displayForgot = false) {
@@ -381,7 +381,7 @@ class login_form extends HTML_QuickForm {
     // Affichage des erreurs
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     }
     $reqUri = $_SERVER['REQUEST_URI'];
@@ -391,8 +391,8 @@ class login_form extends HTML_QuickForm {
 
     echo '<form action="' . $reqUri . '" method="post" name="frmlogin" id="frmlogin" >';
     echo '<table>';
-    echo '<tr id="forgot_row_3"><td><font color="#467AA7">login</font></td><td>' . $this->getElement('login')->toHTML() . '</td></tr>';
-    echo '<tr id="forgot_row_4"><td><font color="#467AA7">' . $this->getElement('password')->getLabel() . '</font></td><td>' . $this->getElement('password')->toHTML() . '</td></tr>';
+    echo '<tr id="forgot_row_3"><td><span class="info">login</span></td><td>' . $this->getElement('login')->toHTML() . '</td></tr>';
+    echo '<tr id="forgot_row_4"><td><span class="info">' . $this->getElement('password')->getLabel() . '</span></td><td>' . $this->getElement('password')->toHTML() . '</td></tr>';
     echo '<tr id="forgot_row_5"><td colspan="2" align="center">' . $this->getElement('bouton_login')->toHTML();
     if ($withForgot) {
       echo '<br><a style="cursor:pointer;font-size: 80%;" onclick="showForgotForm()">Forgotten password</a>';
@@ -407,7 +407,7 @@ class login_form extends HTML_QuickForm {
       }
       $this->getElement('email_forgot')->setValue($this->exportValue('login'));
 
-      echo '<tr id="forgot_row_1" ' . $display . '><td><font color="#467AA7">' . $this->getElement('email_forgot')->getLabel() . '</font></td><td>' . $this->getElement('email_forgot')->toHTML() . '</td></tr>';
+      echo '<tr id="forgot_row_1" ' . $display . '><td><span class="info">' . $this->getElement('email_forgot')->getLabel() . '</span></td><td>' . $this->getElement('email_forgot')->toHTML() . '</td></tr>';
       echo '<tr id="forgot_row_2" ' . $display . '><td colspan="2" align="center">' . $this->getElement('bouton_forgot')->toHTML() . '</td></tr>';
     }
     echo '</table>';

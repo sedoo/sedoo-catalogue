@@ -617,7 +617,7 @@ class base_form_multi extends login_form {
     echo "<tr><td $color>" . $this->getElement('email1_' . $i)->getLabel() . '</td><td>' . $this->getElement('email1_' . $i)->toHTML() . '</td>';
     echo '<td>' . $this->getElement('email2_' . $i)->getLabel() . '</td><td>' . $this->getElement('email2_' . $i)->toHTML() . '</td></tr>';
 
-    echo "<tr><td $color>" . $this->getElement('organism_' . $i)->getLabel() . '</font></td><td colspan="3">' . $this->getElement('organism_' . $i)->toHTML();
+    echo "<tr><td $color>" . $this->getElement('organism_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('organism_' . $i)->toHTML();
     echo '&nbsp;&nbsp;or add ' . $this->getElement('org_sname_' . $i)->getLabel() . '' . $this->getElement('org_sname_' . $i)->toHTML() . '</td></tr>';
 
     echo '<tr><td>' . $this->getElement('org_fname_' . $i)->getLabel() . '</td><td>' . $this->getElement('org_fname_' . $i)->toHTML() . '</td>';
@@ -672,7 +672,7 @@ class base_form_multi extends login_form {
   function displayErrors($elementNames) {
     $messages = $this->getErrorMessages($elementNames);
     if (isset($messages) && !empty($messages)) {
-      echo '<tr><td colspan="4"><font color="red" >' . $messages . '</font></td></tr>';
+      echo '<tr><td colspan="4"><span class="danger">' . $messages . '</span></td></tr>';
     }
   }
 

@@ -19,15 +19,15 @@ class Contact_Users_form extends HTML_QuickForm {
     //Affichage des erreurs
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     }
     $reqUri = $_SERVER['REQUEST_URI'];
 
     echo '<form action="' . $reqUri . '" method="post" name="frmContactUsers" id="frmContactUsers" >';
-    echo '<table><tr><td colspan="3" align="center"><font color="#467AA7">Mandatory fields are in blue</font></td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('Subject')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('Subject')->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('EditionArea')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('EditionArea')->toHTML() . '</td></tr>';
+    echo '<table><tr><td colspan="3" align="center"><span class="info">Mandatory fields are in blue</span></td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('Subject')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('Subject')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('EditionArea')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('EditionArea')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="3" align="center">' . $this->getElement('bouton_send')->toHTML() . '</td></tr>';
     echo '</table></form>';
 	}

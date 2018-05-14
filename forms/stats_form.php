@@ -56,7 +56,7 @@ class stats_form extends login_form {
       $selectedStyle = 'style="font-size:110%;font-weight:bold;"';
       echo '<table><tr><th>';
       if ($stype == 0) {
-        echo "<font $selectedStyle >By date</font>";
+        echo "<span $selectedStyle >By date</span>";
       } else {
         echo '<a href="' . self::getUrl(1, 0) . '">By date</a>';
       }
@@ -65,7 +65,7 @@ class stats_form extends login_form {
 
       if ($this->projectName != MainProject) {
         if ($stype == 1) {
-          echo "<font $selectedStyle>By role</font>";
+          echo "<span $selectedStyle>By role</span>";
         } else {
           echo '<a href="' . self::getUrl(1, 1) . '">By role</a>';
         }
@@ -74,7 +74,7 @@ class stats_form extends login_form {
       }
 
       if ($stype == 2) {
-        echo "<font $selectedStyle>By country</font>";
+        echo "<span $selectedStyle>By country</span>";
       } else {
         echo '<a href="' . self::getUrl(1, 2) . '">By country</a>';
       }
@@ -301,28 +301,28 @@ class stats_form extends login_form {
     $selectedStyle = 'style="font-size:110%;font-weight:bold;"';
     echo '<table><tr><th>';
     if ($stype == 0) {
-      echo "<font $selectedStyle >By date</font>";
+      echo "<span $selectedStyle >By date</span>";
     } else {
       echo '<a href="' . self::getUrl(0, 0) . '">By date</a>';
     }
 
     echo '</th><th>';
     if ($stype == 3) {
-      echo "<font $selectedStyle>By data type</font>";
+      echo "<span $selectedStyle>By data type</span>";
     } else {
       echo '<a href="' . self::getUrl(0, 3) . '">By data type</a>';
     }
 
     echo '</th><th>';
     if ($stype == 1) {
-      echo "<font $selectedStyle>By user</font>";
+      echo "<span $selectedStyle>By user</span>";
     } else {
       echo '<a href="' . self::getUrl(0, 1) . '">By user</a>';
     }
 
     echo '</th><th>';
     if ($stype == 2) {
-      echo "<font $selectedStyle>By dataset</font>";
+      echo "<span $selectedStyle>By dataset</span>";
     } else {
       echo '<a href="' . self::getUrl(0, 2) . '">By dataset</a>';
     }

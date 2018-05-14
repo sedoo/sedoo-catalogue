@@ -22,7 +22,7 @@ if (isset($datsId) && !empty($datsId)) {
 		}else{
 			if (isset($_POST['bouton_forgot'])){
 				if ($form->forgottenPassword()){
-					echo "<font size=\"3\" color='green'><strong>A new password has been generated and sent to you by email.</strong></font><br>";
+					echo "<span class='success'><strong>A new password has been generated and sent to you by email.</strong></span><br>";
 				}
 				$form->saveErrors();
 				$form->displayLoginForm("Download",true,true);
@@ -30,7 +30,7 @@ if (isset($datsId) && !empty($datsId)) {
 			
 		}
 	}else{
-		echo '<font size="3" color="red">No result to load.</font><br>';
+		echo '<span class="danger">No result to load.</span><br>';
 	}
 }
 

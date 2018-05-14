@@ -32,7 +32,7 @@ function genPDF($content, $fileTitle) {
 					</head>
 					<body>
 						<div class='main-content' style='text-align: center;'>
-							<center><h1>$fileTitle</h2></center>
+							<div class='aligncenter'><h1>$fileTitle</h2></div>
 							<br><br>
 							$content
 	                    </div>

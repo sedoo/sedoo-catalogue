@@ -18,12 +18,12 @@ function getCouleurScore($cpt, $max) {
 
 function printTd($cpt, $max, $comment = '') {
   $color = getCouleurScore($cpt, $max);
-  echo "<td title='$comment' ><font color='$color'>$cpt / $max</font></td>";
+  echo "<td title='$comment' ><span style='color:$color'>$cpt / $max</span></td>";
 }
 
 function printTh($cpt, $max) {
   $color = getCouleurScore($cpt, $max);
-  echo "<th><font color='$color'>$cpt / $max</font></th>";
+  echo "<th><span style='color:$color'>$cpt / $max</span></th>";
 }
 
 class dats_quality {
@@ -317,7 +317,7 @@ class dats_quality {
     echo '<table><tr><th colspan="2" align="center" >';
     $score = $this->getScore();
     $color = getCouleurScore($score, 100);
-    echo "<font color='$color' size='3' >Score: $score %</font>";
+    echo "<span style='color:$color'>Score: $score %</span>";
     echo '</th></tr>';
 
     echo '<tr><th>Dataset description</th>';

@@ -10,9 +10,9 @@ if ($sform->isPortalUser()) {
   $rubId = $_REQUEST['rubriqueId'];
   if (isset($datsId) && !empty($datsId)) {
     if ($sform->addAbo($datsId)) {
-      echo '<p><font size="2" color="green">You will be informed by email when new data are available for this dataset.</font></p>';
+      echo '<p><span class="success">You will be informed by email when new data are available for this dataset.</span></p>';
     } else {
-      echo '<p><font size="2" color="red">We were unable to proceed this request.</font></p>';
+      echo '<p><span class="danger">We were unable to proceed this request.</span></p>';
     }
   }
 } else {

@@ -253,13 +253,13 @@ if ($form->isCat()) {
         }
 
         if ($insertionOk) {
-          echo "<font size=\"3\" color='green'><strong>The dataset has been succesfully inserted in the database</strong></font><br>";
+          echo "<span class='success'><strong>The dataset has been succesfully inserted in the database</strong></span><br>";
 
           $_SESSION['dataset'] = null;
           editDataset($form->dataset->dats_id, $project_name);
 
         } else {
-          echo "<font size=\"3\" color='red'><strong>An error occured during the insertion process.</strong></font><br>";
+          echo "<span class='danger'><strong>An error occured during the insertion process.</strong></span><br>";
 
           $dts = new dataset;
           $dts->dats_id = $form->dataset->dats_id;

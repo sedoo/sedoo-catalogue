@@ -17,10 +17,10 @@ if ($archiveform->isRoot()) {
     if (isset($_POST['bouton_add'])) {
       if ($archiveform->validate()) {
         if ($archiveform->archive()) {
-          echo "<font size=\"3\" color='green'><strong>Dataset succesfully archived.</strong></font><br>";
+          echo "<span class='success'><strong>Dataset succesfully archived.</strong></span><br>";
           $archiveform->reset();
         } else {
-          echo "<font size=\"3\" color='red'><strong>An error occurred.</strong></font><br>";
+          echo "<span class='danger'><strong>An error occurred.</strong></span><br>";
         }
       }
     }

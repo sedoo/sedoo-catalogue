@@ -465,25 +465,25 @@ class site_form_simple extends base_form {
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
         if (strpos($error, 'General') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_general"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_general"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Contact') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Instru') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_instru"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_instru"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Site') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_site"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_site"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Measured') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Derived') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param_calcul"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param_calcul"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Data') === 0) {
-          echo '<a href="#a_use"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="#a_use"><span class="danger">' . $error . '</span></a><br>';
         } else {
-          echo '<font size="3" color="red">' . $error . '</font><br>';
+          echo '<span class="danger">' . $error . '</span><br>';
         }
       }
     }
-    echo '<div id="errors" color="red"></div><br>';
+    echo '<div id="errors" class="danger"></div><br>';
 
     echo '<style>
 				select {
@@ -503,7 +503,7 @@ class site_form_simple extends base_form {
     echo '<SCRIPT LANGUAGE="Javascript" SRC="/js/functions.js"> </SCRIPT>';
     echo $this->getElement('dats_id')->toHTML();
 
-    echo '<table class="metadata-form"><tr><th class="top" colspan="4" align="left"><font color="#467AA7">Required fields are in blue</font></th></tr>';
+    echo '<table class="metadata-form"><tr><th class="top" colspan="4" align="left"><span class="info">Required fields are in blue</span></th></tr>';
     echo '<tr><td colspan="4" align="center"><a href="' . $reqUri . '?datsId=-10">Reset</a></td></tr>';
 
     /**
@@ -512,8 +512,8 @@ class site_form_simple extends base_form {
 
     echo '<tr><th colspan="4" align="center"><a name="a_general" ></a><strong>General information</strong></th></tr>';
     $this->displayErrorsGeneralInfo();
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
-    echo '<tr><td><font>' . $this->getElement('dats_doi')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_doi')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('dats_title')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
+    echo '<tr><td><span>' . $this->getElement('dats_doi')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('dats_doi')->toHTML() . '</td></tr>';
     $this->displayPeriodForm(); // base_form ok
 
     for ($i = 0; $i < $this->dataset->nbProj; $i++) {

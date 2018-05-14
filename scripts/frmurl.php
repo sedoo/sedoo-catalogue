@@ -37,9 +37,9 @@ if ($urlform->isRoot()) {
   } else if (isset($_POST['bouton_add'])) {
     if ($urlform->validate()) {
       if ($urlform->addUrl()) {
-        echo "<font size=\"3\" color='green'><strong>URL succesfully inserted.</strong></font><br>";
+        echo "<span class='success'><strong>URL succesfully inserted.</strong></span><br>";
       } else {
-        echo "<font size=\"3\" color='red'><strong>An error occurred.</strong></font><br>";
+        echo "<span class='danger'><strong>An error occurred.</strong></span><br>";
       }
     }
   }

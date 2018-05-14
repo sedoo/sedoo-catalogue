@@ -82,7 +82,7 @@ function datstype($value, $project_name) {
       printTd(round($qual->getScoreVar(), 0), 20, $qual->commentVar);
       $score = $qual->getScore();
       $color = getCouleurScore($score, 100);
-      echo "<td><strong><font color='$color'>$score %</font></strong></td></tr>";
+      echo "<td><strong><span style='color:$color'>$score %</span></strong></td></tr>";
     }
     echo '</table>';
   } else {
@@ -102,7 +102,7 @@ function datstype($value, $project_name) {
       printTd(round($qual->getScoreVar(), 0), 20, $qual->commentVar);
       $score = $qual->getScore();
       $color = getCouleurScore($score, 100);
-      echo "<td><strong><font color='$color'>$score %</font></strong></td></tr>";
+      echo "<td><strong><span style='color:$color'>$score %</span></strong></td></tr>";
     }
     echo '</table>';
   }

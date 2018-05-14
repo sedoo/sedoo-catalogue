@@ -99,3 +99,19 @@ padding: 2px 11px;
 text-align: center;
 text-decoration: none;
 }
+
+.warning {
+	color: orange;
+}
+
+.danger {
+	color: red;
+}
+
+.success {
+	color: green;
+}
+
+.info {
+	color: #467AA7;
+}

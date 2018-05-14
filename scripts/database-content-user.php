@@ -8,11 +8,11 @@ if (!$db = pg_connect("host=" . $hote . " user=" . $db_user . " dbname=" . $db_n
 
 displayPage();
 
-foreach ($MainProjects as $pro) {
+// foreach ($MainProjects as $pro) {
   if (isset($_POST['button_' . $pro])) {
     genPDF($pro);
   }
-}
+// }
 
 if (!@pg_close($db)) {
   echo "Error during database closure !";

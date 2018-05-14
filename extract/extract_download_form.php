@@ -18,7 +18,7 @@ class extract_download_form extends login_form {
       try {
         $this->reponse = new reponseXml($resultId, $project_name);
       } catch (Exception $e) {
-        echo '<font size="3" color="red">' . $e->getMessage() . '</font><br>';
+        echo '<span class="danger">' . $e->getMessage() . '</span><br>';
       }
 
       if (!$this->isLogged()) {
@@ -56,7 +56,7 @@ class extract_download_form extends login_form {
       if ($this->testUser()) {
         $this->reponse->toHtml();
       } else {
-        echo '<font size="3" color="red">You cannot access this page.</font><br>';
+        echo '<span class="danger">You cannot access this page.</span><br>';
       }
     }
   }

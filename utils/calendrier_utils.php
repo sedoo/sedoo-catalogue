@@ -4,7 +4,7 @@ require_once 'bd/data_availability.php';
 
 function afficheListeAnnees($year, $yearMin, $yearMax, $url) {
   echo "<a href='$url'>Back</a><br/><br/>";
-  echo '<center><strong>';
+  echo '<div class="aligncenter"><strong>';
   if ($yearMin < $year) {
     echo "<a href='$url&year=" . ($year - 1) . "'>&lt;&lt;</a>";
   }
@@ -26,7 +26,7 @@ function afficheListeAnnees($year, $yearMin, $yearMax, $url) {
     echo "<a href='$url&year=" . ($year + 1) . "'>&gt;&gt;</a></strong>";
   }
 
-  echo '</center><br/><br/>';
+  echo '</div><br/><br/>';
 }
 
 function afficheCalendriers($ins_dats_id, $var_id, $place_id, $year) {

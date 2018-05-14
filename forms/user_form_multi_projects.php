@@ -192,10 +192,10 @@ class user_form_new extends login_form {
     // Affichage des erreurs
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     } else if ($this->msg) {
-      echo "<font size=\"3\" color='green'>$this->msg</font><br>";
+      echo "<span class='success'>$this->msg</span><br>";
     }
 
     $reqUri = $_SERVER['REQUEST_URI'];
@@ -274,20 +274,20 @@ class user_form_new extends login_form {
           $msg = "You have already submitted a request. You will get an answer by email soon.";
         }
 
-        echo "<tr width=600px><td width=600px colspan='3' align='center' class='ui-state-highlight'><font style='color:green;'>$msg</font></td></tr>";
+        echo "<tr width=600px><td width=600px colspan='3' align='center' class='ui-state-highlight'><span class='success'>$msg</span></td></tr>";
       }
     } else {
       if (!isset($user->abstract) && !isset($this->user->abstract) && !isset($this->user->abstract)) {
         if ($isPortalForm == false) {
-          echo '<tr><td><font color="#467AA7">' . $this->getElement('abstract')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('abstract')->toHTML() . '</td></tr>';
+          echo '<tr><td><span class="info">' . $this->getElement('abstract')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('abstract')->toHTML() . '</td></tr>';
           $this->addRule('abstract', 'Description of Work is required', 'required');
           $this->addRule('abstract', 'Description of Work must contain at least 350 characters', 'minlength', 350);
         }
       } else {
-        echo '<tr><td><font>' . $this->getElement('abstract')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('abstract')->toHTML() . '</td></tr>';
+        echo '<tr><td><span>' . $this->getElement('abstract')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('abstract')->toHTML() . '</td></tr>';
       }
 
-      echo '<tr><td colspan="3" align="center"><font color="#467AA7">Data and Publication Policy</font></td></tr>';
+      echo '<tr><td colspan="3" align="center"><span class="info">Data and Publication Policy</span></td></tr>';
       echo '<tr><td colspan="3" >';
       echo 'With this form, I fully accept the <a href="/portal/Data-Policy" target="_blank" >data and publication policy</a><br/><br/>In particular :<br>';
       echo $this->getElement('chkChart')->toHTML();
@@ -301,25 +301,25 @@ class user_form_new extends login_form {
 	
   function displayFormRegister($update = false, $isPortalForm = false) {
     global $MainProjects;
-    echo '<table><tr><td colspan="3" align="center"><font color="#467AA7">Mandatory fields are in blue</font></td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('firstname')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('firstname')->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('lastname')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('lastname')->toHTML() . '</td></tr>';
+    echo '<table><tr><td colspan="3" align="center"><span class="info">Mandatory fields are in blue</span></td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('firstname')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('firstname')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('lastname')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('lastname')->toHTML() . '</td></tr>';
 
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('affiliation')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('affiliation')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('affiliation')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('affiliation')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="3" align="center"><strong>Place of Work</strong></td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('street')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('street')->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('zip')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('zip')->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('city')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('city')->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('country')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('country')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('street')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('street')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('zip')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('zip')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('city')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('city')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('country')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('country')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="3" align="center"><strong>Contact</strong></td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('phone')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('phone')->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('mail')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('mail')->toHTML() . '</td></tr>';
-    echo '<tr><td colspan="3" align="center"><strong>Planned Work</strong></font></td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('abstract')->getLabel() . '</font></td><td colspan="2">' . $this->getElement('abstract')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('phone')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('phone')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('mail')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('mail')->toHTML() . '</td></tr>';
+    echo '<tr><td colspan="3" align="center"><strong>Planned Work</strong></span></td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('abstract')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('abstract')->toHTML() . '</td></tr>';
     if ($update == true) {
       // foreach ( $MainProjects as $proj ) {
       //   if (array_key_exists ( strtolower ( $proj ) . 'ApplicationDate', $this->user->attrs [strtolower ( $proj )] ) || array_key_exists ( strtolower ( $proj ) . 'ApplicationDate', $this->user->attrs )) {
-      //     echo '<tr><td><font> Work in ' . $proj . ' (more information if any)  </font></td><td colspan="2">' . $this->getElement ( $proj  . '_abstract' )->toHTML () . '</td></tr>';
+      //     echo '<tr><td><span> Work in ' . $proj . ' (more information if any)  </span></td><td colspan="2">' . $this->getElement ( $proj  . '_abstract' )->toHTML () . '</td></tr>';
       //   }
       // }
     }
@@ -386,33 +386,33 @@ class user_form_new extends login_form {
                 $msg = "You have already submitted a request. You will get an answer by email soon.";
               }
 
-              echo "<tr width=600px><td width=600px colspan='3' align='center' class='ui-state-highlight'><font style='color:green;'>$msg</font></td></tr>";
+              echo "<tr width=600px><td width=600px colspan='3' align='center' class='ui-state-highlight'><span class='success'>$msg</span></td></tr>";
             }
           } else {
             if ($isPortalForm == false) {
-              echo '<tr><td colspan="3" align="center" class="ui-state-highlight"><strong>Planned Work</strong></font></td></tr>';
+              echo '<tr><td colspan="3" align="center" class="ui-state-highlight"><strong>Planned Work</strong></span></td></tr>';
 
               if (!isset($user->abstract) && !isset($user->attrs[strtolower($proj) . 'Abstract'][0])) {
-                echo '<tr  class="ui-state-highlight"><td><font color="#467AA7">' . $this->getElement($proj . '_abstract')->getLabel() . '</font></td><td colspan="2">' . $this->getElement($proj . '_abstract')->toHTML() . '</td></tr>';
+                echo '<tr  class="ui-state-highlight"><td><span class="info">' . $this->getElement($proj . '_abstract')->getLabel() . '</span></td><td colspan="2">' . $this->getElement($proj . '_abstract')->toHTML() . '</td></tr>';
                 $this->addRule($proj . '_abstract', 'Description of Work is required', 'required');
                 $this->addRule($proj . '_abstract', 'Description of Work must contain at least 350 characters', 'minlength', 350);
               } else {
-                echo '<tr  class="ui-state-highlight"><td><font>' . $this->getElement($proj . '_abstract')->getLabel() . '</font></td><td colspan="2">' . $this->getElement($proj . '_abstract')->toHTML() . '</td></tr>';
+                echo '<tr  class="ui-state-highlight"><td><span>' . $this->getElement($proj . '_abstract')->getLabel() . '</span></td><td colspan="2">' . $this->getElement($proj . '_abstract')->toHTML() . '</td></tr>';
               }
 
             }
-            echo "<tr class='ui-state-highlight'><td colspan='2'><font color='black'>Do you participate in one of the $proj working groups ?</font></td><td><font color='black'>";
+            echo "<tr class='ui-state-highlight'><td colspan='2'><span>Do you participate in one of the $proj working groups ?</span></td><td><span>";
             for ($i = 1; $i <= count($this->projects[$proj]); $i++) {
               echo '<br>' . $this->getElement($proj . '_wg_' . $i)->toHTML() . '&nbsp;' . $this->getElement($proj . '_wg_' . $i)->getLabel();
             }
-            echo '</font></td></tr>';
+            echo '</span></td></tr>';
 
             if (constant(strtolower($proj) . 'SubProjects') != '') {
-              echo '<tr  class="ui-state-highlight"><td colspan="2"><font color="black">' . $this->getElement($proj . '_sub_project')->getLabel() . '</font></td>';
+              echo '<tr  class="ui-state-highlight"><td colspan="2"><span>' . $this->getElement($proj . '_sub_project')->getLabel() . '</span></td>';
               echo '<td>' . $this->getElement($proj . '_sub_project')->toHTML() . '</td></tr>';
             }
-            echo '<tr class=""><td class="ui-state-highlight" colspan="3" align="center"><font color="#467AA7">Data and Publication Policy</font></td></tr>';
-            echo '<tr class="ui-state-highlight"><td colspan="3" ><font color="black">';
+            echo '<tr class=""><td class="ui-state-highlight" colspan="3" align="center"><span class="info">Data and Publication Policy</span></td></tr>';
+            echo '<tr class="ui-state-highlight"><td colspan="3" ><span>';
             echo "With this form, I fully accept the $proj data and publication policy (<a href='/$proj/Data-Policy/" . $proj . "_DataPolicy.pdf' target='_blank'>click here to access pdf file</a>). In particular:<br>";
             echo $this->getElement($proj . '_chkChart')->toHTML();
             //En commentaire car je n'ai pas pu le rendre générique pour l'instant - Nizar
@@ -420,7 +420,7 @@ class user_form_new extends login_form {
             echo "<br/><br/>In the case of any publication$tmp using datasets or products obtained in the database:<br>";
             echo "<br/><br/>If I process a dataset or product based on data received under the $proj data policy:<br>";
              */
-            echo '</font>';
+            echo '</span>';
           }
           echo '</td></tr>';
         }
@@ -433,9 +433,9 @@ class user_form_new extends login_form {
 	}
 	
   private function displayFormCheck() {
-    echo '<br/><font size ="3.5">Please enter your email address:</font>';
+    echo '<br/><span>Please enter your email address:</span>';
     echo '<table>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('mail')->getLabel() . '</font></td><td>' . $this->getElement('mail')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('mail')->getLabel() . '</span></td><td>' . $this->getElement('mail')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_check')->toHTML() . '</td></tr>';
     echo '</table>';
 	}
@@ -448,8 +448,8 @@ class user_form_new extends login_form {
 	
   private function displayFormLogin() {
     echo '<table>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('mail')->getLabel() . '</font></td><td>' . $this->getElement('mail')->toHTML() . '</td></tr>';
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('password')->getLabel() . '</font></td><td>' . $this->getElement('password')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('mail')->getLabel() . '</span></td><td>' . $this->getElement('mail')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('password')->getLabel() . '</span></td><td>' . $this->getElement('password')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_login_reg')->toHTML() . '</td></tr>';
     echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_forgot')->toHTML() . '</td></tr>';
     echo '</table>';
@@ -608,7 +608,7 @@ class user_form_new extends login_form {
       }
 
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
+      echo "<span class='danger'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></span><br>";
       $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande[$proj]);
       return false;
     }
@@ -642,7 +642,7 @@ class user_form_new extends login_form {
         return false;
       }
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
+      echo "<span class='danger'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></span><br>";
       $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande[$proj]);
       return false;
     }
@@ -675,7 +675,7 @@ class user_form_new extends login_form {
         return false;
       }
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
+      echo "<span class='danger'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></span><br>";
       $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande[$proj]);
       return false;
     }
@@ -693,7 +693,7 @@ class user_form_new extends login_form {
       }
       return true;
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
+      echo "<span class='danger'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></span><br>";
       return false;
     }
 	}
@@ -761,7 +761,7 @@ class user_form_new extends login_form {
         return false;
       }
     } catch (Exception $e) {
-      echo "<font size=\"3\" color='red'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></font><br>";
+      echo "<span class='danger'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></span><br>";
       $this->mailAdmin('ERREUR', "Erreur lors de la mise d'1 utilisateur.", $e, $this->demande);
       return false;
     }

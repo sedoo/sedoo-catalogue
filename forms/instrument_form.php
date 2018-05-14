@@ -328,25 +328,25 @@ class instrument_form extends base_form {
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
         if (strpos($error, 'General') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_general"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_general"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Contact') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Instru') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_instru"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_instru"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Site') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_site"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_site"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Measured') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Derived') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param_calcul"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param_calcul"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Data') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_use"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_use"><span class="danger">' . $error . '</span></a><br>';
         } else {
-          echo '<font size="3" color="red">' . $error . '</font><br>';
+          echo '<span class="danger">' . $error . '</span><br>';
         }
       }
     }
-    echo '<div id="errors" color="red"></div><br>';
+    echo '<div id="errors" class="danger"></div><br>';
 
     if (strpos($_SERVER['REQUEST_URI'], '&datsId')) {
       $reqUri = substr($_SERVER['REQUEST_URI'], 0, strpos($_SERVER['REQUEST_URI'], '&datsId'));
@@ -369,12 +369,12 @@ class instrument_form extends base_form {
     echo $this->getElement('dats_id')->toHTML();
     echo $this->getElement('sensor_id')->toHTML();
 
-    echo '<table><tr><th class="top" colspan="3" align="left"><font color="#467AA7">Required fields are in blue</font></td><th class="top" align="right">';
+    echo '<table><tr><th class="top" colspan="3" align="left"><span class="info">Required fields are in blue</span></td><th class="top" align="right">';
     echo '</td></tr>';
     echo '<tr><td colspan="4" align="center"><a href="' . $reqUri . '?datsId=-10">Reset</a></td></tr>';
     echo '<tr><th colspan="4" align="center"><a name="a_general" ></a><strong>General information</strong></th></tr>';
     $this->displayErrorsGeneralInfo();
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('dats_title')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
     echo '<tr><td rowspan="2">' . $this->getElement('period')->getLabel() . '</td><td rowspan="2">' . $this->getElement('period')->toHTML() . '</td><td>' . $this->getElement('dats_date_begin')->getLabel() . '</td><td>' . $this->getElement('dats_date_end')->getLabel() . "</td></tr>";
     echo '<tr><td>' . $this->getElement('dats_date_begin')->toHTML() . '</td><td>' . $this->getElement('dats_date_end')->toHTML() . '<br>' . $this->getElement('dats_date_end_not_planned')->toHTML() . '&nbsp;' . $this->getElement('dats_date_end_not_planned')->getLabel() . '</td></tr>';
 

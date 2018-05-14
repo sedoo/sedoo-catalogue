@@ -244,7 +244,7 @@ class treeByPlat {
     $tree = new HTML_TreeMenu();
     foreach ($plat_list as $plat) {
       $racine = new HTML_TreeNode(array(
-        'text' => '<font style="font-size:110%;">' . $plat->gcmd_plat_name . '</font>',
+        'text' => '<span>' . $plat->gcmd_plat_name . '</span>',
       ));
       $cpt = $this->addPlatformsFromType($racine, $plat);
       if ($cpt > 0) {
@@ -273,26 +273,26 @@ class treeByPlat {
     $cpt0 = 0;
     foreach ($sites1 as $site1) {
       $node1 = new HTML_TreeNode(array(
-        'text' => '<font style="font-size:110%;">' . $site1->place_name . '</font>',
+        'text' => '<span>' . $site1->place_name . '</span>',
         'expanded' => 'false',
       ));
       $cpt1 = 0;
       $sites2 = $p->getChildrenSites($site1->place_id);
       foreach ($sites2 as $site2) {
         $node2 = new HTML_TreeNode(array(
-          'text' => '<font style="font-size:110%;">' . $site2->place_name . '</font>',
+          'text' => '<span>' . $site2->place_name . '</span>',
         ));
         $cpt2 = 0;
         $sites3 = $p->getChildrenSites($site2->place_id);
         foreach ($sites3 as $site3) {
           $node3 = new HTML_TreeNode(array(
-            'text' => '<font style="font-size:110%;">' . $site3->place_name . '</font>',
+            'text' => '<span>' . $site3->place_name . '</span>',
           ));
           $cpt3 = 0;
           $sites4 = $p->getChildrenSites($site3->place_id);
           foreach ($sites4 as $site4) {
             $node4 = new HTML_TreeNode(array(
-              'text' => '<font style="font-size:110%;">' . $site4->place_name . '</font>',
+              'text' => '<span>' . $site4->place_name . '</span>',
             ));
             if ($cpt4 > 0) {
               $cpt3++;
@@ -327,7 +327,7 @@ class treeByPlat {
       }
 
       $node0 = new HTML_TreeNode(array(
-        'text' => "<font style='font-size:110%;'>$others</font>",
+        'text' => "<span>$others</span>",
       ));
       $cpt1 = $this->addDatasets($node0, $platId, 0);
       if ($cpt1 > 0) {
@@ -362,7 +362,7 @@ class treeByPlat {
       if ($arbre->EmptyTab[0] == false) {
         echo '<th>';
         if ($datsType == 0) {
-          echo "<font $selectedStyle >IN SITU</font>";
+          echo "<span $selectedStyle >IN SITU</span>";
         } else {
           echo '<a href="' . treeByPlat::getUrl(0) . '">IN SITU</a>';
         }
@@ -372,7 +372,7 @@ class treeByPlat {
       if ($arbre->EmptyTab[2] == false) {
         echo '<th>';
         if ($datsType == 2) {
-          echo "<font $selectedStyle>MODEL</font>";
+          echo "<span $selectedStyle>MODEL</span>";
         } else {
           echo '<a href="' . treeByPlat::getUrl(2) . '">MODEL</a>';
         }
@@ -382,7 +382,7 @@ class treeByPlat {
       if ($arbre->EmptyTab[1] == false) {
         echo '<th>';
         if ($datsType == 1) {
-          echo "<font $selectedStyle>SATELLITE</font>";
+          echo "<span $selectedStyle>SATELLITE</span>";
         } else {
           echo '<a href="' . treeByPlat::getUrl(1) . '">SATELLITE</a>';
         }
@@ -392,7 +392,7 @@ class treeByPlat {
       if ($arbre->EmptyTab[3] == false) {
         echo '<th>';
         if ($datsType == 3) {
-          echo "<font $selectedStyle>VALUE-ADDED DATASETS</font>";
+          echo "<span $selectedStyle>VALUE-ADDED DATASETS</span>";
         } else {
           echo '<a href="' . treeByPlat::getUrl(3) . '">VALUE-ADDED DATASETS</a>';
         }

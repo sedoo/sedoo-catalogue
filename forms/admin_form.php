@@ -73,7 +73,7 @@ class admin_form extends login_form {
     if ($group) {
       if ($group == -1) {
         $this->_errors[] = "Please select a group in the list";
-        echo "<font size=\"3\" color='red'><strong>Please select a group in the list.</strong></font><br>";
+        echo "<span class='danger'><strong>Please select a group in the list.</strong></span><br>";
         return true;
       }
       $nvAttrs["memberOf"] = $group;
@@ -135,7 +135,7 @@ class admin_form extends login_form {
             }
             $this->readPendingRequestsList();
             $this->readRegisteredUsersList();
-            echo "<font size=\"3\" color='green'><strong>The user has been registered successfully.</strong></font><br>";
+            echo "<span class='success'><strong>The user has been registered successfully.</strong></span><br>";
             return true;
           } else {
             log_error('Echec modif');
@@ -175,7 +175,7 @@ class admin_form extends login_form {
         $this->sendMailRejet($user->mail, $this->getProjectAdminEmail($project_name));
         $this->readPendingRequestsList();
         $this->readRejectedRequestsList();
-        echo "<font size=\"3\" color='green'><strong>The request has been rejected successfully.</strong></font><br>";
+        echo "<span class='success'><strong>The request has been rejected successfully.</strong></span><br>";
         return true;
       } else {
         return false;
@@ -196,7 +196,7 @@ class admin_form extends login_form {
       if ($ldapConn->modifyAttribute($user->dn, strtolower($project_name) . "Status", STATUS_PENDING)) {
         $this->readPendingRequestsList();
         $this->readRejectedRequestsList();
-        echo "<font size=\"3\" color='green'><strong>The request has been restored successfully.</strong></font><br>";
+        echo "<span class='success'><strong>The request has been restored successfully.</strong></span><br>";
         return true;
       } else {
         return false;
@@ -246,7 +246,7 @@ class admin_form extends login_form {
               }
               $ldapConn->addAttributes($user->dn, $nvAttrs);
             }
-            echo "<font size=\"3\" color='green'><strong>The user has been updated successfully.</strong></font><br>";
+            echo "<span class='success'><strong>The user has been updated successfully.</strong></span><br>";
             $this->readRegisteredUsersList();
             return true;
           } else {
@@ -258,7 +258,7 @@ class admin_form extends login_form {
           return false;
         }
       } else {
-        echo "<font size=\"3\" color='red'><strong>No modifications to save.</strong></font><br>";
+        echo "<span class='danger'><strong>No modifications to save.</strong></span><br>";
         return true;
       }
     } else {
@@ -293,7 +293,7 @@ class admin_form extends login_form {
         $this->readRegisteredUsersList();
         $this->readPendingRequestsList();
         $this->readRejectedRequestsList();
-        echo "<font size=\"3\" color='green'><strong>The user has been deleted successfully.</strong></font><br>";
+        echo "<span class='success'><strong>The user has been deleted successfully.</strong></span><br>";
         return true;
       }
       $ldapConn->close();
@@ -311,7 +311,7 @@ class admin_form extends login_form {
       if ($ldapConn->deleteEntry($user->dn)) {
         $this->readPendingRequestsList();
         $this->readRejectedRequestsList();
-        echo "<font size=\"3\" color='green'><strong>The request has been deleted successfully.</strong></font><br>";
+        echo "<span class='success'><strong>The request has been deleted successfully.</strong></span><br>";
         return true;
       } else {
         return false;

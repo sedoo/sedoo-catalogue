@@ -15,10 +15,10 @@ if ($jform->isRoot()) {
     if (isset($_POST['bouton_add'])) {
       if ($jform->validate()) {
         if ($jform->addEntry()) {
-          echo "<font size=\"3\" color='green'><strong>Entry succesfully inserted.</strong></font><br>";
+          echo "<span class='success'><strong>Entry succesfully inserted.</strong></span><br>";
           $jform->resetAddForm();
         } else {
-          echo "<font size=\"3\" color='red'><strong>An error occurred.</strong></font><br>";
+          echo "<span class='danger'><strong>An error occurred.</strong></span><br>";
         }
       }
     }
@@ -28,7 +28,7 @@ if ($jform->isRoot()) {
   }
 } else if ($jform->isLogged()) {
   echo "<h1>Admin Corner</h1>";
-  echo "<font size=\"3\" color='red'><strong>You cannot view this part of the site.</strong></font><br>";
+  echo "<span class='danger'><strong>You cannot view this part of the site.</strong></span><br>";
 } else {
   $jform->displayLGForm("", true);
 }

@@ -298,19 +298,19 @@ class mod_form extends base_form {
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
         if (strpos($error, 'Data descr') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_general"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_general"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Contact') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_contact"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Model') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_model"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_model"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Coverage') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_cover"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_cover"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Param') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_param"><span class="danger">' . $error . '</span></a><br>';
         } else if (strpos($error, 'Data') === 0) {
-          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_use"><font size="3" color="red">' . $error . '</font></a><br>';
+          echo '<a href="' . $_SERVER['REQUEST_URI'] . '#a_use"><span class="danger">' . $error . '</span></a><br>';
         } else {
-          echo '<font size="3" color="red">' . $error . '</font><br>';
+          echo '<span class="danger">' . $error . '</span><br>';
         }
       }
     }
@@ -329,18 +329,18 @@ class mod_form extends base_form {
     echo '<tr><th colspan="4" align="center"><a name="a_model" ></a><strong>Model information</strong></td></tr>';
     $this->displayErrorsModel();
 
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('model_categ')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('model_categ')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('model_categ')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('model_categ')->toHTML() . '</td></tr>';
 
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('model')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('model')->toHTML();
+    echo '<tr><td><span class="info">' . $this->getElement('model')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('model')->toHTML();
     echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_model')->toHTML() . '</td></tr>';
 
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('simu')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('simu')->toHTML();
+    echo '<tr><td><span class="info">' . $this->getElement('simu')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('simu')->toHTML();
     echo '&nbsp;&nbsp;or add new&nbsp;' . $this->getElement('new_simu')->toHTML() . '</td></tr>';
 
     echo '<tr><th colspan="4" align="center"><a name="a_descr" ><a name="a_general" ></a><strong>Data description</strong></td></tr>';
     $this->displayErrorsModDataDescr();
-    echo '<tr><td><font color="#467AA7">' . $this->getElement('dats_title')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
-    echo '<tr><td><font>' . $this->getElement('dats_doi')->getLabel() . '</font></td><td colspan="3">' . $this->getElement('dats_doi')->toHTML() . '</td></tr>';
+    echo '<tr><td><span class="info">' . $this->getElement('dats_title')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('dats_title')->toHTML() . '</td></tr>';
+    echo '<tr><td><span>' . $this->getElement('dats_doi')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('dats_doi')->toHTML() . '</td></tr>';
 
     for ($i = 0; $i < $this->dataset->nbProj; $i++) {
       echo '<tr>';

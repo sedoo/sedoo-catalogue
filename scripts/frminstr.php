@@ -302,11 +302,11 @@ if ($form->isCat($form->dataset, $project_name)) {
         //   }
 
         // }
-        echo "<font size=\"3\" color='green'><strong>Registration succesfull</strong></font><br>";
+        echo "<span class='success'><strong>Registration succesfull</strong></span><br>";
         $_SESSION['dataset'] = null;
         editDataset($form->dataset->dats_id, $project_name);
       } else {
-        echo "<font size=\"3\" color='red'><strong>An error occured during the insertion process.</strong></font><br>";
+        echo "<span class='danger'><strong>An error occured during the insertion process.</strong></span><br>";
 
         $dts = new dataset();
         $dts->dats_id = $form->dataset->dats_id;
@@ -326,8 +326,8 @@ if ($form->isCat($form->dataset, $project_name)) {
 } else if ($form->isLogged()) {
 
   echo "<a href='/$project_name/'>&lt;&lt;&nbsp;Return</a><br/>";
-  echo "<center><img src='/img/interdit.png' heigth='50' width='50' /></center>";
-  echo "<br/><font size=\"3\" color='red'><center><strong>You cannot modify this dataset.</strong></center></font><br/>";
+  echo "<div class='aligncenter'><img src='/img/interdit.png' heigth='50' width='50' /></div>";
+  echo "<br/><span class='danger'><div class='aligncenter'><strong>You cannot modify this dataset.</strong></div></span><br/>";
 } else {
   $form->displayLGForm("", true);
 }

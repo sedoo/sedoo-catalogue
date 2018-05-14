@@ -156,7 +156,7 @@ class groups_form extends login_form {
     // Affichage des erreurs
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     }
     if ($this->group) {
@@ -191,7 +191,7 @@ class groups_form extends login_form {
     // Affichage des erreurs
     if (!empty($this->_errors)) {
       foreach ($this->_errors as $error) {
-        echo '<font size="3" color="red">' . $error . '</font><br>';
+        echo '<span class="danger">' . $error . '</span><br>';
       }
     }
     $reqUri = $_SERVER['REQUEST_URI'];
