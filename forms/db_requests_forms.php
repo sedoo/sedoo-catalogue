@@ -90,7 +90,7 @@ class db_requests_forms extends login_form {
       echo '<th>User</th>';
     }
 
-    echo '<th>Begin / End</th><th>Status (values)</th><th></th></tr>';
+    echo '<th>Begin / End</th><th>Status (values)</th><th colspan="2"></th></tr>';
     foreach ($this->requetes as $r) {
 
       if ($r->isRunning()) {
@@ -110,7 +110,7 @@ class db_requests_forms extends login_form {
       }
 
       echo "<td>" . $r->dateDeb->format('Y-m-d H:i')
-      . "</td><td rowspan='2'>" . $this->printStatus($r->etat, $r->killed, $r->nbValeurs) . "</td><td rowspan='2' style='white-space : nowrap;'>"
+      . "</td><td rowspan='2'>" . $this->printStatus($r->etat, $r->killed, $r->nbValeurs) . "</td><td rowspan='2' colspan='2' style='white-space : nowrap;'>"
       . $this->printResume($r->xml) . "</td></tr>";
 
       echo '<tr><td>' . (($r->dateFin) ? $r->dateFin->format('Y-m-d H:i') : '') . '</td></tr>';
