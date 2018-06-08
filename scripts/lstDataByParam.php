@@ -13,13 +13,10 @@ class varIds {
 }
 
 $projects = get_filtre_projets($project_name);
-
 $gcmd = new gcmd_science_keyword();
 echo "<h1>Parameter list</h1>";
 
 include 'legende.php';
-
-echo "<ul>";
 
 if (isset($projects) && !empty($projects)) {
   $query = "select * from gcmd_science_keyword where gcmd_level = 2 and gcmd_id in (select distinct gcm_gcmd_id from gcmd_science_keyword where gcmd_id in (select distinct gcmd_id from variable where var_id in (select distinct var_id from dats_var where dats_id in (select distinct dats_id from dats_proj where project_id in ($projects)) and dats_id in (select distinct dats_id from dataset where is_requested is null AND (is_archived is null OR NOT is_archived))))) order by gcmd_name";

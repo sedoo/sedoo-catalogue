@@ -6,9 +6,9 @@ require_once "scripts/filtreProjets.php";
 require_once "conf/conf.php";
 
 // Database Identifiants
-$db_name = DB_NAME;
-$hote = DB_HOST;
-$db_user = DB_USER;
+$db_name = DB_NAME; // inutilisé ?
+$hote = DB_HOST; // inutilisé ?
+$db_user = DB_USER; // inutilisé ?
 $db = '';
 $Dats_Projects = array();
 // Projects Ids
