@@ -196,7 +196,9 @@ class ElasticSearchUtils {
 					$nodeConf ['dataLink'] = $url->url;
 					$nodeConf ['dataIcon'] = $root . "/scripts/images/dataPurple.gif";
 					$db = new database ();
-					$database = $db->getByDatsId ( $dts->dats_id );
+					if ($dts->dats_id != null) {
+						$database = $db->getByDatsId ( $dts->dats_id );
+					}
 					if (isset ( $database )) {
 						$nodeConf ['dataTitle'] = $database->database_name . ' FTP access';
 					} else {
