@@ -310,7 +310,7 @@ class search_form extends HTML_QuickForm {
 		$this->gcmd_sensor = $this->exportValue ( 'sensor_gcmd' );
 		$gcmd_ids = $this->exportValue ( 'gcmd_science_key' );
 		$this->gcmd_variable = 0;
-		for($j = 3; $j >= 0; $j --) {
+		for ($j = 3; $j >= 0; $j --) {
 			
 			if (isset ( $gcmd_ids [$j] ) && $gcmd_ids [$j] > 0) {
 				$this->gcmd_variable = $gcmd_ids [$j];

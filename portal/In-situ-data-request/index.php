@@ -7,7 +7,7 @@ require_once 'conf/conf.php';
 
 require_once 'conf/define-project.php'; ;
 $project_url = "/Cerdanya";
-$titreMilieu = "";
+$titreMilieu = "In Situ Data Request";
 ob_start();
 $_REQUEST['requested'] = true;
 

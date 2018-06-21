@@ -593,7 +593,7 @@ class HTML2PDF_parsingCss
         if ($legacy) {
             foreach ($legacy as $legacyName => $legacyValue) {
                 if (is_array($legacyValue)) {
-                    foreach($legacyValue as $legacy2Name => $legacy2Value)
+                    foreach ($legacyValue as $legacy2Name => $legacy2Value)
                         $this->value[$legacyName][$legacy2Name] = $legacy2Value;
                 } else {
                     $this->value[$legacyName] = $legacyValue;

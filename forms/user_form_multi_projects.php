@@ -968,7 +968,7 @@ class user_form_new extends login_form {
       $this->exclAttrs[] = 'telephoneNumber';
     }
     if ($update == true) {
-      // foreach($MainProjects as $proj){
+      // foreach ($MainProjects as $proj){
       //   if (isset ( $this->user->attrs [strtolower($proj).'Abstract'] ) || isset ( $this->user->attrs [strtolower($proj)] [strtolower($proj).'Abstract'] )) {
       //     if (isset ( $this->user->attrs [strtolower($proj).'Abstract'] )) {
       //       if (is_array ( $this->user->attrs [strtolower($proj).'Abstract'] ))

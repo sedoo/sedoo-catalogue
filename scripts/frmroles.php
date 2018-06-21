@@ -37,7 +37,7 @@ foreach ($roles as $role) {
 echo '<th></th></tr>';
 $dr = new dats_role();
 foreach ($liste_dats as $dats) {
-  echo "<tr><td><a href='$project_url/?editDatsId=$dats->dats_id'>$dats->dats_title</a></td>";
+  echo "<tr><td><a href='https://$_SERVER[HTTP_HOST]/?editDatsId=$dats->dats_id'>$dats->dats_title</a></td>";
   $cpt = 0;
   $isCore = false;
   $isAsso = false;
@@ -58,16 +58,16 @@ foreach ($liste_dats as $dats) {
 
   $comment = '';
   if ($cpt == 0) {
-    $comment = "No role defined for $project_name users.";
+    $comment = "No role defined for " . MainProject . " users.";
   } else {
     if ($isAsso && !$isCore) {
       $comment = 'This dataset should also be accessible to core users.';
     }
   }
   if ($comment) {
-    echo "<td><a href='$project_url/Admin-Corner?adm&pageId=6&datsId=$dats->dats_id'><img src='/img/avertissement-icone-16.png' title='$comment' /></a></td>";
+    echo "<td><a href='https://$_SERVER[HTTP_HOST]/Admin-Corner?adm&pageId=6&datsId=$dats->dats_id'><img src='/img/avertissement-icone-16.png' title='$comment' /></a></td>";
   } else {
-    echo "<td><a href='$project_url/Admin-Corner?adm&pageId=6&datsId=$dats->dats_id'><img src='/img/modifier-icone-16.png' title='Edit'></a></td>";
+    echo "<td><a href='https://$_SERVER[HTTP_HOST]/Admin-Corner?adm&pageId=6&datsId=$dats->dats_id'><img src='/img/modifier-icone-16.png' title='Edit'></a></td>";
   }
 
   echo '</tr>';

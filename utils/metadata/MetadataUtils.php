@@ -240,7 +240,7 @@ class MetadataUtils {
 				$platformName = trim ( $site->place_name );
 			}
 			
-			for($i = 0; $i < count ( $dats->dats_sensors ); $i ++) {
+			for ($i = 0; $i < count ( $dats->dats_sensors ); $i ++) {
 				$instrumentGcmd = null;
 				$instrumentName = '';
 				if (isset ( $dats->dats_sensors [$i]->sensor->manufacturer )) {

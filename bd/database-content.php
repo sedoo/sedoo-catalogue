@@ -133,7 +133,7 @@ function ecrireEtat($db, $plateformes, $isPDF = false) {
       }
       foreach ($p->ds as $ds) {
         if ($project_name == strtolower(MainProject) || $isPDF == true) {
-          $server_response .= "<tr style = 'page-break-inside: avoid;'><td style = 'page-break-inside: avoid;' width = 40%><h5 style='color: #31708f;page-break-inside: avoid;'>" . $ds->dats_title . "</h5></td>" . "<td style = 'page-break-inside: avoid;' width = 25%><h5 style = 'page-break-inside: avoid;'>" . $ds->uids[0] . "</h5></td>" . "<td style = 'page-break-inside: avoid;' width = 10%><h5 style = 'page-break-inside: avoid;'>" . $ds->dd . "</h5></td>" . "<td style = 'page-break-inside: avoid;' width = 10%><h5 style = 'page-break-inside: avoid;'>" . $ds->df . "</h5></td>" . "<td style = 'page-break-inside: avoid;' width = 15%><h5 style = 'page-break-inside: avoid;'><a href=\"http://$_SERVER[HTTP_HOST]?editDatsId=$ds->dats_id&datsId=$ds->dats_id\">View metadata</a></h5></td></tr>";
+          $server_response .= "<tr style = 'page-break-inside: avoid;'><td style = 'page-break-inside: avoid;' width = 40%><h5 style='color: #31708f;page-break-inside: avoid;'>" . $ds->dats_title . "</h5></td>" . "<td style = 'page-break-inside: avoid;' width = 25%><h5 style = 'page-break-inside: avoid;'>" . $ds->uids[0] . "</h5></td>" . "<td style = 'page-break-inside: avoid;' width = 10%><h5 style = 'page-break-inside: avoid;'>" . $ds->dd . "</h5></td>" . "<td style = 'page-break-inside: avoid;' width = 10%><h5 style = 'page-break-inside: avoid;'>" . $ds->df . "</h5></td>" . "<td style = 'page-break-inside: avoid;' width = 15%><h5 style = 'page-break-inside: avoid;'><a href=\"https://$_SERVER[HTTP_HOST]?editDatsId=$ds->dats_id&datsId=$ds->dats_id\">View metadata</a></h5></td></tr>";
         } else {
           $server_response .= "<tr><td style='color: #31708f;' max-width = 30% width = 30% >" . $ds->dats_title . "</td>" . "<td width = 5%>" . $ds->dats_id . "</td>";
           if ($ds->ins_date != $ds->last_update) {
@@ -147,7 +147,7 @@ function ecrireEtat($db, $plateformes, $isPDF = false) {
             $server_response .= $roles[$ds->role[0]];
           }
 
-          $server_response .= "</td><td width = 10%>" . $ds->dd . "</td>" . "<td width = 10%>" . $ds->df . "</td>" . "<td width = 10%><a href=\"http://$_SERVER[HTTP_HOST]?editDatsId=$ds->dats_id&datsId=$ds->dats_id\">View metadata</a></td></tr>";
+          $server_response .= "</td><td width = 10%>" . $ds->dd . "</td>" . "<td width = 10%>" . $ds->df . "</td>" . "<td width = 10%><a href=\"https://$_SERVER[HTTP_HOST]?editDatsId=$ds->dats_id&datsId=$ds->dats_id\">View metadata</a></td></tr>";
         }
       }
       $server_response .= "</tbody>" . "</table></div><br>";
@@ -259,7 +259,7 @@ function genPDF($Project_Name = null) {
   $Content = <<<EOD
 	              <html>
 					<head>
-						<title>".$pro_name." Database Content</title>
+						<title>" . MainProject . " Database Content</title>
 						<style type ="text/css">
 							$stylesheet
 						</style>
@@ -267,7 +267,7 @@ function genPDF($Project_Name = null) {
 					<body>
 						<div class='container'>
 							<br>
-							<p class='navbar-text navbar-left'><h2 style='color: #31708f; text-align : center;'>$pro_name Database Content</h2></p><br>
+							<p class='navbar-text navbar-left'><h2 style='color: #31708f; text-align : center;'>" . MainProject . " Database Content</h2></p><br>
 							<br><br>
 							$project_content
 	                    </div>
@@ -310,7 +310,7 @@ function displayPageByProject() {
   echo "<div class='container'>
 			<div class='aligncenter'>
 				<p class='navbar-text navbar-left'>
-				<h2 style='color: #31708f;'>$project_name Database Content</h2>
+				<h2 style='color: #31708f;'>" . MainProject . " Database Content</h2>
 				</p>
 			</div>
 			<br>

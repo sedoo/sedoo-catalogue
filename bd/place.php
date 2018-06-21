@@ -236,7 +236,7 @@ class place {
   function chargeFormModelCategsNew($form, $label, $titre) {
     $gcmd = new gcmd_plateform_keyword();
     $type = $gcmd->getByName(model_dataset::GCMD_CATEG);
-
+    
     $lev1 = $this->getByLevel(1, 0, $type->gcmd_plat_id);
     foreach ($lev1 as $item1) {
       $array_lev1[$item1->place_id] = $item1->place_name;
@@ -255,7 +255,7 @@ class place {
   function chargeFormModelCategs($form, $label, $titre) {
     $gcmd = new gcmd_plateform_keyword();
     $types = $gcmd->getByIds(MODEL_CATEGORIES);
-
+    
     foreach ($types as $type) {
       $array_type[$type->gcmd_plat_id] = $type->gcmd_plat_name;
       $liste = $this->getByLevel(1, 0, $type->gcmd_plat_id);

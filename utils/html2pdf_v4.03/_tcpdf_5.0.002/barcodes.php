@@ -1793,7 +1793,7 @@ class TCPDFBarcode {
 		// convert codewords to characters
 		$characters = array();
 		$bitmask = 512;
-		foreach($codewords as $k => $val) {
+		foreach ($codewords as $k => $val) {
 			if ($val <= 1286) {
 				$chrcode = $table5of13[$val];
 			} else {
@@ -1873,7 +1873,7 @@ class TCPDFBarcode {
 		$dec = 0;
 		$bitval = 1;
 		$len = strlen($hex);
-		for($pos = ($len - 1); $pos >= 0; --$pos) {
+		for ($pos = ($len - 1); $pos >= 0; --$pos) {
 			$dec = bcadd($dec, bcmul(hexdec($hex{$pos}), $bitval));
 			$bitval = bcmul($bitval, 16);
 		}

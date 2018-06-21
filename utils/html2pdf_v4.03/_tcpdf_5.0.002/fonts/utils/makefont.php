@@ -224,7 +224,7 @@ function ReadMap($enc) {
 			$cc2gn[$cc] = $gn;
 		}
 	}
-	for($i = 0; $i <= 255; $i++) {
+	for ($i = 0; $i <= 255; $i++) {
 		if(!isset($cc2gn[$i])) {
 			$cc2gn[$i] = '.notdef';
 		}
@@ -245,7 +245,7 @@ function ReadUFM($file, &$cidtogidmap) {
 	}
 	$widths = array();
 	$fm = array();
-	foreach($a as $l) {
+	foreach ($a as $l) {
 		$e = explode(' ',chop($l));
 		if(count($e) < 2) {
 			continue;
@@ -353,7 +353,7 @@ function ReadAFM($file,&$map) {
 		'combiningdotbelow'=>'dotbelowcomb',
 		'dongsign'=>'dong'
 		);
-	foreach($a as $l) {
+	foreach ($a as $l) {
 		$e = explode(' ', rtrim($l));
 		if (count($e) < 2) {
 			continue;

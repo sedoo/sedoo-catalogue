@@ -12,7 +12,7 @@ session_start();
 $form = new admin_form;
 $form->createForm();
 
-$project_name = strtolower(explode('.', $_SERVER['SERVER_NAME'])[0]);
+require_once 'conf/define-project.php';
 
 $form->registeredUsers = unserialize($_SESSION[$project_name . 'registeredUsers']);
 

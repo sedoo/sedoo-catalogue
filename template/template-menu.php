@@ -102,7 +102,7 @@ if ($project_name == strtolower(MainProject)) {
 		if(isset($MainProjects[0]) && !empty($MainProjects[0])) {
 				echo "<h2>".MainProject." programs</h2>";
 			}
-			foreach($MainProjects as $proj){
+			foreach ($MainProjects as $proj){
 				if(isset($proj) && !empty($proj)) {
 	    			echo "<a href='/".$proj."'>".$proj."</a>";
 				}
@@ -114,7 +114,7 @@ if ($project_name == strtolower(MainProject)) {
 		echo "<section>";
 		if(isset($OtherProjects[0]) && !empty($OtherProjects[0]))
 			echo "<h2>More projects</h2>";
-		foreach($OtherProjects as $proj){
+		foreach ($OtherProjects as $proj){
 			if(isset($proj) && !empty($proj))
     			echo "<a href='/".$proj."'>".$proj."</a>";
 		}

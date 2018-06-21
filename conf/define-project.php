@@ -2,4 +2,4 @@
 /**
  * on récupère le nom du projet à partir de l'url
  */
-$project_name = explode('.', $_SERVER['SERVER_NAME'])[0];
+$project_name = strtolower(explode('.', $_SERVER['SERVER_NAME'])[0]);

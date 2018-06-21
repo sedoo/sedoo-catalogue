@@ -310,19 +310,19 @@ class HTML2PDF_parsingHtml
         // read the parameters : nom=valeur
         $prop = '([a-zA-Z0-9_]+)=([^"\'\s>]+)';
         preg_match_all('/'.$prop.'/is', $code, $match);
-        for($k=0; $k<count($match[0]); $k++)
+        for ($k=0; $k<count($match[0]); $k++)
             $param[trim(strtolower($match[1][$k]))] = trim($match[2][$k]);
 
         // read the parameters : nom="valeur"
         $prop = '([a-zA-Z0-9_]+)=["]([^"]*)["]';
         preg_match_all('/'.$prop.'/is', $code, $match);
-        for($k=0; $k<count($match[0]); $k++)
+        for ($k=0; $k<count($match[0]); $k++)
             $param[trim(strtolower($match[1][$k]))] = trim($match[2][$k]);
 
         // read the parameters : nom='valeur'
         $prop = "([a-zA-Z0-9_]+)=[']([^']*)[']";
         preg_match_all('/'.$prop.'/is', $code, $match);
-        for($k=0; $k<count($match[0]); $k++)
+        for ($k=0; $k<count($match[0]); $k++)
             $param[trim(strtolower($match[1][$k]))] = trim($match[2][$k]);
 
         // compliance of each parameter

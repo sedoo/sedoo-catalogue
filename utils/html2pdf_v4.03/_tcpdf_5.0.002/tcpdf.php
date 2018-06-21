@@ -6405,7 +6405,7 @@ if (!class_exists('TCPDF', false)) {
 			//Pages root
 			$this->offsets[1] = $this->bufferlen;
 			$out = '1 0 obj <</Type /Pages  /Kids [';
-			foreach($this->page_obj_id as $page_obj) {
+			foreach ($this->page_obj_id as $page_obj) {
 				$out .= ' '.$page_obj.' 0 R';
 			}
 			$out .= ' ] /Count '.$nb.' >>  endobj';
@@ -6849,7 +6849,7 @@ if (!class_exists('TCPDF', false)) {
 							 		}
 							 		if (isset($pl['opt']['mk']['bc']) AND (is_array($pl['opt']['mk']['bc']))) {
 							 			$annots .= ' /BC [';
-							 			foreach($pl['opt']['mk']['bc'] AS $col) {
+							 			foreach ($pl['opt']['mk']['bc'] AS $col) {
 							 				$col = intval($col);
 											$color = $col <= 0 ? 0 : ($col >= 255 ? 1 : $col / 255);
 							 				$annots .= sprintf(' %.2F', $color);
@@ -6858,7 +6858,7 @@ if (!class_exists('TCPDF', false)) {
 							 		}
 							 		if (isset($pl['opt']['mk']['bg']) AND (is_array($pl['opt']['mk']['bg']))) {
 							 			$annots .= ' /BG [';
-							 			foreach($pl['opt']['mk']['bg'] AS $col) {
+							 			foreach ($pl['opt']['mk']['bg'] AS $col) {
 							 				$col = intval($col);
 											$color = $col <= 0 ? 0 : ($col >= 255 ? 1 : $col / 255);
 							 				$annots .= sprintf(' %.2F', $color);
@@ -6935,7 +6935,7 @@ if (!class_exists('TCPDF', false)) {
 									if (is_array($pl['opt']['ff'])) {
 										// array of bit settings
 										$flag = 0;
-										foreach($pl['opt']['ff'] as $val) {
+										foreach ($pl['opt']['ff'] as $val) {
 											$flag += 1 << ($val - 1);
 										}
 									} else {
@@ -6999,7 +6999,7 @@ if (!class_exists('TCPDF', false)) {
 								}
 								if (isset($pl['opt']['opt']) AND (is_array($pl['opt']['opt'])) AND !empty($pl['opt']['opt'])) {
 						 			$annots .= ' /Opt [';
-						 			foreach($pl['opt']['opt'] AS $copt) {
+						 			foreach ($pl['opt']['opt'] AS $copt) {
 						 				if (is_array($copt)) {
 						 					$annots .= ' ['.$this->_textannobjstring($copt[0]).' '.$this->_textannobjstring($copt[1]).']';
 						 				} else {
@@ -7013,7 +7013,7 @@ if (!class_exists('TCPDF', false)) {
 						 		}
 						 		if (isset($pl['opt']['i']) AND (is_array($pl['opt']['i'])) AND !empty($pl['opt']['i'])) {
 						 			$annots .= ' /I [';
-						 			foreach($pl['opt']['i'] AS $copt) {
+						 			foreach ($pl['opt']['i'] AS $copt) {
 						 				$annots .= intval($copt).' ';
 						 			}
 						 			$annots .= ']';
@@ -7730,7 +7730,7 @@ if (!class_exists('TCPDF', false)) {
 					$objrefs .= $this->sig_obj_id.' 0 R';
 				}
 				if (!empty($this->form_obj_id)) {
-					foreach($this->form_obj_id as $objid) {
+					foreach ($this->form_obj_id as $objid) {
 						$objrefs .= ' '.$objid.' 0 R';
 					}
 				}
@@ -18117,7 +18117,7 @@ if (!class_exists('TCPDF', false)) {
 			}
 			$inserted = 0;
 			$maxpos = $numchars - $rightmin;
-			for($i = $leftmin; $i <= $maxpos; ++$i) {
+			for ($i = $leftmin; $i <= $maxpos; ++$i) {
 				if(isset($hyphenword[$i]) AND (($hyphenword[$i] % 2) != 0)) {
 					// 173 = soft hyphen character
 					array_splice($word, $i + $inserted, 0, 173);
@@ -18149,7 +18149,7 @@ if (!class_exists('TCPDF', false)) {
 			$patterns_array = preg_split('/[\s]+/', $data);
 			// create new language array of patterns
 			$patterns = array();
-			foreach($patterns_array as $val) {
+			foreach ($patterns_array as $val) {
 				if (!$this->empty_string($val)) {
 					$val = trim($val);
 					$val = str_replace('\'', '\\\'', $val);
@@ -18888,7 +18888,7 @@ if (!class_exists('TCPDF', false)) {
 						$gradient['coords'][4] /= $w;
 					}
 					// fix values
-					foreach($gradient['coords'] as $key => $val) {
+					foreach ($gradient['coords'] as $key => $val) {
 						if ($val < 0) {
 							$gradient['coords'][$key] = 0;
 						} elseif ($val > 1) {

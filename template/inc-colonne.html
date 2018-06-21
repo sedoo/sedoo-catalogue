@@ -108,7 +108,7 @@
 	if(isset($MainProjects) && !empty($MainProjects)){
 		if(isset($MainProjects[0]) && !empty($MainProjects[0]))
 			echo "<dt><h1>".MainProject." programs</h1></dt>";
-		foreach($MainProjects as $proj){
+		foreach ($MainProjects as $proj){
 			if(isset($proj) && !empty($proj))
     			echo "<dt><a href='/".$proj."'>".$proj."</a></dt>";
 		}
@@ -116,7 +116,7 @@
 	if(isset($OtherProjects) && !empty($OtherProjects)){
 		if(isset($OtherProjects[0]) && !empty($OtherProjects[0]))
 			echo "<dt><h1>More projects</h1></dt>";
-		foreach($OtherProjects as $proj){
+		foreach ($OtherProjects as $proj){
 			if(isset($proj) && !empty($proj))
     			echo "<dt><a href='/".$proj."'>".$proj."</a></dt>";
 		}

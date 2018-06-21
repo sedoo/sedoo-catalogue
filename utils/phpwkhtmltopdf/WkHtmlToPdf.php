@@ -64,7 +64,7 @@ class WkHtmlToPdf
             unlink($this->tmpFile);
         }
 
-        foreach($this->tmpFiles as $tmp) {
+        foreach ($this->tmpFiles as $tmp) {
             unlink($tmp);
         }
     }
@@ -244,7 +244,7 @@ class WkHtmlToPdf
 
         $command .= $this->renderOptions($this->options);
 
-        foreach($this->objects as $object)
+        foreach ($this->objects as $object)
         {
             $command .= ' '.$object['input'];
             unset($object['input']);
@@ -330,7 +330,7 @@ class WkHtmlToPdf
     protected function renderOptions($options)
     {
         $out = '';
-        foreach($options as $key=>$val)
+        foreach ($options as $key=>$val)
             if (is_numeric($key)) {
                 $out .= " --$val";
             } else {
