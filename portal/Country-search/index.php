@@ -1,10 +1,11 @@
 <?php
 if (!isset($_SESSION)) {
-  session_start();
+    session_start();
 }
 
 require_once 'conf/conf.php';
-require_once 'conf/define-project.php'; ;
+require_once 'conf/define-project.php';
+;
 $project_url = "/";
 $titreMilieu = "";
 ob_start();
@@ -12,4 +13,3 @@ include "lstDataByCountry.php";
 
 $milieu = ob_get_clean();
 include "template.php";
-?>

@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION)) {
-  session_start();
+    session_start();
 }
 
 require_once 'conf/define-project.php';
@@ -12,4 +12,3 @@ include "frmprofile.php";
 
 $milieu = ob_get_clean();
 include "template-account.php";
-?>

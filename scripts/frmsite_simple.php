@@ -11,132 +11,129 @@ echo "<h1>Multi-instrumented platform registration</h1>";
 
 $datsId = $_REQUEST['datsId'];
 if (!isset($datsId) || empty($datsId)) {
-  $datsId = $_SESSION['datsId_tmp'];
-  $_SESSION['datsId_tmp'] = null;
+    $datsId = $_SESSION['datsId_tmp'];
+    $_SESSION['datsId_tmp'] = null;
 }
 if (isset($datsId) && !empty($datsId)) {
-  $form->dataset = dataset_factory::createMultiInstrumentDatasetById($datsId);
-  $_SESSION['dataset_multi'] = serialize($form->dataset);
-} else if (isset($_SESSION['dataset_multi'])) {
-  $form->dataset = unserialize($_SESSION['dataset_multi']);
+    $form->dataset = dataset_factory::createMultiInstrumentDatasetById($datsId);
+    $_SESSION['dataset_multi'] = serialize($form->dataset);
+} elseif (isset($_SESSION['dataset_multi'])) {
+    $form->dataset = unserialize($_SESSION['dataset_multi']);
 }
 
 if ($form->isCat($form->dataset, $project_name)) {
-  if (!isset($form->dataset)) {
-    $form->dataset = new multi_instru_dataset();
-    $form->dataset->nbPis = 1;
-    $form->dataset->nbSensors = 1;
-    $form->dataset->dats_sensors[0] = new dats_sensor;
-    $form->dataset->dats_sensors[0]->nbVars = 1;
-    $form->dataset->nbFormats = 1;
-    $form->dataset->nbProj = 1;
-    $form->dataset->dats_id = 0;
-  }
-
-  $form->dataset->dataset_types = array();
-  $form->dataset->dataset_types[0] = new dataset_type();
-  $form->dataset->dataset_types[0] = $form->dataset->dataset_types[0]->getByType(dataset_type::TYPE_MULTI_INSTRU);
-
-  $form->createForm($project_name);
-
-  for ($i = 0; $i < $form->dataset->nbSensors; $i++) {
-    $bouton_add_var_pressed = false;
-    if (isset($_POST['bouton_add_variable_' . $i])) {
-      $form->saveForm();
-      $form->dataset->dats_sensors[$i]->nbVars++;
-      $form->nbVarsBySensor[$i] = $form->dataset->dats_sensors[$i]->nbVars;
-      $form->addVariableSensor($i);
-      $form->displayForm();
-      $_SESSION['dataset_multi'] = serialize($form->dataset);
-      $bouton_add_var_pressed = true;
-      break;
+    if (!isset($form->dataset)) {
+        $form->dataset = new multi_instru_dataset();
+        $form->dataset->nbPis = 1;
+        $form->dataset->nbSensors = 1;
+        $form->dataset->dats_sensors[0] = new dats_sensor();
+        $form->dataset->dats_sensors[0]->nbVars = 1;
+        $form->dataset->nbFormats = 1;
+        $form->dataset->nbProj = 1;
+        $form->dataset->dats_id = 0;
     }
-  }
 
-  if (!$bouton_add_var_pressed) {
+    $form->dataset->dataset_types = array();
+    $form->dataset->dataset_types[0] = new dataset_type();
+    $form->dataset->dataset_types[0] = $form->dataset->dataset_types[0]->getByType(dataset_type::TYPE_MULTI_INSTRU);
 
-    if (isset($_POST['upload'])) {
-      $form->saveForm();
-      $form->dataset->image = uploadImg("upload_image");
-      $form->displayForm();
-      $_SESSION['dataset_multi'] = serialize($form->dataset);
-    } else if (isset($_POST['delete'])) {
-      $form->saveForm();
-      if (isset($form->dataset->image) && !empty($form->dataset->image)) {
-        unlink($form->dataset->image);
-        $form->dataset->image = null;
-      }
-      $form->displayForm();
-      $_SESSION['dataset_multi'] = serialize($form->dataset);
-    } else if (isset($_POST['bouton_add_pi'])) {
-      $form->saveForm();
-      $form->dataset->nbPis++;
-      $form->addPi();
-      $form->displayForm();
-      $_SESSION['dataset_multi'] = serialize($form->dataset);
-    } else if (isset($_POST['bouton_add_format'])) {
-      $form->saveForm();
-      $form->dataset->nbFormats++;
-      $form->addFormat();
-      $form->displayForm();
-      $_SESSION['dataset_multi'] = serialize($form->dataset);
-    } else if (isset($_POST['bouton_add_projet'])) {
-      $form->saveForm();
-      $form->dataset->nbProj++;
-      $form->addProjet();
-      $form->displayForm();
-      $_SESSION['dataset_multi'] = serialize($form->dataset);
-    } else if (isset($_POST['bouton_add_sensor'])) {
-      $form->saveForm();
-      $form->dataset->nbSensors++;
-      $form->dataset->dats_sensors[$form->dataset->nbSensors - 1] = new dats_sensor();
-      $form->dataset->dats_sensors[$form->dataset->nbSensors - 1]->nbVars = 1;
-      $form->addSensor();
-      $form->displayForm();
-      $_SESSION['dataset_multi'] = serialize($form->dataset);
-    } else if (isset($_POST['bouton_save'])) {
-      $form->saveForm();
-      $form->saveDatsVars();
-      $form->addValidationRules();
-      if ($form->validate()) {
-        // Formulaire OK
-        if ($form->dataset->dats_id == 0) {
-          $insertionOk = $form->dataset->insert();
-        } else {
-          $insertionOk = $form->dataset->update();
+    $form->createForm($project_name);
+
+    for ($i = 0; $i < $form->dataset->nbSensors; $i++) {
+        $bouton_add_var_pressed = false;
+        if (isset($_POST['bouton_add_variable_' . $i])) {
+            $form->saveForm();
+            $form->dataset->dats_sensors[$i]->nbVars++;
+            $form->nbVarsBySensor[$i] = $form->dataset->dats_sensors[$i]->nbVars;
+            $form->addVariableSensor($i);
+            $form->displayForm();
+            $_SESSION['dataset_multi'] = serialize($form->dataset);
+            $bouton_add_var_pressed = true;
+            break;
         }
-        if ($insertionOk) {
-          echo "<span class='success'><strong>The dataset has been succesfully inserted in the database</strong></span><br>";
-          $_SESSION['dataset_multi'] = null;
-          $dts = dataset_factory::createMultiInstrumentDatasetById($form->dataset->dats_id);
-          $dts->display($project_name);
-        } else {
-          echo "<span class='danger'><strong>An error occured during the insertion process.</strong></span><br>";
-
-          $dts = new dataset();
-          $dts->dats_id = $form->dataset->dats_id;
-          if (!$dts->idExiste()) {
-            $form->dataset->dats_id = 0;
-          }
-
-          $form->displayForm();
-          $_SESSION['dataset_multi'] = serialize($form->dataset);
-        }
-      } else {
-        // Erreurs dans le formulaire
-        $form->displayForm();
-        $_SESSION['dataset_multi'] = serialize($form->dataset);
-      }
-    } else {
-      $form->displayForm();
     }
-  }
-} else if ($form->isLogged()) {
-  echo "<a href='/$project_name/'>&lt;&lt;&nbsp;Return</a><br/>";
-  echo "<div class='aligncenter'><img src='/img/interdit.png' heigth='50' width='50' /></div>";
-  echo "<br/><span class='danger'><div class='aligncenter'><strong>You cannot modify this dataset.</strong></div></span><br/>";
+
+    if (!$bouton_add_var_pressed) {
+        if (isset($_POST['upload'])) {
+            $form->saveForm();
+            $form->dataset->image = uploadImg("upload_image");
+            $form->displayForm();
+            $_SESSION['dataset_multi'] = serialize($form->dataset);
+        } elseif (isset($_POST['delete'])) {
+            $form->saveForm();
+            if (isset($form->dataset->image) && !empty($form->dataset->image)) {
+                unlink($form->dataset->image);
+                $form->dataset->image = null;
+            }
+            $form->displayForm();
+            $_SESSION['dataset_multi'] = serialize($form->dataset);
+        } elseif (isset($_POST['bouton_add_pi'])) {
+            $form->saveForm();
+            $form->dataset->nbPis++;
+            $form->addPi();
+            $form->displayForm();
+            $_SESSION['dataset_multi'] = serialize($form->dataset);
+        } elseif (isset($_POST['bouton_add_format'])) {
+            $form->saveForm();
+            $form->dataset->nbFormats++;
+            $form->addFormat();
+            $form->displayForm();
+            $_SESSION['dataset_multi'] = serialize($form->dataset);
+        } elseif (isset($_POST['bouton_add_projet'])) {
+            $form->saveForm();
+            $form->dataset->nbProj++;
+            $form->addProjet();
+            $form->displayForm();
+            $_SESSION['dataset_multi'] = serialize($form->dataset);
+        } elseif (isset($_POST['bouton_add_sensor'])) {
+            $form->saveForm();
+            $form->dataset->nbSensors++;
+            $form->dataset->dats_sensors[$form->dataset->nbSensors - 1] = new dats_sensor();
+            $form->dataset->dats_sensors[$form->dataset->nbSensors - 1]->nbVars = 1;
+            $form->addSensor();
+            $form->displayForm();
+            $_SESSION['dataset_multi'] = serialize($form->dataset);
+        } elseif (isset($_POST['bouton_save'])) {
+            $form->saveForm();
+            $form->saveDatsVars();
+            $form->addValidationRules();
+            if ($form->validate()) {
+                // Formulaire OK
+                if ($form->dataset->dats_id == 0) {
+                    $insertionOk = $form->dataset->insert();
+                } else {
+                    $insertionOk = $form->dataset->update();
+                }
+                if ($insertionOk) {
+                    echo "<span class='success'><strong>The dataset has been succesfully inserted in the database</strong></span><br>";
+                    $_SESSION['dataset_multi'] = null;
+                    $dts = dataset_factory::createMultiInstrumentDatasetById($form->dataset->dats_id);
+                    $dts->display($project_name);
+                } else {
+                    echo "<span class='danger'><strong>An error occured during the insertion process.</strong></span><br>";
+
+                    $dts = new dataset();
+                    $dts->dats_id = $form->dataset->dats_id;
+                    if (!$dts->idExiste()) {
+                        $form->dataset->dats_id = 0;
+                    }
+
+                    $form->displayForm();
+                    $_SESSION['dataset_multi'] = serialize($form->dataset);
+                }
+            } else {
+                // Erreurs dans le formulaire
+                $form->displayForm();
+                $_SESSION['dataset_multi'] = serialize($form->dataset);
+            }
+        } else {
+            $form->displayForm();
+        }
+    }
+} elseif ($form->isLogged()) {
+    echo "<a href='/$project_name/'>&lt;&lt;&nbsp;Return</a><br/>";
+    echo "<div class='aligncenter'><img src='/img/interdit.png' heigth='50' width='50' /></div>";
+    echo "<br/><span class='danger'><div class='aligncenter'><strong>You cannot modify this dataset.</strong></div></span><br/>";
 } else {
-  $form->displayLGForm("", true);
+    $form->displayLGForm("", true);
 }
-
-?>

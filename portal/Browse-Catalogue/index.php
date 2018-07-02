@@ -1,44 +1,45 @@
 <?php
 if (!isset($_SESSION)) {
-  session_start();
+    session_start();
 }
 
 require_once 'conf/conf.php';
-require_once 'conf/define-project.php'; ;
+require_once 'conf/define-project.php';
+;
 $project_url = "/";
 $titreMilieu = "Browse catalogue";
 ob_start();
 ?>
 <div class="column1-unit">
-	<br>
-	<br>
+    <br>
+    <br>
 
-	<div class="">
-		<p>The <?= $project_name; ?> database offers different tools to browse its metadata catalogue:<br></p>
-		<ul>
-			<li>
-				<a href="/portal/Search-tool">Search Tool</a>: browse the catalogue using thematic, geographic and or temporal criteria.
-			</li>
-			<li>
-				<a href="/portal/Thematic-search">By thematic keywords</a>: look for datasets corresponding to one and / or several keywords of your choice.
-			</li>
-			<li>
-				<a href="/portal/Parameter-search">By parameter</a>: a list of the <?= $project_name; ?> datasets ordered by measured parameters.
-				The parameters are named following the Global Change Master Directory Science keywords.
-			</li>
-			<li>
-				<a href="/portal/Instrument-search">By instrument</a>: a list of the <?= $project_name; ?> datasets ordered by instrument types.
-			</li>
-			<li>
-				<a href="/portal/Plateform-search">By platform types</a>: a list of the <?= $project_name; ?> datasets ordered by platform types.
-			</li>
-		</ul>
-		<p>To access metadata corresponding to a particular dataset, click on the dataset title. The flags next to some of the datasets titles means that corresponding data is available to download:
-			<?php include 'legende.php'; ?>
-		</p>
-	</div>
+    <div class="">
+        <p>The <?= $project_name; ?> database offers different tools to browse its metadata catalogue:<br></p>
+        <ul>
+            <li>
+                <a href="/portal/Search-tool">Search Tool</a>: browse the catalogue using thematic, geographic and or temporal criteria.
+            </li>
+            <li>
+                <a href="/portal/Thematic-search">By thematic keywords</a>: look for datasets corresponding to one and / or several keywords of your choice.
+            </li>
+            <li>
+                <a href="/portal/Parameter-search">By parameter</a>: a list of the <?= $project_name; ?> datasets ordered by measured parameters.
+                The parameters are named following the Global Change Master Directory Science keywords.
+            </li>
+            <li>
+                <a href="/portal/Instrument-search">By instrument</a>: a list of the <?= $project_name; ?> datasets ordered by instrument types.
+            </li>
+            <li>
+                <a href="/portal/Plateform-search">By platform types</a>: a list of the <?= $project_name; ?> datasets ordered by platform types.
+            </li>
+        </ul>
+        <p>To access metadata corresponding to a particular dataset, click on the dataset title. The flags next to some of the datasets titles means that corresponding data is available to download:
+            <?php include 'legende.php'; ?>
+        </p>
+    </div>
 </div>
 <?php
-	$milieu = ob_get_clean();
-	include "template.php";
+    $milieu = ob_get_clean();
+    include "template.php";
 ?>

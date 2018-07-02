@@ -1,6 +1,6 @@
 <?php
 if (!isset($_SESSION)) {
-  session_start();
+    session_start();
 }
 
 $project_name = "Historical datasets";
@@ -10,4 +10,3 @@ $titreMilieu = "Historical datasets";
 ob_start();
 $milieu = ob_get_clean();
 include "template.php";
-?>

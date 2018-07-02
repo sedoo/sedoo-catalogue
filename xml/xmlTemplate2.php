@@ -4,4 +4,3 @@ $xmlstr = <<<XML
 <gcmd_science_keywords xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="gcmd_science_keyword.xsd">
 </gcmd_science_keywords>
 XML;
-?>

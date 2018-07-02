@@ -9,80 +9,89 @@ require_once "conf.php";
  * To change the template for this generated file go to
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
-class bdConnect {
-  var $hote = DB_HOST;
-  var $db_name = DB_NAME;
-  var $db_user = DB_USER;
-  var $db_password = DB_PASS;
-  var $conn;
+class bdConnect
+{
+    var $hote = DB_HOST;
+    var $db_name = DB_NAME;
+    var $db_user = DB_USER;
+    var $db_password = DB_PASS;
+    var $conn;
 
-  function db_open() {
-    if (!$this->conn = pg_pconnect("host=" . $this->hote . " user=" . $this->db_user . " dbname=" . $this->db_name . " password=" . $this->db_password)) {
-      echo "Cannot connect to database.\n";
-      exit;
+    function db_open()
+    {
+        if (!$this->conn = pg_pconnect("host=" . $this->hote . " user=" . $this->db_user . " dbname=" . $this->db_name . " password=" . $this->db_password)) {
+            echo "Cannot connect to database.\n";
+            exit;
+        }
     }
 
-  }
-
-  function db_close() {
-    if (!@pg_close($this->conn)) {
-      echo "Erreur de fermeture de la base !!!";
-    }
-  }
-
-  function get_data($requete) {
-    $this->db_open();
-    if ($res = pg_query($this->conn, $requete)) {
-      for ($i = 0; $i < pg_num_rows($res); $i++) {
-        $tab_res[$i] = pg_fetch_row($res);
-      }
-    }
-    $this->db_close();
-    if (!isset($tab_res) || empty($tab_res)) {
-      return null;
+    function db_close()
+    {
+        if (!@pg_close($this->conn)) {
+            echo "Erreur de fermeture de la base !!!";
+        }
     }
 
-    return $tab_res;
-  }
+    function get_data($requete)
+    {
+        $this->db_open();
+        if ($res = pg_query($this->conn, $requete)) {
+            for ($i = 0; $i < pg_num_rows($res); $i++) {
+                $tab_res[$i] = pg_fetch_row($res);
+            }
+        }
+        $this->db_close();
+        if (!isset($tab_res) || empty($tab_res)) {
+            return null;
+        }
 
-  function getLastId($sequence) {
-    $query = "SELECT last_value from " . $sequence;
-    $res = $this->exec($query);
-    $id = pg_fetch_array($res);
-    return $id[0];
-  }
-
-  function insert($requete) {
-    $this->exec($requete);
-  }
-
-  function update($requete) {
-    return $this->exec($requete);
-  }
-
-  function exec($requete) {
-    if (!isset($this->conn) || empty($this->conn)) {
-      throw new Exception('ERREUR: Connection à la base non ouverte');
+        return $tab_res;
     }
 
-    log_debug('SQL - ' . $requete);
-    $res = pg_query($this->conn, $requete);
-    if (!$res) {
-      throw new Exception('Erreur SQL !' . $requete . '-' . pg_last_error($this->conn));
+    function getLastId($sequence)
+    {
+        $query = "SELECT last_value from " . $sequence;
+        $res = $this->exec($query);
+        $id = pg_fetch_array($res);
+        return $id[0];
     }
 
-    return $res;
-  }
+    function insert($requete)
+    {
+        $this->exec($requete);
+    }
 
-  function beginTransaction() {
-    return $this->exec("BEGIN");
-  }
+    function update($requete)
+    {
+        return $this->exec($requete);
+    }
 
-  function commitTransaction() {
-    return $this->exec("COMMIT");
-  }
-  function rollbackTransaction() {
-    return $this->exec("ROLLBACK");
-  }
+    function exec($requete)
+    {
+        if (!isset($this->conn) || empty($this->conn)) {
+            throw new Exception('ERREUR: Connection à la base non ouverte');
+        }
+
+        log_debug('SQL - ' . $requete);
+        $res = pg_query($this->conn, $requete);
+        if (!$res) {
+            throw new Exception('Erreur SQL !' . $requete . '-' . pg_last_error($this->conn));
+        }
+
+        return $res;
+    }
+
+    function beginTransaction()
+    {
+        return $this->exec("BEGIN");
+    }
+
+    function commitTransaction()
+    {
+        return $this->exec("COMMIT");
+    }
+    function rollbackTransaction()
+    {
+        return $this->exec("ROLLBACK");
+    }
 }
-?>

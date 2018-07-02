@@ -1,17 +1,17 @@
 <?php
 
-class entry {
+class entry
+{
 
-  var $dn;
+    var $dn;
 
-  function __construct($dn) {
-    $this->dn = $dn;
-  }
+    function __construct($dn)
+    {
+        $this->dn = $dn;
+    }
 
-  function toString() {
-    return "DN: $this->dn\n";
-  }
-
+    function toString()
+    {
+        return "DN: $this->dn\n";
+    }
 }
-
-?>

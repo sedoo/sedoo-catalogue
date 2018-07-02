@@ -12,5 +12,3 @@ define("STATUS_PENDING", "pending");
 define("STATUS_ACCEPTED", "registered");
 define("STATUS_REJECTED", "rejected");
 define("FORMAT_DATE", "Ymd");
-
-?>

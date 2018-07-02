@@ -14,286 +14,297 @@ require_once "validation.php";
 require_once "utils/datepicker_utils.php";
 require_once "conf/conf.php";
 
-class search_form extends HTML_QuickForm {
+class search_form extends HTML_QuickForm
+{
 
-  var $latMin;
-  var $latMax;
-  var $lonMin;
-  var $lonMax;
-  var $date_begin;
-  var $date_end;
-  var $period;
-  var $gcmd_sensor;
-  var $gcmd_variable;
-  var $keywords;
-  var $and_or;
-  var $order_by;
-  var $filter_data;
-	var $filter_data_db;
+    var $latMin;
+    var $latMax;
+    var $lonMin;
+    var $lonMax;
+    var $date_begin;
+    var $date_end;
+    var $period;
+    var $gcmd_sensor;
+    var $gcmd_variable;
+    var $keywords;
+    var $and_or;
+    var $order_by;
+    var $filter_data;
+    var $filter_data_db;
 
-  function createForm($projectName) {
-    global $project_name;
-    if (!isset($projectName)) {
-      $projectName = $project_name;
-    }
-
-    $this->addElement('text', 'keywords', 'Keywords : ', array(
-      'size' => '50',
-    ));
-    $this->applyFilter('keywords', 'trim');
-    $and_or[] = &HTML_QuickForm::createElement('radio', null, null, 'All of the above keywords', 'and');
-    $and_or[] = &HTML_QuickForm::createElement('radio', null, null, 'Any of the above keywords', 'or');
-    $this->addGroup($and_or, 'and_or', 'Search with: ', '&nbsp;&nbsp;&nbsp;');
-    $defaultValues['and_or'] = 'or';
-    $this->setDefaults($defaultValues);
-    $this->createFormVariable();
-    $this->createFormInstrumentType();
-    $this->createFormPeriode();
-    $this->createFormMap();
-    $this->createFormOrderBy();
-    $this->createFormFilterData();
-    $this->createFormFilterDataDb();
-    $this->addElement('submit', 'bouton_search', 'search');
-	}
-	
-  function createFormOrderBy() {
-    $order_by[] = &HTML_QuickForm::createElement('radio', null, null, ' By instruments', '1');
-    $order_by[] = &HTML_QuickForm::createElement('radio', null, null, ' By platform types', '2');
-    $order_by[] = &HTML_QuickForm::createElement('radio', null, null, ' By dataset name', '3');
-    $this->addGroup($order_by, 'order_by', 'Sort result: ', '&nbsp;&nbsp;&nbsp;');
-    $defaultValues['order_by'] = '3';
-    $this->setDefaults($defaultValues);
-	}
-	
-  function createFormFilterData() {
-    $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
-    $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
-    $this->addGroup($options, 'filter_data', 'Show only datasets with available data ?', '&nbsp;&nbsp;');
-    $defaultValues['filter_data'] = 0;
-    $this->setDefaults($defaultValues);
-	}
-	
-  function createFormFilterDataDb() {
-    $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
-    $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
-    $this->addGroup($options, 'filter_data_db', 'Show only datasets with homogenized data ?', '&nbsp;&nbsp;');
-    $defaultValues['filter_data_db'] = 0;
-    $this->setDefaults($defaultValues);
-	}
-	
-  function createFormVariable() {
-    $key = new gcmd_science_keyword();
-    $key_select = $key->chargeForm($this, 'gcmd_science_key', 'Parameter keyword');
-    $this->addElement($key_select);
-	}
-	
-  function createFormInstrumentType() {
-    $key = new gcmd_instrument_keyword();
-    $key_select = $key->chargeForm($this, 'sensor_gcmd', 'Instrument type');
-    $this->addElement($key_select);
-	}
-	
-  function createFormPeriode() {
-    $key = new period();
-    $key_select = $key->chargeFormWithDates($this, 'period', 'Period');
-    $this->addElement($key_select);
-    $this->addElement('text', 'date_begin', 'Date begin (yyyy-mm-dd)', array(
-      'size' => 10,
-      'id' => 'date_begin',
-    ));
-    $this->addElement('text', 'date_end', 'Date end (yyyy-mm-dd)', array(
-      'size' => 10,
-      'id' => 'date_end',
-    ));
-	}
-	
-  function createFormMap() {
-
-    $this->addElement('hidden', 'minLat', MAP_DEFAULT_LAT_MIN);
-    $this->addElement('hidden', 'maxLat', MAP_DEFAULT_LAT_MAX);
-    $this->addElement('hidden', 'minLon', MAP_DEFAULT_LON_MIN);
-    $this->addElement('hidden', 'maxLon', MAP_DEFAULT_LON_MAX);
-
-    $this->addElement('hidden', 'startMinLat', MAP_DEFAULT_LAT_MIN);
-    $this->addElement('hidden', 'startMaxLat', MAP_DEFAULT_LAT_MAX);
-    $this->addElement('hidden', 'startMinLon', MAP_DEFAULT_LON_MIN);
-    $this->addElement('hidden', 'startMaxLon', MAP_DEFAULT_LON_MAX);
-    $this->addElement('text', 'maxLatDeg', 'Lat: ', array(
-      'id' => 'maxLatDeg',
-      'size' => 3,
-    ));
-    $this->addElement('text', 'minLatDeg', 'Lat: ', array(
-      'id' => 'minLatDeg',
-      'size' => 3,
-    ));
-    $this->addElement('text', 'maxLonDeg', 'Lon: ', array(
-      'id' => 'maxLonDeg',
-      'size' => 3,
-    ));
-    $this->addElement('text', 'minLonDeg', 'Lon: ', array(
-      'id' => 'minLonDeg',
-      'size' => 3,
-    ));
-    $this->addElement('text', 'maxLatMin', '', array(
-      'id' => 'maxLatMin',
-      'size' => 2,
-    ));
-    $this->addElement('text', 'minLatMin', '', array(
-      'id' => 'minLatMin',
-      'size' => 2,
-    ));
-    $this->addElement('text', 'maxLonMin', '', array(
-      'id' => 'maxLonMin',
-      'size' => 2,
-    ));
-    $this->addElement('text', 'minLonMin', '', array(
-      'id' => 'minLonMin',
-      'size' => 2,
-    ));
-    $this->addElement('text', 'maxLatSec', '', array(
-      'id' => 'maxLatSec',
-      'size' => 2,
-    ));
-    $this->addElement('text', 'minLatSec', '', array(
-      'id' => 'minLatSec',
-      'size' => 2,
-    ));
-    $this->addElement('text', 'maxLonSec', '', array(
-      'id' => 'maxLonSec',
-      'size' => 2,
-    ));
-    $this->addElement('text', 'minLonSec', '', array(
-      'id' => 'minLonSec',
-      'size' => 2,
-    ));
-    $this->addElement('submit', 'unzoom', 'UnZoom', array(
-      'onclick' => "unZoom()",
-    ));
-	}
-	
-  function addValidationRules() {
-    $this->registerRule('validDate', 'function', 'validDate');
-    $this->registerRule('validPeriod', 'function', 'validPeriod');
-    $this->addRule('date_begin', 'Date begin is not a date', 'validDate');
-    $this->addRule('date_end', 'Date end is not a date', 'validDate');
-    $this->addRule(array(
-      'date_begin',
-      'date_end',
-    ), 'Date end must be after date begin', 'validPeriod');
-    $this->addRule('maxLatDeg', 'Latitude &deg; must be numeric', 'numeric');
-    $this->addRule('maxLatDeg', 'Latitude &deg; is incorrect', 'number_range', array(
-      -90,
-      90,
-    ));
-    $this->addRule('minLatDeg', 'Latitude &deg; must be numeric', 'numeric');
-    $this->addRule('minLatDeg', 'Latitude &deg; is incorrect', 'number_range', array(
-      -90,
-      90,
-    ));
-    $this->addRule('maxLonDeg', 'Longitude &deg; must be numeric', 'numeric');
-    $this->addRule('maxLonDeg', 'Longitude &deg; is incorrect', 'number_range', array(
-      -180,
-      180,
-    ));
-    $this->addRule('minLonDeg', 'Longitude &deg;  must be numeric', 'numeric');
-    $this->addRule('minLonDeg', 'Longitude &deg; is incorrect', 'number_range', array(
-      -180,
-      180,
-    ));
-    $this->addRule('maxLatMin', 'Latitude \' must be numeric', 'numeric');
-    $this->addRule('maxLatMin', 'Latitude \' is incorrect', 'number_range', array(
-      0,
-      50,
-    ));
-    $this->addRule('minLatMin', 'Latitude \' must be numeric', 'numeric');
-    $this->addRule('minLatMin', 'Latitude \' is incorrect', 'number_range', array(
-      0,
-      59,
-    ));
-    $this->addRule('maxLonMin', 'Longitude \' must be numeric', 'numeric');
-    $this->addRule('maxLonMin', 'Longitude \'  is incorrect', 'number_range', array(
-      0,
-      59,
-    ));
-    $this->addRule('minLonMin', 'Longitude \'  must be numeric', 'numeric');
-    $this->addRule('minLonMin', 'Longitude \' is incorrect', 'number_range', array(
-      0,
-      59,
-    ));
-    $this->addRule('maxLatSec', 'Latitude " must be numeric', 'numeric');
-    $this->addRule('maxLatSec', 'Latitude " is incorrect', 'number_range', array(
-      0,
-      50,
-    ));
-    $this->addRule('minLatSec', 'Latitude " must be numeric', 'numeric');
-    $this->addRule('minLatSec', 'Latitude " is incorrect', 'number_range', array(
-      0,
-      59,
-    ));
-    $this->addRule('maxLonSec', 'Longitude " must be numeric', 'numeric');
-    $this->addRule('maxLonSec', 'Longitude " is incorrect', 'number_range', array(
-      0,
-      59,
-    ));
-    $this->addRule('minLonSec', 'Longitude " must be numeric', 'numeric');
-    $this->addRule('minLonSec', 'Longitude " is incorrect', 'number_range', array(
-      0,
-      59,
-    ));
-	}
-	
-  function displayForm() {
-    $this->addValidationRules();
-    DatePickerUtils::addScriptPeriod('date_begin', 'date_end');
-    // affichage des erreurs
-    if (!empty($this->_errors)) {
-      foreach ($this->_errors as $error) {
-        if (strpos($error, 'General') === 0) {
-          echo '<a href="#a_general"><span class="danger">' . $error . '</span></a><br>';
-        } else if (strpos($error, 'Contact') === 0) {
-          echo '<a href="#a_contact"><span class="danger">' . $error . '</span></a><br>';
-        } else if (strpos($error, 'Instru') === 0) {
-          echo '<a href="#a_instru"><span class="danger">' . $error . '</span></a><br>';
-        } else if (strpos($error, 'Site') === 0) {
-          echo '<a href="#a_site"><span class="danger">' . $error . '</span></a><br>';
-        } else if (strpos($error, 'Measured') === 0) {
-          echo '<a href="#a_param"><span class="danger">' . $error . '</span></a><br>';
-        } else if (strpos($error, 'Derived') === 0) {
-          echo '<a href="#a_param_calcul"><span class="danger">' . $error . '</span></a><br>';
-        } else if (strpos($error, 'Data') === 0) {
-          echo '<a href="#a_use"><span class="danger">' . $error . '</span></a><br>';
-        } else {
-          echo '<span class="danger">' . $error . '</span><br>';
+    function createForm($projectName)
+    {
+        global $project_name;
+        if (!isset($projectName)) {
+            $projectName = $project_name;
         }
-      }
+
+        $this->addElement('text', 'keywords', 'Keywords : ', array(
+        'size' => '50',
+        ));
+        $this->applyFilter('keywords', 'trim');
+        $and_or[] = &HTML_QuickForm::createElement('radio', null, null, 'All of the above keywords', 'and');
+        $and_or[] = &HTML_QuickForm::createElement('radio', null, null, 'Any of the above keywords', 'or');
+        $this->addGroup($and_or, 'and_or', 'Search with: ', '&nbsp;&nbsp;&nbsp;');
+        $defaultValues['and_or'] = 'or';
+        $this->setDefaults($defaultValues);
+        $this->createFormVariable();
+        $this->createFormInstrumentType();
+        $this->createFormPeriode();
+        $this->createFormMap();
+        $this->createFormOrderBy();
+        $this->createFormFilterData();
+        $this->createFormFilterDataDb();
+        $this->addElement('submit', 'bouton_search', 'search');
     }
-    echo '<div id="errors" class="danger"></div><br>';
+    
+    function createFormOrderBy()
+    {
+        $order_by[] = &HTML_QuickForm::createElement('radio', null, null, ' By instruments', '1');
+        $order_by[] = &HTML_QuickForm::createElement('radio', null, null, ' By platform types', '2');
+        $order_by[] = &HTML_QuickForm::createElement('radio', null, null, ' By dataset name', '3');
+        $this->addGroup($order_by, 'order_by', 'Sort result: ', '&nbsp;&nbsp;&nbsp;');
+        $defaultValues['order_by'] = '3';
+        $this->setDefaults($defaultValues);
+    }
+    
+    function createFormFilterData()
+    {
+        $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
+        $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
+        $this->addGroup($options, 'filter_data', 'Show only datasets with available data ?', '&nbsp;&nbsp;');
+        $defaultValues['filter_data'] = 0;
+        $this->setDefaults($defaultValues);
+    }
+    
+    function createFormFilterDataDb()
+    {
+        $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
+        $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
+        $this->addGroup($options, 'filter_data_db', 'Show only datasets with homogenized data ?', '&nbsp;&nbsp;');
+        $defaultValues['filter_data_db'] = 0;
+        $this->setDefaults($defaultValues);
+    }
+    
+    function createFormVariable()
+    {
+        $key = new gcmd_science_keyword();
+        $key_select = $key->chargeForm($this, 'gcmd_science_key', 'Parameter keyword');
+        $this->addElement($key_select);
+    }
+    
+    function createFormInstrumentType()
+    {
+        $key = new gcmd_instrument_keyword();
+        $key_select = $key->chargeForm($this, 'sensor_gcmd', 'Instrument type');
+        $this->addElement($key_select);
+    }
+    
+    function createFormPeriode()
+    {
+        $key = new period();
+        $key_select = $key->chargeFormWithDates($this, 'period', 'Period');
+        $this->addElement($key_select);
+        $this->addElement('text', 'date_begin', 'Date begin (yyyy-mm-dd)', array(
+        'size' => 10,
+        'id' => 'date_begin',
+        ));
+        $this->addElement('text', 'date_end', 'Date end (yyyy-mm-dd)', array(
+        'size' => 10,
+        'id' => 'date_end',
+        ));
+    }
+    
+    function createFormMap()
+    {
 
-    $reqUri = $_SERVER['REQUEST_URI'];
+        $this->addElement('hidden', 'minLat', MAP_DEFAULT_LAT_MIN);
+        $this->addElement('hidden', 'maxLat', MAP_DEFAULT_LAT_MAX);
+        $this->addElement('hidden', 'minLon', MAP_DEFAULT_LON_MIN);
+        $this->addElement('hidden', 'maxLon', MAP_DEFAULT_LON_MAX);
 
-    echo '<form action="' . $reqUri . '" method="post" name="frmmap" id="frmmap" enctype="multipart/form-data">';
-    echo $this->getElement('minLat')->toHTML();
-    echo $this->getElement('maxLat')->toHTML();
-    echo $this->getElement('minLon')->toHTML();
-    echo $this->getElement('maxLon')->toHTML();
-    echo $this->getElement('startMinLat')->toHTML();
-    echo $this->getElement('startMaxLat')->toHTML();
-    echo $this->getElement('startMinLon')->toHTML();
-    echo $this->getElement('startMaxLon')->toHTML();
+        $this->addElement('hidden', 'startMinLat', MAP_DEFAULT_LAT_MIN);
+        $this->addElement('hidden', 'startMaxLat', MAP_DEFAULT_LAT_MAX);
+        $this->addElement('hidden', 'startMinLon', MAP_DEFAULT_LON_MIN);
+        $this->addElement('hidden', 'startMaxLon', MAP_DEFAULT_LON_MAX);
+        $this->addElement('text', 'maxLatDeg', 'Lat: ', array(
+        'id' => 'maxLatDeg',
+        'size' => 3,
+        ));
+        $this->addElement('text', 'minLatDeg', 'Lat: ', array(
+        'id' => 'minLatDeg',
+        'size' => 3,
+        ));
+        $this->addElement('text', 'maxLonDeg', 'Lon: ', array(
+        'id' => 'maxLonDeg',
+        'size' => 3,
+        ));
+        $this->addElement('text', 'minLonDeg', 'Lon: ', array(
+        'id' => 'minLonDeg',
+        'size' => 3,
+        ));
+        $this->addElement('text', 'maxLatMin', '', array(
+        'id' => 'maxLatMin',
+        'size' => 2,
+        ));
+        $this->addElement('text', 'minLatMin', '', array(
+        'id' => 'minLatMin',
+        'size' => 2,
+        ));
+        $this->addElement('text', 'maxLonMin', '', array(
+        'id' => 'maxLonMin',
+        'size' => 2,
+        ));
+        $this->addElement('text', 'minLonMin', '', array(
+        'id' => 'minLonMin',
+        'size' => 2,
+        ));
+        $this->addElement('text', 'maxLatSec', '', array(
+        'id' => 'maxLatSec',
+        'size' => 2,
+        ));
+        $this->addElement('text', 'minLatSec', '', array(
+        'id' => 'minLatSec',
+        'size' => 2,
+        ));
+        $this->addElement('text', 'maxLonSec', '', array(
+        'id' => 'maxLonSec',
+        'size' => 2,
+        ));
+        $this->addElement('text', 'minLonSec', '', array(
+        'id' => 'minLonSec',
+        'size' => 2,
+        ));
+        $this->addElement('submit', 'unzoom', 'UnZoom', array(
+        'onclick' => "unZoom()",
+        ));
+    }
+    
+    function addValidationRules()
+    {
+        $this->registerRule('validDate', 'function', 'validDate');
+        $this->registerRule('validPeriod', 'function', 'validPeriod');
+        $this->addRule('date_begin', 'Date begin is not a date', 'validDate');
+        $this->addRule('date_end', 'Date end is not a date', 'validDate');
+        $this->addRule(array(
+        'date_begin',
+        'date_end',
+        ), 'Date end must be after date begin', 'validPeriod');
+        $this->addRule('maxLatDeg', 'Latitude &deg; must be numeric', 'numeric');
+        $this->addRule('maxLatDeg', 'Latitude &deg; is incorrect', 'number_range', array(
+        -90,
+        90,
+        ));
+        $this->addRule('minLatDeg', 'Latitude &deg; must be numeric', 'numeric');
+        $this->addRule('minLatDeg', 'Latitude &deg; is incorrect', 'number_range', array(
+        -90,
+        90,
+        ));
+        $this->addRule('maxLonDeg', 'Longitude &deg; must be numeric', 'numeric');
+        $this->addRule('maxLonDeg', 'Longitude &deg; is incorrect', 'number_range', array(
+        -180,
+        180,
+        ));
+        $this->addRule('minLonDeg', 'Longitude &deg;  must be numeric', 'numeric');
+        $this->addRule('minLonDeg', 'Longitude &deg; is incorrect', 'number_range', array(
+        -180,
+        180,
+        ));
+        $this->addRule('maxLatMin', 'Latitude \' must be numeric', 'numeric');
+        $this->addRule('maxLatMin', 'Latitude \' is incorrect', 'number_range', array(
+        0,
+        50,
+        ));
+        $this->addRule('minLatMin', 'Latitude \' must be numeric', 'numeric');
+        $this->addRule('minLatMin', 'Latitude \' is incorrect', 'number_range', array(
+        0,
+        59,
+        ));
+        $this->addRule('maxLonMin', 'Longitude \' must be numeric', 'numeric');
+        $this->addRule('maxLonMin', 'Longitude \'  is incorrect', 'number_range', array(
+        0,
+        59,
+        ));
+        $this->addRule('minLonMin', 'Longitude \'  must be numeric', 'numeric');
+        $this->addRule('minLonMin', 'Longitude \' is incorrect', 'number_range', array(
+        0,
+        59,
+        ));
+        $this->addRule('maxLatSec', 'Latitude " must be numeric', 'numeric');
+        $this->addRule('maxLatSec', 'Latitude " is incorrect', 'number_range', array(
+        0,
+        50,
+        ));
+        $this->addRule('minLatSec', 'Latitude " must be numeric', 'numeric');
+        $this->addRule('minLatSec', 'Latitude " is incorrect', 'number_range', array(
+        0,
+        59,
+        ));
+        $this->addRule('maxLonSec', 'Longitude " must be numeric', 'numeric');
+        $this->addRule('maxLonSec', 'Longitude " is incorrect', 'number_range', array(
+        0,
+        59,
+        ));
+        $this->addRule('minLonSec', 'Longitude " must be numeric', 'numeric');
+        $this->addRule('minLonSec', 'Longitude " is incorrect', 'number_range', array(
+        0,
+        59,
+        ));
+    }
+    
+    function displayForm()
+    {
+        $this->addValidationRules();
+        DatePickerUtils::addScriptPeriod('date_begin', 'date_end');
+      // affichage des erreurs
+        if (!empty($this->_errors)) {
+            foreach ($this->_errors as $error) {
+                if (strpos($error, 'General') === 0) {
+                    echo '<a href="#a_general"><span class="danger">' . $error . '</span></a><br>';
+                } elseif (strpos($error, 'Contact') === 0) {
+                    echo '<a href="#a_contact"><span class="danger">' . $error . '</span></a><br>';
+                } elseif (strpos($error, 'Instru') === 0) {
+                    echo '<a href="#a_instru"><span class="danger">' . $error . '</span></a><br>';
+                } elseif (strpos($error, 'Site') === 0) {
+                    echo '<a href="#a_site"><span class="danger">' . $error . '</span></a><br>';
+                } elseif (strpos($error, 'Measured') === 0) {
+                    echo '<a href="#a_param"><span class="danger">' . $error . '</span></a><br>';
+                } elseif (strpos($error, 'Derived') === 0) {
+                    echo '<a href="#a_param_calcul"><span class="danger">' . $error . '</span></a><br>';
+                } elseif (strpos($error, 'Data') === 0) {
+                    echo '<a href="#a_use"><span class="danger">' . $error . '</span></a><br>';
+                } else {
+                    echo '<span class="danger">' . $error . '</span><br>';
+                }
+            }
+        }
+        echo '<div id="errors" class="danger"></div><br>';
 
-    echo '<table>';
-    echo '<tr><td>' . $this->getElement('keywords')->getLabel() . '</td><td colspan="3">' . $this->getElement('keywords')->toHTML() . '</td></tr>';
-    echo '<tr><td>' . $this->getElement('and_or')->getLabel() . '</td><td colspan="3">' . $this->getElement('and_or')->toHTML() . '</td></tr>';
+        $reqUri = $_SERVER['REQUEST_URI'];
 
-    echo '<tr><td>' . $this->getElement('sensor_gcmd')->getLabel() . '</td><td colspan="3">' . $this->getElement('sensor_gcmd')->toHTML() . '</td></tr>';
+        echo '<form action="' . $reqUri . '" method="post" name="frmmap" id="frmmap" enctype="multipart/form-data">';
+        echo $this->getElement('minLat')->toHTML();
+        echo $this->getElement('maxLat')->toHTML();
+        echo $this->getElement('minLon')->toHTML();
+        echo $this->getElement('maxLon')->toHTML();
+        echo $this->getElement('startMinLat')->toHTML();
+        echo $this->getElement('startMaxLat')->toHTML();
+        echo $this->getElement('startMinLon')->toHTML();
+        echo $this->getElement('startMaxLon')->toHTML();
 
-    echo '<tr><td>' . $this->getElement('gcmd_science_key')->getLabel() . '</td>' . '<td colspan="3">' . $this->getElement('gcmd_science_key')->toHTML() . '</td></tr>';
+        echo '<table>';
+        echo '<tr><td>' . $this->getElement('keywords')->getLabel() . '</td><td colspan="3">' . $this->getElement('keywords')->toHTML() . '</td></tr>';
+        echo '<tr><td>' . $this->getElement('and_or')->getLabel() . '</td><td colspan="3">' . $this->getElement('and_or')->toHTML() . '</td></tr>';
 
-    echo '<tr><td rowspan="2">Period</td>' . '<td>' . $this->getElement('date_begin')->getLabel() . '</td>' . '<td>' . $this->getElement('date_end')->getLabel() . "</td></tr>";
-    echo '<tr><td>' . $this->getElement('date_begin')->toHTML() . '</td>' . '<td>' . $this->getElement('date_end')->toHTML() . '</td></tr>';
-    echo '<tr><td>' . $this->getElement('order_by')->getLabel() . '</td><td colspan="3">' . $this->getElement('order_by')->toHTML() . '</td></tr>';
-    echo '<tr><td colspan="4">';
-    echo '<div id="line1"></div><div id="line2"></div>
+        echo '<tr><td>' . $this->getElement('sensor_gcmd')->getLabel() . '</td><td colspan="3">' . $this->getElement('sensor_gcmd')->toHTML() . '</td></tr>';
+
+        echo '<tr><td>' . $this->getElement('gcmd_science_key')->getLabel() . '</td>' . '<td colspan="3">' . $this->getElement('gcmd_science_key')->toHTML() . '</td></tr>';
+
+        echo '<tr><td rowspan="2">Period</td>' . '<td>' . $this->getElement('date_begin')->getLabel() . '</td>' . '<td>' . $this->getElement('date_end')->getLabel() . "</td></tr>";
+        echo '<tr><td>' . $this->getElement('date_begin')->toHTML() . '</td>' . '<td>' . $this->getElement('date_end')->toHTML() . '</td></tr>';
+        echo '<tr><td>' . $this->getElement('order_by')->getLabel() . '</td><td colspan="3">' . $this->getElement('order_by')->toHTML() . '</td></tr>';
+        echo '<tr><td colspan="4">';
+        echo '<div id="line1"></div><div id="line2"></div>
                 <table border="0">
                 </table><br><br>
                 <table>
@@ -338,74 +349,73 @@ class search_form extends HTML_QuickForm {
                                 </table>
                                 <br>
                                 </td></tr></table>';
-    echo '</td></tr>';
-    echo '<tr><td colspan="2">' . $this->getElement('filter_data')->getLabel() . '</td><td colspan="2">' . $this->getElement('filter_data')->toHTML() . '</td></tr>';
-    echo '<tr><td colspan="2">' . $this->getElement('filter_data_db')->getLabel() . '</td><td colspan="2">' . $this->getElement('filter_data_db')->toHTML() . '</td></tr>';
+        echo '</td></tr>';
+        echo '<tr><td colspan="2">' . $this->getElement('filter_data')->getLabel() . '</td><td colspan="2">' . $this->getElement('filter_data')->toHTML() . '</td></tr>';
+        echo '<tr><td colspan="2">' . $this->getElement('filter_data_db')->getLabel() . '</td><td colspan="2">' . $this->getElement('filter_data_db')->toHTML() . '</td></tr>';
 
-    echo '<th colspan="4" align="center">' . $this->getElement('bouton_search')->toHTML() . '</td></th></table>';
-    echo '</form>';
-	}
-	
-  function saveForm() {
-    $keys = $this->exportValue('keywords');
-    if (isset($keys) && !empty($keys)) {
-      $this->keywords = explode(' ', $keys);
-    } else {
-      $this->keywords = array();
+        echo '<th colspan="4" align="center">' . $this->getElement('bouton_search')->toHTML() . '</td></th></table>';
+        echo '</form>';
     }
+    
+    function saveForm()
+    {
+        $keys = $this->exportValue('keywords');
+        if (isset($keys) && !empty($keys)) {
+            $this->keywords = explode(' ', $keys);
+        } else {
+            $this->keywords = array();
+        }
 
-    $this->and_or = $this->exportValue('and_or');
-    $this->period = $this->exportValue('period');
-    $this->date_begin = $this->exportValue('date_begin');
-    $this->date_end = $this->exportValue('date_end');
-    $this->order_by = $this->exportValue('order_by');
-    $this->gcmd_sensor = $this->exportValue('sensor_gcmd');
-    $gcmd_ids = $this->exportValue('gcmd_science_key');
-    $this->gcmd_variable = 0;
-    for ($j = 3; $j >= 0; $j--) {
+        $this->and_or = $this->exportValue('and_or');
+        $this->period = $this->exportValue('period');
+        $this->date_begin = $this->exportValue('date_begin');
+        $this->date_end = $this->exportValue('date_end');
+        $this->order_by = $this->exportValue('order_by');
+        $this->gcmd_sensor = $this->exportValue('sensor_gcmd');
+        $gcmd_ids = $this->exportValue('gcmd_science_key');
+        $this->gcmd_variable = 0;
+        for ($j = 3; $j >= 0; $j--) {
+            if (isset($gcmd_ids[$j]) && $gcmd_ids[$j] > 0) {
+                $this->gcmd_variable = $gcmd_ids[$j];
+                break;
+            }
+        }
+        $this->latMin = $this->deg2Double($this->exportValue('minLatDeg'), $this->exportValue('minLatMin'), $this->exportValue('minLatSec'));
+        $this->latMax = $this->deg2Double($this->exportValue('maxLatDeg'), $this->exportValue('maxLatMin'), $this->exportValue('maxLatSec'));
+        $this->lonMin = $this->deg2Double($this->exportValue('minLonDeg'), $this->exportValue('minLonMin'), $this->exportValue('minLonSec'));
+        $this->lonMax = $this->deg2Double($this->exportValue('maxLonDeg'), $this->exportValue('maxLonMin'), $this->exportValue('maxLonSec'));
+        $this->order_by = $this->exportValue('order_by');
 
-      if (isset($gcmd_ids[$j]) && $gcmd_ids[$j] > 0) {
-        $this->gcmd_variable = $gcmd_ids[$j];
-        break;
-      }
+        $this->filter_data = $this->exportValue('filter_data');
+        $this->filter_data_db = $this->exportValue('filter_data_db');
+
+        $_SESSION['requete_search_form'] = serialize($this);
     }
-    $this->latMin = $this->deg2Double($this->exportValue('minLatDeg'), $this->exportValue('minLatMin'), $this->exportValue('minLatSec'));
-    $this->latMax = $this->deg2Double($this->exportValue('maxLatDeg'), $this->exportValue('maxLatMin'), $this->exportValue('maxLatSec'));
-    $this->lonMin = $this->deg2Double($this->exportValue('minLonDeg'), $this->exportValue('minLonMin'), $this->exportValue('minLonSec'));
-    $this->lonMax = $this->deg2Double($this->exportValue('maxLonDeg'), $this->exportValue('maxLonMin'), $this->exportValue('maxLonSec'));
-    $this->order_by = $this->exportValue('order_by');
+    
+    function deg2Double($deg, $min, $sec)
+    {
+        if ($deg == "") {
+            $deg = 0;
+        }
 
-    $this->filter_data = $this->exportValue('filter_data');
-    $this->filter_data_db = $this->exportValue('filter_data_db');
+        if ($min == "") {
+            $min = 0;
+        }
 
-    $_SESSION['requete_search_form'] = serialize($this);
-	}
-	
-  function deg2Double($deg, $min, $sec) {
-    if ($deg == "") {
-      $deg = 0;
+        if ($sec == "") {
+            $sec = 0;
+        }
+
+        $d = intval($deg);
+        $m = intval($min);
+        $s = intval($sec);
+        if ($d != 0) {
+            $sign = $d / abs($d);
+        } elseif ($deg . length > 1 && $deg . substring(0, 1) == "-") {
+            $sign = -1;
+        } else {
+            $sign = 1;
+        }
+        return ($d + $sign * $m / 60 + $sign * $s / 3600) * 10000;
     }
-
-    if ($min == "") {
-      $min = 0;
-    }
-
-    if ($sec == "") {
-      $sec = 0;
-    }
-
-    $d = intval($deg);
-    $m = intval($min);
-    $s = intval($sec);
-    if ($d != 0) {
-      $sign = $d / abs($d);
-    } else if ($deg . length > 1 && $deg . substring(0, 1) == "-") {
-      $sign = -1;
-    } else {
-      $sign = 1;
-    }
-    return ($d + $sign * $m / 60 + $sign * $s / 3600) * 10000;
-	}
-
 }
-?>

@@ -7,110 +7,107 @@ $form = new sat_form_simple();
 $form->createLoginForm();
 
 if ($form->isCat()) {
-  if (array_key_exists('datsId', $_REQUEST)) {
-    $datsId = $_REQUEST['datsId'];
-  }
-  $requested = $_REQUEST['requested'];
-  if (!isset($datsId) || empty($datsId)) {
-    $datsId = $_SESSION['datsId_tmp'];
-    $_SESSION['datsId_tmp'] = null;
-  }
+    if (array_key_exists('datsId', $_REQUEST)) {
+        $datsId = $_REQUEST['datsId'];
+    }
+    $requested = $_REQUEST['requested'];
+    if (!isset($datsId) || empty($datsId)) {
+        $datsId = $_SESSION['datsId_tmp'];
+        $_SESSION['datsId_tmp'] = null;
+    }
 
   // Creation et affichage du formulaire
-  if (isset($datsId) && !empty($datsId)) {
-    $form->dataset = dataset_factory::createSatelliteDatasetById($datsId);
-    $_SESSION['datasetSat'] = serialize($form->dataset);
-  } else if (isset($_SESSION['datasetSat'])) {
-    $form->dataset = unserialize($_SESSION['datasetSat']);
-  }
+    if (isset($datsId) && !empty($datsId)) {
+        $form->dataset = dataset_factory::createSatelliteDatasetById($datsId);
+        $_SESSION['datasetSat'] = serialize($form->dataset);
+    } elseif (isset($_SESSION['datasetSat'])) {
+        $form->dataset = unserialize($_SESSION['datasetSat']);
+    }
 
-  if (!isset($form->dataset)) {
-    $form->dataset = new satellite_dataset();
-    $form->dataset->nbPis = 1;
-    $form->dataset->nbSites = 1;
-    $form->dataset->nbCalcVars = 0;
-    $form->dataset->nbVars = 1;
-    $form->dataset->nbFormats = 1;
-    $form->dataset->nbProj = 1;
-    $form->dataset->dats_id = 0;
-  }
-  $form->dataset->dataset_types = array();
-  $form->dataset->dataset_types[0] = new dataset_type();
-  $form->dataset->dataset_types[0] = $form->dataset->dataset_types[0]->getByType(dataset_type::TYPE_SATELLITE);
+    if (!isset($form->dataset)) {
+        $form->dataset = new satellite_dataset();
+        $form->dataset->nbPis = 1;
+        $form->dataset->nbSites = 1;
+        $form->dataset->nbCalcVars = 0;
+        $form->dataset->nbVars = 1;
+        $form->dataset->nbFormats = 1;
+        $form->dataset->nbProj = 1;
+        $form->dataset->dats_id = 0;
+    }
+    $form->dataset->dataset_types = array();
+    $form->dataset->dataset_types[0] = new dataset_type();
+    $form->dataset->dataset_types[0] = $form->dataset->dataset_types[0]->getByType(dataset_type::TYPE_SATELLITE);
 
   // TODO nettoyer
-  $form->createForm();
+    $form->createForm();
 
-  if (strpos($_SERVER['REQUEST_URI'], '&datsId')) {
-    $reqUri = substr($_SERVER['REQUEST_URI'], 10, strpos($_SERVER['REQUEST_URI'], '&datsId'));
-  } else {
-    $reqUri = substr($_SERVER['REQUEST_URI'], 10);
-  }
+    if (strpos($_SERVER['REQUEST_URI'], '&datsId')) {
+        $reqUri = substr($_SERVER['REQUEST_URI'], 10, strpos($_SERVER['REQUEST_URI'], '&datsId'));
+    } else {
+        $reqUri = substr($_SERVER['REQUEST_URI'], 10);
+    }
 
-  if (isset($_POST['bouton_add_instru'])) {
-    $form->saveForm();
-    $form->dataset->nbSites++;
-    $form->addSat();
-    $form->displayForm();
-    $_SESSION['datasetSat'] = serialize($form->dataset);
-  } else if (isset($_POST['bouton_add_variable'])) {
-    $form->saveForm();
-    $form->dataset->nbVars++;
-    $form->addVariable();
-    $form->displayForm();
-    $_SESSION['datasetSat'] = serialize($form->dataset);
-  } else if (isset($_POST['bouton_add_projet'])) {
-    $form->saveForm();
-    $form->dataset->nbProj++;
-    $form->addProjet();
-    $form->displayForm();
-    $_SESSION['datasetSat'] = serialize($form->dataset);
-  } else if (isset($_POST['bouton_add_pi'])) {
-    $form->saveForm();
-    $form->dataset->nbPis++;
-    $form->addPi();
-    $form->displayForm();
-    $_SESSION['datasetSat'] = serialize($form->dataset);
-  } else if (isset($_POST['bouton_save'])) {
-    $form->saveForm();
-    $form->addValidationRules();
-
-    if ($form->validate()) {
-      if ($form->dataset->dats_id == 0) {
-        $insertionOk = $form->dataset->insert();
-        $form->dataset->set_requested($requested);
-      } else {
-        $insertionOk = $form->dataset->update();
-        $form->dataset->set_requested($requested);
-      }
-
-      if ($insertionOk) {
-        echo "<span class='success'><strong>The dataset has been succesfully inserted in the database</strong></span><br>";
-
-        $_SESSION['datasetSat'] = null;
-        //editDataset ( $form->dataset->dats_id );
-        $form->dataset->display($project_name);
-      } else {
-        echo "<span class='danger'><strong>An error occured during the insertion process.</strong></span><br>";
-
-        $dts = new dataset();
-        $dts->dats_id = $form->dataset->dats_id;
-        if (!$dts->idExiste()) {
-          $form->dataset->dats_id = 0;
-        }
+    if (isset($_POST['bouton_add_instru'])) {
+        $form->saveForm();
+        $form->dataset->nbSites++;
+        $form->addSat();
         $form->displayForm();
         $_SESSION['datasetSat'] = serialize($form->dataset);
-      }
+    } elseif (isset($_POST['bouton_add_variable'])) {
+        $form->saveForm();
+        $form->dataset->nbVars++;
+        $form->addVariable();
+        $form->displayForm();
+        $_SESSION['datasetSat'] = serialize($form->dataset);
+    } elseif (isset($_POST['bouton_add_projet'])) {
+        $form->saveForm();
+        $form->dataset->nbProj++;
+        $form->addProjet();
+        $form->displayForm();
+        $_SESSION['datasetSat'] = serialize($form->dataset);
+    } elseif (isset($_POST['bouton_add_pi'])) {
+        $form->saveForm();
+        $form->dataset->nbPis++;
+        $form->addPi();
+        $form->displayForm();
+        $_SESSION['datasetSat'] = serialize($form->dataset);
+    } elseif (isset($_POST['bouton_save'])) {
+        $form->saveForm();
+        $form->addValidationRules();
+
+        if ($form->validate()) {
+            if ($form->dataset->dats_id == 0) {
+                $insertionOk = $form->dataset->insert();
+                $form->dataset->set_requested($requested);
+            } else {
+                $insertionOk = $form->dataset->update();
+                $form->dataset->set_requested($requested);
+            }
+
+            if ($insertionOk) {
+                echo "<span class='success'><strong>The dataset has been succesfully inserted in the database</strong></span><br>";
+
+                $_SESSION['datasetSat'] = null;
+                //editDataset ( $form->dataset->dats_id );
+                $form->dataset->display($project_name);
+            } else {
+                echo "<span class='danger'><strong>An error occured during the insertion process.</strong></span><br>";
+
+                $dts = new dataset();
+                $dts->dats_id = $form->dataset->dats_id;
+                if (!$dts->idExiste()) {
+                    $form->dataset->dats_id = 0;
+                }
+                $form->displayForm();
+                $_SESSION['datasetSat'] = serialize($form->dataset);
+            }
+        } else {
+            $form->displayForm();
+            $_SESSION['datasetSat'] = serialize($form->dataset);
+        }
     } else {
-      $form->displayForm();
-      $_SESSION['datasetSat'] = serialize($form->dataset);
+        $form->displayForm();
     }
-  } else {
-    $form->displayForm();
-  }
-
 } else {
-  $form->displayLGForm("", true);
+    $form->displayLGForm("", true);
 }
-
-?>

@@ -1,16 +1,19 @@
 <?php
 
-class countries {
+class countries
+{
 
-  public static function getDisplayName($code) {
-    return countries::$countries[$code];
-  }
+    public static function getDisplayName($code)
+    {
+        return countries::$countries[$code];
+    }
 
-  public static function getCode($name) {
-    return array_search($name, countries::$countries);
-  }
+    public static function getCode($name)
+    {
+        return array_search($name, countries::$countries);
+    }
 
-  static $countries = array(
+    static $countries = array(
     "0" => "-- Country --",
     "AF" => "Afghanistan",
     "AL" => "Albania",
@@ -251,8 +254,5 @@ class countries {
     "YE" => "Yemen",
     "ZM" => "Zambia",
     "ZW" => "Zimbabwe",
-  );
-
+    );
 }
-
-?>

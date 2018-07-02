@@ -10,12 +10,12 @@ header("Content-type: text/html; charset=UTF8");
     </nav>
 
     <main role="main">
-    	<section role="authUser">
+        <section role="authUser">
             <?php include "logout.php";?>
         </section>
-		<?php require 'template/template-milieu.php';?>
+        <?php require 'template/template-milieu.php';?>
 
-	</main>
+    </main>
 </div> <!-- end content-area -->
 <!-- <footer>
     <?php //require "inc-footer.html";?>

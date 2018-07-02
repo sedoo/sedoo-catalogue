@@ -1,8 +1,8 @@
 <?php
-  if (!isset($_SESSION)) {
+if (!isset($_SESSION)) {
     session_start();
-  }
-  require_once 'conf/define-project.php'; 
+}
+  require_once 'conf/define-project.php';
   $project_url = "/";
   $titreMilieu = "Access data";
   ob_start();

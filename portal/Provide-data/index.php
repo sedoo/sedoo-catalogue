@@ -1,10 +1,10 @@
 <?php
 if (!isset($_SESSION)) {
-  session_start();
+    session_start();
 }
 
 require_once 'conf/conf.php';
-require_once 'conf/define-project.php'; 
+require_once 'conf/define-project.php';
 $project_url = "/Cerdanya";
 $titreMilieu = "Provide data";
 ob_start();
@@ -29,26 +29,40 @@ ob_start();
     <p>If not already done, <strong>add or update  a metadata form </strong>describing the datasets you provide at the following address:
       <a href="<?php echo 'https://' . $_SERVER['HTTP_HOST']; ?>/portal/Provide-metadata/" ><?= 'https://' . $_SERVER['HTTP_HOST']; ?>portal/Provide-metadata</a>
     <p>
-    After uploading your data, please <strong>inform us</strong> by email: <strong><?php if (defined('Portal_Contact_Email')) {
-      echo Portal_Contact_Email;
+    After uploading your data, please <strong>inform us</strong> by email: <strong>
+    <?php
+    if (defined('Portal_Contact_Email')) {
+        echo Portal_Contact_Email;
     }
-    ?></strong>
+    ?>
+    </strong>
     so that we can make the data avalaible.  Don't forget to mention the following items:
     <ul>
       <li>The name of the FTP directory where you uploaded your data
       <li>The title of the metadata form describing your dataset
-      <li>Which data policy (Public, <?php echo MainProject;if (constant('HasAssociatedUsers') == 'true') {echo ", " . $project_name . " Core or Associated Users";} else {echo " or " . $project_name . " Core Users";} ?> Access)
+      <li>Which data policy (Public, 
+        <?php
+        echo MainProject;
+        if (constant('HasAssociatedUsers') == 'true') {
+            echo ", " . $project_name . " Core or Associated Users";
+        } else {
+            echo " or " . $project_name . " Core Users";
+        }
+        ?> Access)
       and "use constraints" should be applied to your data.
       Use contraints example: Permission is granted to use these data and images in research and publications when accompanied by the following statement:
-      "Data were obtained from the <?php echo MainProject; ?> program, sponsored by Grants <?php echo MainProject . "/" . $project_name; ?> [ and the relevant project or Institution or Lab]."
+      "Data were obtained from the <?= MainProject; ?> program, sponsored by Grants <?= MainProject . "/" . $project_name; ?> [ and the relevant project or Institution or Lab]."
     </ul>
     <br>
     <p><strong>Provide model outputs or value-added datasets</strong></p>
 
-    <p>Large dataset providers are invited to contact  <strong><?php if (defined('Portal_Contact_Email')) {
-      echo Portal_Contact_Email;
-    }
-    ?></strong> in order to define the best way to upload the data.</p>
+    <p>Large dataset providers are invited to contact  <strong>
+<?php
+if (defined('Portal_Contact_Email')) {
+    echo Portal_Contact_Email;
+}
+?>
+    </strong> in order to define the best way to upload the data.</p>
   </div>
 </div>
 

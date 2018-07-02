@@ -7,4 +7,3 @@ $xmlstr = <<<XML
 </resource>
 
 XML;
-?>
