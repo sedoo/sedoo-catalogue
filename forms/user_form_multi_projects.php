@@ -10,10 +10,10 @@ require_once "mail.php";
 class user_form_new extends login_form
 {
 
-    var $demande;
-    var $project;
-    var $projects;
-    var $msg;
+    public $demande;
+    public $project;
+    public $projects;
+    public $msg;
 
     function createForm($testMail = true)
     {
@@ -909,8 +909,8 @@ class user_form_new extends login_form
         $this->disabledElmts[] = $elementName;
     }
     
-    var $disabledElmts = array();
-    var $exclAttrs = array();
+    public $disabledElmts = array();
+    public $exclAttrs = array();
     
     function initUser($update = false)
     {

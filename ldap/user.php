@@ -6,8 +6,8 @@ require_once "ldap/entry.php";
 class user extends entry
 {
 
-    var $cn;
-    var $sn;
+    public $cn;
+    public $sn;
 
     function __construct($dn = null, $attrs = null)
     {

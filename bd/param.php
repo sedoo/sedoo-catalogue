@@ -7,13 +7,13 @@ require_once "bd/unit.php";
 class param
 {
 
-    var $var_id;
-    var $unit_id;
-    var $param_code;
-    var $standard_name;
-    var $var;
-    var $unit;
-    var $hasData = false;
+    public $var_id;
+    public $unit_id;
+    public $param_code;
+    public $standard_name;
+    public $var;
+    public $unit;
+    public $hasData = false;
 
     function new_param($tab)
     {

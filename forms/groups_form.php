@@ -4,8 +4,8 @@ require_once "forms/login_form.php";
 class groups_form extends login_form
 {
 
-    var $group;
-    var $list;
+    public $group;
+    public $list;
     
     function createForm()
     {

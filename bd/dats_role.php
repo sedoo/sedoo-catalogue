@@ -11,10 +11,10 @@ require_once "bd/role.php";
 
 class dats_role
 {
-    var $dats_id;
-    var $role_id;
-    var $dataset;
-    var $role;
+    public $dats_id;
+    public $role_id;
+    public $dataset;
+    public $role;
 
     function new_dats_role($tab)
     {

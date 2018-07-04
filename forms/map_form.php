@@ -4,10 +4,10 @@ require_once 'login_form.php';
 class map_form extends login_form
 {
 
-    var $latMin;
-    var $latMax;
-    var $lonMin;
-    var $lonMax;
+    public $latMin;
+    public $latMax;
+    public $lonMin;
+    public $lonMax;
 
     function createFormMap(
         $defaultLatMin = MAP_DEFAULT_LAT_MIN,

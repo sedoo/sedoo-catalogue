@@ -14,8 +14,8 @@ define("ADD_URL_QL", 5);
 class url_form extends login_form
 {
 
-    var $type;
-    var $projectName;
+    public $type;
+    public $projectName;
 
     function createForm($typeUrl, $projectName = MainProject)
     {

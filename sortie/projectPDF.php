@@ -4,8 +4,8 @@ require_once 'fpdf17/fpdf.php';
 class projectPDF extends FPDF
 {
 
-    var $text_indent = 0;
-    var $titre;
+    public $text_indent = 0;
+    public $titre;
     
     function projectPdf($titre = 'Instrument Form')
     {

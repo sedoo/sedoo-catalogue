@@ -10,10 +10,10 @@ require_once 'scripts/filtreProjets.php';
 class stats_form extends login_form
 {
 
-    var $statsUsers;
-    var $projectName;
-    var $filtreProjets;
-    var $yDeb = STATS_DEFAULT_MIN_YEAR;
+    public $statsUsers;
+    public $projectName;
+    public $filtreProjets;
+    public $yDeb = STATS_DEFAULT_MIN_YEAR;
 
     function createForm($projectName)
     {

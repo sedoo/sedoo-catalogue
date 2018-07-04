@@ -4,18 +4,18 @@ require_once "bd/bdConnect.php";
 
 class data_availability
 {
-    var $ins_dats_id;
-    var $var_id;
-    var $place_id;
+    public $ins_dats_id;
+    public $var_id;
+    public $place_id;
 
-    var $date_begin;
-    var $date_end;
+    public $date_begin;
+    public $date_end;
 
-    var $val_min;
-    var $val_max;
-    var $nb_valeurs;
+    public $val_min;
+    public $val_max;
+    public $nb_valeurs;
 
-    var $period;
+    public $period;
 
     function new_data_availability($tab)
     {

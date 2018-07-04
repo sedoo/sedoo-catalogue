@@ -10,9 +10,9 @@ require_once "bd/bdConnect.php";
 
 class database
 {
-    var $database_id;
-    var $database_name;
-    var $database_url;
+    public $database_id;
+    public $database_name;
+    public $database_url;
 
     function new_database($tab)
     {

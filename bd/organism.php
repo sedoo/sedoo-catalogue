@@ -10,10 +10,10 @@ require_once "bd/country.php";
 
 class organism
 {
-    var $org_id;
-    var $org_sname;
-    var $org_fname;
-    var $org_url;
+    public $org_id;
+    public $org_sname;
+    public $org_fname;
+    public $org_url;
 
     function new_organism($tab)
     {

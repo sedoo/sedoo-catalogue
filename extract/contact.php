@@ -3,10 +3,10 @@
 class contact
 {
 
-    var $nom;
-    var $mail;
-    var $organisme;
-    var $type;
+    public $nom;
+    public $mail;
+    public $organisme;
+    public $type;
 
     function contact($xmlElt)
     {

@@ -6,10 +6,10 @@ require_once "bd/gcmd_location_keyword.php";
 class dats_loc
 {
 
-    var $dats_id;
-    var $gcmd_loc_id;
-    var $dataset;
-    var $gcmd_location_keyword;
+    public $dats_id;
+    public $gcmd_loc_id;
+    public $dataset;
+    public $gcmd_location_keyword;
 
     function new_dats_loc($tab)
     {

@@ -11,10 +11,10 @@ require_once "bd/data_format.php";
 
 class dats_data_format
 {
-    var $dats_id;
-    var $data_format_id;
-    var $dataset;
-    var $data_format;
+    public $dats_id;
+    public $data_format_id;
+    public $dataset;
+    public $data_format;
 
     function new_dats_data_format($tab)
     {

@@ -6,13 +6,13 @@ require_once('extract/conf.php');
 class reponseXml
 {
     
-    var $id;
-    var $userName;
-    var $mail;
-    var $roles;
-    var $files;
-    var $project_name;
-    var $isPublic;
+    public $id;
+    public $userName;
+    public $mail;
+    public $roles;
+    public $files;
+    public $project_name;
+    public $isPublic;
 
     function reponseXml($id, $project_name)
     {

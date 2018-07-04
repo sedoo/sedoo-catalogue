@@ -9,9 +9,9 @@ require_once "bd/bdConnect.php";
 
 class manufacturer
 {
-    var $manufacturer_id;
-    var $manufacturer_name;
-    var $manufacturer_url;
+    public $manufacturer_id;
+    public $manufacturer_name;
+    public $manufacturer_url;
 
     function new_manufacturer($tab)
     {

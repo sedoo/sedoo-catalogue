@@ -11,10 +11,10 @@ require_once "bd/role.php";
 
 class url_event_role
 {
-    var $url_event_id;
-    var $role_id;
-    var $url_event;
-    var $role;
+    public $url_event_id;
+    public $role_id;
+    public $url_event;
+    public $role;
 
     function new_url_event_role($tab)
     {

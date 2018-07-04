@@ -9,10 +9,10 @@ require_once "bd/bdConnect.php";
 
 class event
 {
-    var $event_id;
-    var $event_name;
-    var $event_date_begin;
-    var $event_date_end;
+    public $event_id;
+    public $event_name;
+    public $event_date_begin;
+    public $event_date_end;
 
     function new_event($tab)
     {

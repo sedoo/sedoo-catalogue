@@ -9,8 +9,8 @@ require_once "bd/bdConnect.php";
 
 class country
 {
-    var $country_id;
-    var $country_name;
+    public $country_id;
+    public $country_name;
 
     function new_country($tab)
     {

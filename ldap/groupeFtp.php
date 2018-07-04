@@ -5,8 +5,8 @@ require_once "ldap/groupe.php";
 class groupeFtp extends groupe
 {
 
-    var $gidNumber;
-    var $memberUid;
+    public $gidNumber;
+    public $memberUid;
 
     function __construct($dn = null, $attrs = null)
     {

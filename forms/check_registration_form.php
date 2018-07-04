@@ -6,8 +6,8 @@ require_once "ldap/ldapConnect.php";
 class check_registration_form extends HTML_QuickForm
 {
 
-    var $msg = null;
-    var $project;
+    public $msg = null;
+    public $project;
 
     function createForm($project)
     {

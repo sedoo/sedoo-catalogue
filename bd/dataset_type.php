@@ -16,9 +16,9 @@ class dataset_type
     const TYPE_INSTRUMENT = 'INSTRUMENT';
     const TYPE_MULTI_INSTRU = 'MULTI-INSTRUMENT';
 
-    var $dats_type_id;
-    var $dats_type_title;
-    var $dats_type_desc;
+    public $dats_type_id;
+    public $dats_type_title;
+    public $dats_type_desc;
 
     function new_dataset_type($tab)
     {

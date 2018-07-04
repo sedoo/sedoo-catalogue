@@ -6,7 +6,7 @@ require_once "extract/reponseXml.php";
 class extract_download_form extends login_form
 {
 
-    var $reponse;
+    public $reponse;
 
     function createForm($resultId = null, $project_name = null)
     {

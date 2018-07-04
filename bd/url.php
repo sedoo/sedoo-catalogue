@@ -11,10 +11,10 @@ require_once "bd/dataset.php";
 class url
 {
 
-    var $dats_id;
-    var $url_id;
-    var $url;
-    var $url_type;
+    public $dats_id;
+    public $url_id;
+    public $url;
+    public $url_type;
 
     function new_url($tab)
     {

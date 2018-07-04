@@ -10,16 +10,16 @@ require_once "bd/thesaurus.php";
 
 class gcmd_plateform_keyword
 {
-    var $gcmd_plat_id;
-    var $gcmd_plat_name;
-    var $gcmd_level;
-    var $gcm_gcmd_id;
-    var $thesaurus_id;
-    var $thesaurus;
-    var $uid;
+    public $gcmd_plat_id;
+    public $gcmd_plat_name;
+    public $gcmd_level;
+    public $gcm_gcmd_id;
+    public $thesaurus_id;
+    public $thesaurus;
+    public $uid;
 
-    var $gcmd_parent;
-    var $enfants;
+    public $gcmd_parent;
+    public $enfants;
 
     function new_gcmd_plateform_keyword($tab)
     {

@@ -6,15 +6,15 @@ require_once "bd/project.php";
 
 class gcmd_location_keyword
 {
-    var $gcmd_loc_id;
-    var $gcm_gcmd_id;
-    var $gcmd_loc_name;
-    var $gcmd_level;
-    var $thesaurus_id;
-    var $thesaurus;
-    var $uid;
-    var $gcmd_parent;
-    var $enfants;
+    public $gcmd_loc_id;
+    public $gcm_gcmd_id;
+    public $gcmd_loc_name;
+    public $gcmd_level;
+    public $thesaurus_id;
+    public $thesaurus;
+    public $uid;
+    public $gcmd_parent;
+    public $enfants;
 
     function new_gcmd_location_keyword($tab)
     {

@@ -14,21 +14,21 @@ require_once ("forms/validation.php");
 require_once ("utils/datepicker_utils.php");
 require_once ("conf/conf.php");
 class search_form extends HTML_QuickForm {
-	var $latMin;
-	var $latMax;
-	var $lonMin;
-	var $lonMax;
-	var $date_begin;
-	var $date_end;
-	var $period;
-	var $gcmd_sensor;
-	var $gcmd_variable;
-	var $keywords;
-	var $and_or;
-	var $order_by;
-	var $filter_data;
-	var $filter_data_db;
-	var $projectName;
+	public $latMin;
+	public $latMax;
+	public $lonMin;
+	public $lonMax;
+	public $date_begin;
+	public $date_end;
+	public $period;
+	public $gcmd_sensor;
+	public $gcmd_variable;
+	public $keywords;
+	public $and_or;
+	public $order_by;
+	public $filter_data;
+	public $filter_data_db;
+	public $projectName;
 	function createForm($projectName) {
 		$this->projectName = $projectName;
 		$this->addElement ( 'text', 'keywords', "Keywords", array (

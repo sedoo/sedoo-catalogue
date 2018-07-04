@@ -10,26 +10,26 @@ require_once "scripts/common.php";
 
 class place
 {
-    var $place_id;
-    var $pla_place_id;
-    var $bound_id;
-    var $gcmd_plat_id;
-    var $place_name;
-    var $place_elevation_min;
-    var $place_elevation_max;
-    var $parent_place;
-    var $boundings;
-    var $gcmd_plateform_keyword;
-    var $enfants;
+    public $place_id;
+    public $pla_place_id;
+    public $bound_id;
+    public $gcmd_plat_id;
+    public $place_name;
+    public $place_elevation_min;
+    public $place_elevation_max;
+    public $parent_place;
+    public $boundings;
+    public $gcmd_plateform_keyword;
+    public $enfants;
 
-    var $place_level;
+    public $place_level;
 
-    var $west_bounding_coord;
-    var $east_bounding_coord;
-    var $north_bounding_coord;
-    var $south_bounding_coord;
+    public $west_bounding_coord;
+    public $east_bounding_coord;
+    public $north_bounding_coord;
+    public $south_bounding_coord;
 
-    var $sensor_environment;
+    public $sensor_environment;
 
     function new_place($tab)
     {

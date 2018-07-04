@@ -14,14 +14,14 @@ require_once "scripts/mail.php";
 
 class extraction_form extends map_form
 {
-    var $projectName;
-    var $requete;
-    var $msg;
-    var $datsId;
-    var $multipleDatasets;
-    var $search;
-    var $minValidDate = null;
-    var $maxValidDate = null;
+    public $projectName;
+    public $requete;
+    public $msg;
+    public $datsId;
+    public $multipleDatasets;
+    public $search;
+    public $minValidDate = null;
+    public $maxValidDate = null;
 
     function createForm($projectName, $dats_id = null, $search = 0)
     {

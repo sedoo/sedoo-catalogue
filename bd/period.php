@@ -10,10 +10,10 @@ require_once "scripts/filtreProjets.php";
 
 class period
 {
-    var $period_id;
-    var $period_name;
-    var $period_begin;
-    var $period_end;
+    public $period_id;
+    public $period_name;
+    public $period_begin;
+    public $period_end;
 
     function new_period($tab)
     {

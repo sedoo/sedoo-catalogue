@@ -7,13 +7,13 @@ class projectUser extends portalUser
 {
 
   // TODO ajout attribut status (pending, registered, rejected)
-    var $proj_name;
-    var $status;
-    var $applicationDate;
-    var $registrationDate;
-    var $associatedProject;
-    var $wg;
-    var $abstract;
+    public $proj_name;
+    public $status;
+    public $applicationDate;
+    public $registrationDate;
+    public $associatedProject;
+    public $wg;
+    public $abstract;
 
     function __construct($dn = null, $attrs = null, $proj)
     {

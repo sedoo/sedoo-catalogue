@@ -6,10 +6,10 @@ require_once "bd/gcmd_location_keyword.php";
 class proj_loc_keyword
 {
 
-    var $gcmd_loc_id;
-    var $project_id;
-    var $project;
-    var $gcmd_location_keyword;
+    public $gcmd_loc_id;
+    public $project_id;
+    public $project;
+    public $gcmd_location_keyword;
 
     function new_proj_loc_keyword($tab)
     {

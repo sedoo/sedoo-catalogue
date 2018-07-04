@@ -3,9 +3,9 @@ require_once "bd/bdConnect.php";
 
 class thesaurus
 {
-    var $thesaurus_id;
-    var $name;
-    var $url;
+    public $thesaurus_id;
+    public $name;
+    public $url;
 
     function new_thesaurus($tab)
     {

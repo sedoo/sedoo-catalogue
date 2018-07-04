@@ -11,20 +11,20 @@ require_once "bd/sensor.php";
 
 class dats_sensor
 {
-    var $dats_id;
-    var $sensor_id;
-    var $nb_sensor;
-    var $sensor_resol_temp;
-    var $sensor_lat_resolution;
-    var $sensor_lon_resolution;
-    var $sensor_vert_resolution;
-    var $grid_original;
-    var $grid_process;
-    var $dataset;
-    var $sensor;
+    public $dats_id;
+    public $sensor_id;
+    public $nb_sensor;
+    public $sensor_resol_temp;
+    public $sensor_lat_resolution;
+    public $sensor_lon_resolution;
+    public $sensor_vert_resolution;
+    public $grid_original;
+    public $grid_process;
+    public $dataset;
+    public $sensor;
   // add by lolo
-    var $nbVars;
-    var $nbCalcVars;
+    public $nbVars;
+    public $nbCalcVars;
 
     function new_dats_sensor($tab)
     {

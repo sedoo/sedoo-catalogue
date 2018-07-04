@@ -9,16 +9,16 @@ require_once 'lstDataUtils.php';
 class treeByPlat
 {
 
-    var $treeMenu;
-    var $withDataOnly;
-    var $dataType;
-    var $filter;
-    var $search;
-    var $project_name;
-    var $projects;
-    var $cptDats;
-    var $datsSat;
-    var $EmptyTab;
+    public $treeMenu;
+    public $withDataOnly;
+    public $dataType;
+    public $filter;
+    public $search;
+    public $project_name;
+    public $projects;
+    public $cptDats;
+    public $datsSat;
+    public $EmptyTab;
     
     function treeByPlat($withDataOnly = false, $dataType = 0, $filter = null, $search = 0)
     {

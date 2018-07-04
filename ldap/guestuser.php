@@ -6,9 +6,9 @@ require_once "ldap/entry.php";
 class guestuser
 {
 
-    var $cn;
-    var $sn;
-    var $mail;
+    public $cn;
+    public $sn;
+    public $mail;
 
     function __construct($mail)
     {

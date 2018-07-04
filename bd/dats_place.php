@@ -11,10 +11,10 @@ require_once "bd/place.php";
 
 class dats_place
 {
-    var $dats_id;
-    var $place_id;
-    var $dataset;
-    var $place;
+    public $dats_id;
+    public $place_id;
+    public $dataset;
+    public $place;
 
     function new_dats_place($tab)
     {

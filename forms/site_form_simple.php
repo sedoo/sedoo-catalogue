@@ -4,7 +4,7 @@ require_once "forms/base_form.php";
 class site_form_simple extends base_form
 {
 
-    var $nbVarsBySensor = array();
+    public $nbVarsBySensor = array();
 
     function createForm($projectName)
     {

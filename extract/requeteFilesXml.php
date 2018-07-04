@@ -6,12 +6,12 @@ require_once('conf/conf.php');
 class requeteFilesXml
 {
 
-    var $projectName;
-    var $user;
-    var $compression;
-    var $dataset;
-    var $racine;
-    var $files;
+    public $projectName;
+    public $user;
+    public $compression;
+    public $dataset;
+    public $racine;
+    public $files;
     
 
     function requeteFilesXml($user, $projectName, $dataset, $racine)

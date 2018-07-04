@@ -13,22 +13,22 @@ require_once "bd/vertical_level_type.php";
 
 class dats_var
 {
-    var $var_id;
-    var $dats_id;
-    var $unit_id;
-    var $vert_level_type_id;
-    var $vertical_level_type;
-    var $unit;
-    var $flag_param_calcule;
-    var $min_value;
-    var $max_value;
-    var $methode_acq;
-    var $date_min;
-    var $date_max;
-    var $dataset;
-    var $variable;
+    public $var_id;
+    public $dats_id;
+    public $unit_id;
+    public $vert_level_type_id;
+    public $vertical_level_type;
+    public $unit;
+    public $flag_param_calcule;
+    public $min_value;
+    public $max_value;
+    public $methode_acq;
+    public $date_min;
+    public $date_max;
+    public $dataset;
+    public $variable;
 
-    var $level_type;
+    public $level_type;
 
     function new_dats_var($tab)
     {

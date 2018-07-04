@@ -11,11 +11,11 @@ require_once "bd/sensor.php";
 
 class sensor_place
 {
-    var $place_id;
-    var $sensor_id;
-    var $environment;
-    var $place;
-    var $sensor;
+    public $place_id;
+    public $sensor_id;
+    public $environment;
+    public $place;
+    public $sensor;
 
     function new_sensor_place($tab)
     {

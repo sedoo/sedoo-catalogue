@@ -28,7 +28,7 @@ require_once "bd/gcmd_location_keyword.php";
 class base_form_multi extends login_form
 {
 
-    var $dataset;
+    public $dataset;
 
     function createLoginForm()
     {

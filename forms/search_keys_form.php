@@ -13,10 +13,10 @@ require_once "validation.php";
 class search_keys_form extends HTML_QuickForm
 {
 
-    var $keywords;
-    var $and_or;
-    var $filter_data;
-    var $filter_data_db;
+    public $keywords;
+    public $and_or;
+    public $filter_data;
+    public $filter_data_db;
 
     function createForm()
     {

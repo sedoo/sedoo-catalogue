@@ -5,8 +5,8 @@ require_once "ldap/entry.php";
 class projet extends entry
 {
 
-    var $cn;
-    var $description;
+    public $cn;
+    public $description;
 
     function __construct($dn = null, $attrs = null)
     {

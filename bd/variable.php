@@ -10,11 +10,11 @@ require_once "bd/gcmd_science_keyword.php";
 
 class variable
 {
-    var $var_id;
-    var $gcmd_id;
-    var $var_name;
-    var $gcmd;
-    var $sensor_precision;
+    public $var_id;
+    public $gcmd_id;
+    public $var_name;
+    public $gcmd;
+    public $sensor_precision;
 
     function new_variable($tab)
     {

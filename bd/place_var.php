@@ -11,10 +11,10 @@ require_once "bd/variable.php";
 
 class place_var
 {
-    var $var_id;
-    var $place_id;
-    var $variable;
-    var $place;
+    public $var_id;
+    public $place_id;
+    public $variable;
+    public $place;
 
     function new_place_var($tab)
     {

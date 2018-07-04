@@ -6,30 +6,30 @@ require_once "ldap/entry.php";
 class portalUser extends entry
 {
 
-    var $lastname;
-    var $firstname;
-    var $cn;
-    var $mail;
-    var $affiliation;
-    var $street;
-    var $zipCode;
-    var $city;
-    var $country;
-    var $phoneNumber;
-    var $abstract;
-    var $altMail;
-    var $otherUser;
-    var $applicationDate;
-    var $registrationDate;
+    public $lastname;
+    public $firstname;
+    public $cn;
+    public $mail;
+    public $affiliation;
+    public $street;
+    public $zipCode;
+    public $city;
+    public $country;
+    public $phoneNumber;
+    public $abstract;
+    public $altMail;
+    public $otherUser;
+    public $applicationDate;
+    public $registrationDate;
 
   // Utilisateurs enregistrés uniquement
-    var $memberOf;
-    var $userPassword;
-    var $userPasswords;
-    var $otherGroups;
-    var $editableGroup;
-    var $supervisor_name;
-    var $supervisor_affiliation;
+    public $memberOf;
+    public $userPassword;
+    public $userPasswords;
+    public $otherGroups;
+    public $editableGroup;
+    public $supervisor_name;
+    public $supervisor_affiliation;
     
     function __construct($dn = null, $attrs = null)
     {
@@ -42,7 +42,7 @@ class portalUser extends entry
         }
     }
     
-    var $attrs;
+    public $attrs;
     
     function initUser($attrs)
     {

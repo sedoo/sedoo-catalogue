@@ -5,8 +5,8 @@ require_once "utils/elastic/ElasticSearchUtils.php";
 
 class search_form_menu extends HTML_QuickForm {
 
-  var $keywords;
-	var $projectName;
+  public $keywords;
+	public $projectName;
 	
   function createForm($projectName) {
     $this->projectName = $projectName;

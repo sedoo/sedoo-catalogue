@@ -11,17 +11,17 @@ require_once "bd/sensor.php";
 
 class sensor_var
 {
-    var $var_id;
-    var $sensor_id;
-    var $sensor_precision;
-    var $variable;
-    var $sensor;
+    public $var_id;
+    public $sensor_id;
+    public $sensor_precision;
+    public $variable;
+    public $sensor;
   //add by lolo
-    var $unit;
-    var $methode_acq;
-    var $date_min;
-    var $date_max;
-    var $flag_param_calcule;
+    public $unit;
+    public $methode_acq;
+    public $date_min;
+    public $date_max;
+    public $flag_param_calcule;
 
     function new_sensor_var($tab)
     {

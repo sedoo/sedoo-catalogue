@@ -11,11 +11,11 @@ require_once "ldap/constants.php";
 class ldapConnect
 {
 
-    var $ldaphost = LDAP_HOST;
-    var $ldapport = LDAP_PORT;
-    var $ldapdn = LDAP_DN;
-    var $ldappasswd = LDAP_PASSWD;
-    var $ldapconn;
+    public $ldaphost = LDAP_HOST;
+    public $ldapport = LDAP_PORT;
+    public $ldapdn = LDAP_DN;
+    public $ldappasswd = LDAP_PASSWD;
+    public $ldapconn;
 
   /*
    * Connexion en utilisant LDAP_DN et LDAP_PASSWD (voir constants.php)

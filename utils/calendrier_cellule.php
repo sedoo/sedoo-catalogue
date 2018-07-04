@@ -6,8 +6,8 @@ class calendrier_cellule {
   const VERT = "#32CD32";
   const ROUGE = "#ff9090";
 
-  var $jour;
-  var $color;
+  public $jour;
+  public $color;
 
   function calendrier_cellule($jour = null, $color = self::BLANC) {
     $this->color = $color;

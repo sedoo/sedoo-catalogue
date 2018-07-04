@@ -6,13 +6,13 @@ class map_form
 {
 
   //Centre
-    var $lat = 50;
-    var $lon = 15;
+    public $lat = 50;
+    public $lon = 15;
 
   //Dimensions carte
-    var $width = 640;
-    var $height = 640;
-    var $zoomLvl = 4;
+    public $width = 640;
+    public $height = 640;
+    public $zoomLvl = 4;
 
     private function includeScripts()
     {

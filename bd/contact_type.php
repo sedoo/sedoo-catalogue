@@ -9,8 +9,8 @@ require_once "bd/bdConnect.php";
 
 class contact_type
 {
-    var $contact_type_id;
-    var $contact_type_name;
+    public $contact_type_id;
+    public $contact_type_name;
 
     function new_contact_type($tab)
     {

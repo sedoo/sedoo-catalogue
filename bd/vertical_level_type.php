@@ -9,8 +9,8 @@ require_once "bd/bdConnect.php";
 
 class vertical_level_type
 {
-    var $vert_level_type_id;
-    var $vert_level_type_name;
+    public $vert_level_type_id;
+    public $vert_level_type_name;
 
     function new_vertical_level_type($tab)
     {

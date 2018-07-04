@@ -32,33 +32,33 @@ function printTh($cpt, $max)
 class dats_quality
 {
 
-    var $cptCore;
-    var $cptCoreMax;
-    var $commentCore;
+    public $cptCore;
+    public $cptCoreMax;
+    public $commentCore;
 
-    var $cptInfo;
-    var $cptInfoMax;
-    var $commentInfo;
+    public $cptInfo;
+    public $cptInfoMax;
+    public $commentInfo;
 
-    var $cptDates;
-    var $cptDatesMax;
-    var $commentDates;
+    public $cptDates;
+    public $cptDatesMax;
+    public $commentDates;
 
-    var $cptUse;
-    var $cptUseMax;
-    var $commentUse;
+    public $cptUse;
+    public $cptUseMax;
+    public $commentUse;
 
-    var $cptSensor;
-    var $cptSensorMax;
-    var $commentSensor;
+    public $cptSensor;
+    public $cptSensorMax;
+    public $commentSensor;
 
-    var $cptSite;
-    var $cptSiteMax;
-    var $commentSite;
+    public $cptSite;
+    public $cptSiteMax;
+    public $commentSite;
 
-    var $cptVar;
-    var $cptVarMax;
-    var $commentVar;
+    public $cptVar;
+    public $cptVarMax;
+    public $commentVar;
 
     function init($dats)
     {

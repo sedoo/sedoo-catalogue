@@ -9,8 +9,8 @@ require_once "bd/bdConnect.php";
 
 class data_format
 {
-    var $data_format_id;
-    var $data_format_name;
+    public $data_format_id;
+    public $data_format_name;
 
     function new_data_format($tab)
     {

@@ -10,15 +10,15 @@ class requete
     const CODE_SUCCES = 1;
     const CODE_VIDE = 2;
 
-    var $requeteId;
-    var $dateDeb;
-    var $dateActive;
-    var $dateFin;
-    var $nbValeurs;
-    var $mail;
-    var $xml;
-    var $etat;
-    var $killed;
+    public $requeteId;
+    public $dateDeb;
+    public $dateActive;
+    public $dateFin;
+    public $nbValeurs;
+    public $mail;
+    public $xml;
+    public $etat;
+    public $killed;
 
 /*
 requete_id          | integer                     | non NULL Par défaut, nextval('requete_requete_id_seq'::regclass)

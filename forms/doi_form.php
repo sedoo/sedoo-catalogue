@@ -8,8 +8,8 @@ require_once 'scripts/filtreProjets.php';
 class doi_form extends login_form
 {
 
-    var $datasetxml;
-    var $datasetxmlerror;
+    public $datasetxml;
+    public $datasetxmlerror;
 
     function createForm($project_name)
     {

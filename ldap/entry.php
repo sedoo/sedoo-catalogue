@@ -3,7 +3,7 @@
 class entry
 {
 
-    var $dn;
+    public $dn;
 
     function __construct($dn)
     {

@@ -7,11 +7,11 @@ require_once "bd/sensor_place.php";
 class va_dataset_form extends base_form
 {
 
-    var $dats_sensors;
-    var $sites;
-    var $nbModForm;
-    var $nbSatForm;
-    var $nbInstruFrom;
+    public $dats_sensors;
+    public $sites;
+    public $nbModForm;
+    public $nbSatForm;
+    public $nbInstruFrom;
 
   //================================================================= Creation Functions ===========================================================
 

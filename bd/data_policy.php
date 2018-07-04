@@ -10,8 +10,8 @@ require_once "bd/bdConnect.php";
 
 class data_policy
 {
-    var $data_policy_id;
-    var $data_policy_name;
+    public $data_policy_id;
+    public $data_policy_name;
 
     function new_data_policy($tab)
     {

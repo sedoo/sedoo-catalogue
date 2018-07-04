@@ -5,12 +5,12 @@ require_once('extract/contactsJeu.php');
 class fichierResultat
 {
     
-    var $filename;
+    public $filename;
     
-    var $contacts;
-    var $associatedFiles;
+    public $contacts;
+    public $associatedFiles;
     
-    var $project_name;
+    public $project_name;
     
     function fichierResultat($xmlElt, $project_name)
     {

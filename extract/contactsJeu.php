@@ -5,10 +5,10 @@ require_once 'extract/contact.php';
 class contactsJeu
 {
 
-    var $datsId;
-    var $datsTitle;
+    public $datsId;
+    public $datsTitle;
 
-    var $contacts;
+    public $contacts;
 
     function contactsJeu($xmlElt)
     {

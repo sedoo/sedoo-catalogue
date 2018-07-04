@@ -9,12 +9,12 @@ require_once "bd/bdConnect.php";
 
 class project
 {
-    var $project_id;
-    var $pro_project_id;
-    var $project_name;
-    var $parent_project;
-    var $enfants;
-    var $project_url;
+    public $project_id;
+    public $pro_project_id;
+    public $project_name;
+    public $parent_project;
+    public $enfants;
+    public $project_url;
 
     function new_project($tab)
     {

@@ -12,12 +12,12 @@ require_once "bd/contact_type.php";
 
 class dats_originator
 {
-    var $dats_id;
-    var $pers_id;
-    var $contact_type_id;
-    var $dataset;
-    var $personne;
-    var $contact_type;
+    public $dats_id;
+    public $pers_id;
+    public $contact_type_id;
+    public $dataset;
+    public $personne;
+    public $contact_type;
 
     function new_dats_originator($tab)
     {

@@ -10,11 +10,11 @@ require_once "bd/bdConnect.php";
 class url_event
 {
 
-    var $url_event_id;
-    var $event_id;
-    var $url_event;
-    var $url_descript;
-    var $event;
+    public $url_event_id;
+    public $event_id;
+    public $url_event;
+    public $url_descript;
+    public $event;
 
     function new_url_event($tab)
     {

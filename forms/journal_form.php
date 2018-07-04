@@ -7,9 +7,9 @@ require_once 'scripts/filtreProjets.php';
 class journal_form extends login_form
 {
 
-    var $journal;
-    var $filterUser;
-    var $projectName;
+    public $journal;
+    public $filterUser;
+    public $projectName;
     
     function createForm($filterUser = false, $typeJournal = 0)
     {

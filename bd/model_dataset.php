@@ -6,10 +6,10 @@ class model_dataset extends base_dataset
 
     const GCMD_CATEG = "Models/Analyses";
 
-    var $dataType;
+    public $dataType;
 
   //sites ne contient que la zone (geoCoverage)
-    var $model;
+    public $model;
 
   //Simulation : dats_sensor[0]
 

@@ -14,18 +14,18 @@ require_once 'extract/sortieCGI.php';
 class download_form extends login_form
 {
 
-    var $filesList;
-    var $path;
-    var $jeu;
-    var $pathJeu;
-    var $logFile;
-    var $selection;
-    var $mailNotif;
-    var $projectName;
-    var $dataPath;
-    var $queryString;
-    var $jeuRoles;
-    var $isPublic = false;
+    public $filesList;
+    public $path;
+    public $jeu;
+    public $pathJeu;
+    public $logFile;
+    public $selection;
+    public $mailNotif;
+    public $projectName;
+    public $dataPath;
+    public $queryString;
+    public $jeuRoles;
+    public $isPublic = false;
 
     function createForm($projectName, $queryString = '')
     {
@@ -489,7 +489,7 @@ class download_form extends login_form
         return $archiveName;
     }
     
-    var $cpt = 0;
+    public $cpt = 0;
     
     function addToArchiveTmp($archive, $file)
     {

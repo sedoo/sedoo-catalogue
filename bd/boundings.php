@@ -9,11 +9,11 @@ require_once "bd/bdConnect.php";
 
 class boundings
 {
-    var $bound_id;
-    var $west_bounding_coord;
-    var $east_bounding_coord;
-    var $north_bounding_coord;
-    var $south_bounding_coord;
+    public $bound_id;
+    public $west_bounding_coord;
+    public $east_bounding_coord;
+    public $north_bounding_coord;
+    public $south_bounding_coord;
 
     function new_boundings($tab)
     {

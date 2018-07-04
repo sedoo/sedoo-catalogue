@@ -11,10 +11,10 @@ require_once "bd/base_dataset.php";
 class satellite_dataset extends base_dataset
 {
 
-    var $dataType;
+    public $dataType;
 
   //sites ne contient que la zone (geoCoverage)
-    var $sats;
+    public $sats;
 
   /* ***** INIT ***** */
 

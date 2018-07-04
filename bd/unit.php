@@ -10,9 +10,9 @@ require_once "bd/bdConnect.php";
 
 class unit
 {
-    var $unit_id;
-    var $unit_code;
-    var $unit_name;
+    public $unit_id;
+    public $unit_code;
+    public $unit_name;
 
     function new_unit($tab)
     {

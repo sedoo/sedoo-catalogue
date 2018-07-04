@@ -6,15 +6,15 @@ require_once "bd/dataset.php";
 class inserted_dataset
 {
 
-    var $ins_dats_id;
-    var $ins_dats_name;
-    var $date_insertion;
-    var $date_last_update;
-    var $datasets;
-    var $date_min;
-    var $date_max;
-    var $vars;
-    var $places;
+    public $ins_dats_id;
+    public $ins_dats_name;
+    public $date_insertion;
+    public $date_last_update;
+    public $datasets;
+    public $date_min;
+    public $date_max;
+    public $vars;
+    public $places;
 
     function new_inserted_dataset($tab, $varId = null, $placeId = null)
     {

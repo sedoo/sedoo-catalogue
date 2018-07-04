@@ -11,10 +11,10 @@ require_once "bd/dataset_type.php";
 
 class dats_type
 {
-    var $dats_id;
-    var $dats_type_id;
-    var $dataset;
-    var $dataset_type;
+    public $dats_id;
+    public $dats_type_id;
+    public $dataset;
+    public $dataset_type;
 
     function new_dats_place($tab)
     {

@@ -5,22 +5,22 @@ require_once 'extract/conf.php';
 class requeteXml
 {
 
-    var $projectName;
-    var $latMin;
-    var $latMax;
-    var $lonMin;
-    var $lonMax;
-    var $dateMin;
-    var $dateMax;
-    var $format;
-    var $format_version;
-    var $compression;
-    var $withFlag;
-    var $withDelta;
-    var $datasets;
-    var $places;
-    var $variables;
-    var $user;
+    public $projectName;
+    public $latMin;
+    public $latMax;
+    public $lonMin;
+    public $lonMax;
+    public $dateMin;
+    public $dateMax;
+    public $format;
+    public $format_version;
+    public $compression;
+    public $withFlag;
+    public $withDelta;
+    public $datasets;
+    public $places;
+    public $variables;
+    public $user;
 
     function requeteXml($user, $projectName)
     {

@@ -10,11 +10,11 @@ define('USERS_PER_PAGE', 20);
 class admin_form extends login_form
 {
 
-    var $pendingRequests;
-    var $rejectedRequests;
-    var $registeredUsers;
-    var $registeredUsersByProject;
-    var $participants;
+    public $pendingRequests;
+    public $rejectedRequests;
+    public $registeredUsers;
+    public $registeredUsersByProject;
+    public $participants;
 
     function createForm()
     {

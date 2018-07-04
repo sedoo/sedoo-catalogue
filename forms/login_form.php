@@ -11,9 +11,9 @@ require_once "ldap/guestuser.php";
 class login_form extends HTML_QuickForm
 {
 
-    var $user;
-    var $groups;
-    var $groupList;
+    public $user;
+    public $groups;
+    public $groupList;
 
   /**
    * Test si l'utilisateur connecté est le pi de $dats.

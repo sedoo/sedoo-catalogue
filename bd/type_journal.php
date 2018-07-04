@@ -9,8 +9,8 @@ require_once "bd/bdConnect.php";
 
 class type_journal
 {
-    var $id;
-    var $name;
+    public $id;
+    public $name;
 
     function new_type_journal($tab)
     {

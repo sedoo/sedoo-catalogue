@@ -8,8 +8,8 @@ require_once 'extract/sortieCGI.php';
 class db_requests_forms extends login_form
 {
 
-    var $requetes;
-    var $isAdmin;
+    public $requetes;
+    public $isAdmin;
 
     function createForm($admin = false)
     {

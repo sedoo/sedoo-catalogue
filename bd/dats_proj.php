@@ -11,10 +11,10 @@ require_once "bd/project.php";
 
 class dats_proj
 {
-    var $dats_id;
-    var $project_id;
-    var $dataset;
-    var $project;
+    public $dats_id;
+    public $project_id;
+    public $dataset;
+    public $project;
 
     function new_dats_proj($tab)
     {

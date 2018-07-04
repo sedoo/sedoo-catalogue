@@ -13,22 +13,22 @@ require_once "scripts/common.php";
 
 class sensor
 {
-    var $sensor_id;
-    var $manufacturer_id;
-    var $gcmd_sensor_id;
-    var $bound_id;
-    var $sensor_model;
-    var $sensor_calibration;
-    var $sensor_date_begin;
-    var $sensor_date_end;
-    var $sensor_url;
-    var $sensor_elevation;
-    var $manufacturer;
-    var $gcmd_instrument_keyword;
-    var $boundings;
-    var $sensor_places;
-    var $sensor_vars;
-    var $sensor_environment;
+    public $sensor_id;
+    public $manufacturer_id;
+    public $gcmd_sensor_id;
+    public $bound_id;
+    public $sensor_model;
+    public $sensor_calibration;
+    public $sensor_date_begin;
+    public $sensor_date_end;
+    public $sensor_url;
+    public $sensor_elevation;
+    public $manufacturer;
+    public $gcmd_instrument_keyword;
+    public $boundings;
+    public $sensor_places;
+    public $sensor_vars;
+    public $sensor_environment;
 
     function new_sensor($tab)
     {

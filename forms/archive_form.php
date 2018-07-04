@@ -8,8 +8,8 @@ require_once 'editDataset.php';
 class archive_form extends login_form
 {
 
-    var $projectName;
-    var $projects;
+    public $projectName;
+    public $projects;
 
     function createForm($projectName)
     {

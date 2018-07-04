@@ -18,16 +18,16 @@ $Projects[MainProject] = get_filtre_projets(MainProject);
 
 class _Dataset
 {
-    var $dats_id;
-    var $url;
-    var $dats_title;
-    var $uids;
-    var $sgbd;
-    var $role;
-    var $dd;
-    var $df;
-    var $ins_date;
-    var $last_update;
+    public $dats_id;
+    public $url;
+    public $dats_title;
+    public $uids;
+    public $sgbd;
+    public $role;
+    public $dd;
+    public $df;
+    public $ins_date;
+    public $last_update;
 
     function _Dataset($url, $id, $name, $dateDeb, $dateFin, $uids, $sgbd, $role, $ins_date, $last_update)
     {
@@ -46,9 +46,9 @@ class _Dataset
 
 class Plateforme
 {
-    var $id; // map titre du domaine
-    var $name; // Nom du domaine
-    var $count;
+    public $id; // map titre du domaine
+    public $name; // Nom du domaine
+    public $count;
     
     function Plateforme($id, $name)
     {

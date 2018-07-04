@@ -67,7 +67,7 @@ class HTML_TreeMenu
    * Indexed array of subnodes
    * @var array
    */
-    var $items;
+    public $items;
 
   /**
    * Constructor
@@ -298,73 +298,73 @@ class HTML_TreeNode
    * The text for this node.
    * @var string
    */
-    var $text;
+    public $text;
 
   /**
    * The link for this node.
    * @var string
    */
-    var $link;
+    public $link;
 
   /**
    * The icon for this node.
    * @var string
    */
-    var $icon;
+    public $icon;
 
   /**
    * The icon to show when expanded for this node.
    * @var string
    */
-    var $expandedIcon;
+    public $expandedIcon;
 
   /**
    * The css class for this node
    * @var string
    */
-    var $cssClass;
+    public $cssClass;
 
   /**
    * The link target for this node
    * @var string
    */
-    var $linkTarget;
+    public $linkTarget;
 
   /**
    * Indexed array of subnodes
    * @var array
    */
-    var $items;
+    public $items;
 
   /**
    * Whether this node is expanded or not
    * @var bool
    */
-    var $expanded;
+    public $expanded;
 
   /**
    * Whether this node is dynamic or not
    * @var bool
    */
-    var $isDynamic;
+    public $isDynamic;
 
   /**
    * Should this node be made visible?
    * @var bool
    */
-    var $ensureVisible;
+    public $ensureVisible;
 
   /**
    * The parent node. Null if top level
    * @var object
    */
-    var $parent;
+    public $parent;
 
   /**
    * Javascript event handlers;
    * @var array
    */
-    var $events;
+    public $events;
 
   /**
    * Constructor
@@ -499,7 +499,7 @@ class HTML_TreeMenu_Presentation
    * The TreeMenu structure
    * @var object
    */
-    var $menu;
+    public $menu;
 
   /**
    * Base constructor simply sets the menu object
@@ -546,45 +546,45 @@ class HTML_TreeMenu_DHTML extends HTML_TreeMenu_Presentation
    * false it will override all dynamic status vars and set the menu to be
    * fully expanded an non-dynamic.
    */
-    var $isDynamic;
+    public $isDynamic;
 
   /**
    * Path to the images
    * @var string
    */
-    var $images;
+    public $images;
 
   /**
    * Target for the links generated
    * @var string
    */
-    var $linkTarget;
+    public $linkTarget;
 
   /**
    * Whether to use clientside persistence or not
    * @var bool
    */
-    var $usePersistence;
+    public $usePersistence;
 
   /**
    * The default CSS class for the nodes
    */
-    var $defaultClass;
+    public $defaultClass;
 
   /**
    * Whether to skip first level branch images
    * @var bool
    */
-    var $noTopLevelImages;
+    public $noTopLevelImages;
 
   /**
    * Name of Jabbascript object to use
    * @var string
    */
-    var $jsObjectName;
+    public $jsObjectName;
 
   //Ajout GB : pour n'afficher que les noeuds avec des données (false par défaut)
-    var $filterData;
+    public $filterData;
 
   /**
    * Constructor, takes the tree structure as
@@ -761,26 +761,26 @@ class HTML_TreeMenu_Listbox extends HTML_TreeMenu_Presentation
    * The text that is displayed in the first option
    * @var string
    */
-    var $promoText;
+    public $promoText;
 
   /**
    * The character used for indentation
    * @var string
    */
-    var $indentChar;
+    public $indentChar;
 
   /**
    * How many of the indent chars to use
    * per indentation level
    * @var integer
    */
-    var $indentNum;
+    public $indentNum;
 
   /**
    * Target for the links generated
    * @var string
    */
-    var $linkTarget;
+    public $linkTarget;
 
   /**
    * Constructor

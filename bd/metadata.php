@@ -5,12 +5,12 @@ require_once "bd/gcmd_science_keyword.php";
 class metadata
 {
 
-    var $paramsGCMD;
+    public $paramsGCMD;
 
-    var $array_topic;
-    var $array_categorie;
-    var $array_variable;
-    var $array_variable2;
+    public $array_topic;
+    public $array_categorie;
+    public $array_variable;
+    public $array_variable2;
 
   /*function __construct(){
   $this->loadGCMDScienceKeywords();

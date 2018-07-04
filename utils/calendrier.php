@@ -4,8 +4,8 @@ require_once 'calendrier_cellule.php';
 
 class calendrier {
 
-  var $titre;
-  var $table;
+  public $titre;
+  public $table;
 
   function calendrier($year, $month, $availableDays = array()) {
     $date = new DateTime("$year-$month-01");

@@ -9,8 +9,8 @@ require_once "bd/bdConnect.php";
 
 class role
 {
-    var $role_id;
-    var $role_name;
+    public $role_id;
+    public $role_name;
 
     function new_role($tab)
     {

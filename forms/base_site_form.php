@@ -26,7 +26,7 @@ require_once "bd/database.php";
 class base_site_form extends login_form
 {
 
-    var $dataset;
+    public $dataset;
 
     function createLoginForm()
     {

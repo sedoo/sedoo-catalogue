@@ -9,8 +9,8 @@ require_once "bd/bdConnect.php";
 
 class status_final
 {
-    var $status_final_id;
-    var $status_final_name;
+    public $status_final_id;
+    public $status_final_name;
 
     function new_status_final($tab)
     {

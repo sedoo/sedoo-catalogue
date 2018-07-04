@@ -9,8 +9,8 @@ require_once "bd/bdConnect.php";
 
 class status_progress
 {
-    var $status_progress_id;
-    var $status_progress_name;
+    public $status_progress_id;
+    public $status_progress_name;
 
     function new_status_progress($tab)
     {

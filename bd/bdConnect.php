@@ -11,11 +11,11 @@ require_once "conf.php";
  */
 class bdConnect
 {
-    var $hote = DB_HOST;
-    var $db_name = DB_NAME;
-    var $db_user = DB_USER;
-    var $db_password = DB_PASS;
-    var $conn;
+    public $hote = DB_HOST;
+    public $db_name = DB_NAME;
+    public $db_user = DB_USER;
+    public $db_password = DB_PASS;
+    public $conn;
 
     function db_open()
     {

@@ -9,15 +9,15 @@ require_once "bd/bdConnect.php";
 
 class gcmd_instrument_keyword
 {
-    var $gcmd_sensor_id;
-    var $gcmd_sensor_name;
-    var $gcm_gcmd_id;
-    var $gcmd_level;
-    var $thesaurus_id;
-    var $uid;
+    public $gcmd_sensor_id;
+    public $gcmd_sensor_name;
+    public $gcm_gcmd_id;
+    public $gcmd_level;
+    public $thesaurus_id;
+    public $uid;
 
-    var $gcmd_parent;
-    var $enfants;
+    public $gcmd_parent;
+    public $enfants;
 
     function new_gcmd_instrument_keyword($tab)
     {

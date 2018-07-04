@@ -12,14 +12,14 @@ require_once "bd/organism.php";
 
 class personne
 {
-    var $pers_id;
-    var $org_id;
-    var $pers_name;
-    var $pers_email_1;
-    var $pers_email_2;
-    var $organism;
-    var $contact_type_id;
-    var $contact_type;
+    public $pers_id;
+    public $org_id;
+    public $pers_name;
+    public $pers_email_1;
+    public $pers_email_2;
+    public $organism;
+    public $contact_type_id;
+    public $contact_type;
 
     function new_contact($name, $mail, $organismName)
     {

@@ -8,8 +8,8 @@ require_once "editDataset.php";
 class stats_form_dats extends login_form
 {
 
-    var $dats;
-    var $projectName;
+    public $dats;
+    public $projectName;
 
     function createForm($datsId, $projectName)
     {
