@@ -12,14 +12,14 @@ require_once "bd/contact_type.php";
 
 class dats_originator
 {
-    var $dats_id;
-    var $pers_id;
-    var $contact_type_id;
-    var $dataset;
-    var $personne;
-    var $contact_type;
+    public $dats_id;
+    public $pers_id;
+    public $contact_type_id;
+    public $dataset;
+    public $personne;
+    public $contact_type;
 
-    function new_dats_originator($tab)
+    public function new_dats_originator($tab)
     {
         $this->dats_id = $tab[0];
         $this->pers_id = $tab[1];
@@ -35,18 +35,18 @@ class dats_originator
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from dats_originators order by dats_id";
         return $this->getByQuery($query);
     }
 
-    function getByDataset($datsId)
+    public function getByDataset($datsId)
     {
         return $this->getByQuery("select dats_originators.* from dats_originators join personne using (pers_id) where dats_id = $datsId order by contact_type_id,pers_name;");
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -59,7 +59,7 @@ class dats_originator
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
 
         $query = "select * from dats_originators where " .
@@ -72,7 +72,7 @@ class dats_originator
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (!$this->existe()) {
             $query_insert = "insert into dats_originators (dats_id,pers_id,contact_type_id)";

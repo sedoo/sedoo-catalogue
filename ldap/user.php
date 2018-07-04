@@ -6,10 +6,10 @@ require_once "ldap/entry.php";
 class user extends entry
 {
 
-    var $cn;
-    var $sn;
+    public $cn;
+    public $sn;
 
-    function __construct($dn = null, $attrs = null)
+    public function __construct($dn = null, $attrs = null)
     {
         if (isset($dn)) {
             parent::__construct($dn);
@@ -20,7 +20,7 @@ class user extends entry
         }
     }
 
-    function initUser($attrs)
+    public function initUser($attrs)
     {
         $this->cn = $attrs["cn"][0];
 
@@ -29,7 +29,7 @@ class user extends entry
         }
     }
 
-    function testGroups($groups)
+    public function testGroups($groups)
     {
         return false;
     }
@@ -38,21 +38,21 @@ class user extends entry
    * Teste si l'utilisateur est membre d'un des groupes du tableau $groups.
    * @return false
    */
-    function isMemberOf($groups)
+    public function isMemberOf($groups)
     {
         return false;
     }
 
-    function isRoot()
+    public function isRoot()
     {
         return false;
     }
 
-  /*function isAdmin(){
+  /*public function isAdmin(){
   return false;
   }*/
 
-    function isProjectAdmin()
+    public function isProjectAdmin()
     {
         return false;
     }

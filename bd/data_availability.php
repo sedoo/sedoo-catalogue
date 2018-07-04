@@ -4,20 +4,20 @@ require_once "bd/bdConnect.php";
 
 class data_availability
 {
-    var $ins_dats_id;
-    var $var_id;
-    var $place_id;
+    public $ins_dats_id;
+    public $var_id;
+    public $place_id;
 
-    var $date_begin;
-    var $date_end;
+    public $date_begin;
+    public $date_end;
 
-    var $val_min;
-    var $val_max;
-    var $nb_valeurs;
+    public $val_min;
+    public $val_max;
+    public $nb_valeurs;
 
-    var $period;
+    public $period;
 
-    function new_data_availability($tab)
+    public function new_data_availability($tab)
     {
         $this->ins_dats_id = $tab[0];
         $this->var_id = $tab[1];
@@ -30,7 +30,7 @@ class data_availability
         $this->period = $tab[8];
     }
 
-    function getByDatsVarPlace($ins_dats_id, $var_id, $place_id, $year = null)
+    public function getByDatsVarPlace($ins_dats_id, $var_id, $place_id, $year = null)
     {
         if ($year) {
             $whereYear = "AND date_end >= '$year-01-01' and date_begin <= '$year-12-31'";

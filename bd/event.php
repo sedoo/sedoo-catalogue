@@ -9,12 +9,12 @@ require_once "bd/bdConnect.php";
 
 class event
 {
-    var $event_id;
-    var $event_name;
-    var $event_date_begin;
-    var $event_date_end;
+    public $event_id;
+    public $event_name;
+    public $event_date_begin;
+    public $event_date_end;
 
-    function new_event($tab)
+    public function new_event($tab)
     {
         $this->event_id = $tab[0];
         $this->event_name = $tab[1];
@@ -22,7 +22,7 @@ class event
         $this->event_date_end = $tab[3];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from event order by event_date_begin";
         $bd = new bdConnect();
@@ -36,7 +36,7 @@ class event
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new event();

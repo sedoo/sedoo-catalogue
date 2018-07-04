@@ -10,15 +10,15 @@ require_once "bd/metadata.php";
 
 class gcmd_science_keyword
 {
-    var $gcmd_id;
-    var $gcm_gcmd_id;
-    var $gcmd_name;
-    var $gcmd_level;
-    var $thesaurus_id;
-    var $uid;
+    public $gcmd_id;
+    public $gcm_gcmd_id;
+    public $gcmd_name;
+    public $gcmd_level;
+    public $thesaurus_id;
+    public $uid;
 
-    var $gcmd_parent;
-    var $enfants;
+    public $gcmd_parent;
+    public $enfants;
 
     function new_gcmd_science_keyword($tab)
     {

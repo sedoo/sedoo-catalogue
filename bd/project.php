@@ -9,14 +9,14 @@ require_once "bd/bdConnect.php";
 
 class project
 {
-    var $project_id;
-    var $pro_project_id;
-    var $project_name;
-    var $parent_project;
-    var $enfants;
-    var $project_url;
+    public $project_id;
+    public $pro_project_id;
+    public $project_name;
+    public $parent_project;
+    public $enfants;
+    public $project_url;
 
-    function new_project($tab)
+    public function new_project($tab)
     {
         $this->project_id = $tab[0];
         $this->pro_project_id = $tab[1];
@@ -28,12 +28,12 @@ class project
         }
     }
 
-    function getFullName()
+    public function getFullName()
     {
         return (($this->parent_project) ? $this->parent_project->toString() . ' > ' : '') . $this->project_name;
     }
 
-    function toString()
+    public function toString()
     {
         $label = $this->getFullName();
         if ($this->project_url) {
@@ -43,19 +43,19 @@ class project
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from project order by project_name";
         return $this->getByQuery($query);
     }
 
-    function getSousProjets()
+    public function getSousProjets()
     {
         $query = "SELECT * FROM project WHERE pro_project_id = $this->project_id ORDER BY project_name";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -68,7 +68,7 @@ class project
         return $liste;
     }
 
-    function getIdByProjectName($name)
+    public function getIdByProjectName($name)
     {
         if (!isset($name) || empty($name)) {
             return new project();
@@ -83,7 +83,7 @@ class project
         return $project;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new project();
@@ -99,7 +99,7 @@ class project
         return $project;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from project where " .
         "lower(project_name) = lower('" . (str_replace("'", "\'", $this->project_name)) . "')";
@@ -111,7 +111,7 @@ class project
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from project where project_id = " . $this->project_id;
         $bd = new bdConnect();
@@ -122,7 +122,7 @@ class project
         return false;
     }
 
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $array_proj[0] = "--Project--";

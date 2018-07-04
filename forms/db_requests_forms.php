@@ -8,10 +8,10 @@ require_once 'extract/sortieCGI.php';
 class db_requests_forms extends login_form
 {
 
-    var $requetes;
-    var $isAdmin;
+    public $requetes;
+    public $isAdmin;
 
-    function createForm($admin = false)
+    public function createForm($admin = false)
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -59,7 +59,7 @@ class db_requests_forms extends login_form
         }
     }
 
-    function kill($id)
+    public function kill($id)
     {
         foreach ($this->requetes as $r) {
             if ($r->requeteId == $id) {
@@ -68,7 +68,7 @@ class db_requests_forms extends login_form
         }
     }
 
-    function send($id)
+    public function send($id)
     {
         foreach ($this->requetes as $r) {
             if ($r->requeteId == $id) {
@@ -88,7 +88,7 @@ class db_requests_forms extends login_form
         }
     }
 
-    function display()
+    public function display()
     {
         echo '<form method="post" ><table>';
         echo '<tr><th>Id</th>';

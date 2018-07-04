@@ -8,10 +8,10 @@ require_once 'editDataset.php';
 class archive_form extends login_form
 {
 
-    var $projectName;
-    var $projects;
+    public $projectName;
+    public $projects;
 
-    function createForm($projectName)
+    public function createForm($projectName)
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -39,7 +39,7 @@ class archive_form extends login_form
         }
     }
 
-    function archive()
+    public function archive()
     {
         $datsId = $_POST['dataset'];
         $comment = $_POST['comment'];
@@ -55,7 +55,7 @@ class archive_form extends login_form
         return false;
     }
 
-    function displayArchivedDataset($datsId)
+    public function displayArchivedDataset($datsId)
     {
         echo "<h1>Archived dataset</h1><p/>";
 
@@ -67,7 +67,7 @@ class archive_form extends login_form
         editDataset($datsId, $this->projectName, true);
     }
 
-    function displayArchiveList()
+    public function displayArchiveList()
     {
 
         $reqUri = $_SERVER['REQUEST_URI'];
@@ -93,12 +93,12 @@ class archive_form extends login_form
         echo '</table>';
     }
 
-    function reset()
+    public function reset()
     {
         $this->getElement('comment')->setValue(null);
     }
 
-    function display()
+    public function display()
     {
         echo "<h1>Archives</h1><p/>";
         $reqUri = $_SERVER['REQUEST_URI'];

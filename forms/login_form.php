@@ -11,14 +11,14 @@ require_once "ldap/guestuser.php";
 class login_form extends HTML_QuickForm
 {
 
-    var $user;
-    var $groups;
-    var $groupList;
+    public $user;
+    public $groups;
+    public $groupList;
 
   /**
    * Test si l'utilisateur connecté est le pi de $dats.
    */
-    function isPi($dats, $projectName)
+    public function isPi($dats, $projectName)
     {
         if (isset($dats)) {
             foreach ($dats->dats_originators as $pi) {
@@ -30,7 +30,7 @@ class login_form extends HTML_QuickForm
         return false;
     }
     
-    function isCreator($dats, $projectName)
+    public function isCreator($dats, $projectName)
     {
         if (isset($dats)) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -42,7 +42,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function isAdmin($dats = null, $projectName = MainProject)
+    public function isAdmin($dats = null, $projectName = MainProject)
     {
         if ($this->isLogged()) {
             if (!isset($dats)) {
@@ -55,7 +55,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function isPortalAdmin()
+    public function isPortalAdmin()
     {
         if ($this->isLogged()) {
             return ($this->user->isPortalAdmin() || $this->user->isRoot());
@@ -64,7 +64,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function isProjectAdmin()
+    public function isProjectAdmin()
     {
         global $project_name;
         if ($this->isLogged()) {
@@ -74,7 +74,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function isRoot()
+    public function isRoot()
     {
         if ($this->isLogged()) {
             return $this->user->isRoot();
@@ -83,7 +83,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function isCat($dats = null, $projectName = null)
+    public function isCat($dats = null, $projectName = null)
     {
         if ($this->isLogged()) {
             if (!isset($dats)) {
@@ -96,7 +96,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function isPortalUser()
+    public function isPortalUser()
     {
         if ($this->isLogged()) {
             return ((get_class($this->user) == MainProject . 'User') || $this->user->isRoot());
@@ -105,12 +105,12 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function isLogged()
+    public function isLogged()
     {
         return isset($this->user);
     }
     
-    function genPassword($seed, $length)
+    public function genPassword($seed, $length)
     {
         $alphabet = "azertyuiopqsdfghjkmwxcvbnAWQZXSECDRVFTBGYNHUJKLPM23456789_-";
         $passwd = '';
@@ -120,7 +120,7 @@ class login_form extends HTML_QuickForm
         return $passwd;
     }
     
-    function sendMailNewPassword($mail, $passwd, $project)
+    public function sendMailNewPassword($mail, $passwd, $project)
     {
         $texte = "Dear database user,\n\n" . "A new password has been generated.\n" . "Your username is: $mail";
         $texte .= "\nYour password is: " . $passwd;
@@ -128,7 +128,7 @@ class login_form extends HTML_QuickForm
         sendMailSimple($mail, MainProject . " Database new password", $texte, ROOT_EMAIL);
     }
     
-    function sendMailRegistration($mail, $passwd, $project)
+    public function sendMailRegistration($mail, $passwd, $project)
     {
       // Envoi du mail
         global $project_name;
@@ -176,7 +176,7 @@ class login_form extends HTML_QuickForm
         sendMailSimple(ROOT_EMAIL, "[$project-DATABASE] New User", "User $mail has been registered", ROOT_EMAIL);
     }
     
-    function initGroups()
+    public function initGroups()
     {
         if (isset($_SESSION['ldapGroups']) && !empty($_SESSION['ldapGroups'])) {
             $this->groupList = unserialize($_SESSION['ldapGroups']);
@@ -197,7 +197,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function createLoginForm($labelId = 'login', $public = false)
+    public function createLoginForm($labelId = 'login', $public = false)
     {
         $this->addElement('submit', 'loginbutton', "Login");
         $this->addElement('text', 'login', $labelId);
@@ -220,14 +220,14 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function saveErrors()
+    public function saveErrors()
     {
         if (!empty($this->_errors)) {
             $_POST['loginError'] = $this->_errors;
         }
     }
     
-    function forgottenPassword($project)
+    public function forgottenPassword($project)
     {
         global $project_name;
         if (!isset($project)) {
@@ -267,7 +267,7 @@ class login_form extends HTML_QuickForm
         return false;
     }
     
-    function loginCat()
+    public function loginCat()
     {
         $username = $this->exportValue('login');
         if (strpos($username, '@')) {
@@ -277,7 +277,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function loginPublic()
+    public function loginPublic()
     {
         $mail = $this->exportValue('login');
         if (isset($mail) && !empty($mail)) {
@@ -289,7 +289,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function loginSimple()
+    public function loginSimple()
     {
         $ldapConn = new ldapConnect();
         $username = $this->exportValue('login');
@@ -310,7 +310,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function loginAdmin()
+    public function loginAdmin()
     {
         $ldapConn = new ldapConnect();
         $mail = $this->exportValue('login');
@@ -340,7 +340,7 @@ class login_form extends HTML_QuickForm
         }
     }
     
-    function mailAdmin($sujet, $msg, $e = null, $user = null)
+    public function mailAdmin($sujet, $msg, $e = null, $user = null)
     {
         global $project_name;
         $texte = $msg;
@@ -353,7 +353,7 @@ class login_form extends HTML_QuickForm
         sendMailSimple(ROOT_EMAIL, "[" . $project_name . "] $sujet", $texte);
     }
     
-    function displayPublicLogin($titre)
+    public function displayPublicLogin($titre)
     {
         echo "<h1>$titre</h1><p/>";
         if (!empty($this->_errors)) {
@@ -370,14 +370,14 @@ class login_form extends HTML_QuickForm
         echo '</form>';
     }
     
-    function displayLoginButton()
+    public function displayLoginButton()
     {
         echo '<form method="post" action="' . $_SERVER['REQUEST_URI'] . '" >';
         echo "&nbsp;" . $this->getElement('loginbutton')->toHTML();
         echo '</form>';
     }
     
-    function displayLGForm($titre, $withForgot = false, $displayForgot = false, $withForgotPass = false)
+    public function displayLGForm($titre, $withForgot = false, $displayForgot = false, $withForgotPass = false)
     {
         global $project_name;
         echo "<div class='aligncenter' style = 'padding-left : 120px ; padding-right: 120px;' >";
@@ -398,7 +398,7 @@ class login_form extends HTML_QuickForm
         echo "</table></div>";
     }
     
-    function displayLoginForm($titre, $withForgot = false, $displayForgot = false)
+    public function displayLoginForm($titre, $withForgot = false, $displayForgot = false)
     {
         echo '<SCRIPT LANGUAGE="Javascript" SRC="/js/forgot.js"> </SCRIPT>';
         echo "<h1>$titre</h1><p/>";

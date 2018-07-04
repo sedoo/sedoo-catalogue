@@ -4,9 +4,9 @@ require_once "forms/base_form.php";
 class site_form_simple extends base_form
 {
 
-    var $nbVarsBySensor = array();
+    public $nbVarsBySensor = array();
 
-    function createForm($projectName)
+    public function createForm($projectName)
     {
         $this->createFormBase(false); // base_form ok
         $this->createFormPeriod($projectName); // base_form ok
@@ -89,12 +89,12 @@ class site_form_simple extends base_form
         ));
     }
     
-    function addSensor()
+    public function addSensor()
     {
         $this->createFormSensor($this->dataset->nbSensors - 1);
     }
     
-    function addVariableSensor($i)
+    public function addVariableSensor($i)
     {
         $this->createFormVariable($i, '', $this->dataset->dats_sensors[$i]->nbVars - 1); // base_form ok
     }
@@ -131,7 +131,7 @@ class site_form_simple extends base_form
         }
     }
     
-    function initForm()
+    public function initForm()
     {
         $dataset = &$this->dataset;
 
@@ -212,7 +212,7 @@ class site_form_simple extends base_form
         }
     }
     
-    function addValidationRules()
+    public function addValidationRules()
     {
         $this->addValidationRulesBase(); // base_form ok
 
@@ -323,7 +323,7 @@ class site_form_simple extends base_form
         $this->addFormRule('test_valid_form');
     }
     
-    function saveForm()
+    public function saveForm()
     {
         $dataset = &$this->dataset;
 
@@ -462,7 +462,7 @@ class site_form_simple extends base_form
         $dataset->period_id = &$dataset->period->period_id;
     }
     
-    function displayForm()
+    public function displayForm()
     {
         global $project_name;
         $this->addValidationRules();
@@ -642,14 +642,14 @@ class site_form_simple extends base_form
         $proj = new project();
         $project = $proj->getIdByProjectName($project_name);
         echo '<script>
-		function init_project(){
+		public function init_project(){
 			$("#frmsite select[name=\'project_0[0]\']").val(' . $project->project_id . ').attr("selected",true).change();
 		}
 		window.onload = init_project();
 					</script>';
     }
     
-    function saveDatsVars()
+    public function saveDatsVars()
     {
         $dataset = &$this->dataset;
         unset($dataset->dats_vars);

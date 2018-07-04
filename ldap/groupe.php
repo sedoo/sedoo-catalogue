@@ -5,13 +5,13 @@ require_once "ldap/entry.php";
 class groupe extends entry
 {
 
-    var $id;
-    var $cn;
-    var $description;
-    var $project;
-    var $isAdmin = false;
+    public $id;
+    public $cn;
+    public $description;
+    public $project;
+    public $isAdmin = false;
     
-    function __construct($dn = null, $attrs = null)
+    public function __construct($dn = null, $attrs = null)
     {
         if (isset($dn)) {
             parent::__construct($dn);
@@ -34,7 +34,7 @@ class groupe extends entry
         }
     }
 
-    function stringToBoolean($str)
+    public function stringToBoolean($str)
     {
         $trueStrings = array('TRUE', 'True', 'true', 'yes', 'Yes', 'YES');
 

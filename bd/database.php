@@ -10,23 +10,23 @@ require_once "bd/bdConnect.php";
 
 class database
 {
-    var $database_id;
-    var $database_name;
-    var $database_url;
+    public $database_id;
+    public $database_name;
+    public $database_url;
 
-    function new_database($tab)
+    public function new_database($tab)
     {
         $this->database_id = $tab[0];
         $this->database_name = $tab[1];
         $this->database_url = $tab[2];
     }
 
-    function toString()
+    public function toString()
     {
         return $this->database_name . (($this->database_url) ? ',url: ' . $this->database_url : '');
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (!$this->existe()) {
             $query_insert = "INSERT INTO database (database_name";
@@ -45,7 +45,7 @@ class database
         return $this->database_id;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "SELECT * FROM database ORDER BY database_name";
         $bd = new bdConnect();
@@ -59,7 +59,7 @@ class database
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new database();
@@ -74,7 +74,7 @@ class database
         return $per;
     }
 
-    function getByDatsId($datsId)
+    public function getByDatsId($datsId)
     {
         $liste = $this->getByQuery("SELECT database.* FROM dataset JOIN database using (database_id) WHERE dats_id = $datsId");
         if (empty($liste)) {
@@ -84,7 +84,7 @@ class database
         }
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -97,7 +97,7 @@ class database
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from database where " .
         "lower(database_name) = lower('" . (str_replace("'", "\'", $this->database_name)) . "')";
@@ -109,7 +109,7 @@ class database
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from database where database_id = " . $this->database_id;
         $bd = new bdConnect();
@@ -121,7 +121,7 @@ class database
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAll();

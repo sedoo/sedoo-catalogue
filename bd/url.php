@@ -11,12 +11,12 @@ require_once "bd/dataset.php";
 class url
 {
 
-    var $dats_id;
-    var $url_id;
-    var $url;
-    var $url_type;
+    public $dats_id;
+    public $url_id;
+    public $url;
+    public $url_type;
 
-    function new_url($tab)
+    public function new_url($tab)
     {
         $this->url_id = $tab[0];
         $this->url = $tab[1];
@@ -32,13 +32,13 @@ class url
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from url order by dats_id";
         return $this->getByQuery($query);
     }
 
-    function getById($urlId)
+    public function getById($urlId)
     {
         $query = "SELECT * FROM url WHERE url_id = $urlId";
         $liste = $this->getByQuery($query);
@@ -49,31 +49,31 @@ class url
         }
     }
 
-    function getByDataset($datsId)
+    public function getByDataset($datsId)
     {
         $query = "SELECT * FROM url WHERE dats_id = $datsId";
         return $this->getByQuery($query);
     }
 
-    function getLocalFileByDataset($datsId)
+    public function getLocalFileByDataset($datsId)
     {
         $query = "select * from url where dats_id = $datsId and url_type = 'local file'";
         return $this->getByQuery($query);
     }
 
-    function getMapFileByDataset($datsId)
+    public function getMapFileByDataset($datsId)
     {
         $query = "select * from url where dats_id = $datsId and url_type = 'map'";
         return $this->getByQuery($query);
     }
 
-    function getHttpByDataset($datsId)
+    public function getHttpByDataset($datsId)
     {
         $query = "select * from url where dats_id = $datsId and url_type = 'http'";
         return $this->getByQuery($query);
     }
 
-    static function addUrl(&$bd, $url, $datsId, $type)
+    public static function addUrl(&$bd, $url, $datsId, $type)
     {
         $queryExists = "select * from url where url_type = '$type' and dats_id = $datsId";
         if ($resultat = $bd->get_data($queryExists)) {
@@ -87,7 +87,7 @@ class url
         }
     }
 
-    static function updateUrl(&$bd, $url_id, $url)
+    public static function updateUrl(&$bd, $url_id, $url)
     {
         $query = "update url set url = '$url' where url_id = $url_id;";
         echo $query . '<br>';
@@ -95,7 +95,7 @@ class url
         return true;
     }
 
-    static function deleteUrl(&$bd, $url_id)
+    public static function deleteUrl(&$bd, $url_id)
     {
         $query = "delete from url where url_id = $url_id;";
         echo $query . '<br>';
@@ -103,7 +103,7 @@ class url
         return true;
     }
 
-    static function deleteUrls(&$bd, $dats_id)
+    public static function deleteUrls(&$bd, $dats_id)
     {
         $query = "delete from url where dats_id = $dats_id;";
         echo $query . '<br>';
@@ -111,13 +111,13 @@ class url
         return true;
     }
 
-    function getFtpByDataset($datsId)
+    public function getFtpByDataset($datsId)
     {
         $query = "select * from url where dats_id = $datsId and url_type = 'ftp'";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();

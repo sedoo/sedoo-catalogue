@@ -9,8 +9,8 @@ require_once "bd/bdConnect.php";
 class duplicate_dataset_form extends base_form
 {
 
-    var $duplicated_dats_id;
-    var $duplicated_dats_title;
+    public $duplicated_dats_id;
+    public $duplicated_dats_title;
 
     function createForm($project_name)
     {

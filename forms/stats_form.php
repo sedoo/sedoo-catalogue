@@ -10,12 +10,12 @@ require_once 'scripts/filtreProjets.php';
 class stats_form extends login_form
 {
 
-    var $statsUsers;
-    var $projectName;
-    var $filtreProjets;
-    var $yDeb = STATS_DEFAULT_MIN_YEAR;
+    public $statsUsers;
+    public $projectName;
+    public $filtreProjets;
+    public $yDeb = STATS_DEFAULT_MIN_YEAR;
 
-    function createForm($projectName)
+    public function createForm($projectName)
     {
         $this->projectName = $projectName;
 
@@ -45,7 +45,7 @@ class stats_form extends login_form
         return new DateTime('1900-01-01');
     }
 
-    function displayNbEnregistrements()
+    public function displayNbEnregistrements()
     {
         echo '<h1>User registrations (' . $this->statsUsers[0][0] . ')</h1><br><br>';
 
@@ -101,7 +101,7 @@ class stats_form extends login_form
         }
     }
 
-    function getNbEnregistrements()
+    public function getNbEnregistrements()
     {
         global $MainProjects;
         $resultat = array();
@@ -189,7 +189,7 @@ class stats_form extends login_form
         return $resultat;
     }
 
-    function getNbRequetesByMonth()
+    public function getNbRequetesByMonth()
     {
         $query = 'select extract(year from date) as year,extract(month from date) as month,count(*) from journal where type_journal_id = ' . TYPE_DL . ' and contact not in (' . EXCLUDE_USERS . ") $this->filtreProjets group by year,month;";
         $bd = new bdConnect();
@@ -212,7 +212,7 @@ class stats_form extends login_form
         return $requetes;
     }
 
-    function getNbRequetesByUser()
+    public function getNbRequetesByUser()
     {
         $query = 'select contact, count(*) from journal where type_journal_id = ' . TYPE_DL . ' and contact not in (' . EXCLUDE_USERS . ") $this->filtreProjets group by contact order by count desc;";
         $bd = new bdConnect();
@@ -227,7 +227,7 @@ class stats_form extends login_form
         return $requetes;
     }
 
-    function getNbRequetesByDataType()
+    public function getNbRequetesByDataType()
     {
         $query = "select coalesce(dats_type_title,'IN SITU') as type, count(*) from journal inner join dataset using (dats_id) left join dats_type using (dats_id) left join dataset_type using (dats_type_id)  where type_journal_id = " . TYPE_DL . ' and contact not in (' . EXCLUDE_USERS . ") $this->filtreProjets group by type order by type";
         $bd = new bdConnect();
@@ -242,7 +242,7 @@ class stats_form extends login_form
         return $requetes;
     }
 
-    function getNbRequetesByDataset()
+    public function getNbRequetesByDataset()
     {
         $query = 'select dats_id,dats_title, count(*) from journal inner join dataset using (dats_id) where type_journal_id = ' . TYPE_DL . ' and contact not in (' . EXCLUDE_USERS . ") $this->filtreProjets group by dats_id,dats_title order by count desc;";
         $bd = new bdConnect();
@@ -282,7 +282,7 @@ class stats_form extends login_form
         return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) . "?adm&pageId=7&type=$type&proj=$project_name&stype=$stype$spipAttrs";
     }
 
-    function display($datsId = 0)
+    public function display($datsId = 0)
     {
         if (isset($_REQUEST['type']) && !empty($_REQUEST['type'])) {
             $type = $_REQUEST['type'];
@@ -299,7 +299,7 @@ class stats_form extends login_form
         }
     }
 
-    function displayStatsRequetes()
+    public function displayStatsRequetes()
     {
         echo '<h1>Data downloads</h1><br><br>';
         if (isset($_REQUEST['stype']) && !empty($_REQUEST['stype'])) {
@@ -359,7 +359,7 @@ class stats_form extends login_form
         }
     }
 
-    function displayNbRequetesByDataset()
+    public function displayNbRequetesByDataset()
     {
         $requetes = $this->getNbRequetesByDataset();
         echo '<table>';
@@ -369,7 +369,7 @@ class stats_form extends login_form
         echo '</table>';
     }
 
-    function displayNbRequetesByUser()
+    public function displayNbRequetesByUser()
     {
         $requetes = $this->getNbRequetesByUser();
         echo '<table>';
@@ -380,7 +380,7 @@ class stats_form extends login_form
         echo '</table>';
     }
 
-    function displayNbRequetesByMonth()
+    public function displayNbRequetesByMonth()
     {
         global $project_name;
         $requetes = $this->getNbRequetesByMonth();

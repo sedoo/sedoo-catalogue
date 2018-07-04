@@ -10,18 +10,18 @@ require_once "bd/thesaurus.php";
 
 class gcmd_plateform_keyword
 {
-    var $gcmd_plat_id;
-    var $gcmd_plat_name;
-    var $gcmd_level;
-    var $gcm_gcmd_id;
-    var $thesaurus_id;
-    var $thesaurus;
-    var $uid;
+    public $gcmd_plat_id;
+    public $gcmd_plat_name;
+    public $gcmd_level;
+    public $gcm_gcmd_id;
+    public $thesaurus_id;
+    public $thesaurus;
+    public $uid;
 
-    var $gcmd_parent;
-    var $enfants;
+    public $gcmd_parent;
+    public $enfants;
 
-    function new_gcmd_plateform_keyword($tab)
+    public function new_gcmd_plateform_keyword($tab)
     {
         $this->gcmd_plat_id = $tab[0];
         $this->gcmd_plat_name = $tab[1];
@@ -40,7 +40,7 @@ class gcmd_plateform_keyword
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from gcmd_plateform_keyword order by gcmd_plat_name";
         $bd = new bdConnect();
@@ -54,7 +54,7 @@ class gcmd_plateform_keyword
         return $liste;
     }
 
-    function getChildren($recursive = false)
+    public function getChildren($recursive = false)
     {
         $liste = array();
         $this->readChildren($liste, $recursive);
@@ -73,7 +73,7 @@ class gcmd_plateform_keyword
         }
     }
 
-    function getAllInSitu()
+    public function getAllInSitu()
     {
         $query = 'select * from gcmd_plateform_keyword where gcmd_plat_id not in (' . GCMD_PLAT_EXCLUDE_INSITU . ') order by gcmd_plat_name';
         $bd = new bdConnect();
@@ -87,7 +87,7 @@ class gcmd_plateform_keyword
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new gcmd_plateform_keyword();
@@ -102,7 +102,7 @@ class gcmd_plateform_keyword
         return $gcmd_plateform_keyword;
     }
 
-    function getByIds($ids)
+    public function getByIds($ids)
     {
         if (!isset($ids) || empty($ids)) {
             return new gcmd_plateform_keyword();
@@ -113,7 +113,7 @@ class gcmd_plateform_keyword
         return $this->getByQuery($query);
     }
 
-    function getByName($name)
+    public function getByName($name)
     {
         $query = "select * from gcmd_plateform_keyword where gcmd_plat_name = '" . $name . "'";
         $gcmd_plateform_keyword = null;
@@ -125,7 +125,7 @@ class gcmd_plateform_keyword
         return $gcmd_plateform_keyword;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -138,7 +138,7 @@ class gcmd_plateform_keyword
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from gcmd_plateform_keyword where " .
         "lower(gcmd_plat_name) = lower('" . (str_replace("'", "\'", $this->gcmd_plat_name)) . "')";
@@ -150,7 +150,7 @@ class gcmd_plateform_keyword
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from gcmd_plateform_keyword where gcmd_plat_id = " . $this->gcmd_plat_id;
         $bd = new bdConnect();
@@ -161,7 +161,7 @@ class gcmd_plateform_keyword
         return false;
     }
 
-    function insert()
+    public function insert()
     {
         $query = "insert into gcmd_plateform_keyword ('gcmd_plat_name') " .
         "values ('" . str_replace("'", "\'", $this->gcmd_plat_name) . "')";
@@ -169,7 +169,7 @@ class gcmd_plateform_keyword
         $this->gcmd_plat_id = $bd->insert($query);
     }
 
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAllInSitu();
@@ -182,7 +182,7 @@ class gcmd_plateform_keyword
         return $s;
     }
 
-    function chargeFormvadataset($form, $label, $titre)
+    public function chargeFormvadataset($form, $label, $titre)
     {
 
         $liste = $this->getAllInSitu();
@@ -194,7 +194,7 @@ class gcmd_plateform_keyword
         return $s;
     }
 
-    function chargeFormPlat($form, $label, $titre)
+    public function chargeFormPlat($form, $label, $titre)
     {
         $array_topic[0] = "-- Topic --";
         $array_categorie[0][0] = "-- Term --";

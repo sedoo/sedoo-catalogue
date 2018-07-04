@@ -10,12 +10,12 @@ require_once "mail.php";
 class user_form_new extends login_form
 {
 
-    var $demande;
-    var $project;
-    var $projects;
-    var $msg;
+    public $demande;
+    public $project;
+    public $projects;
+    public $msg;
 
-    function createForm($testMail = true)
+    public function createForm($testMail = true)
     {
         $this->addElement('hidden', 'check_result');
         $this->addElement('hidden', 'user');
@@ -58,7 +58,7 @@ class user_form_new extends login_form
         }
     }
     
-    function doLogin()
+    public function doLogin()
     {
         $this->getElement('login')->setValue($this->getElement('mail')->getValue());
         $result = $this->loginAdmin($this->project);
@@ -69,13 +69,13 @@ class user_form_new extends login_form
         return $result;
     }
     
-    function doForgot()
+    public function doForgot()
     {
         $this->getElement('email_forgot')->setValue($this->getElement('mail')->getValue());
         return $this->forgottenPassword($this->project);
     }
     
-    function addValidationRules()
+    public function addValidationRules()
     {
         $this->registerRule('valid_xor', 'function', 'valid_xor');
         $this->registerRule('not_in_directory', 'function', 'not_in_directory');
@@ -144,7 +144,7 @@ class user_form_new extends login_form
         $this->addElement('submit', 'bouton_save', 'Apply');
     }
     
-    function addProjectDataPolicy()
+    public function addProjectDataPolicy()
     {
         if (isset($this->project)) {
             foreach ($this->project as $proj) {
@@ -193,7 +193,7 @@ class user_form_new extends login_form
         }
     }
     
-    function displayForm($isPortalForm)
+    public function displayForm($isPortalForm)
     {
         $chk = $this->getElement('check_result')->getValue();
       // Affichage des erreurs
@@ -234,7 +234,7 @@ class user_form_new extends login_form
         echo '</form>';
     }
     
-    function addProjectAbstract()
+    public function addProjectAbstract()
     {
         global $project_name, $MainProjects;
         $this->user = unserialize($_SESSION['loggedUser']);
@@ -247,7 +247,7 @@ class user_form_new extends login_form
       // }
     }
     
-    function displayPortalDataPolicy($isPortalForm = false)
+    public function displayPortalDataPolicy($isPortalForm = false)
     {
         $this->getUserFromLdap();
         $user = $this->user;
@@ -308,7 +308,7 @@ class user_form_new extends login_form
         }
     }
     
-    function displayFormRegister($update = false, $isPortalForm = false)
+    public function displayFormRegister($update = false, $isPortalForm = false)
     {
         global $MainProjects;
         echo '<table><tr><td colspan="3" align="center"><span class="info">Mandatory fields are in blue</span></td></tr>';
@@ -352,7 +352,7 @@ class user_form_new extends login_form
         }
     }
     
-    function displayProjectDataPolicy($isPortalForm = false)
+    public function displayProjectDataPolicy($isPortalForm = false)
     {
       // Affichage des erreurs
         $this->getUserFromLdap();
@@ -450,7 +450,7 @@ class user_form_new extends login_form
         echo '</table>';
     }
     
-    function displayModifyButton()
+    public function displayModifyButton()
     {
         echo '<form method="post" action="/Your-Account/?p&pageId=9" >';
         echo "&nbsp;" . $this->getElement('bouton_modify')->toHTML();
@@ -467,7 +467,7 @@ class user_form_new extends login_form
         echo '</table>';
     }
     
-    function saveForm($isPortalForm = false)
+    public function saveForm($isPortalForm = false)
     {
         $this->demande = new portalUser();
         $this->demande->lastname = $this->exportValue('lastname');
@@ -492,7 +492,7 @@ class user_form_new extends login_form
         $_SESSION['username'] = $this->demande->cn;
     }
     
-    function savePortalDataPolicyForm()
+    public function savePortalDataPolicyForm()
     {
         if (!isset($this->demande)) {
             $this->demande = unserialize($_SESSION['loggedUser']);
@@ -502,7 +502,7 @@ class user_form_new extends login_form
         $_SESSION['username'] = $this->demande->cn;
     }
     
-    function saveDataPolicyForm($isPortalForm = false)
+    public function saveDataPolicyForm($isPortalForm = false)
     {
         if (!isset($this->demande)) {
             $this->demande = unserialize($_SESSION['loggedUser']);
@@ -529,7 +529,7 @@ class user_form_new extends login_form
         $_SESSION['username'] = $this->demande->cn;
     }
     
-    function mailAdmin($sujet, $msg, $e = null, $user = null)
+    public function mailAdmin($sujet, $msg, $e = null, $user = null)
     {
         if (isset($this->project)) {
             foreach ($this->project as $proj) {
@@ -554,7 +554,7 @@ class user_form_new extends login_form
         }
     }
     
-    function addUser($isPortalForm)
+    public function addUser($isPortalForm)
     {
         if ($this->addPortalUser($isPortalForm)) {
             return true;
@@ -563,7 +563,7 @@ class user_form_new extends login_form
         }
     }
     
-    function addProjectUser($isPortalForm = false)
+    public function addProjectUser($isPortalForm = false)
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -628,7 +628,7 @@ class user_form_new extends login_form
         }
     }
     
-    function requestPortalDataAccess()
+    public function requestPortalDataAccess()
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -697,7 +697,7 @@ class user_form_new extends login_form
         }
     }
     
-    function getUserFromLdap()
+    public function getUserFromLdap()
     {
         $ldap = new ldapConnect();
         $ldap->openAdm();
@@ -718,7 +718,7 @@ class user_form_new extends login_form
   /*
    * Ajoute une demande d'accès à un user existant.
    */
-    function updateUser()
+    public function updateUser()
     {
         global $MainProjects;
         $ldap = new ldapConnect();
@@ -801,7 +801,7 @@ class user_form_new extends login_form
   /*
    * Teste si toutes les checkboxes du groupe sont cochées.
    */
-    function validateCbs($groupName)
+    public function validateCbs($groupName)
     {
         foreach ($this->getElement($groupName)->getElements() as $box) {
             $value = $box->getValue();
@@ -812,7 +812,7 @@ class user_form_new extends login_form
         return true;
     }
     
-    function validateCb($CBname)
+    public function validateCb($CBname)
     {
         $value = $this->getElement($CBname)->getValue();
         if (empty($value)) {
@@ -822,7 +822,7 @@ class user_form_new extends login_form
         }
     }
     
-    function validateChart($forPortal = false)
+    public function validateChart($forPortal = false)
     {
         if ($forPortal == false) {
             $bool = 0;
@@ -848,7 +848,7 @@ class user_form_new extends login_form
         }
     }
     
-    function check()
+    public function check()
     {
         $chk = $this->checkMail();
         $this->getElement('check_result')->setValue($chk);
@@ -902,17 +902,17 @@ class user_form_new extends login_form
         }
     }
     
-    function disableElement($elementName)
+    public function disableElement($elementName)
     {
         $this->getElement($elementName)->setAttribute('onfocus', 'blur()');
         $this->getElement($elementName)->setAttribute('style', 'background-color: transparent;');
         $this->disabledElmts[] = $elementName;
     }
     
-    var $disabledElmts = array();
-    var $exclAttrs = array();
+    public $disabledElmts = array();
+    public $exclAttrs = array();
     
-    function initUser($update = false)
+    public function initUser($update = false)
     {
         $this->getUserFromLdap();
         if (isset($this->user) && !empty($this->user)) {
@@ -920,7 +920,7 @@ class user_form_new extends login_form
         }
     }
     
-    function updateUserProfile()
+    public function updateUserProfile()
     {
         global $MainProjects;
         $this->getUserFromLdap();
@@ -943,7 +943,7 @@ class user_form_new extends login_form
     }
 
   // Nv
-    function initForm($user, $update)
+    public function initForm($user, $update)
     {
         global $MainProjects;
         $this->getElement('mail')->setValue($user->mail);

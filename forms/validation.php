@@ -52,7 +52,7 @@ function validPeriod($element_names, $element_values)
  */
 function existe($element, $value, $args)
 {
-    $obj = new $args[0]();
+    $obj = new $args[0];
     $obj->$args[1] = $value;
     return !$obj->existe();
 }

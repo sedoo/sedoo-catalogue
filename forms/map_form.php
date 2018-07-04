@@ -4,12 +4,12 @@ require_once 'login_form.php';
 class map_form extends login_form
 {
 
-    var $latMin;
-    var $latMax;
-    var $lonMin;
-    var $lonMax;
+    public $latMin;
+    public $latMax;
+    public $lonMin;
+    public $lonMax;
 
-    function createFormMap(
+    public function createFormMap(
         $defaultLatMin = MAP_DEFAULT_LAT_MIN,
         $defaultLatMax = MAP_DEFAULT_LAT_MAX,
         $defaultLonMin = MAP_DEFAULT_LON_MIN,
@@ -58,7 +58,7 @@ class map_form extends login_form
         $this->addElement('button', 'unzoom', 'UnZoom', array('onclick' => "unZoomPortal()"));
     }
 
-    function saveFormMap()
+    public function saveFormMap()
     {
         $this->latMin = $this->deg2Double($this->exportValue('minLatDeg'), $this->exportValue('minLatMin'), $this->exportValue('minLatSec'));
         $this->latMax = $this->deg2Double($this->exportValue('maxLatDeg'), $this->exportValue('maxLatMin'), $this->exportValue('maxLatSec'));
@@ -66,7 +66,7 @@ class map_form extends login_form
         $this->lonMax = $this->deg2Double($this->exportValue('maxLonDeg'), $this->exportValue('maxLonMin'), $this->exportValue('maxLonSec'));
     }
 
-    function addValidationRulesMap()
+    public function addValidationRulesMap()
     {
         $this->addRule('maxLatDeg', 'Latitude &deg; must be numeric', 'numeric');
         $this->addRule('maxLatDeg', 'Latitude &deg; is incorrect', 'number_range', array(-90, 90));
@@ -94,7 +94,7 @@ class map_form extends login_form
         $this->addRule('minLonSec', 'Longitude " is incorrect', 'number_range', array(0, 59));
     }
 
-    function displayFormMap($title = '')
+    public function displayFormMap($title = '')
     {
         echo $this->getElement('minLat')->toHTML();
         echo $this->getElement('maxLat')->toHTML();
@@ -155,7 +155,7 @@ class map_form extends login_form
                      </tr></table>';
     }
 
-    function deg2Double($deg, $min, $sec)
+    public function deg2Double($deg, $min, $sec)
     {
         if ($deg == "") {
             $deg = 0;

@@ -11,22 +11,22 @@ require_once "bd/sensor.php";
 
 class dats_sensor
 {
-    var $dats_id;
-    var $sensor_id;
-    var $nb_sensor;
-    var $sensor_resol_temp;
-    var $sensor_lat_resolution;
-    var $sensor_lon_resolution;
-    var $sensor_vert_resolution;
-    var $grid_original;
-    var $grid_process;
-    var $dataset;
-    var $sensor;
+    public $dats_id;
+    public $sensor_id;
+    public $nb_sensor;
+    public $sensor_resol_temp;
+    public $sensor_lat_resolution;
+    public $sensor_lon_resolution;
+    public $sensor_vert_resolution;
+    public $grid_original;
+    public $grid_process;
+    public $dataset;
+    public $sensor;
   // add by lolo
-    var $nbVars;
-    var $nbCalcVars;
+    public $nbVars;
+    public $nbCalcVars;
 
-    function new_dats_sensor($tab)
+    public function new_dats_sensor($tab)
     {
         $this->dats_id = $tab[1];
         $this->sensor_id = $tab[0];
@@ -50,7 +50,7 @@ class dats_sensor
         }
     }
 
-    function getSensor()
+    public function getSensor()
     {
         if (isset($this->sensor_id) && !empty($this->sensor_id)) {
             $sensor = new sensor();
@@ -59,7 +59,7 @@ class dats_sensor
     }
 
   // add by lolo
-    function getSensorVars()
+    public function getSensorVars()
     {
         if (isset($this->sensor_id) && !empty($this->sensor_id) && isset($this->dats_id) && !empty($this->dats_id)) {
             $query = 'select * from sensor_var where sensor_id = ' . $this->sensor_id . ' ' .
@@ -72,7 +72,7 @@ class dats_sensor
     }
 
   // add by lolo
-    function getSensorCalcVars()
+    public function getSensorCalcVars()
     {
         if (isset($this->sensor_id) && !empty($this->sensor_id) && isset($this->dats_id) && !empty($this->dats_id)) {
             $query = 'select * from sensor_var where sensor_id = ' . $this->sensor_id . ' ' .
@@ -84,7 +84,7 @@ class dats_sensor
         }
     }
 
-    function toString()
+    public function toString()
     {
         $result = 'GCMD: ';
         if (isset($this->sensor->gcmd_instrument_keyword)) {
@@ -139,7 +139,7 @@ class dats_sensor
         return $result;
     }
 
-    function getDataset()
+    public function getDataset()
     {
         if (isset($this->dats_id) && !empty($this->dats_id)) {
             $dts = new dataset();
@@ -147,20 +147,20 @@ class dats_sensor
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from dats_sensor order by dats_id";
         return $this->getByQuery($query);
     }
 
-    function getByIds($d_id, $s_id)
+    public function getByIds($d_id, $s_id)
     {
         $query = "select * from dats_sensor where dats_id = " . $d_id . " and sensor_id = " . $s_id;
         $liste = $this->getByQuery($query);
         return $liste[0];
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -173,7 +173,7 @@ class dats_sensor
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from dats_sensor where " .
         "dats_id = " . $this->dats_id . " and sensor_id = " . $this->sensor_id;
@@ -185,7 +185,7 @@ class dats_sensor
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         $query_insert = "insert into dats_sensor (dats_id,sensor_id";
         $query_values = "values (" . $this->dats_id . "," . $this->sensor_id;

@@ -9,16 +9,16 @@ require_once "bd/bdConnect.php";
 
 class status_progress
 {
-    var $status_progress_id;
-    var $status_progress_name;
+    public $status_progress_id;
+    public $status_progress_name;
 
-    function new_status_progress($tab)
+    public function new_status_progress($tab)
     {
         $this->status_progress_id = $tab[0];
         $this->status_progress_name = $tab[1];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from status_progress order by status_progress_name";
         $bd = new bdConnect();
@@ -32,7 +32,7 @@ class status_progress
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new status_progress();
@@ -47,7 +47,7 @@ class status_progress
         return $status_progress;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -60,7 +60,7 @@ class status_progress
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from status_progress where " .
         "lower(status_progress_name) = lower('" . (str_replace("'", "\'", $this->status_progress_name)) . "')";
@@ -72,7 +72,7 @@ class status_progress
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from status_progress where status_progress_id = " . $this->status_progress_id;
         $bd = new bdConnect();
@@ -83,7 +83,7 @@ class status_progress
         return false;
     }
 
-    function insert()
+    public function insert()
     {
         $query = "insert into status_progress ('status_progress_name') " .
         "values ('" . str_replace("'", "\'", $this->status_progress_name) . "')";
@@ -92,7 +92,7 @@ class status_progress
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAll();

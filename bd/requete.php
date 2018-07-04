@@ -10,15 +10,15 @@ class requete
     const CODE_SUCCES = 1;
     const CODE_VIDE = 2;
 
-    var $requeteId;
-    var $dateDeb;
-    var $dateActive;
-    var $dateFin;
-    var $nbValeurs;
-    var $mail;
-    var $xml;
-    var $etat;
-    var $killed;
+    public $requeteId;
+    public $dateDeb;
+    public $dateActive;
+    public $dateFin;
+    public $nbValeurs;
+    public $mail;
+    public $xml;
+    public $etat;
+    public $killed;
 
 /*
 requete_id          | integer                     | non NULL Par défaut, nextval('requete_requete_id_seq'::regclass)
@@ -30,7 +30,7 @@ requete_date_fin    | timestamp without time zone |
 requete_etat        | smallint                    | non NULL
 requete_kill        | boolean                     | non NULL
 requete_nb_val   */
-    function new_requete($tab)
+    public function new_requete($tab)
     {
         $this->requeteId = $tab[0];
         $this->mail = $tab[1];
@@ -52,29 +52,29 @@ requete_nb_val   */
         $this->nbValeurs = $tab[8];
     }
 
-    function isRunning()
+    public function isRunning()
     {
         return ($this->etat == self::CODE_EN_COURS) && !$this->killed;
     }
 
-    function isFinished()
+    public function isFinished()
     {
         return ($this->etat != self::CODE_EN_COURS);
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "SELECT * FROM requete ORDER BY requete_id desc";
         return $this->getByQuery($query);
     }
 
-    function getByUser($mail)
+    public function getByUser($mail)
     {
         $query = "SELECT * FROM requete WHERE requete_email = '$mail' ORDER BY requete_id desc";
         return $this->getByQuery($query);
     }
 
-    function kill()
+    public function kill()
     {
         $query = "UPDATE requete SET requete_kill = 'true' WHERE requete_id = $this->requeteId;";
         $bd = new bdConnect();
@@ -84,7 +84,7 @@ requete_nb_val   */
         $bd->db_close();
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();

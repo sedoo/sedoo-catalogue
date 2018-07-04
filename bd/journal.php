@@ -19,15 +19,15 @@ define('EXCLUDE_USERS', "'laurence.mastrorillo@obs-mip.fr','guillaume.brissebrat
 class journal
 {
 
-    var $id;
-    var $date;
-    var $type_id;
-    var $type;
-    var $contact;
-    var $dats_id;
-    var $dataset;
-    var $comment;
-    var $publier;
+    public $id;
+    public $date;
+    public $type_id;
+    public $type;
+    public $contact;
+    public $dats_id;
+    public $dataset;
+    public $comment;
+    public $publier;
     
     function new_journal($tab)
     {

@@ -11,12 +11,12 @@ require_once "bd/project.php";
 
 class dats_proj
 {
-    var $dats_id;
-    var $project_id;
-    var $dataset;
-    var $project;
+    public $dats_id;
+    public $project_id;
+    public $dataset;
+    public $project;
 
-    function new_dats_proj($tab)
+    public function new_dats_proj($tab)
     {
         $this->dats_id = $tab[1];
         $this->project_id = $tab[0];
@@ -30,13 +30,13 @@ class dats_proj
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from dats_proj order by dats_id";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -49,7 +49,7 @@ class dats_proj
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from dats_proj where " .
         "dats_id = " . $this->dats_id . " and project_id = " . $this->project_id;
@@ -61,7 +61,7 @@ class dats_proj
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (!$this->existe()) {
             $query = "insert into dats_proj (dats_id,project_id) " .

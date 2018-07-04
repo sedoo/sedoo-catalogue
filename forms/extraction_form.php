@@ -14,16 +14,16 @@ require_once "scripts/mail.php";
 
 class extraction_form extends map_form
 {
-    var $projectName;
-    var $requete;
-    var $msg;
-    var $datsId;
-    var $multipleDatasets;
-    var $search;
-    var $minValidDate = null;
-    var $maxValidDate = null;
+    public $projectName;
+    public $requete;
+    public $msg;
+    public $datsId;
+    public $multipleDatasets;
+    public $search;
+    public $minValidDate = null;
+    public $maxValidDate = null;
 
-    function createForm($projectName, $dats_id = null, $search = 0)
+    public function createForm($projectName, $dats_id = null, $search = 0)
     {
         $this->projectName = $projectName;
         $this->search = $search;
@@ -93,7 +93,7 @@ class extraction_form extends map_form
         }
     }
 
-    function createFormDatasets($dats_ids)
+    public function createFormDatasets($dats_ids)
     {
         if (isset($dats_ids) && !empty($dats_ids)) {
             $query = "SELECT dats_id, dats_title FROM dataset where dats_id IN ($dats_ids) ORDER BY dats_title;";
@@ -129,7 +129,7 @@ class extraction_form extends map_form
         }
     }
 
-    function createFormParams($gcmd_id, $dats_ids)
+    public function createFormParams($gcmd_id, $dats_ids)
     {
         $p = new param();
         if (isset($gcmd_id) && $gcmd_id > 0) {
@@ -168,7 +168,7 @@ class extraction_form extends map_form
         }
     }
 
-    function createFormPeriod($dats_ids)
+    public function createFormPeriod($dats_ids)
     {
 
         $this->addElement('text', 'date_min', 'Date min (yyyy-mm-dd)', array(
@@ -213,7 +213,7 @@ class extraction_form extends map_form
     }
 
 
-    function createFormFlag()
+    public function createFormFlag()
     {
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
@@ -222,7 +222,7 @@ class extraction_form extends map_form
         $this->setDefaults($defaultValues);
     }
 
-    function createFormDelta()
+    public function createFormDelta()
     {
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
@@ -231,7 +231,7 @@ class extraction_form extends map_form
         $this->setDefaults($defaultValues);
     }
 
-    function createFormCompression()
+    public function createFormCompression()
     {
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;zip', 'zip');
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;gzip', 'gzip');
@@ -240,7 +240,7 @@ class extraction_form extends map_form
         $this->setDefaults($defaultValues);
     }
 
-    function createFormFormat()
+    public function createFormFormat()
     {
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;Ascii (Nasa Ames)', 'ames');
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;netCdf', 'netcdf');
@@ -249,7 +249,7 @@ class extraction_form extends map_form
         $this->setDefaults($defaultValues);
     }
 
-    function createFormFormatOption()
+    public function createFormFormatOption()
     {
         if (isset($this->datsId) && $this->datsId > 0) {
           // Requete sur un seul jeu
@@ -267,7 +267,7 @@ class extraction_form extends map_form
         }
     }
 
-    function saveRequete()
+    public function saveRequete()
     {
         $this->requete->format = $_POST['format'];
         $this->requete->format_version = '1001m';
@@ -294,7 +294,7 @@ class extraction_form extends map_form
         $_SESSION['requete_xml'] = serialize($this->requete);
     }
 
-    function send()
+    public function send()
     {
         if (send_to_cgi($this->requete->toXml(), $retour)) {
             $elts = explode(':', $retour);
@@ -312,12 +312,12 @@ class extraction_form extends map_form
         }
     }
 
-    function sendMailErreur($error)
+    public function sendMailErreur($error)
     {
         sendMailSimple(ROOT_EMAIL, '[' . MainProject . '-DATABASE] Error', $error);
     }
 
-    function displayForm()
+    public function displayForm()
     {
         DatePickerUtils::addScriptPeriod('date_min', 'date_max', $this->minValidDate, $this->maxValidDate);
 

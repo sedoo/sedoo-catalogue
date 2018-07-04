@@ -9,16 +9,16 @@ require_once "bd/bdConnect.php";
 
 class status_final
 {
-    var $status_final_id;
-    var $status_final_name;
+    public $status_final_id;
+    public $status_final_name;
 
-    function new_status_final($tab)
+    public function new_status_final($tab)
     {
         $this->status_final_id = $tab[0];
         $this->status_final_name = $tab[1];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from status_final order by status_final_name";
         $bd = new bdConnect();
@@ -32,7 +32,7 @@ class status_final
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new status_final();
@@ -47,7 +47,7 @@ class status_final
         return $status_final;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -60,7 +60,7 @@ class status_final
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from status_final where " .
         "lower(status_final_name) = lower('" . (str_replace("'", "\'", $this->status_final_name)) . "')";
@@ -72,7 +72,7 @@ class status_final
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from status_final where status_final_id = " . $this->status_final_id;
         $bd = new bdConnect();
@@ -83,7 +83,7 @@ class status_final
         return false;
     }
 
-    function insert()
+    public function insert()
     {
         $query = "insert into status_final ('status_final_name') " .
         "values ('" . str_replace("'", "\'", $this->status_final_name) . "')";
@@ -92,7 +92,7 @@ class status_final
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAll();

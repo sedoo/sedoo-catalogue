@@ -9,8 +9,8 @@ require_once 'lstDataUtils.php';
 
 class varIds
 {
-    var $var_name;
-    var $ids;
+    public $var_name;
+    public $ids;
 }
 
 $projects = get_filtre_projets($project_name);

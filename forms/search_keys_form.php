@@ -13,12 +13,12 @@ require_once "validation.php";
 class search_keys_form extends HTML_QuickForm
 {
 
-    var $keywords;
-    var $and_or;
-    var $filter_data;
-    var $filter_data_db;
+    public $keywords;
+    public $and_or;
+    public $filter_data;
+    public $filter_data_db;
 
-    function createForm()
+    public function createForm()
     {
         $this->addElement('text', 'keywords', 'Keywords: ', array('size' => '50'));
         $and_or[] = &HTML_QuickForm::createElement('radio', null, null, 'All of the above keywords (AND)', 'and');
@@ -33,7 +33,7 @@ class search_keys_form extends HTML_QuickForm
         $this->addElement('submit', 'bouton_search', 'search');
     }
 
-    function createFormFilterData()
+    public function createFormFilterData()
     {
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
@@ -42,7 +42,7 @@ class search_keys_form extends HTML_QuickForm
         $this->setDefaults($defaultValues);
     }
 
-    function createFormFilterDataDb()
+    public function createFormFilterDataDb()
     {
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
@@ -51,7 +51,7 @@ class search_keys_form extends HTML_QuickForm
         $this->setDefaults($defaultValues);
     }
 
-    function displayForm()
+    public function displayForm()
     {
         $reqUri = $_SERVER['REQUEST_URI'];
 
@@ -69,7 +69,7 @@ class search_keys_form extends HTML_QuickForm
         echo '</form>';
     }
 
-    function saveForm()
+    public function saveForm()
     {
         $keys = $this->exportValue('keywords');
         $this->keywords = split(' ', $keys);

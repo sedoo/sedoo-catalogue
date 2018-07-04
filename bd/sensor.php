@@ -13,24 +13,24 @@ require_once "scripts/common.php";
 
 class sensor
 {
-    var $sensor_id;
-    var $manufacturer_id;
-    var $gcmd_sensor_id;
-    var $bound_id;
-    var $sensor_model;
-    var $sensor_calibration;
-    var $sensor_date_begin;
-    var $sensor_date_end;
-    var $sensor_url;
-    var $sensor_elevation;
-    var $manufacturer;
-    var $gcmd_instrument_keyword;
-    var $boundings;
-    var $sensor_places;
-    var $sensor_vars;
-    var $sensor_environment;
+    public $sensor_id;
+    public $manufacturer_id;
+    public $gcmd_sensor_id;
+    public $bound_id;
+    public $sensor_model;
+    public $sensor_calibration;
+    public $sensor_date_begin;
+    public $sensor_date_end;
+    public $sensor_url;
+    public $sensor_elevation;
+    public $manufacturer;
+    public $gcmd_instrument_keyword;
+    public $boundings;
+    public $sensor_places;
+    public $sensor_vars;
+    public $sensor_environment;
 
-    function new_sensor($tab)
+    public function new_sensor($tab)
     {
         $this->sensor_id = $tab[0];
         $this->manufacturer_id = $tab[1];
@@ -57,7 +57,7 @@ class sensor
         }
     }
 
-    function toString()
+    public function toString()
     {
         $result = 'GCMD: ';
         if (isset($this->gcmd_instrument_keyword)) {
@@ -95,13 +95,13 @@ class sensor
         return $result;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from sensor order by sensor_model";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -114,12 +114,12 @@ class sensor
         return $liste;
     }
 
-    function getByPlace($placeId)
+    public function getByPlace($placeId)
     {
         return $this->getByQuery("select DISTINCT ON (sensor_model) * from sensor where sensor_id in (select sensor_id from sensor_place where place_id = " . $placeId . ")");
     }
     
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new personne();
@@ -134,7 +134,7 @@ class sensor
         return $sensor;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from sensor where " .
         "lower(sensor_model) = lower('" . str_replace("'", "\'", $this->sensor_model) . "')" .
@@ -148,7 +148,7 @@ class sensor
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from sensor where sensor_id = " . $this->sensor_id;
         $bd = new bdConnect();
@@ -159,7 +159,7 @@ class sensor
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if ($this->manufacturer_id === 0) {
             $this->manufacturer_id = $this->manufacturer->insert($bd);
@@ -231,7 +231,7 @@ class sensor
         return $this->sensor_id;
     }
 
-    function update(&$bd)
+    public function update(&$bd)
     {
         if ($this->manufacturer_id == 0) {
             $this->manufacturer_id = $this->manufacturer->insert($bd);
@@ -305,7 +305,7 @@ class sensor
         return $this->sensor_id;
     }
 
-    function get_sensor_places()
+    public function get_sensor_places()
     {
         $query = "select * from sensor_place where sensor_id = " . $this->sensor_id;
         $sensor_place = new sensor_place();
@@ -315,7 +315,7 @@ class sensor
         }
     }
 
-    function getSensorModelBySensorId($id)
+    public function getSensorModelBySensorId($id)
     {
         $query = "select sensor_model from sensor where sensor_id = " . $id;
         $bd = new bdConnect();

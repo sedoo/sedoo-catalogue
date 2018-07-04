@@ -14,20 +14,20 @@ require_once 'extract/sortieCGI.php';
 class download_form extends login_form
 {
 
-    var $filesList;
-    var $path;
-    var $jeu;
-    var $pathJeu;
-    var $logFile;
-    var $selection;
-    var $mailNotif;
-    var $projectName;
-    var $dataPath;
-    var $queryString;
-    var $jeuRoles;
-    var $isPublic = false;
+    public $filesList;
+    public $path;
+    public $jeu;
+    public $pathJeu;
+    public $logFile;
+    public $selection;
+    public $mailNotif;
+    public $projectName;
+    public $dataPath;
+    public $queryString;
+    public $jeuRoles;
+    public $isPublic = false;
 
-    function createForm($projectName, $queryString = '')
+    public function createForm($projectName, $queryString = '')
     {
         $this->projectName = $projectName;
         $this->queryString = $queryString;
@@ -54,7 +54,7 @@ class download_form extends login_form
         }
     }
     
-    function saveForm()
+    public function saveForm()
     {
         echo 'Selected:';
         for ($i = 0; $i < count($this->filesList); $i++) {
@@ -64,7 +64,7 @@ class download_form extends login_form
         }
     }
     
-    function getJeuUrl($jeuId)
+    public function getJeuUrl($jeuId)
     {
         $url = new url();
         $liste = $url->getLocalFileByDataset($jeuId);
@@ -103,7 +103,7 @@ class download_form extends login_form
         }
     }
     
-    function getReadme()
+    public function getReadme()
     {
         $readme = $this->searchReadme($this->path);
 
@@ -123,7 +123,7 @@ class download_form extends login_form
         }
     }
     
-    function getTitle()
+    public function getTitle()
     {
         $href = '/Data-Search/?datsId=' . $this->jeu->dats_id;
         if (isset($this->queryString) && !empty($this->queryString)) {
@@ -135,18 +135,18 @@ class download_form extends login_form
         return "<a href='$href'>" . $this->getJeuNom() . '</a>';
     }
     
-    function getJeuNom()
+    public function getJeuNom()
     {
         return $this->jeu->dats_title;
     }
     
-    function initJeu($jeuId)
+    public function initJeu($jeuId)
     {
         $dts = new dataset();
         $this->jeu = $dts->getById($jeuId);
     }
     
-    function getJeuRoles($jeuId)
+    public function getJeuRoles($jeuId)
     {
         $dr = new dats_role();
         $liste = $dr->getByDataset($jeuId);
@@ -159,7 +159,7 @@ class download_form extends login_form
         return $ret;
     }
     
-    function initForm()
+    public function initForm()
     {
         $jeuId = $_REQUEST['datsId'];
         if (!isset($jeuId) || empty($jeuId)) {
@@ -237,12 +237,12 @@ class download_form extends login_form
         return false;
     }
     
-    function getRelativepath($path, $root)
+    public function getRelativepath($path, $root)
     {
         return substr(str_replace($root, "", $path), 1);
     }
     
-    function getFileSize($path)
+    public function getFileSize($path)
     {
         $size = filesize($path);
         $units = array(
@@ -259,7 +259,7 @@ class download_form extends login_form
         return round($size, 2) . $units[$i];
     }
     
-    function displayForm($archive = null)
+    public function displayForm($archive = null)
     {
         echo '<div id="blanket" style="display:none;">';
         echo '</div><div id="popUpDiv" style="display:none;text-align:center;">';
@@ -300,7 +300,7 @@ class download_form extends login_form
         }
     }
     
-    function displayDirectory()
+    public function displayDirectory()
     {
         $reqUri = $this->getReqUri();
         $reqUriNoPath = $this->getReqUri(false);
@@ -410,7 +410,7 @@ class download_form extends login_form
 	    }); </script>";
     }
     
-    function getReqUri($withPath = true)
+    public function getReqUri($withPath = true)
     {
         return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) . '?datsId=' . $_GET['datsId'] . "&$this->queryString" . (($withPath) ? '&path=' . $_GET['path'] : '');
     }
@@ -442,7 +442,7 @@ class download_form extends login_form
         }
     }
     
-    function displaySelection($archive = null)
+    public function displaySelection($archive = null)
     {
         $reqUri = $this->getReqUri();
         echo $this->getElement('email_notif_hidden')->toHTML();
@@ -468,7 +468,7 @@ class download_form extends login_form
         echo "</table>";
     }
     
-    function createArchive($log = false, $includeDoc = false)
+    public function createArchive($log = false, $includeDoc = false)
     {
         $archiveName = uniqid();
         $archiveFile = DATA_PATH_DL . '/' . $archiveName . '.zip';
@@ -489,9 +489,9 @@ class download_form extends login_form
         return $archiveName;
     }
     
-    var $cpt = 0;
+    public $cpt = 0;
     
-    function addToArchiveTmp($archive, $file)
+    public function addToArchiveTmp($archive, $file)
     {
         if (is_dir($file)) {
             $ret = $archive->addDir($this->getRelativepath($file, $this->pathJeu));
@@ -501,30 +501,30 @@ class download_form extends login_form
         $this->cpt++;
     }
     
-    function downloadCurrentDir()
+    public function downloadCurrentDir()
     {
         $this->selectAll();
         return $this->download();
     }
     
-    function removeItemFromSelection($i)
+    public function removeItemFromSelection($i)
     {
         unset($this->selection[$i]);
         sort($this->selection);
     }
     
-    function addFileToSelection($file)
+    public function addFileToSelection($file)
     {
         $this->selection[] = $file;
         $this->filterSelection();
     }
     
-    function addItemToSelection($i)
+    public function addItemToSelection($i)
     {
         $this->addFileToSelection($this->path . '/' . $this->filesList[$i]);
     }
     
-    function addToSelection()
+    public function addToSelection()
     {
         for ($i = 0; $i < count($this->filesList); $i++) {
             if ($this->getElement('file_' . $i)->getChecked()) {
@@ -533,12 +533,12 @@ class download_form extends login_form
         }
     }
     
-    function addAllToSelection()
+    public function addAllToSelection()
     {
         $this->addFileToSelection($this->path);
     }
     
-    function clearSelection()
+    public function clearSelection()
     {
         $this->selection = array();
     }
@@ -552,12 +552,12 @@ class download_form extends login_form
    *          $dir
    * @return boolean
    */
-    function isChild($file, $dir)
+    public function isChild($file, $dir)
     {
         return (strpos($file, $dir) === 0);
     }
     
-    function isAlreadyInSelection($file)
+    public function isAlreadyInSelection($file)
     {
         foreach ($this->selection as $selectedFile) {
             if ($this->isChild($file, $selectedFile)) {
@@ -567,7 +567,7 @@ class download_form extends login_form
         return false;
     }
     
-    function filterSelection()
+    public function filterSelection()
     {
         $this->selection = array_unique($this->selection);
         sort($this->selection);
@@ -583,7 +583,7 @@ class download_form extends login_form
         }
     }
     
-    function downloadCGI()
+    public function downloadCGI()
     {
         $requete = new requeteFilesXml($this->user, $this->projectName, $this->jeu, $this->pathJeu);
         foreach (array_keys($this->selection) as $i) {
@@ -613,7 +613,7 @@ class download_form extends login_form
         return $msg;
     }
     
-    function download()
+    public function download()
     {
         $this->openLogFile();
         $archiveName = $this->createArchive(true, true);
@@ -624,17 +624,17 @@ class download_form extends login_form
     }
     
   /* LOG (Quel utilisateur a téléchargé quel fichier) */
-    function openLogFile()
+    public function openLogFile()
     {
         $this->logFile = fopen(LOG_DL, 'a');
     }
     
-    function closeLogFile()
+    public function closeLogFile()
     {
         return fclose($this->logFile);
     }
     
-    function addToLog($file)
+    public function addToLog($file)
     {
         $date = new DateTime();
         $ligne = $date->format('Y-m-d') . ';' . $this->user->mail . ';' . $this->getJeuNom() . ';' . $file;

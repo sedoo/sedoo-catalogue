@@ -6,10 +6,10 @@ require_once "ldap/ldapConnect.php";
 class check_registration_form extends HTML_QuickForm
 {
 
-    var $msg = null;
-    var $project;
+    public $msg = null;
+    public $project;
 
-    function createForm($project)
+    public function createForm($project)
     {
         $this->project = $project;
 
@@ -20,7 +20,7 @@ class check_registration_form extends HTML_QuickForm
         $this->addElement('submit', 'bouton_check', 'Check');
     }
 
-    function displayForm()
+    public function displayForm()
     {
         echo "<h2>Status of your request</h2><p/>";
 
@@ -42,7 +42,7 @@ class check_registration_form extends HTML_QuickForm
         echo '</form>';
     }
 
-    function check()
+    public function check()
     {
         global $project_name;
         $mail = $this->exportValue('email_check');

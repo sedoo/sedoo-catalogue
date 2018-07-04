@@ -1,27 +1,28 @@
 <?php
 
-class calendrier_cellule {
+class calendrier_cellule
+{
 
-  const BLANC = "#ffffff";
-  const VERT = "#32CD32";
-  const ROUGE = "#ff9090";
+    const BLANC = "#ffffff";
+    const VERT = "#32CD32";
+    const ROUGE = "#ff9090";
 
-  var $jour;
-  var $color;
+    public $jour;
+    public $color;
 
-  function calendrier_cellule($jour = null, $color = self::BLANC) {
-    $this->color = $color;
-    $this->jour = $jour;
-  }
+    public function calendrier_cellule($jour = null, $color = self::BLANC)
+    {
+        $this->color = $color;
+        $this->jour = $jour;
+    }
 
-  function setAvailable() {
-    $this->color = self::VERT;
-  }
+    public function setAvailable()
+    {
+        $this->color = self::VERT;
+    }
 
-  function setMissing() {
-    $this->color = self::ROUGE;
-  }
-
+    public function setMissing()
+    {
+        $this->color = self::ROUGE;
+    }
 }
-
-?>

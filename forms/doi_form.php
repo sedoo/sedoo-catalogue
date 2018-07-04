@@ -8,10 +8,10 @@ require_once 'scripts/filtreProjets.php';
 class doi_form extends login_form
 {
 
-    var $datasetxml;
-    var $datasetxmlerror;
+    public $datasetxml;
+    public $datasetxmlerror;
 
-    function createForm($project_name)
+    public function createForm($project_name)
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -24,7 +24,7 @@ class doi_form extends login_form
         }
     }
     
-    function isNotValid($xml, $project_name, $id)
+    public function isNotValid($xml, $project_name, $id)
     {
         $xmle = simplexml_load_string($xml);
 
@@ -102,7 +102,7 @@ class doi_form extends login_form
         return $var;
     }
 
-    function displaydoixml($dats_id, $xmlstr, $project_name)
+    public function displaydoixml($dats_id, $xmlstr, $project_name)
     {
         $projects = getProjects($dats_id);
         $Doi['projects'] = getProjectsName($projects);
@@ -118,7 +118,7 @@ class doi_form extends login_form
         return $Doi;
     }
 
-    function createDoiForm($project_name)
+    public function createDoiForm($project_name)
     {
         $dts = new dataset();
         $projects = 'SELECT DISTINCT dats_id FROM dats_proj WHERE project_id IN (' . get_filtre_projets($project_name) . ')';
@@ -166,7 +166,7 @@ class doi_form extends login_form
         $this->addElement('submit', 'bouton_ok', 'Create DOI');
     }
     
-    function registerDoi($project_name)
+    public function registerDoi($project_name)
     {
         $doi = DOI_PREFIX . $_POST['doi'];
         $dats_id = $_POST['dataset'];
@@ -223,7 +223,7 @@ class doi_form extends login_form
         }
     }
     
-    function displayDoiForm()
+    public function displayDoiForm()
     {
         $reqUri = $_SERVER['REQUEST_URI'];
 

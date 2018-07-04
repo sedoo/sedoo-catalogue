@@ -40,76 +40,76 @@ require_once "sedoo-metadata/sedoo_metadata_utils.php";
 abstract class base_dataset implements iDataset
 {
 
-    var $dats_id;
-    var $status_final_id;
-    var $status_progress_id;
-    var $database_id;
-    var $period_id;
-    var $data_policy_id;
-    var $bound_id;
-    var $org_id;
-    var $dats_title;
-    var $dats_pub_date;
-    var $dats_version;
-    var $dats_process_level;
-    var $dats_other_cit;
-    var $dats_abstract;
-    var $dats_purpose;
-    var $dats_elevation_min;
-    var $dats_elevation_max;
-    var $dats_date_begin;
-    var $dats_date_end;
-    var $dats_use_constraints;
-    var $dats_access_constraints;
-    var $dats_reference;
-    var $dats_quality;
-    var $status_final;
-    var $status_progress;
-    var $dats_doi;
-    var $boundings;
-    var $organism;
-    var $period;
-    var $database;
-    var $data_policy;
-    var $originators;
-    var $dats_originators;
-    var $data_formats;
-    var $required_data_formats;
-    var $dataset_types;
-    var $dats_sensors;
-    var $dats_variables;
-    var $sites;
-    var $dats_creator;
+    public $dats_id;
+    public $status_final_id;
+    public $status_progress_id;
+    public $database_id;
+    public $period_id;
+    public $data_policy_id;
+    public $bound_id;
+    public $org_id;
+    public $dats_title;
+    public $dats_pub_date;
+    public $dats_version;
+    public $dats_process_level;
+    public $dats_other_cit;
+    public $dats_abstract;
+    public $dats_purpose;
+    public $dats_elevation_min;
+    public $dats_elevation_max;
+    public $dats_date_begin;
+    public $dats_date_end;
+    public $dats_use_constraints;
+    public $dats_access_constraints;
+    public $dats_reference;
+    public $dats_quality;
+    public $status_final;
+    public $status_progress;
+    public $dats_doi;
+    public $boundings;
+    public $organism;
+    public $period;
+    public $database;
+    public $data_policy;
+    public $originators;
+    public $dats_originators;
+    public $data_formats;
+    public $required_data_formats;
+    public $dataset_types;
+    public $dats_sensors;
+    public $dats_variables;
+    public $sites;
+    public $dats_creator;
 
-    var $projects;
-    var $dats_date_end_not_planned;
+    public $projects;
+    public $dats_date_end_not_planned;
 
-    var $is_requested;
+    public $is_requested;
 
-    var $is_archived;
+    public $is_archived;
 
-    var $dats_funding;
-    var $dats_dmetmaj;
-    var $code;
-    var $dats_uuid;
+    public $dats_funding;
+    public $dats_dmetmaj;
+    public $code;
+    public $dats_uuid;
 
   //Pour l'affichage
-    var $nbPis;
-    var $nbSites;
-    var $nbVars;
-    var $nbCalcVars;
-    var $nbVarsReel;
-    var $nbCalcVarsReel;
-    var $nbFormats;
-    var $nbProj;
+    public $nbPis;
+    public $nbSites;
+    public $nbVars;
+    public $nbCalcVars;
+    public $nbVarsReel;
+    public $nbCalcVarsReel;
+    public $nbFormats;
+    public $nbProj;
   //add by lolo
-    var $nbSensors;
+    public $nbSensors;
 
-    var $image;
-    var $attFile;
+    public $image;
+    public $attFile;
 
   //Connexion bd
-    var $bdConn;
+    public $bdConn;
 
     abstract public function init($tab);
 

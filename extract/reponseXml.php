@@ -6,15 +6,15 @@ require_once('extract/conf.php');
 class reponseXml
 {
     
-    var $id;
-    var $userName;
-    var $mail;
-    var $roles;
-    var $files;
-    var $project_name;
-    var $isPublic;
+    public $id;
+    public $userName;
+    public $mail;
+    public $roles;
+    public $files;
+    public $project_name;
+    public $isPublic;
 
-    function reponseXml($id, $project_name)
+    public function reponseXml($id, $project_name)
     {
         $this->project_name = $project_name;
         
@@ -27,12 +27,12 @@ class reponseXml
         }
     }
     
-    function isPublic()
+    public function isPublic()
     {
         return 'true' == $this->isPublic;
     }
 
-    function readXml($xml)
+    public function readXml($xml)
     {
         $this->id = $xml->attributes()->requestId;
         $this->isPublic = $xml->attributes()->public;
@@ -49,7 +49,7 @@ class reponseXml
         }
     }
     
-    function toHtml()
+    public function toHtml()
     {
         echo '<form action="" method="post" name="frmdl" id="frmdl"><table><tr><th align="center">File</th><th align="center">Size</th><th align="center">Contacts</th></tr>';
         foreach ($this->files as $f) {

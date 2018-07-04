@@ -9,12 +9,12 @@ require_once "conf/conf.php";
 class mails
 {
 
-    static function sendMailUser($user, $jeu, $project = MainProject, $sendMailPis = true, $from = ROOT_EMAIL, $cc = ROOT_EMAIL)
+    public static function sendMailUser($user, $jeu, $project = MainProject, $sendMailPis = true, $from = ROOT_EMAIL, $cc = ROOT_EMAIL)
     {
         mails::sendMailUser2($user, array($jeu), $sendMailPis, $from, $cc, $project);
     }
 
-    static function sendMailUser2($user, $jeux, $sendMailPis = true, $from = ROOT_EMAIL, $cc = ROOT_EMAIL, $project = MainProject)
+    public static function sendMailUser2($user, $jeux, $sendMailPis = true, $from = ROOT_EMAIL, $cc = ROOT_EMAIL, $project = MainProject)
     {
         $sujet = "$project Data Access";
 
@@ -71,7 +71,7 @@ class mails
         sendMail($cc, "[$project-DATABASE] Data download", 'Sent to ' . $user->mail . "\n\n" . $corps, $fichesPdf, $from);
     }
 
-    static function sendMailPi($mail, $jeuNom, $user, $from = ROOT_EMAIL, $cc = ROOT_EMAIL, $project = MainProject)
+    public static function sendMailPi($mail, $jeuNom, $user, $from = ROOT_EMAIL, $cc = ROOT_EMAIL, $project = MainProject)
     {
         global $MainProjects;
         $sujet = "$project Data Access";

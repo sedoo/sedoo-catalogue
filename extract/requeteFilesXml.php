@@ -6,15 +6,15 @@ require_once('conf/conf.php');
 class requeteFilesXml
 {
 
-    var $projectName;
-    var $user;
-    var $compression;
-    var $dataset;
-    var $racine;
-    var $files;
+    public $projectName;
+    public $user;
+    public $compression;
+    public $dataset;
+    public $racine;
+    public $files;
     
 
-    function requeteFilesXml($user, $projectName, $dataset, $racine)
+    public function requeteFilesXml($user, $projectName, $dataset, $racine)
     {
         if ($projectName == 'Overall') {
             $this->projectName = MainProject;
@@ -28,12 +28,12 @@ class requeteFilesXml
         $this->files = array();
     }
     
-    function addFile($file)
+    public function addFile($file)
     {
         $this->files[] = $file;
     }
         
-    function toXml()
+    public function toXml()
     {
         $xml = simplexml_load_file(XML_FICHIERS_TEMPLATE);
 

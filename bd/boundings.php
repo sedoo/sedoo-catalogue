@@ -9,13 +9,13 @@ require_once "bd/bdConnect.php";
 
 class boundings
 {
-    var $bound_id;
-    var $west_bounding_coord;
-    var $east_bounding_coord;
-    var $north_bounding_coord;
-    var $south_bounding_coord;
+    public $bound_id;
+    public $west_bounding_coord;
+    public $east_bounding_coord;
+    public $north_bounding_coord;
+    public $south_bounding_coord;
 
-    function new_boundings($tab)
+    public function new_boundings($tab)
     {
         $this->bound_id = $tab[0];
         $this->west_bounding_coord = intCoord2double($tab[1]);
@@ -24,18 +24,18 @@ class boundings
         $this->south_bounding_coord = intCoord2double($tab[4]);
     }
 
-    function toString()
+    public function toString()
     {
         return 'west: ' . $this->west_bounding_coord . ', east: ' . $this->east_bounding_coord . ', north: ' . $this->north_bounding_coord . ', south: ' . $this->south_bounding_coord;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from boundings";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -48,7 +48,7 @@ class boundings
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new status_final();
@@ -63,7 +63,7 @@ class boundings
         return $boundings;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from boundings where " .
         "west_bounding_coord = " . doubleCoord2int($this->west_bounding_coord) . " and " .
@@ -78,7 +78,7 @@ class boundings
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from boundings where bound_id = " . $this->bound_id;
         $bd = new bdConnect();
@@ -92,7 +92,7 @@ class boundings
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (!$this->existe()) {
             $query = "insert into boundings (west_bounding_coord,east_bounding_coord," .

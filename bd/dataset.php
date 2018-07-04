@@ -31,83 +31,83 @@ require_once "sedoo-metadata/sedoo_metadata_utils.php";
 
 class dataset
 {
-    var $dats_id;
-    var $status_final_id;
-    var $status_progress_id;
-    var $database_id;
-    var $period_id;
-    var $data_policy_id;
-    var $bound_id;
-    var $org_id;
-    var $dats_title;
-    var $dats_pub_date;
-    var $dats_version;
-    var $dats_process_level;
-    var $dats_other_cit;
-    var $dats_abstract;
-    var $dats_purpose;
-    var $dats_elevation_min;
-    var $dats_elevation_max;
-    var $dats_date_begin;
-    var $dats_date_end;
-    var $dats_use_constraints;
-    var $dats_access_constraints;
-    var $dats_reference;
-    var $dats_quality;
-    var $status_final;
-    var $status_progress;
-    var $dats_doi;
-    var $boundings;
-    var $organism;
-    var $period;
-    var $database;
-    var $data_policy;
-    var $originators;
-    var $dats_originators;
-    var $data_formats;
-    var $required_data_formats;
-    var $dataset_types;
-    var $dats_sensors;
-    var $dats_variables;
-    var $sites;
-    var $dats_creator;
-    var $projects;
-    var $dats_date_end_not_planned;
-    var $is_requested;
-    var $is_archived;
-    var $dats_funding;
-    var $dats_dmetmaj;
-    var $code;
-    var $dats_uuid;
+    public $dats_id;
+    public $status_final_id;
+    public $status_progress_id;
+    public $database_id;
+    public $period_id;
+    public $data_policy_id;
+    public $bound_id;
+    public $org_id;
+    public $dats_title;
+    public $dats_pub_date;
+    public $dats_version;
+    public $dats_process_level;
+    public $dats_other_cit;
+    public $dats_abstract;
+    public $dats_purpose;
+    public $dats_elevation_min;
+    public $dats_elevation_max;
+    public $dats_date_begin;
+    public $dats_date_end;
+    public $dats_use_constraints;
+    public $dats_access_constraints;
+    public $dats_reference;
+    public $dats_quality;
+    public $status_final;
+    public $status_progress;
+    public $dats_doi;
+    public $boundings;
+    public $organism;
+    public $period;
+    public $database;
+    public $data_policy;
+    public $originators;
+    public $dats_originators;
+    public $data_formats;
+    public $required_data_formats;
+    public $dataset_types;
+    public $dats_sensors;
+    public $dats_variables;
+    public $sites;
+    public $dats_creator;
+    public $projects;
+    public $dats_date_end_not_planned;
+    public $is_requested;
+    public $is_archived;
+    public $dats_funding;
+    public $dats_dmetmaj;
+    public $code;
+    public $dats_uuid;
 
   // Pour l'affichage
-    var $nbPis;
-    var $nbSites;
-    var $nbVars;
-    var $nbCalcVars;
-    var $nbVarsReel;
-    var $nbCalcVarsReel;
-    var $nbFormats;
-    var $nbProj;
+    public $nbPis;
+    public $nbSites;
+    public $nbVars;
+    public $nbCalcVars;
+    public $nbVarsReel;
+    public $nbCalcVarsReel;
+    public $nbFormats;
+    public $nbProj;
   // add by lolo
-    var $nbSensors;
+    public $nbSensors;
 
   // add by Nizar
   // Used to count sites for VA dataset form
-    var $nbModForm;
-    var $nbInstruForm;
-    var $nbSatForm;
+    public $nbModForm;
+    public $nbInstruForm;
+    public $nbSatForm;
   // Used to count Sensors for VA dataset form
-    var $nbModFormSensor;
-    var $nbInstruFormSensor;
-    var $nbSatFormSensor;
-    var $image;
-    var $attFile;
+    public $nbModFormSensor;
+    public $nbInstruFormSensor;
+    public $nbSatFormSensor;
+    public $image;
+    public $attFile;
 
   // Connexion bd
-    var $bdConn;
+    public $bdConn;
 
-    function new_dataset($tab)
+    public function new_dataset($tab)
     {
         $this->dats_id = $tab[0];
         $this->status_final_id = $tab[1];
@@ -220,13 +220,13 @@ class dataset
         }
     }
 
-    function newDatasetOnlyTitle($tab)
+    public function newDatasetOnlyTitle($tab)
     {
         $this->dats_id = $tab[0];
         $this->dats_title = $tab[1];
     }
 
-    function getOnlyTitles($query)
+    public function getOnlyTitles($query)
     {
         $bd = new bdConnect();
 
@@ -240,7 +240,7 @@ class dataset
         return $liste;
     }
 
-    function toString()
+    public function toString()
     {
         $result = "Dataset id: " . $this->dats_id . "\n";
         $result .= 'Dataset title: ' . $this->dats_title . "\n";
@@ -329,20 +329,20 @@ class dataset
         return $result;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select dataset.* from dataset left join dats_type using (dats_id) left join dataset_type using (dats_type_id) order by dats_type_title desc,dats_title asc";
 
         return $this->getByQuery($query);
     }
 
-    function getAllSat()
+    public function getAllSat()
     {
         $query = "select * from dataset order by dats_title";
         return $this->getByQuery($query);
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new dataset();
@@ -357,7 +357,7 @@ class dataset
         }
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
 
@@ -371,7 +371,7 @@ class dataset
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from dataset where " . "lower(dats_title) = lower('" . (str_replace("'", "\'", $this->dats_title)) . "')";
         $bd = new bdConnect();
@@ -382,7 +382,7 @@ class dataset
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from dataset where dats_id = " . $this->dats_id;
         $bd = new bdConnect();
@@ -393,29 +393,29 @@ class dataset
         return false;
     }
 
-    function isSatelliteDataset()
+    public function isSatelliteDataset()
     {
         return $this->datasetTypeEquals('SATELLITE');
     }
 
-    function isModelDataset()
+    public function isModelDataset()
     {
         return $this->datasetTypeEquals('MODEL');
     }
 
-    function isValueAddedDataset()
+    public function isValueAddedDataset()
     {
         return $this->datasetTypeEquals('VALUE-ADDED DATASET');
     }
 
-    function isInsertedDataset()
+    public function isInsertedDataset()
     {
         $bd = new bdConnect();
         $query = "SELECT * FROM dats_data WHERE dats_id = " . $this->dats_id . " LIMIT 1";
         return ($resultat = $bd->get_data($query));
     }
 
-    function datasetTypeEquals($type)
+    public function datasetTypeEquals($type)
     {
         if (isset($this->dataset_types) && !empty($this->dataset_types)) {
             $dtype = new dataset_type();
@@ -429,7 +429,7 @@ class dataset
         return false;
     }
 
-    function update()
+    public function update()
     {
         $this->bdConn = new bdConnect();
         $this->bdConn->db_open();
@@ -638,7 +638,7 @@ class dataset
         }
     }
 
-    function insert()
+    public function insert()
     {
         $this->bdConn = new bdConnect();
         $this->bdConn->db_open();
@@ -800,12 +800,12 @@ class dataset
         }
     }
 
-    function sendMailErreur(Exception $e)
+    public function sendMailErreur(Exception $e)
     {
         sendMail(Portal_Contact_Email, '[' . MainProject . '] Catalogue - Erreur', $e->getMessage() . "\n\n" . $this->toString(), $this->image);
     }
 
-    function sendMailDataset()
+    public function sendMailDataset()
     {
         $fichePdf = fiche2pdf($this->dats_id, true);
         sendMail(Portal_Contact_Email, '[' . MainProject . '] Catalogue - Dataset ok', $this->toString(), array(
@@ -814,7 +814,7 @@ class dataset
         ));
     }
 
-    function insert_dataset_types()
+    public function insert_dataset_types()
     {
         if (isset($this->dataset_types) && !empty($this->dataset_types)) {
             for ($i = 0; $i < count($this->dataset_types); $i++) {
@@ -833,7 +833,7 @@ class dataset
         }
     }
 
-    function insert_data_formats()
+    public function insert_data_formats()
     {
         for ($i = 0; $i < count($this->data_formats); $i++) {
             if ($this->data_formats[$i]->data_format_id != -1) {
@@ -861,7 +861,7 @@ class dataset
     }
 
   // modif by lolo
-    function insert_dats_var()
+    public function insert_dats_var()
     {
         for ($i = 0; $i < count($this->dats_variables); $i++) {
             if (isset($this->dats_variables[$i]->unit) && $this->dats_variables[$i]->unit_id == 0) {
@@ -890,7 +890,7 @@ class dataset
         }
     }
 
-    function insert_dats_originators()
+    public function insert_dats_originators()
     {
         for ($i = 0; $i < count($this->originators); $i++) {
             $do = new dats_originator();
@@ -903,7 +903,7 @@ class dataset
         }
     }
 
-    function insert_originators()
+    public function insert_originators()
     {
         for ($i = 0; $i < count($this->originators); $i++) {
             if ($this->originators[$i]->pers_id == 0) {
@@ -913,7 +913,7 @@ class dataset
     }
 
   // modif by lolo
-    function insert_sensor_places()
+    public function insert_sensor_places()
     {
         if ($this->isSatelliteDataset() || $this->isModelDataset()) {
             $this->insert_sensor_places_satmod();
@@ -952,7 +952,7 @@ class dataset
         }
     }
 
-    function insert_sensor_places_satmod()
+    public function insert_sensor_places_satmod()
     {
         for ($i = 1; $i < count($this->sites); $i++) {
             if ($this->sites[$i]->place_id != -1 && $this->dats_sensors[$i - 1]->sensor->sensor_id != -1 && strlen($this->sites[$i]->place_id) > 0 && strlen($this->dats_sensors[$i - 1]->sensor->sensor_id) > 0) {
@@ -965,7 +965,7 @@ class dataset
     }
 
   // add by nizar
-    function insert_sensor_places_Vadataset()
+    public function insert_sensor_places_Vadataset()
     {
         for ($i = 0; $i < count($this->dats_sensors); $i++) {
             if ($this->sites[$i]->place_id != -1 && $this->dats_sensors[$i]->sensor->sensor_id != -1 && strlen($this->sites[$i]->place_id) > 0 && strlen($this->dats_sensors[$i]->sensor->sensor_id) > 0) {
@@ -988,7 +988,7 @@ class dataset
     }
 
   // modif by lolo, plusieurs sensors
-    function insert_sensor_vars()
+    public function insert_sensor_vars()
     {
         for ($i = 0; $i < count($this->dats_sensors); $i++) {
             if ($this->dats_sensors[$i]->sensor->sensor_id > 0) {
@@ -1005,7 +1005,7 @@ class dataset
 
   // 1 seul, ben non, plusieurs !
   // modif by lolo
-    function insert_sensors()
+    public function insert_sensors()
     {
         for ($i = 0; $i < count($this->dats_sensors); $i++) {
             if (isset($this->dats_sensors[$i])) {
@@ -1022,7 +1022,7 @@ class dataset
         }
     }
 
-    function insert_sites()
+    public function insert_sites()
     {
         for ($i = 0; $i < count($this->sites); $i++) {
             if (isset($this->sites[$i]->place_id) && $this->sites[$i]->place_id == 0 && strlen($this->sites[$i]->place_id) > 0) {
@@ -1058,7 +1058,7 @@ class dataset
         }
     }
 
-    function insert_projects()
+    public function insert_projects()
     {
         for ($i = 0; $i < count($this->projects); $i++) {
             if ($this->projects[$i]->project_id != 0) {
@@ -1070,7 +1070,7 @@ class dataset
         }
     }
 
-    function insert_data_policy()
+    public function insert_data_policy()
     {
         if (isset($this->data_policy) && $this->data_policy->data_policy_id == 0) {
             $this->data_policy->insert($this->bdConn);
@@ -1078,7 +1078,7 @@ class dataset
         }
     }
 
-    function insert_database()
+    public function insert_database()
     {
         if (isset($this->database) && $this->database->database_id == 0) {
             $this->database->insert($this->bdConn);
@@ -1087,13 +1087,13 @@ class dataset
         }
     }
 
-    function get_dats_originators()
+    public function get_dats_originators()
     {
         $pers = new dats_originator();
         $this->dats_originators = $pers->getByDataset($this->dats_id);
     }
 
-    function get_originators()
+    public function get_originators()
     {
         $query = "select * from personne inner join dats_originators using (pers_id) where dats_id = " . $this->dats_id;
 
@@ -1103,14 +1103,14 @@ class dataset
         $this->nbPis = count($this->originators);
     }
 
-    function get_required_data_formats()
+    public function get_required_data_formats()
     {
         $query = "select * from data_format where data_format_id in " . "(select distinct data_format_id from dats_required_data_format where dats_id = " . $this->dats_id . ")";
         $dformat = new data_format();
         $this->required_data_formats = $dformat->getByQuery($query);
     }
 
-    function get_data_formats()
+    public function get_data_formats()
     {
         $query = "select * from data_format where data_format_id in " . "(select distinct data_format_id from dats_data_format where dats_id = " . $this->dats_id . ")";
         $dformat = new data_format();
@@ -1119,14 +1119,14 @@ class dataset
         $this->nbFormats = count($this->data_formats);
     }
 
-    function get_dataset_types()
+    public function get_dataset_types()
     {
         $query = "select * from dataset_type where dats_type_id in " . "(select distinct dats_type_id from dats_type where dats_id = " . $this->dats_id . ")";
         $dtype = new dataset_type();
         $this->dataset_types = $dtype->getByQuery($query);
     }
 
-    function get_projects()
+    public function get_projects()
     {
         $query = "select * from project where project_id in " . "(select distinct project_id from dats_proj where dats_id = " . $this->dats_id . ")";
         $proj = new project();
@@ -1135,7 +1135,7 @@ class dataset
         $this->nbProj = count($this->projects);
     }
 
-    function get_dats_sensors()
+    public function get_dats_sensors()
     {
         if ($this->isSatelliteDataset()) {
             $this->get_dats_sensors_sat();
@@ -1177,7 +1177,7 @@ class dataset
         }
     }
 
-    function get_dats_sensors_sat()
+    public function get_dats_sensors_sat()
     {
         $query = "SELECT * FROM dats_sensor LEFT JOIN sensor_place USING (sensor_id) WHERE dats_id = " . $this->dats_id . " ORDER BY place_id";
 
@@ -1185,7 +1185,7 @@ class dataset
         $this->dats_sensors = $dats_sensor->getByQuery($query);
     }
 
-    function get_sites_sat()
+    public function get_sites_sat()
     {
 
         $query = "select * from place where place_id in (select place_id from dats_place where dats_id = " . $this->dats_id . ") and gcmd_plat_id in (select gcmd_plat_id from gcmd_plateform_keyword where gcmd_plat_name ilike 'Geographic Regions')";
@@ -1205,7 +1205,7 @@ class dataset
         }
     }
 
-    function get_sites()
+    public function get_sites()
     {
         if ($this->isSatelliteDataset()) {
             $this->get_sites_sat();
@@ -1255,7 +1255,7 @@ class dataset
     }
 
   // modif by lolo
-    function get_sensor_environments()
+    public function get_sensor_environments()
     {
         for ($i = 0; $i < count($this->dats_sensors); $i++) {
             if ($this->dats_sensors[$i]->sensor->sensor_id > 0) {
@@ -1281,7 +1281,7 @@ class dataset
     }
 
   // modif by lolo
-    function get_sensor_vars()
+    public function get_sensor_vars()
     {
         for ($i = 0; $i < count($this->dats_sensors); $i++) {
             if ($this->dats_sensors[$i]->sensor->sensor_id > 0) {
@@ -1311,7 +1311,7 @@ class dataset
         }
     }
 
-    function get_dats_variables()
+    public function get_dats_variables()
     {
         $query = "select * from dats_var where dats_id = " . $this->dats_id;
         $dats_var = new dats_var();
@@ -1329,7 +1329,7 @@ class dataset
         }
     }
 
-    function set_requested($requested)
+    public function set_requested($requested)
     {
         if ($requested) {
             $query = "update dataset set is_requested = true where dats_id = " . $this->dats_id;

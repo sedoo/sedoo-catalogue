@@ -11,20 +11,20 @@ require_once "bd/sensor.php";
 
 class sensor_place
 {
-    var $place_id;
-    var $sensor_id;
-    var $environment;
-    var $place;
-    var $sensor;
+    public $place_id;
+    public $sensor_id;
+    public $environment;
+    public $place;
+    public $sensor;
 
-    function new_sensor_place($tab)
+    public function new_sensor_place($tab)
     {
         $this->sensor_id = $tab[0];
         $this->place_id = $tab[1];
         $this->environment = $tab[2];
     }
 
-    function getPlace()
+    public function getPlace()
     {
         if (isset($this->place_id) && !empty($this->place_id)) {
             $place = new place();
@@ -32,7 +32,7 @@ class sensor_place
         }
     }
 
-    function getSensor()
+    public function getSensor()
     {
         if (isset($this->sensor_id) && !empty($this->sensor_id)) {
             $sensor = new sensor();
@@ -40,13 +40,13 @@ class sensor_place
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from sensor_place";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -59,7 +59,7 @@ class sensor_place
         return $liste;
     }
 
-    function getByIds($p_id, $s_id)
+    public function getByIds($p_id, $s_id)
     {
         $query = "select * from sensor_place where place_id = " . $p_id . " and sensor_id = " . $s_id;
         $liste = $this->getByQuery($query);
@@ -70,7 +70,7 @@ class sensor_place
         }
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from sensor_place where " .
         "sensor_id = " . $this->sensor_id . " and place_id = " . $this->place_id;
@@ -83,7 +83,7 @@ class sensor_place
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (!$this->existe()) {
             $query_insert = "insert into sensor_place (sensor_id,place_id";
@@ -99,7 +99,7 @@ class sensor_place
         }
     }
 
-    function updateByDatsPlaceID($dats_id, $old_place_id, $place_id)
+    public function updateByDatsPlaceID($dats_id, $old_place_id, $place_id)
     {
         $query_update = "update sensor_place set place_id = '.$place_id.' where sensor_id in (select sensor_id from sensor left join dats_sensor using (sensor_id) where dats_id = '.$dats_id.' and place_id='.$old_place_id.')";
         $bd = new bdConnect();

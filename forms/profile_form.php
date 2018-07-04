@@ -7,7 +7,7 @@ require_once "conf/conf.php";
 class profile_form extends login_form
 {
 
-    function createForm()
+    public function createForm()
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -19,7 +19,7 @@ class profile_form extends login_form
         }
     }
     
-    function changeMail()
+    public function changeMail()
     {
         $ldapConn = new ldapConnect();
         $newmail = $this->exportValue('new_mail');
@@ -40,7 +40,7 @@ class profile_form extends login_form
         }
     }
     
-    function changePassword($project)
+    public function changePassword($project)
     {
         global $project_name;
         $ldapConn = new ldapConnect();
@@ -72,7 +72,7 @@ class profile_form extends login_form
         }
     }
     
-    function createChangeEmailForm()
+    public function createChangeEmailForm()
     {
         $this->registerRule('not_in_directory', 'function', 'not_in_directory');
         $this->addElement('text', 'new_mail', 'New Mail');
@@ -83,7 +83,7 @@ class profile_form extends login_form
         $this->addElement('submit', 'bouton_change_mail', 'Ok');
     }
     
-    function createChangePasswordForm()
+    public function createChangePasswordForm()
     {
         $this->addElement('password', 'password_1', 'New Password');
         $this->applyFilter('password_1', 'trim');
@@ -99,7 +99,7 @@ class profile_form extends login_form
         $this->addElement('submit', 'bouton_change_password', 'Ok');
     }
     
-    function displayProfile()
+    public function displayProfile()
     {
         global $project_name, $MainProjects;
         echo '<table>';
@@ -148,7 +148,7 @@ class profile_form extends login_form
         echo "</table>";
     }
     
-    function displayChangePasswordForm()
+    public function displayChangePasswordForm()
     {
       // Affichage des erreurs
         if (!empty($this->_errors)) {
@@ -166,7 +166,7 @@ class profile_form extends login_form
         echo '</form>';
     }
     
-    function displayChangeEmailForm()
+    public function displayChangeEmailForm()
     {
       // Affichage des erreurs
         if (!empty($this->_errors)) {

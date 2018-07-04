@@ -7,11 +7,11 @@ require_once 'scripts/filtreProjets.php';
 class journal_form extends login_form
 {
 
-    var $journal;
-    var $filterUser;
-    var $projectName;
+    public $journal;
+    public $filterUser;
+    public $projectName;
     
-    function createForm($filterUser = false, $typeJournal = 0)
+    public function createForm($filterUser = false, $typeJournal = 0)
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -26,7 +26,7 @@ class journal_form extends login_form
         }
     }
     
-    function createAddForm($typeJournal = 0)
+    public function createAddForm($typeJournal = 0)
     {
         $this->addElement('textarea', 'comment', 'Comment', array(
         'cols' => 40,
@@ -82,12 +82,12 @@ class journal_form extends login_form
         $this->addElement('submit', 'bouton_add', 'Add');
     }
     
-    function resetAddForm()
+    public function resetAddForm()
     {
         $this->getElement('comment')->setValue(null);
     }
     
-    function readJournal($type, $filter = false)
+    public function readJournal($type, $filter = false)
     {
         $this->journal = new journal();
         if ($filter) {
@@ -97,13 +97,13 @@ class journal_form extends login_form
         }
     }
     
-    function addEntry()
+    public function addEntry()
     {
         $public = ($_POST['type_journal'] != TYPE_CHANGES);
         return journal::addNews($this->user->mail, $_POST['dataset'], $_POST['comment'], $_POST['type_journal'], $public, $this->projectName);
     }
     
-    function displayAddForm($typeJournal = 0)
+    public function displayAddForm($typeJournal = 0)
     {
         echo "<h1>Journal - New entry</h1>";
 
@@ -136,13 +136,13 @@ class journal_form extends login_form
         echo '</form>';
     }
     
-    function addAbo()
+    public function addAbo()
     {
         $dats_id = $_POST['dataset'];
         journal::addAboEntry($this->user->mail, $dats_id);
     }
     
-    function deleteAbo($id)
+    public function deleteAbo($id)
     {
         journal::deleteAbo($id, $this->user->mail);
     }
@@ -150,7 +150,7 @@ class journal_form extends login_form
   /**
    * @param string $proj 'SELECT project_id FROM project'
    */
-    function displayListAbo($proj)
+    public function displayListAbo($proj)
     {
         echo "<h1>Email notifications</h1>";
         $liste = new journal();
@@ -204,7 +204,7 @@ class journal_form extends login_form
   /**
    * @param string $proj 'SELECT project_id FROM project'
    */
-    function displayListDl($proj)
+    public function displayListDl($proj)
     {
         echo "<h1>Download history</h1>";
         $liste = new journal();
@@ -236,7 +236,7 @@ class journal_form extends login_form
         echo '</table>';
     }
     
-    function displayChanges()
+    public function displayChanges()
     {
         echo "<h1>Changes</h1>";
         $liste = new journal();
@@ -251,7 +251,7 @@ class journal_form extends login_form
         echo '</table>';
     }
     
-    function displayListNewData($proj)
+    public function displayListNewData($proj)
     {
         echo "<h1>Updates</h1>";
         $liste = new journal();
@@ -268,7 +268,7 @@ class journal_form extends login_form
         echo '</table>';
     }
     
-    function displayList($type = 0)
+    public function displayList($type = 0)
     {
         if ($type == TYPE_ABO) {
             $this->displayListAbo(get_filtre_projets($this->projectName));

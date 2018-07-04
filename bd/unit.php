@@ -10,18 +10,18 @@ require_once "bd/bdConnect.php";
 
 class unit
 {
-    var $unit_id;
-    var $unit_code;
-    var $unit_name;
+    public $unit_id;
+    public $unit_code;
+    public $unit_name;
 
-    function new_unit($tab)
+    public function new_unit($tab)
     {
         $this->unit_id = $tab[0];
         $this->unit_code = $tab[1];
         $this->unit_name = $tab[2];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from unit order by unit_name";
         $bd = new bdConnect();
@@ -35,7 +35,7 @@ class unit
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new unit();
@@ -50,7 +50,7 @@ class unit
         return $per;
     }
 
-    function getByCode($code)
+    public function getByCode($code)
     {
         $query = "select * from unit where lower(unit_code) = '" . strtolower($code) . "'";
         $unit = null;
@@ -62,7 +62,7 @@ class unit
         return $unit;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -75,7 +75,7 @@ class unit
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from unit where " .
         "lower(unit_name) = lower('" . (str_replace("'", "\'", $this->unit_name)) . "')";
@@ -87,7 +87,7 @@ class unit
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from unit where unit_id = " . $this->unit_id;
         $bd = new bdConnect();
@@ -98,12 +98,12 @@ class unit
         return false;
     }
 
-    function toString()
+    public function toString()
     {
         return $this->unit_name . (($this->unit_code) ? ' - ' . $this->unit_code : '');
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
 
         if (!$this->existe()) {
@@ -123,7 +123,7 @@ class unit
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre, $indice, $type)
+    public function chargeForm($form, $label, $titre, $indice, $type)
     {
 
         $liste = $this->getAll();

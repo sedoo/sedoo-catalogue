@@ -7,15 +7,15 @@ class projectUser extends portalUser
 {
 
   // TODO ajout attribut status (pending, registered, rejected)
-    var $proj_name;
-    var $status;
-    var $applicationDate;
-    var $registrationDate;
-    var $associatedProject;
-    var $wg;
-    var $abstract;
+    public $proj_name;
+    public $status;
+    public $applicationDate;
+    public $registrationDate;
+    public $associatedProject;
+    public $wg;
+    public $abstract;
 
-    function __construct($dn = null, $attrs = null, $proj)
+    public function __construct($dn = null, $attrs = null, $proj)
     {
         parent::__construct($dn, $attrs);
         $this->proj_name = $proj;
@@ -24,7 +24,7 @@ class projectUser extends portalUser
         }
     }
     
-    function initProjectUser($attrs)
+    public function initProjectUser($attrs)
     {
         $this->applicationDate = $attrs[strtolower($this->proj_name) . "ApplicationDate"][0];
         if ($attrs[strtolower($this->proj_name) . "Status"]) {
@@ -49,7 +49,7 @@ class projectUser extends portalUser
   /*
    * Retourne un tableau contenant tous les attributs d'un utilisateur non enregistré.
    */
-    function getProjectUserEntry()
+    public function getProjectUserEntry()
     {
         $entree = $this->getUserEntry();
         $entree["objectClass"][] = strtolower($this->proj_name) . 'User';
@@ -70,7 +70,7 @@ class projectUser extends portalUser
   /*
    * Retourne un tableau contenant tous les attributs d'un utilisateur enregistré.
    */
-    function getProjectRegisteredUserEntry()
+    public function getProjectRegisteredUserEntry()
     {
         $entree = $this->getRegisteredUserEntry();
         $entree["objectClass"][] = strtolower($this->proj_name) . 'User';
@@ -83,7 +83,7 @@ class projectUser extends portalUser
         return $entree;
     }
     
-    function toString($withDn = false)
+    public function toString($withDn = false)
     {
         $result = parent::toString($withDn);
         if (isset($this->wg) && !empty($this->wg)) {
@@ -103,7 +103,7 @@ class projectUser extends portalUser
         return $result;
     }
     
-    function isProjectAdmin()
+    public function isProjectAdmin()
     {
         global $project_name, $MainProjects;
         if (in_array($project_name, $MainProjects)) {

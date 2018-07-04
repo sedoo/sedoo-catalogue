@@ -5,7 +5,7 @@ require_once "forms/base_form.php";
 class mod_va_form extends base_form
 {
 
-    function createForm()
+    public function createForm()
     {
         $this->createFormBase();
         $this->addElement('reset', 'reset', 'Reset');
@@ -80,18 +80,18 @@ class mod_va_form extends base_form
         $this->addElement('submit', 'bouton_add_projet', 'Add a project', array('onclick' => "document.getElementById('frmmodva').action += '#a_general'"));
     }
 
-    function addProjet()
+    public function addProjet()
     {
         $this->createFormProject($this->dataset->nbProj - 1);
     }
 
-    function addVariableMod($nb_variable)
+    public function addVariableMod($nb_variable)
     {
         $this->addVariable($nb_variable);
         $this->getElement('methode_acq_' . ($nb_variable - 1))->setLabel("Parameter processing related information");
     }
 
-    function initForm()
+    public function initForm()
     {
         $this->initFormBase();
 
@@ -130,7 +130,7 @@ class mod_va_form extends base_form
         }
     }
 
-    function saveForm()
+    public function saveForm()
     {
 
         $this->saveFormBase();
@@ -170,7 +170,7 @@ class mod_va_form extends base_form
         $this->dataset->required_data_formats[0]->data_format_id = $this->exportValue('required_data_format');
     }
 
-    function addValidationRules()
+    public function addValidationRules()
     {
         $this->registerRule('validDate', 'function', 'validDate');
         $this->registerRule('validPeriod', 'function', 'validPeriod');
@@ -280,23 +280,23 @@ class mod_va_form extends base_form
         }
     }
 
-    function displayErrorsCoverage()
+    public function displayErrorsCoverage()
     {
         $this->displayErrors(array('dats_date_begin', 'dats_date_end', 'area', 'sensor_resol_temp',
         'west_bound_0', 'east_bound_0', 'north_bound_0', 'south_bound_0', 'place_alt_min_0', 'place_alt_max_0'));
     }
 
-    function displayErrorsModel()
+    public function displayErrorsModel()
     {
         $this->displayErrors(array('model', 'new_model', 'simu', 'new_simu'));
     }
 
-    function displayErrorsModDataDescr()
+    public function displayErrorsModDataDescr()
     {
         $this->displayErrors(array('dats_title'));
     }
 
-    function displayForm()
+    public function displayForm()
     {
         $this->addValidationRules();
         $this->initForm();

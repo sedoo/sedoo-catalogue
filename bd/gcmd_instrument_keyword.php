@@ -9,17 +9,17 @@ require_once "bd/bdConnect.php";
 
 class gcmd_instrument_keyword
 {
-    var $gcmd_sensor_id;
-    var $gcmd_sensor_name;
-    var $gcm_gcmd_id;
-    var $gcmd_level;
-    var $thesaurus_id;
-    var $uid;
+    public $gcmd_sensor_id;
+    public $gcmd_sensor_name;
+    public $gcm_gcmd_id;
+    public $gcmd_level;
+    public $thesaurus_id;
+    public $uid;
 
-    var $gcmd_parent;
-    var $enfants;
+    public $gcmd_parent;
+    public $enfants;
 
-    function new_gcmd_instrument_keyword($tab)
+    public function new_gcmd_instrument_keyword($tab)
     {
         $this->gcmd_sensor_id = $tab[0];
         $this->gcmd_sensor_name = $tab[1];
@@ -33,7 +33,7 @@ class gcmd_instrument_keyword
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from gcmd_instrument_keyword order by gcmd_sensor_name";
         $bd = new bdConnect();
@@ -47,7 +47,7 @@ class gcmd_instrument_keyword
         return $liste;
     }
 
-    function getChildren($recursive = false)
+    public function getChildren($recursive = false)
     {
         $liste = array();
         $this->readChildren($liste, $recursive);
@@ -66,7 +66,7 @@ class gcmd_instrument_keyword
         }
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new gcmd_instrument_keyword();
@@ -82,7 +82,7 @@ class gcmd_instrument_keyword
         return $gcmd_instrument_keyword;
     }
 
-    function getByName($name)
+    public function getByName($name)
     {
         $query = "select * from gcmd_instrument_keyword where lower(gcmd_sensor_name) = '" . strtolower($name) . "'";
 
@@ -95,7 +95,7 @@ class gcmd_instrument_keyword
         return $gcmd_sensor_keyword;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -108,7 +108,7 @@ class gcmd_instrument_keyword
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from gcmd_instrument_keyword where " .
         "lower(gcmd_sensor_name) = lower('" . (str_replace("'", "\'", $this->gcmd_sensor_name)) . "')";
@@ -120,7 +120,7 @@ class gcmd_instrument_keyword
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from gcmd_instrument_keyword where gcmd_sensor_id = " . $this->gcmd_sensor_id;
         $bd = new bdConnect();
@@ -131,7 +131,7 @@ class gcmd_instrument_keyword
         return false;
     }
 
-    function insert()
+    public function insert()
     {
         $query = "insert into gcmd_instrument_keyword ('gcmd_sensor_name') " .
         "values ('" . str_replace("'", "\'", $this->gcmd_sensor_name) . "')";
@@ -140,7 +140,7 @@ class gcmd_instrument_keyword
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAll();
@@ -154,7 +154,7 @@ class gcmd_instrument_keyword
         return $s;
     }
 
-    function chargeFormVadataset($form, $label, $titre)
+    public function chargeFormVadataset($form, $label, $titre)
     {
 
         $liste = $this->getAll();
@@ -167,7 +167,7 @@ class gcmd_instrument_keyword
         return $s;
     }
 
-    function chargeFormInstr($form, $label, $titre)
+    public function chargeFormInstr($form, $label, $titre)
     {
         $array_topic[0] = "-- Level 1 --";
         $array_categorie[0][0] = "-- Level 2 --";
