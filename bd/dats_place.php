@@ -16,7 +16,7 @@ class dats_place
     public $dataset;
     public $place;
 
-    function new_dats_place($tab)
+    public function new_dats_place($tab)
     {
         $this->dats_id = $tab[0];
         $this->place_id = $tab[1];
@@ -30,13 +30,13 @@ class dats_place
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from dats_place order by dats_id";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -49,7 +49,7 @@ class dats_place
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from dats_place where " .
         "dats_id = " . $this->dats_id . " and place_id = " . $this->place_id;
@@ -60,7 +60,7 @@ class dats_place
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (!$this->existe()) {
             $query = "insert into dats_place (dats_id,place_id) " .

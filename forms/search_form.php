@@ -32,7 +32,7 @@ class search_form extends HTML_QuickForm
     public $filter_data;
     public $filter_data_db;
 
-    function createForm($projectName)
+    public function createForm($projectName)
     {
         global $project_name;
         if (!isset($projectName)) {
@@ -58,7 +58,7 @@ class search_form extends HTML_QuickForm
         $this->addElement('submit', 'bouton_search', 'search');
     }
     
-    function createFormOrderBy()
+    public function createFormOrderBy()
     {
         $order_by[] = &HTML_QuickForm::createElement('radio', null, null, ' By instruments', '1');
         $order_by[] = &HTML_QuickForm::createElement('radio', null, null, ' By platform types', '2');
@@ -68,7 +68,7 @@ class search_form extends HTML_QuickForm
         $this->setDefaults($defaultValues);
     }
     
-    function createFormFilterData()
+    public function createFormFilterData()
     {
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
@@ -77,7 +77,7 @@ class search_form extends HTML_QuickForm
         $this->setDefaults($defaultValues);
     }
     
-    function createFormFilterDataDb()
+    public function createFormFilterDataDb()
     {
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;yes', 1);
         $options[] = &HTML_QuickForm::createElement('radio', null, null, '&nbsp;no', 0);
@@ -86,21 +86,21 @@ class search_form extends HTML_QuickForm
         $this->setDefaults($defaultValues);
     }
     
-    function createFormVariable()
+    public function createFormVariable()
     {
         $key = new gcmd_science_keyword();
         $key_select = $key->chargeForm($this, 'gcmd_science_key', 'Parameter keyword');
         $this->addElement($key_select);
     }
     
-    function createFormInstrumentType()
+    public function createFormInstrumentType()
     {
         $key = new gcmd_instrument_keyword();
         $key_select = $key->chargeForm($this, 'sensor_gcmd', 'Instrument type');
         $this->addElement($key_select);
     }
     
-    function createFormPeriode()
+    public function createFormPeriode()
     {
         $key = new period();
         $key_select = $key->chargeFormWithDates($this, 'period', 'Period');
@@ -115,7 +115,7 @@ class search_form extends HTML_QuickForm
         ));
     }
     
-    function createFormMap()
+    public function createFormMap()
     {
 
         $this->addElement('hidden', 'minLat', MAP_DEFAULT_LAT_MIN);
@@ -180,7 +180,7 @@ class search_form extends HTML_QuickForm
         ));
     }
     
-    function addValidationRules()
+    public function addValidationRules()
     {
         $this->registerRule('validDate', 'function', 'validDate');
         $this->registerRule('validPeriod', 'function', 'validPeriod');
@@ -252,7 +252,7 @@ class search_form extends HTML_QuickForm
         ));
     }
     
-    function displayForm()
+    public function displayForm()
     {
         $this->addValidationRules();
         DatePickerUtils::addScriptPeriod('date_begin', 'date_end');
@@ -357,7 +357,7 @@ class search_form extends HTML_QuickForm
         echo '</form>';
     }
     
-    function saveForm()
+    public function saveForm()
     {
         $keys = $this->exportValue('keywords');
         if (isset($keys) && !empty($keys)) {
@@ -392,7 +392,7 @@ class search_form extends HTML_QuickForm
         $_SESSION['requete_search_form'] = serialize($this);
     }
     
-    function deg2Double($deg, $min, $sec)
+    public function deg2Double($deg, $min, $sec)
     {
         if ($deg == "") {
             $deg = 0;

@@ -12,11 +12,11 @@ class metadata
     public $array_variable;
     public $array_variable2;
 
-  /*function __construct(){
+  /*public function __construct(){
   $this->loadGCMDScienceKeywords();
   }*/
 
-    function loadGCMDScienceKeywords()
+    public function loadGCMDScienceKeywords()
     {
         $this->$array_topic[0] = "-- Topic --";
         $this->$array_categorie[0][0] = "-- Term --";

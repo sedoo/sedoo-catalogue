@@ -16,7 +16,7 @@ class dats_role
     public $dataset;
     public $role;
 
-    function new_dats_role($tab)
+    public function new_dats_role($tab)
     {
         $this->dats_id = $tab[0];
         $this->role_id = $tab[1];
@@ -30,19 +30,19 @@ class dats_role
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from dats_role order by dats_id";
         return $this->getByQuery($query);
     }
 
-    function getByDataset($datsId)
+    public function getByDataset($datsId)
     {
         $query = "select * from dats_role where dats_id = $datsId";
         return $this->getByQuery($query);
     }
 
-    static function deleteRoles(&$bd, $dats_id)
+    public static function deleteRoles(&$bd, $dats_id)
     {
         $query = "delete from dats_role where dats_id = $dats_id;";
         echo $query . '<br>';
@@ -50,7 +50,7 @@ class dats_role
         return true;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -63,7 +63,7 @@ class dats_role
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from dats_role where " .
         "dats_id = " . $this->dats_id . " and role_id = " . $this->role_id;
@@ -75,7 +75,7 @@ class dats_role
         return false;
     }
 
-    function insert()
+    public function insert()
     {
         $query = "insert into dats_role (dats_id,role_id) " .
         "values (" . $this->dats_id . "," . $this->role_id . ")";
@@ -83,7 +83,7 @@ class dats_role
         $bd->insert($query);
     }
 
-    static function addDatsRole(&$bd, $datsId, $roleId)
+    public static function addDatsRole(&$bd, $datsId, $roleId)
     {
         $queryExists = "select * from dats_role where role_id = $roleId and dats_id = $datsId;";
         if ($resultat = $bd->get_data($queryExists)) {

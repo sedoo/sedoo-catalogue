@@ -10,7 +10,7 @@ require_once "forms/base_form.php";
 class instrument_form extends base_form
 {
 
-    function createForm()
+    public function createForm()
     {
         global $project_name;
         $this->createFormBase();
@@ -40,7 +40,7 @@ class instrument_form extends base_form
         $this->addElement('submit', 'bouton_save', 'Save');
     }
 
-    function createFormManufacturer()
+    public function createFormManufacturer()
     {
         $man = new manufacturer();
         $man_select = $man->chargeForm($this, 'manufacturer', 'Manufacturer');
@@ -49,7 +49,7 @@ class instrument_form extends base_form
         $this->addElement('text', 'new_manufacturer_url', 'Manufacturer web site');
     }
 
-    function createFormSite($i)
+    public function createFormSite($i)
     {
 
         $location = new gcmd_location_keyword();
@@ -71,7 +71,7 @@ class instrument_form extends base_form
         $this->applyFilter('sensor_environment_' . $i, 'trim');
     }
 
-    function createFormSensor()
+    public function createFormSensor()
     {
         $this->createFormManufacturer();
         $this->createFormSensorKeywords();
@@ -106,7 +106,7 @@ class instrument_form extends base_form
   /*
    * Ajoute aux éléments du formulaires des attributs et/ou des regles de validation en fonction de la valeur d'autres champs.
    */
-    function addValidationRules()
+    public function addValidationRules()
     {
 
         $this->addvalidationRulesBase();
@@ -182,7 +182,7 @@ class instrument_form extends base_form
         }
     }
 
-    function initForm()
+    public function initForm()
     {
         $dataset = &$this->dataset;
 
@@ -302,19 +302,19 @@ class instrument_form extends base_form
         }
     }
 
-    function displayErrorsInstru()
+    public function displayErrorsInstru()
     {
         $this->displayErrors(array('sensor_gcmd', 'new_manufacturer', 'new_manufacturer_url', 'sensor_model', 'sensor_calibration',
         'sensor_resol_temp', 'sensor_vert_resolution', 'sensor_lat_resolution', 'sensor_url', 'sensor_latitude', 'sensor_longitude', 'sensor_altitude'));
     }
 
-    function displayErrorsSite($i)
+    public function displayErrorsSite($i)
     {
         $this->displayErrors(array('gcmd_plat_key_' . $i, 'place_' . $i, 'new_place_' . $i, 'west_bound_' . $i, 'east_bound_' . $i, 'north_bound_' . $i,
         'south_bound_' . $i, 'place_alt_min_' . $i, 'place_alt_max_' . $i, 'sensor_environment_' . $i));
     }
 
-    function displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul)
+    public function displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul)
     {
         global $project_name;
         $this->addValidationRules();
@@ -523,7 +523,7 @@ class instrument_form extends base_form
         echo '</form>';
     }
 
-    function saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul)
+    public function saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul)
     {
         $dataset = &$this->dataset;
 
@@ -655,22 +655,22 @@ class instrument_form extends base_form
         $nb_vars = count($dataset->dats_variables);
     }
 
-    function addFormat()
+    public function addFormat()
     {
         $this->createFormDataFormat($this->dataset->nbFormats - 1);
     }
 
-    function addProjet()
+    public function addProjet()
     {
         $this->createFormProject($this->dataset->nbProj - 1);
     }
 
-    function addSite($nb_site)
+    public function addSite($nb_site)
     {
         $this->createFormSite($nb_site - 1);
     }
 
-    function addVariableCalcul($nb_variable)
+    public function addVariableCalcul($nb_variable)
     {
         $this->createFormVariable($nb_variable - 1, 'calcul');
     }

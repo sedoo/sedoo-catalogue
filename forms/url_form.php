@@ -17,7 +17,7 @@ class url_form extends login_form
     public $type;
     public $projectName;
 
-    function createForm($typeUrl, $projectName = MainProject)
+    public function createForm($typeUrl, $projectName = MainProject)
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -33,7 +33,7 @@ class url_form extends login_form
         }
     }
     
-    function createAddUrlForm()
+    public function createAddUrlForm()
     {
         $dts = new dataset();
         $where = '';
@@ -86,7 +86,7 @@ class url_form extends login_form
         }
     }
     
-    function displayUrls()
+    public function displayUrls()
     {
         if (isset($_POST['dataset']) && !empty($_POST['dataset'])) {
             $dats_id = $_POST['dataset'];
@@ -153,7 +153,7 @@ class url_form extends login_form
         }
     }
     
-    function createFormRoles()
+    public function createFormRoles()
     {
         $r = new role();
         $role_select = $r->chargeForm($this, 'roles', 'Roles');
@@ -162,7 +162,7 @@ class url_form extends login_form
         $this->addElement($role_select);
     }
     
-    function deleteUrl($id)
+    public function deleteUrl($id)
     {
         $bd = new bdConnect();
         $bd->db_open();
@@ -170,7 +170,7 @@ class url_form extends login_form
         $bd->db_close();
     }
     
-    function deleteUrls($id)
+    public function deleteUrls($id)
     {
         $bd = new bdConnect();
         $bd->db_open();
@@ -180,7 +180,7 @@ class url_form extends login_form
         $bd->db_close();
     }
     
-    function updateUrl($id)
+    public function updateUrl($id)
     {
         $url = $_POST['url_' . $id];
         if (isset($url) && !empty($url)) {
@@ -191,7 +191,7 @@ class url_form extends login_form
         }
     }
     
-    function updateRoles()
+    public function updateRoles()
     {
         $datsId = $_POST['dataset'];
         $selectedRoles = $this->getElement('roles')->getSelected();
@@ -216,7 +216,7 @@ class url_form extends login_form
         return true;
     }
     
-    function addUrl()
+    public function addUrl()
     {
         $emplacement = $_POST['emplacement'];
         $dats_id = $_POST['dataset'];
@@ -279,7 +279,7 @@ class url_form extends login_form
         return $retour;
     }
     
-    function displayAddURLForm()
+    public function displayAddURLForm()
     {
         $titre = "New URL";
         if (isset($_SERVER['REQUEST_URI']) && !empty($_SERVER['REQUEST_URI'])) {

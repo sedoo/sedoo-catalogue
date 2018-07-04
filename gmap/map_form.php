@@ -35,17 +35,17 @@ class map_form
         echo '}</script>';
     }
 
-    function displayDrawLink($txt = 'Locate on a map')
+    public function displayDrawLink($txt = 'Locate on a map')
     {
         echo '<a id="show_map_canvas" style="cursor: pointer;" onclick="draw();hideLink();">' . $txt . '<a/>';
     }
 
-    function displayMapDiv()
+    public function displayMapDiv()
     {
         echo '<a name="map"/><div id="map_canvas" ></div>';
     }
 
-    function drawStationsFromUrl($url)
+    public function drawStationsFromUrl($url)
     {
         if ($this->genScriptFromUrl($url)) {
             $this->displayDrawLink('Locate stations on a map');
@@ -53,7 +53,7 @@ class map_form
         }
     }
 
-    function genScriptFromUrl($url)
+    public function genScriptFromUrl($url)
     {
         if ((strpos($url, 'file://localhost' . MAP_PATH . '/') === 0)) {
             $file = str_replace('file://localhost', '', $url);
@@ -77,7 +77,7 @@ class map_form
    *
    * return true en cas de succès
    */
-    function genScriptFromSite($site, $mapFileUrl = null)
+    public function genScriptFromSite($site, $mapFileUrl = null)
     {
         $withBox = (isset($site->west_bounding_coord) && strlen($site->west_bounding_coord) > 0)
         || (isset($site->east_bounding_coord) && strlen($site->east_bounding_coord) > 0)
@@ -119,7 +119,7 @@ class map_form
         return false;
     }
 
-    function drawSite($site)
+    public function drawSite($site)
     {
 
         if ($this->genScriptFromSite($site)) {
@@ -128,7 +128,7 @@ class map_form
         }
     }
 
-    function genScriptFromSensors($sensors)
+    public function genScriptFromSensors($sensors)
     {
         $ret = false;
         if (isset($sensors) && count($sensors) > 0) {
@@ -142,7 +142,7 @@ class map_form
         return $ret;
     }
 
-    function genScriptFromSensor($sensor)
+    public function genScriptFromSensor($sensor)
     {
         return $this->genScriptFromSensors(array($sensor));
     }

@@ -10,12 +10,12 @@ require_once "HTML/QuickForm.php";
 class logout_form extends HTML_QuickForm
 {
 
-    function createForm()
+    public function createForm()
     {
         $this->addElement('submit', 'logout', 'logout');
     }
 
-    function displayForm($user, $project)
+    public function displayForm($user, $project)
     {
         global $project_name;
         echo '<form method="post" action="' . $_SERVER['REQUEST_URI'] . '" >';

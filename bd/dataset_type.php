@@ -20,14 +20,14 @@ class dataset_type
     public $dats_type_title;
     public $dats_type_desc;
 
-    function new_dataset_type($tab)
+    public function new_dataset_type($tab)
     {
         $this->dats_type_id = $tab[0];
         $this->dats_type_title = $tab[1];
         $this->dats_type_desc = $tab[2];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from dataset_type order by dats_type_title";
         $bd = new bdConnect();
@@ -41,7 +41,7 @@ class dataset_type
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new dataset_type();
@@ -56,7 +56,7 @@ class dataset_type
         return $dataset_type;
     }
 
-    function getByType($name)
+    public function getByType($name)
     {
         if (!isset($name) || empty($name)) {
             return new dataset_type();
@@ -71,7 +71,7 @@ class dataset_type
         return $dataset_type;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -84,7 +84,7 @@ class dataset_type
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "SELECT * FROM dataset_type WHERE " .
         "LOWER(dats_type_title) = LOWER('" . (str_replace("'", "\'", $this->dats_type_title)) . "')";
@@ -97,7 +97,7 @@ class dataset_type
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "SELECT * FROM dataset_type WHERE dats_type_id = " . $this->dats_type_id;
 
@@ -110,7 +110,7 @@ class dataset_type
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         $query = "INSERT INTO dataset_type (dats_type_title,dats_type_desc) " .
         "VALUES ('" . str_replace("'", "\'", $this->dats_type_title) . "'" .
@@ -124,7 +124,7 @@ class dataset_type
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAll();

@@ -12,13 +12,13 @@ class vertical_level_type
     public $vert_level_type_id;
     public $vert_level_type_name;
 
-    function new_vertical_level_type($tab)
+    public function new_vertical_level_type($tab)
     {
         $this->vert_level_type_id = $tab[0];
         $this->vert_level_type_name = $tab[1];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from vertical_level_type order by vert_level_type_name";
         $bd = new bdConnect();
@@ -32,7 +32,7 @@ class vertical_level_type
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new vertical_level_type();
@@ -47,7 +47,7 @@ class vertical_level_type
         return $country;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -60,7 +60,7 @@ class vertical_level_type
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from vertical_level_type where " .
         "lower(vert_level_type_name) = lower('" . (str_replace("'", "\'", $this->vert_level_type_name)) . "')";
@@ -72,7 +72,7 @@ class vertical_level_type
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from vertical_level_type where vert_level_type_id = " . $this->vert_level_type_id;
         $bd = new bdConnect();
@@ -83,7 +83,7 @@ class vertical_level_type
         return false;
     }
 
-    function insert()
+    public function insert()
     {
         $query = "insert into vertical_level_type ('vert_level_type_name') " .
         "values ('" . str_replace("'", "\'", $this->vert_level_type_name) . "')";
@@ -92,7 +92,7 @@ class vertical_level_type
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre, $indice, $type)
+    public function chargeForm($form, $label, $titre, $indice, $type)
     {
 
         $liste = $this->getAll();

@@ -16,7 +16,7 @@ class url_event
     public $url_descript;
     public $event;
 
-    function new_url_event($tab)
+    public function new_url_event($tab)
     {
         $this->url_event_id = $tab[0];
         $this->event_id = $tab[1];
@@ -28,13 +28,13 @@ class url_event
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from url_event order by event_id";
         return $this->getByQuery($query);
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new url_event();
@@ -50,7 +50,7 @@ class url_event
         return $per;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();

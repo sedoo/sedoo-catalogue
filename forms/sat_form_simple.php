@@ -4,7 +4,7 @@ require_once "forms/base_form.php";
 class sat_form_simple extends base_form
 {
 
-    function createForm($simpleVersion = true)
+    public function createForm($simpleVersion = true)
     {
         $this->createFormBase();
         $this->addElement('reset', 'reset', 'Reset');
@@ -57,7 +57,7 @@ class sat_form_simple extends base_form
         $this->addElement($categ_select);
     }
 
-    function createFormSat($i, $simpleVersion = true)
+    public function createFormSat($i, $simpleVersion = true)
     {
         $this->addElement('text', 'new_satellite_' . $i, 'Satellite name');
         $this->applyFilter('new_satellite_' . $i, 'trim');
@@ -73,7 +73,7 @@ class sat_form_simple extends base_form
         $this->createFormInstru($i, $simpleVersion);
     }
 
-    function createFormInstru($i, $simpleVersion = true)
+    public function createFormInstru($i, $simpleVersion = true)
     {
         $array = array();
         $array[0] = "";
@@ -108,12 +108,12 @@ class sat_form_simple extends base_form
         $this->applyFilter('new_instrument_' . $i, 'trim');
     }
 
-    function addSat()
+    public function addSat()
     {
         $this->createFormSat($this->dataset->nbSites - 1);
     }
 
-    function initForm()
+    public function initForm()
     {
         $this->initFormBase();
 
@@ -163,7 +163,7 @@ class sat_form_simple extends base_form
         }
     }
 
-    function saveForm()
+    public function saveForm()
     {
 
         $this->saveFormBase();
@@ -225,7 +225,7 @@ class sat_form_simple extends base_form
         $this->dataset->required_data_formats[0]->data_format_id = $this->exportValue('required_data_format');
     }
 
-    function addValidationRules($simpleVersion = true)
+    public function addValidationRules($simpleVersion = true)
     {
         $this->registerRule('validDate', 'function', 'validDate');
         $this->registerRule('validPeriod', 'function', 'validPeriod');
@@ -345,23 +345,23 @@ class sat_form_simple extends base_form
         }
     }
 
-    function displayErrorsInstrument($i)
+    public function displayErrorsInstrument($i)
     {
         $this->displayErrors(array('satellite_' . $i, 'instrument_' . $i, 'new_satellite_' . $i, 'new_instrument_' . $i, 'sensor_url_' . $i));
     }
 
-    function displayErrorsCoverage()
+    public function displayErrorsCoverage()
     {
         $this->displayErrors(array('dats_date_begin', 'dats_date_end', 'area', 'new_area', 'grid_type',
         'west_bound_0', 'east_bound_0', 'north_bound_0', 'south_bound_0', 'place_alt_min_0', 'place_alt_max_0'));
     }
 
-    function displayErrorsSatDataDescr()
+    public function displayErrorsSatDataDescr()
     {
         $this->displayErrors(array('dats_title', 'dats_purpose'));
     }
 
-    function displayForm($simpleVersion = true)
+    public function displayForm($simpleVersion = true)
     {
         $this->addValidationRules();
         $this->initForm();

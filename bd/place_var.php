@@ -16,7 +16,7 @@ class place_var
     public $variable;
     public $place;
 
-    function new_place_var($tab)
+    public function new_place_var($tab)
     {
         $this->place_id = $tab[1];
         $this->var_id = $tab[0];
@@ -30,13 +30,13 @@ class place_var
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from place_var";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -49,7 +49,7 @@ class place_var
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from place_var where " .
         "place_id = " . $this->place_id . " and var_id = " . $this->var_id;
@@ -61,7 +61,7 @@ class place_var
         return false;
     }
 
-    function insert()
+    public function insert()
     {
         $query = "insert into place_var ('place_id','var_id') " .
         "values (" . $this->place_id . "," . $this->var_id . ")";

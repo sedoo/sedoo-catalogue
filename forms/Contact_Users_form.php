@@ -8,7 +8,7 @@ require_once "mail.php";
 class Contact_Users_form extends HTML_QuickForm
 {
 
-    function createForm($project)
+    public function createForm($project)
     {
         $this->addElement('textarea', 'EditionArea', 'Message', array('cols' => 50, 'rows' => 8));
         $this->addRule('EditionArea', 'You have to write your message first', 'required');
@@ -17,7 +17,7 @@ class Contact_Users_form extends HTML_QuickForm
         $this->addElement('submit', 'bouton_send', 'Send', array('style' => 'text-align:center;'));
     }
 
-    function display()
+    public function display()
     {
       //Affichage des erreurs
         if (!empty($this->_errors)) {
@@ -35,7 +35,7 @@ class Contact_Users_form extends HTML_QuickForm
         echo '</table></form>';
     }
     
-    function getProjectUsers($project)
+    public function getProjectUsers($project)
     {
         $ldap = new ldapConnect();
         $ldap->openAdm();
@@ -44,7 +44,7 @@ class Contact_Users_form extends HTML_QuickForm
         return $projectUsers;
     }
 
-    function sendMessageToAllUsers($project)
+    public function sendMessageToAllUsers($project)
     {
         $projectUsers = $this->getProjectUsers($project);
         $Subject = $this->exportValue('Subject');

@@ -23,7 +23,7 @@ class sensor_var
     public $date_max;
     public $flag_param_calcule;
 
-    function new_sensor_var($tab)
+    public function new_sensor_var($tab)
     {
         $this->sensor_id = $tab[0];
         $this->var_id = $tab[1];
@@ -40,13 +40,13 @@ class sensor_var
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from sensor_var";
         return $this->getByQuery($query);
     }
 
-    function getByIds($v_id, $s_id)
+    public function getByIds($v_id, $s_id)
     {
         $query = "select * from sensor_var where var_id = " . $v_id . " and sensor_id = " . $s_id;
         $liste = $this->getByQuery($query);
@@ -57,7 +57,7 @@ class sensor_var
         }
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -70,7 +70,7 @@ class sensor_var
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from sensor_var where " .
         "sensor_id = " . $this->sensor_id . " and var_id = " . $this->var_id;
@@ -83,7 +83,7 @@ class sensor_var
     }
 
   //modif by lolo
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (isset($this->sensor_id) && isset($this->var_id) && !$this->existe()) {
             $query_insert = "insert into sensor_var (sensor_id,var_id";
@@ -116,7 +116,7 @@ class sensor_var
     }
 
   //add by lolo
-    function getVariable()
+    public function getVariable()
     {
         $var = new variable();
         return $var->getById($this->var_id);

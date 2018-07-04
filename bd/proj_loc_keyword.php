@@ -11,7 +11,7 @@ class proj_loc_keyword
     public $project;
     public $gcmd_location_keyword;
 
-    function new_proj_loc_keyword($tab)
+    public function new_proj_loc_keyword($tab)
     {
         $this->gcmd_loc_id = $tab[0];
         $this->project_id = $tab[1];
@@ -27,7 +27,7 @@ class proj_loc_keyword
         }
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -40,13 +40,13 @@ class proj_loc_keyword
         return $liste;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from proj_loc_keyword order by project_id";
         return $this->getByQuery($query);
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from proj_loc_keyword where " . "gcmd_loc_id = " . $this->gcmd_loc_id . " and project_id = " . $this->project_id;
         $bd = new bdConnect();
@@ -57,7 +57,7 @@ class proj_loc_keyword
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         $query = "insert into proj_loc_keyword (gcmd_loc_id,project_id) " . "values (" . $this->gcmd_loc_id . "," . $this->project_id . ")";
         $bd->exec($query);

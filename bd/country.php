@@ -12,13 +12,13 @@ class country
     public $country_id;
     public $country_name;
 
-    function new_country($tab)
+    public function new_country($tab)
     {
         $this->country_id = $tab[0];
         $this->country_name = $tab[1];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from country order by country_name";
         $bd = new bdConnect();
@@ -32,7 +32,7 @@ class country
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new country();
@@ -47,7 +47,7 @@ class country
         return $country;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -60,7 +60,7 @@ class country
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from country where " .
         "lower(country_name) = lower('" . (str_replace("'", "\'", $this->country_name)) . "')";
@@ -72,7 +72,7 @@ class country
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from country where country_id = " . $this->country_id;
         $bd = new bdConnect();
@@ -83,7 +83,7 @@ class country
         return false;
     }
 
-    function insert()
+    public function insert()
     {
         $query = "insert into country ('country_name') " .
         "values ('" . str_replace("'", "\'", $this->country_name) . "')";
@@ -92,7 +92,7 @@ class country
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAll();

@@ -15,7 +15,7 @@ class period
     public $period_begin;
     public $period_end;
 
-    function new_period($tab)
+    public function new_period($tab)
     {
         $this->period_id = $tab[0];
         $this->period_name = $tab[1];
@@ -23,7 +23,7 @@ class period
         $this->period_end = $tab[3];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from period order by period_id";
         $bd = new bdConnect();
@@ -37,7 +37,7 @@ class period
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new country();
@@ -52,7 +52,7 @@ class period
         return $per;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -65,13 +65,13 @@ class period
         return $liste;
     }
 
-    function getByProject($projectName)
+    public function getByProject($projectName)
     {
         $query = "SELECT * FROM period WHERE period_id IN (SELECT period_id FROM period_project WHERE project_id in (" . get_filtre_projets($projectName) . ")) order by period_id";
         return $this->getByQuery($query);
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from period where " .
         "lower(period_name) = lower('" . (str_replace("'", "\'", $this->period_name)) . "')";
@@ -83,7 +83,7 @@ class period
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from period where period_id = " . $this->period_id;
         $bd = new bdConnect();
@@ -95,7 +95,7 @@ class period
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre, $projectName = MainProject)
+    public function chargeForm($form, $label, $titre, $projectName = MainProject)
     {
 
         $liste = $this->getByProject($projectName);
@@ -108,7 +108,7 @@ class period
         return $s;
     }
 
-    function chargeFormWithDates($form, $label, $titre, $projectName = MainProject)
+    public function chargeFormWithDates($form, $label, $titre, $projectName = MainProject)
     {
         $liste = $this->getByProject($projectName);
         $array[0] = "";

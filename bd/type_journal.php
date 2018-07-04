@@ -12,13 +12,13 @@ class type_journal
     public $id;
     public $name;
 
-    function new_type_journal($tab)
+    public function new_type_journal($tab)
     {
         $this->id = $tab[0];
         $this->name = $tab[1];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from type_journal order by type_journal_name";
         $bd = new bdConnect();
@@ -32,7 +32,7 @@ class type_journal
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new type_journal();
@@ -47,7 +47,7 @@ class type_journal
         return $type;
     }
 
-    function getByIds($ids)
+    public function getByIds($ids)
     {
         if (!isset($ids) || empty($ids)) {
             return array();
@@ -58,7 +58,7 @@ class type_journal
         return $this->getByQuery($query);
     }
 
-    static function getIdByName($name)
+    public static function getIdByName($name)
     {
         if (!isset($name) || empty($name)) {
             return 0;
@@ -73,7 +73,7 @@ class type_journal
         return $type->id;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -87,7 +87,7 @@ class type_journal
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre, $ids)
+    public function chargeForm($form, $label, $titre, $ids)
     {
         $liste = $this->getByIds($ids);
         for ($i = 0; $i < count($liste); $i++) {

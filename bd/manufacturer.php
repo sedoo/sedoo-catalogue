@@ -13,19 +13,19 @@ class manufacturer
     public $manufacturer_name;
     public $manufacturer_url;
 
-    function new_manufacturer($tab)
+    public function new_manufacturer($tab)
     {
         $this->manufacturer_id = $tab[0];
         $this->manufacturer_name = $tab[1];
         $this->manufacturer_url = $tab[2];
     }
 
-    function toString()
+    public function toString()
     {
         return $this->manufacturer_name . (($this->manufacturer_url) ? ', url: ' . $this->manufacturer_url : '');
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = 'select * from manufacturer order by manufacturer_name';
         $bd = new bdConnect();
@@ -39,7 +39,7 @@ class manufacturer
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new manufacturer();
@@ -54,7 +54,7 @@ class manufacturer
         return $manufacturer;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -67,7 +67,7 @@ class manufacturer
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from manufacturer where " .
         "lower(manufacturer_name) = lower('" . (str_replace("'", "\'", $this->manufacturer_name)) . "')";
@@ -79,7 +79,7 @@ class manufacturer
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from manufacturer where manufacturer_id = " . $this->manufacturer_id;
         $bd = new bdConnect();
@@ -90,7 +90,7 @@ class manufacturer
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (!$this->existe()) {
             $query_insert = "insert into manufacturer (manufacturer_name";
@@ -110,7 +110,7 @@ class manufacturer
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre, $suffix = '')
+    public function chargeForm($form, $label, $titre, $suffix = '')
     {
 
         $liste = $this->getAll();

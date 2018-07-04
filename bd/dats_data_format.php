@@ -16,7 +16,7 @@ class dats_data_format
     public $dataset;
     public $data_format;
 
-    function new_dats_data_format($tab)
+    public function new_dats_data_format($tab)
     {
         $this->dats_id = $tab[0];
         $this->data_format_id = $tab[1];
@@ -31,13 +31,13 @@ class dats_data_format
         }
     }
 
-    function getAll($table = 'dats_data_format')
+    public function getAll($table = 'dats_data_format')
     {
         $query = "select * from " . $table . " order by dats_id";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -50,7 +50,7 @@ class dats_data_format
         return $liste;
     }
 
-    function existe($table = 'dats_data_format')
+    public function existe($table = 'dats_data_format')
     {
         $query = "select * from $table where " .
         "dats_id = " . $this->dats_id . " and data_format_id = " . $this->data_format_id;
@@ -62,7 +62,7 @@ class dats_data_format
         return false;
     }
 
-    function insert(&$bd, $table = 'dats_data_format')
+    public function insert(&$bd, $table = 'dats_data_format')
     {
         if (!$this->existe($table)) {
             $query = "insert into " . $table . " (dats_id,data_format_id) " .

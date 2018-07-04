@@ -30,7 +30,7 @@ class dats_var
 
     public $level_type;
 
-    function new_dats_var($tab)
+    public function new_dats_var($tab)
     {
         $this->var_id = $tab[0];
         $this->dats_id = $tab[1];
@@ -45,7 +45,7 @@ class dats_var
         $this->level_type = $tab[10];
     }
 
-    function toString()
+    public function toString()
     {
         $result = 'Param: ' . $this->variable->var_name . "\n";
         if (isset($this->variable->gcmd)) {
@@ -65,7 +65,7 @@ class dats_var
         return $result;
     }
 
-    function getUnit()
+    public function getUnit()
     {
         if (isset($this->unit_id) && !empty($this->unit_id)) {
             $unit = new unit();
@@ -73,7 +73,7 @@ class dats_var
         }
     }
 
-    function getVerticalLevelType()
+    public function getVerticalLevelType()
     {
         if (isset($this->vert_level_type_id) && !empty($this->vert_level_type_id)) {
             $vertical_level_type = new vertical_level_type();
@@ -81,7 +81,7 @@ class dats_var
         }
     }
 
-    function getDataset()
+    public function getDataset()
     {
         if (isset($this->dats_id) && !empty($this->dats_id)) {
             $dts = new dataset();
@@ -89,7 +89,7 @@ class dats_var
         }
     }
 
-    function getVariable()
+    public function getVariable()
     {
         if (isset($this->var_id) && !empty($this->var_id)) {
             $var = new variable();
@@ -97,13 +97,13 @@ class dats_var
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from dats_var";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
 
@@ -117,14 +117,14 @@ class dats_var
         return $liste;
     }
 
-    function getByIds($d_id, $v_id)
+    public function getByIds($d_id, $v_id)
     {
         $query = "select * from dats_var where dats_id = " . $d_id . " and sensor_id = " . $v_id;
         $liste = $this->getByQuery($query);
         return $liste[0];
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from dats_var where " .
         "dats_id = " . $this->dats_id . " and var_id = " . $this->var_id . " and flag_param_calcule = " . $this->flag_param_calcule;
@@ -136,7 +136,7 @@ class dats_var
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
 
         if ($this->existe()) {

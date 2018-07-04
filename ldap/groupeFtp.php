@@ -8,7 +8,7 @@ class groupeFtp extends groupe
     public $gidNumber;
     public $memberUid;
 
-    function __construct($dn = null, $attrs = null)
+    public function __construct($dn = null, $attrs = null)
     {
         parent::__construct($dn, $attrs);
         if (isset($attrs)) {

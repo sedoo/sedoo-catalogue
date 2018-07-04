@@ -16,7 +16,7 @@ class variable
     public $gcmd;
     public $sensor_precision;
 
-    function new_variable($tab)
+    public function new_variable($tab)
     {
         $this->var_id = $tab[0];
         $this->gcmd_id = $tab[1];
@@ -28,13 +28,13 @@ class variable
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from variable order by var_name";
         return $this->getByQuery($query);
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new variable();
@@ -49,7 +49,7 @@ class variable
         return $var;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -62,7 +62,7 @@ class variable
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from variable where " .
         "lower(var_name) = lower('" . (str_replace("'", "\'", $this->var_name)) . "')";
@@ -81,7 +81,7 @@ class variable
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from variable where var_id = " . $this->var_id;
         $bd = new bdConnect();
@@ -92,7 +92,7 @@ class variable
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         $query_insert = "insert into variable (var_name";
         $query_values = "values ('" . str_replace("'", "\'", $this->var_name) . "'";
@@ -110,7 +110,7 @@ class variable
         return $this->var_id;
     }
 
-    function update(&$bd)
+    public function update(&$bd)
     {
 
         $query = "update variable set var_name='" . str_replace("'", "\'", $this->var_name) . "'";
@@ -125,7 +125,7 @@ class variable
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre, $indice, $type)
+    public function chargeForm($form, $label, $titre, $indice, $type)
     {
 
         $liste = $this->getAll();

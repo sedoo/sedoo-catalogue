@@ -15,7 +15,7 @@ class va_dataset_form extends base_form
 
   //================================================================= Creation Functions ===========================================================
 
-    function createForm()
+    public function createForm()
     {
         $this->createFormBase();
         $tab['seeker_0'] = '0';
@@ -101,7 +101,7 @@ class va_dataset_form extends base_form
         $this->dataset->sites = null;
     }
 
-    function initForm($Modif = false)
+    public function initForm($Modif = false)
     {
         $dataset = &$this->dataset;
         $this->initFormBase();
@@ -142,7 +142,7 @@ class va_dataset_form extends base_form
         }
     }
     
-    function initModForm()
+    public function initModForm()
     {
         if ($this->dataset->dats_id > 0) {
             if (isset($this->sites) && !empty($this->sites)) {
@@ -179,7 +179,7 @@ class va_dataset_form extends base_form
         }
     }
     
-    function initSatForm()
+    public function initSatForm()
     {
         if ($this->dataset->dats_id > 0) {
             if (isset($this->sites) && !empty($this->sites)) {
@@ -214,7 +214,7 @@ class va_dataset_form extends base_form
         }
     }
     
-    function initInstruForm()
+    public function initInstruForm()
     {
         if ($this->dataset->dats_id > 0) {
             $ind = $this->dataset->nbModFormSensor + $this->dataset->nbSatFormSensor + 1;
@@ -239,7 +239,7 @@ class va_dataset_form extends base_form
         }
     }
 
-    function initFormGeoCoverageVaDataset()
+    public function initFormGeoCoverageVaDataset()
     {
         if (isset($this->sites) && !empty($this->sites)) {
             if (isset($this->sites[0]) && !empty($this->sites[0])) {
@@ -250,7 +250,7 @@ class va_dataset_form extends base_form
         }
     }
 
-    function initFormSiteBoundings($i)
+    public function initFormSiteBoundings($i)
     {
         if (isset($this->sites[$i]->boundings) && !empty($this->sites[$i]->boundings)) {
             $this->getElement('west_bound_' . $i)->setValue($this->sites[$i]->boundings->west_bounding_coord);
@@ -262,7 +262,7 @@ class va_dataset_form extends base_form
         $this->getElement('place_alt_max_' . $i)->setValue($this->sites[$i]->place_elevation_max);
     }
 
-    function initVaFormResolution()
+    public function initVaFormResolution()
     {
         $this->getElement('sensor_resol_tmp')->setValue($this->dats_sensors[0]->sensor_resol_temp);
         $this->getElement('sensor_vert_res')->setValue($this->dats_sensors[0]->sensor_vert_resolution);
@@ -270,39 +270,39 @@ class va_dataset_form extends base_form
         $this->getElement('sensor_lon_res')->setValue($this->dats_sensors[0]->sensor_lon_resolution);
     }
 
-    function addProjet()
+    public function addProjet()
     {
         $this->createFormProject($this->dataset->nbProj - 1);
     }
 
-    function addVariableMod($nb_variable)
+    public function addVariableMod($nb_variable)
     {
         $this->addVariable($nb_variable);
         $this->getElement('methode_acq_' . ($nb_variable - 1))->setLabel("Parameter processing related information");
     }
 
-    function addMod()
+    public function addMod()
     {
         for ($i = 0; $i < $this->dataset->nbModForm; $i++) {
             $this->createFormMod($i);
         }
     }
 
-    function addSat()
+    public function addSat()
     {
         for ($i = 0; $i < $this->dataset->nbSatForm; $i++) {
             $this->createFormSat($i);
         }
     }
 
-    function addInstru()
+    public function addInstru()
     {
         for ($i = 0; $i < $this->dataset->nbInstruForm; $i++) {
             $this->createFormSensor($i);
         }
     }
 
-    function createFormMod($i)
+    public function createFormMod($i)
     {
         $place = new place();
         $mod_select = $place->chargeFormMod($this, 'model_' . $i, 'Model name', "updateModIndex(" . $i . ");");
@@ -333,7 +333,7 @@ class va_dataset_form extends base_form
         $this->addElement('submit', 'mod_button_delete_' . $i, ' X ', array('onclick' => "document.getElementById('frmvadataset').action += '#a_source'", 'style' => 'position:relative;right:-280px;background:transparent;color:rgb(80,80,80);', 'onmouseover' => "document.getElementsByName('mod_button_delete_$i')[0].style.background='#CCFFFF';", 'onmouseout' => "document.getElementsByName('mod_button_delete_$i')[0].style.background='transparent';"));
     }
 
-    function createFormSat($i)
+    public function createFormSat($i)
     {
         $this->addElement('text', 'new_satellite_' . $i, 'Satellite name', array('onchange' => "updateSat(" . $i . ");"));
         $this->applyFilter('new_satellite_' . $i, 'trim');
@@ -351,7 +351,7 @@ class va_dataset_form extends base_form
         $this->addElement('submit', 'sat_button_delete_' . $i, ' X ', array('onclick' => "document.getElementById('frmvadataset').action += '#a_source'", 'style' => 'position:relative;right:-280px;background:transparent;color:rgb(80,80,80);', 'onmouseover' => "document.getElementsByName('sat_button_delete_$i')[0].style.background='#CCFFFF';", 'onmouseout' => "document.getElementsByName('sat_button_delete_$i')[0].style.background='transparent';"));
     }
 
-    function createFormInstru($i)
+    public function createFormInstru($i)
     {
         if (isset($this->dataset->sites[$i + 1]) && !empty($this->dataset->sites[$i + 1]) && $this->dataset->sites[$i + 1]->place_id > 0) {
             $satId = $this->dataset->sites[$i + 1]->place_id;
@@ -376,7 +376,7 @@ class va_dataset_form extends base_form
         $array = null;
     }
 
-    function createFormSite($i)
+    public function createFormSite($i)
     {
 
         $this->dataset->sites[$i + 1] = new place();
@@ -389,7 +389,7 @@ class va_dataset_form extends base_form
         $this->applyFilter('sensor_environment_' . $i, 'trim');
     }
 
-    function createFormSensor($i)
+    public function createFormSensor($i)
     {
         $this->createFormSensorKeywordVaDataset($i);
         $this->addElement('hidden', 'sensor_id_' . $i);
@@ -404,7 +404,7 @@ class va_dataset_form extends base_form
         $this->addElement('submit', 'instru_button_delete_' . $i, ' X ', array('onclick' => "document.getElementById('frmvadataset').action += '#a_source'", 'style' => 'position:relative;right:-260px;background:transparent;color:rgb(80,80,80);', 'onmouseover' => "document.getElementsByName('instru_button_delete_$i')[0].style.background='#CCFFFF';", 'onmouseout' => "document.getElementsByName('instru_button_delete_$i')[0].style.background='transparent';"));
     }
 
-    function createVaFormResolution()
+    public function createVaFormResolution()
     {
         $this->addElement('text', 'sensor_resol_tmp', 'Temporal');
         $this->applyFilter('sensor_resol_tmp', 'trim');
@@ -416,7 +416,7 @@ class va_dataset_form extends base_form
         $this->applyFilter('sensor_lon_res', 'trim');
     }
 
-    function createFormInstruManufacturer($i)
+    public function createFormInstruManufacturer($i)
     {
         $man = new manufacturer();
         $man_select = $man->chargeForm($this, 'manufacturer_' . $i, 'Manufacturer');
@@ -425,7 +425,7 @@ class va_dataset_form extends base_form
         $this->addElement('text', 'new_manufacturer_url_' . $i, 'Manufacturer web site');
     }
 
-    function addFormAccordingOnSourceType()
+    public function addFormAccordingOnSourceType()
     {
         $Source = $this->exportValue('source_type');
         switch ($Source) {
@@ -443,7 +443,7 @@ class va_dataset_form extends base_form
         }
     }
     
-    function deleteModForm($j)
+    public function deleteModForm($j)
     {
         if ($this->dataset->nbModForm > 0) {
             for ($i = $this->dataset->nbSatForm + 1; $i < ($this->dataset->nbModForm + $this->dataset->nbSatForm + 1); $i++) {
@@ -471,7 +471,7 @@ class va_dataset_form extends base_form
         }
     }
     
-    function deleteSatForm($j)
+    public function deleteSatForm($j)
     {
         if ($this->dataset->nbSatForm > 0) {
             for ($i = 1; $i < ($this->dataset->nbModForm + $this->dataset->nbSatForm + 1); $i++) {
@@ -499,7 +499,7 @@ class va_dataset_form extends base_form
         }
     }
 
-    function deleteInstruForm($j)
+    public function deleteInstruForm($j)
     {
         if ($this->dataset->nbInstruForm > 0) {
             $ind = $this->dataset->nbModForm + $this->dataset->nbSatForm + 1;
@@ -530,7 +530,7 @@ class va_dataset_form extends base_form
 
     //================================================================= Validation Rules Functions ===========================================================
     
-    function addValidationRules()
+    public function addValidationRules()
     {
         $this->registerRule('validDate', 'function', 'validDate');
         $this->registerRule('validPeriod', 'function', 'validPeriod');
@@ -613,7 +613,7 @@ class va_dataset_form extends base_form
         }
     }
 
-    function addVaValidationRulesResolution($prefixMsg = 'Instrument')
+    public function addVaValidationRulesResolution($prefixMsg = 'Instrument')
     {
         $this->addRule('sensor_resol_tmp', $prefixMsg . ': Observation frequency exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
         $this->addRule('sensor_vert_res', $prefixMsg . ': Vertical coverage exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
@@ -621,7 +621,7 @@ class va_dataset_form extends base_form
         $this->addRule('sensor_lon_res', $prefixMsg . ': Longitude coverage exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
     }
 
-    function AddModValidationRules()
+    public function AddModValidationRules()
     {
         if ($this->dataset->nbModForm > 0) {
             for ($i = $this->dataset->nbSatForm; $i < ($this->dataset->nbModForm + $this->dataset->nbSatForm); $i++) {
@@ -633,7 +633,7 @@ class va_dataset_form extends base_form
         }
     }
 
-    function addSatValidationRules()
+    public function addSatValidationRules()
     {
         if ($this->dataset->nbSatForm > 0) {
             for ($i = 0; $i < $this->dataset->nbSatForm; $i++) {
@@ -645,7 +645,7 @@ class va_dataset_form extends base_form
         }
     }
 
-    function addInstruValidationRules()
+    public function addInstruValidationRules()
     {
         $ind = $this->dataset->nbModForm + $this->dataset->nbSatForm + 1;
         if ($this->dataset->nbInstruForm > 0) {
@@ -661,7 +661,7 @@ class va_dataset_form extends base_form
 
   //================================================================= Saving Functions ===========================================================
 
-    function saveForm()
+    public function saveForm()
     {
         $this->saveFormBase();
         $this->saveFormGeoCoverage();
@@ -687,7 +687,7 @@ class va_dataset_form extends base_form
         $this->dataset->required_data_formats[0]->data_format_id = $this->exportValue('required_data_format');
     }
     
-    function saveVaFormResolution()
+    public function saveVaFormResolution()
     {
         $this->dataset->dats_sensors = array();
         $this->dataset->dats_sensors[0] = new dats_sensor();
@@ -703,7 +703,7 @@ class va_dataset_form extends base_form
         $this->dataset->dats_sensors[0]->sensor_lon_resolution = $this->exportValue('sensor_lon_res');
     }
     
-    function saveModForm()
+    public function saveModForm()
     {
         if ($this->dataset->nbModForm > 0) {
             for ($i = $this->dataset->nbSatForm; $i < ($this->dataset->nbModForm + $this->dataset->nbSatForm); $i++) {
@@ -748,7 +748,7 @@ class va_dataset_form extends base_form
         }
     }
 
-    function saveSatForm()
+    public function saveSatForm()
     {
 
         if ($this->dataset->nbSatForm > 0) {
@@ -792,7 +792,7 @@ class va_dataset_form extends base_form
         }
     }
 
-    function saveInstruForm()
+    public function saveInstruForm()
     {
 
         $ind = $this->dataset->nbModForm + $this->dataset->nbSatForm + 1;
@@ -857,33 +857,33 @@ class va_dataset_form extends base_form
 
   //==================================================================== Display Functions =====================================================================
 
-    function displayErrorsCoverage()
+    public function displayErrorsCoverage()
     {
         $this->displayErrors(array('dats_date_begin', 'dats_date_end', 'area', 'sensor_resol_temp',
         'west_bound_0', 'east_bound_0', 'north_bound_0', 'south_bound_0', 'place_alt_min_0', 'place_alt_max_0'));
     }
 
-    function displayErrorsMod($i)
+    public function displayErrorsMod($i)
     {
         $this->displayErrors(array('model_' . $i, 'new_model_' . $i, 'simu_' . $i, 'new_simu_' . $i, 'sensor_resol_temp__' . $i));
     }
 
-    function displayErrorsInstru($i)
+    public function displayErrorsInstru($i)
     {
         $this->displayErrors(array('sensor_gcmd_' . $i, 'new_place_' . $i, 'sensor_model_' . $i, 'gcmd_plat_key_' . $i, 'sensor_resol_temp_' . $i, 'sensor_url_' . $i));
     }
 
-    function displayErrorsSat($i)
+    public function displayErrorsSat($i)
     {
         $this->displayErrors(array('satellite_' . $i, 'instrument_' . $i, 'new_satellite_' . $i, 'new_instrument_' . $i, 'sat_sensor_url_' . $i, 'sensor_resol_temp' . $i));
     }
 
-    function displayErrorsModDataDescr()
+    public function displayErrorsModDataDescr()
     {
         $this->displayErrors(array('dats_title'));
     }
 
-    function displayModForm($i)
+    public function displayModForm($i)
     {
         if ($this->dataset->nbModForm > 1) {
             echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_model' colspan='4'  align='center'><strong>Model " . ($i + 1) . "</strong> " . $this->getElement('mod_button_delete_' . $i)->toHTML() . "</td></tr>";
@@ -900,7 +900,7 @@ class va_dataset_form extends base_form
         echo '<td>' . $this->getElement('sensor_resol_temp__' . $i)->getLabel() . '</td><td colspan="1">' . $this->getElement('sensor_resol_temp__' . $i)->toHTML() . '</td></tr>';
     }
 
-    function displaySatForm($i)
+    public function displaySatForm($i)
     {
         if ($this->dataset->nbSatForm > 1) {
             echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_satellite' colspan='4' align='center'><strong>Satellite " . ($i + 1) . "</strong> " . $this->getElement('sat_button_delete_' . $i)->toHTML() . "</td></tr>";
@@ -923,7 +923,7 @@ class va_dataset_form extends base_form
         echo '<td>' . $this->getElement('sat_sensor_url_' . $i)->getLabel() . '</td><td colspan="4">' . $this->getElement('sat_sensor_url_' . $i)->toHTML() . '</td></tr>';
     }
 
-    function displayInstruForm($i)
+    public function displayInstruForm($i)
     {
         if ($this->dataset->nbInstruForm > 1) {
             echo "<tr onmouseover = 'DeactivateButtonAddSource();'><td id='a_instrument' colspan='4' align='center'><strong>Instrument " . ($i + 1) . "</strong> " . $this->getElement('instru_button_delete_' . $i)->toHTML() . "</td></tr>";
@@ -941,7 +941,7 @@ class va_dataset_form extends base_form
         echo '<td>' . $this->getElement('sensor_environment_' . $i)->getLabel() . '</td><td colspan="3">' . $this->getElement('sensor_environment_' . $i)->toHTML() . '</td></tr>';
     }
 
-    function displayVaResolutionForm($simpleVersion = false)
+    public function displayVaResolutionForm($simpleVersion = false)
     {
         echo '<tr><td colspan="4" align="center"><strong>Data resolution</strong><br></td></tr>';
         echo '<tr><td>' . $this->getElement('sensor_lon_res')->getLabel() . '</td><td>' . $this->getElement('sensor_lon_res')->toHTML() . '</td>';
@@ -960,7 +960,7 @@ class va_dataset_form extends base_form
         echo '</tr>';
     }
 
-    function displayForm($Modif = false)
+    public function displayForm($Modif = false)
     {
         $this->addValidationRules();
         $this->initForm($Modif);

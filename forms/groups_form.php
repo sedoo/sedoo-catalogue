@@ -7,7 +7,7 @@ class groups_form extends login_form
     public $group;
     public $list;
     
-    function createForm()
+    public function createForm()
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -27,7 +27,7 @@ class groups_form extends login_form
         }
     }
     
-    function createAdminGroupForm()
+    public function createAdminGroupForm()
     {
         $this->addElement('text', "mail_new", '', array(
         'size' => 50,
@@ -40,7 +40,7 @@ class groups_form extends login_form
         ));
     }
     
-    function createNewGroupForm()
+    public function createNewGroupForm()
     {
         $this->addElement('text', "new_group_name", 'Group name');
         $this->addRule('new_group_name', 'Group name is required', 'required');
@@ -54,7 +54,7 @@ class groups_form extends login_form
         $this->addElement('submit', 'bouton_new_group', 'Create');
     }
     
-    function createGroup()
+    public function createGroup()
     {
         global $project_name;
         $ldap = new ldapConnect();
@@ -82,7 +82,7 @@ class groups_form extends login_form
         $ldap->close();
     }
     
-    function listGroups()
+    public function listGroups()
     {
         global $project_name;
         $ldap = new ldapConnect();
@@ -96,7 +96,7 @@ class groups_form extends login_form
         return $groupes;
     }
     
-    function listUsers()
+    public function listUsers()
     {
         $groupId = $this->exportValue('group');
         $ldap = new ldapConnect();
@@ -115,7 +115,7 @@ class groups_form extends login_form
         $ldap->close();
     }
     
-    function remove($i)
+    public function remove($i)
     {
         if ($this->list) {
             echo "Remove $i, " . $this->list[$i] . '<br>';
@@ -131,7 +131,7 @@ class groups_form extends login_form
         }
     }
     
-    function add()
+    public function add()
     {
         $newMember = $this->exportValue('mail_new');
         if (isset($this->group)) {
@@ -160,7 +160,7 @@ class groups_form extends login_form
         $this->getElement("mail_new")->setValue('');
     }
     
-    function displayUsers()
+    public function displayUsers()
     {
 
       // Affichage des erreurs
@@ -197,7 +197,7 @@ class groups_form extends login_form
         }
     }
     
-    function displayNewGroupForm()
+    public function displayNewGroupForm()
     {
       // Affichage des erreurs
         if (!empty($this->_errors)) {
@@ -216,7 +216,7 @@ class groups_form extends login_form
         echo '</form>';
     }
     
-    function displayForm()
+    public function displayForm()
     {
       // Affichage des erreurs
         $reqUri = $_SERVER['REQUEST_URI'];

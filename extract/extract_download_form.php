@@ -8,7 +8,7 @@ class extract_download_form extends login_form
 
     public $reponse;
 
-    function createForm($resultId = null, $project_name = null)
+    public function createForm($resultId = null, $project_name = null)
     {
         if ($_SESSION['loggedUser']) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -33,7 +33,7 @@ class extract_download_form extends login_form
         }
     }
 
-    function initForm($resultId = null, $project_name)
+    public function initForm($resultId = null, $project_name)
     {
         if (isset($resultId) && !empty($resultId)) {
             $this->reponse = new reponseXml($resultId, $project_name);
@@ -41,7 +41,7 @@ class extract_download_form extends login_form
         }
     }
 
-    function testUser()
+    public function testUser()
     {
         if ($this->isRoot()) {
             return true;
@@ -50,7 +50,7 @@ class extract_download_form extends login_form
         }
     }
 
-    function display()
+    public function display()
     {
         if (isset($this->reponse)) {
             if ($this->reponse->id == 0) {

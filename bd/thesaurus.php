@@ -7,14 +7,14 @@ class thesaurus
     public $name;
     public $url;
 
-    function new_thesaurus($tab)
+    public function new_thesaurus($tab)
     {
         $this->thesaurus_id = $tab[0];
         $this->name = $tab[1];
         $this->url = $tab[2];
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -27,7 +27,7 @@ class thesaurus
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new place();
@@ -42,13 +42,13 @@ class thesaurus
         return thesaurus;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from thesaurus order by nom";
         return $this->getByQuery($query);
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         $query = "insert into thesaurus (name,url) " .
         "values ('" . str_replace("'", "\'", $this->name) . "'" .

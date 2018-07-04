@@ -20,7 +20,7 @@ class ldapConnect
   /*
    * Connexion en utilisant LDAP_DN et LDAP_PASSWD (voir constants.php)
    */
-    function openAdm()
+    public function openAdm()
     {
         $this->open($this->ldapdn, $this->ldappasswd);
     }
@@ -28,7 +28,7 @@ class ldapConnect
   /*
    * Ouvre une connexion. @return TRUE en cas de succès et FALSE en cas d'échec. Exception en cas d'erreur (sauf erreur 49 Invalid credentials)
    */
-    function open($dn, $passwd)
+    public function open($dn, $passwd)
     {
       // Connexion LDAP
         $this->ldapconn = ldap_connect($this->ldaphost, $this->ldapport);
@@ -55,7 +55,7 @@ class ldapConnect
         }
     }
 
-    function close()
+    public function close()
     {
         if ($this->ldapconn) {
             ldap_close($this->ldapconn);
@@ -65,7 +65,7 @@ class ldapConnect
   /*
    * Ajoute une entrée dans l'annuaire.
    */
-    function addEntry($dn, $attrs)
+    public function addEntry($dn, $attrs)
     {
         if (!isset($this->ldapconn) || empty($this->ldapconn)) {
             throw new Exception("Connexion à l'annuaire non ouverte");
@@ -78,7 +78,7 @@ class ldapConnect
         }
     }
 
-    function exists($dn)
+    public function exists($dn)
     {
         if (!isset($this->ldapconn) || empty($this->ldapconn)) {
             throw new Exception("Connexion à l'annuaire non ouverte");
@@ -91,7 +91,7 @@ class ldapConnect
         }
     }
 
-    function getEntry($dn, $retClass = null)
+    public function getEntry($dn, $retClass = null)
     {
         global $MainProjects;
         if (!isset($retClass)) {
@@ -116,7 +116,7 @@ class ldapConnect
         return null;
     }
 
-    function login($dn, $password, $objClass = REGISTERED_USER_CLASS, $retClass = null)
+    public function login($dn, $password, $objClass = REGISTERED_USER_CLASS, $retClass = null)
     {
         global $MainProjects;
         if (!isset($retClass) && empty($retClass)) {
@@ -144,7 +144,7 @@ class ldapConnect
   /*
    * Authentification via l'annuaire. @return entrée correspondante
    */
-    function loginAdmin($adminMail, $password)
+    public function loginAdmin($adminMail, $password)
     {
         $dn = $this->getUserDn($adminMail);
         return $this->login($dn, $password);
@@ -157,7 +157,7 @@ class ldapConnect
    * @param filter filtre ldap
    * @param classname type des objets php à renvoyer
    */
-    function listEntries($base, $filter, $className, $sort = null)
+    public function listEntries($base, $filter, $className, $sort = null)
     {
         global $project_name;
         if (isset($this->ldapconn) && !empty($this->ldapconn)) {
@@ -202,7 +202,7 @@ class ldapConnect
   /*
    * Ajoute des attributs.
    */
-    function addAttributes($dn, $nvAttrs)
+    public function addAttributes($dn, $nvAttrs)
     {
         if (isset($this->ldapconn) && !empty($this->ldapconn)) {
             if (ldap_mod_add($this->ldapconn, $dn, $nvAttrs)) {
@@ -219,7 +219,7 @@ class ldapConnect
   /*
    * Remplace la valeur d'un attribut.
    */
-    function modifyAttribute($dn, $attr, $value)
+    public function modifyAttribute($dn, $attr, $value)
     {
         if (isset($this->ldapconn) && !empty($this->ldapconn)) {
             $nvAttrs[$attr] = $value;
@@ -234,7 +234,7 @@ class ldapConnect
         }
     }
 
-    function modifyAttributes($dn, $attr)
+    public function modifyAttributes($dn, $attr)
     {
         if (isset($this->ldapconn) && !empty($this->ldapconn)) {
             unset($attr['objectClass']);
@@ -255,7 +255,7 @@ class ldapConnect
         }
     }
 
-    function addAttribute($dn, $attr, $value)
+    public function addAttribute($dn, $attr, $value)
     {
         if (isset($this->ldapconn) && !empty($this->ldapconn)) {
             $nvAttrs[$attr] = $value;
@@ -273,7 +273,7 @@ class ldapConnect
   /*
    * Supprime des attributs.
    */
-    function deleteAttributes($dn, $attrs)
+    public function deleteAttributes($dn, $attrs)
     {
         if (isset($this->ldapconn) && !empty($this->ldapconn)) {
             if (ldap_mod_del($this->ldapconn, $dn, $attrs)) {
@@ -287,7 +287,7 @@ class ldapConnect
         }
     }
 
-    function deleteEntry($dn)
+    public function deleteEntry($dn)
     {
         if (!isset($this->ldapconn) || empty($this->ldapconn)) {
             throw new Exception("ERREUR: Connection à l'annuaire non ouverte");
@@ -301,7 +301,7 @@ class ldapConnect
         }
     }
 
-    function renameEntry($dn, $newrdn)
+    public function renameEntry($dn, $newrdn)
     {
         if (!isset($this->ldapconn) || empty($this->ldapconn)) {
             throw new Exception("ERREUR: Connection à l'annuaire non ouverte");
@@ -318,7 +318,7 @@ class ldapConnect
   /*
    * Supprime un attribut.
    */
-    function deleteAttribute($dn, $attr, $value)
+    public function deleteAttribute($dn, $attr, $value)
     {
         if (isset($this->ldapconn) && !empty($this->ldapconn)) {
             $nvAttrs[$attr] = $value;
@@ -333,7 +333,7 @@ class ldapConnect
         }
     }
 
-    function rejectUser($admin, $user, $project)
+    public function rejectUser($admin, $user, $project)
     {
         if ($this->open($admin->dn, $admin->userPassword)) {
             $nvAttrs[strtolower($project) . "Status"] = STATUS_REJECTED;
@@ -349,12 +349,12 @@ class ldapConnect
         }
     }
 
-    function logErreur($msg)
+    public function logErreur($msg)
     {
         echo "ERREUR: $msg. Cause: " . ldap_error($this->ldapconn) . '<br>';
     }
 
-    function getUserDn($mail)
+    public function getUserDn($mail)
     {
         return 'mail=' . $mail . ',' . PEOPLE_BASE;
     }

@@ -16,7 +16,7 @@ class url_event_role
     public $url_event;
     public $role;
 
-    function new_url_event_role($tab)
+    public function new_url_event_role($tab)
     {
         $this->url_event_id = $tab[0];
         $this->role_id = $tab[1];
@@ -30,19 +30,19 @@ class url_event_role
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from url_event_role order by url_event_id";
         return $this->getByQuery($query);
     }
 
-    function getByUrlEvent($id)
+    public function getByUrlEvent($id)
     {
         $query = "select * from url_event_role where url_event_id = $id";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();

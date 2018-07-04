@@ -12,13 +12,13 @@ class role
     public $role_id;
     public $role_name;
 
-    function new_role($tab)
+    public function new_role($tab)
     {
         $this->role_id = $tab[0];
         $this->role_name = $tab[1];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from role order by role_name";
         $bd = new bdConnect();
@@ -32,7 +32,7 @@ class role
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new role();
@@ -47,7 +47,7 @@ class role
         return $role;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -60,7 +60,7 @@ class role
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from role where " .
         "lower(role_name) = lower('" . (str_replace("'", "\'", $this->role_name)) . "')";
@@ -72,7 +72,7 @@ class role
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from role where role_id = " . $this->role_id;
         $bd = new bdConnect();
@@ -83,7 +83,7 @@ class role
         return false;
     }
 
-    function insert()
+    public function insert()
     {
         $query = "insert into role ('role_name') " .
         "values ('" . str_replace("'", "\'", $this->role_name) . "')";
@@ -92,7 +92,7 @@ class role
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAll();

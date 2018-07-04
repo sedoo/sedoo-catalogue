@@ -15,7 +15,7 @@ class organism
     public $org_fname;
     public $org_url;
 
-    function new_organism($tab)
+    public function new_organism($tab)
     {
         $this->org_id = $tab[0];
         $this->org_sname = $tab[1];
@@ -23,7 +23,7 @@ class organism
         $this->org_url = $tab[3];
     }
 
-    function getName()
+    public function getName()
     {
         $name = "";
         if (isset($this->org_sname) && !empty($this->org_sname)) {
@@ -34,7 +34,7 @@ class organism
         return $name;
     }
 
-    function toString()
+    public function toString()
     {
         $result = "Organism: " . $this->getName();
         if (isset($this->org_sname) && !empty($this->org_sname) && isset($this->org_fname) && !empty($this->org_fname)) {
@@ -46,13 +46,13 @@ class organism
         return $result;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from organism order by org_sname";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -65,7 +65,7 @@ class organism
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new organism();
@@ -80,7 +80,7 @@ class organism
         return $org;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from organism where " .
         "lower(org_sname) = lower('" . str_replace("'", "\'", $this->org_sname) . "') and " .
@@ -93,7 +93,7 @@ class organism
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from organism where org_id = " . $this->org_id;
         $bd = new bdConnect();
@@ -105,7 +105,7 @@ class organism
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre, $indice)
+    public function chargeForm($form, $label, $titre, $indice)
     {
 
         $liste = $this->getAll();
@@ -128,7 +128,7 @@ class organism
         return $s;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         $query_insert = "insert into organism (org_sname,org_fname";
         $query_values = "values ('" . str_replace("'", "\'", $this->org_sname) . "','" . str_replace("'", "\'", $this->org_fname) . "'";

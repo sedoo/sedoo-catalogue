@@ -11,7 +11,7 @@ class groupe extends entry
     public $project;
     public $isAdmin = false;
     
-    function __construct($dn = null, $attrs = null)
+    public function __construct($dn = null, $attrs = null)
     {
         if (isset($dn)) {
             parent::__construct($dn);
@@ -34,7 +34,7 @@ class groupe extends entry
         }
     }
 
-    function stringToBoolean($str)
+    public function stringToBoolean($str)
     {
         $trueStrings = array('TRUE', 'True', 'true', 'yes', 'Yes', 'YES');
 

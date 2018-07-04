@@ -12,7 +12,7 @@ class fichierResultat
     
     public $project_name;
     
-    function fichierResultat($xmlElt, $project_name)
+    public function fichierResultat($xmlElt, $project_name)
     {
         $this->project_name = $project_name;
         $this->filename = (string)$xmlElt->filename;
@@ -28,7 +28,7 @@ class fichierResultat
         }
     }
     
-    function getFileSize()
+    public function getFileSize()
     {
         $size = filesize($this->filename);
 
@@ -40,7 +40,7 @@ class fichierResultat
         return round($size, 2) . $units[$i];
     }
     
-    function toHtml()
+    public function toHtml()
     {
         $rows = count($this->contacts);
         $id = uniqid('extract_');

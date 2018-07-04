@@ -13,13 +13,13 @@ class data_policy
     public $data_policy_id;
     public $data_policy_name;
 
-    function new_data_policy($tab)
+    public function new_data_policy($tab)
     {
         $this->data_policy_id = $tab[0];
         $this->data_policy_name = $tab[1];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from data_policy order by data_policy_name";
         $bd = new bdConnect();
@@ -33,7 +33,7 @@ class data_policy
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new data_policy();
@@ -48,7 +48,7 @@ class data_policy
         return $per;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -61,7 +61,7 @@ class data_policy
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from data_policy where " .
         "lower(data_policy_name) = lower('" . (str_replace("'", "\'", $this->data_policy_name)) . "')";
@@ -73,7 +73,7 @@ class data_policy
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (!$this->existe()) {
             $query = "insert into data_policy (data_policy_name) values ('" . str_replace("'", "\'", $this->data_policy_name) . "')";
@@ -83,7 +83,7 @@ class data_policy
         return $this->data_policy_id;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from data_policy where data_policy_id = " . $this->data_policy_id;
         $bd = new bdConnect();
@@ -95,7 +95,7 @@ class data_policy
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAll();

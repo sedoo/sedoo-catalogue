@@ -16,7 +16,7 @@ class dats_type
     public $dataset;
     public $dataset_type;
 
-    function new_dats_place($tab)
+    public function new_dats_place($tab)
     {
         $this->dats_id = $tab[1];
         $this->dats_type_id = $tab[0];
@@ -30,13 +30,13 @@ class dats_type
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from dats_type order by dats_id";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -49,7 +49,7 @@ class dats_type
         return $liste;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from dats_type where " .
         "dats_id = " . $this->dats_id . " and dats_type_id = " . $this->dats_type_id;
@@ -62,7 +62,7 @@ class dats_type
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         $query = "insert into dats_type (dats_id,dats_type_id) " .
         "values (" . $this->dats_id . "," . $this->dats_type_id . ")";

@@ -10,14 +10,14 @@ class guestuser
     public $sn;
     public $mail;
 
-    function __construct($mail)
+    public function __construct($mail)
     {
         $this->mail = $mail;
         $this->cn = "guest";
         $this->sn = "guest";
     }
 
-    function testGroups($groups)
+    public function testGroups($groups)
     {
         return false;
     }
@@ -26,22 +26,22 @@ class guestuser
    * Teste si l'utilisateur est membre d'un des groupes du tableau $groups.
    * @return false
    */
-    function isMemberOf($groups)
+    public function isMemberOf($groups)
     {
         return false;
     }
 
-    function isRoot()
+    public function isRoot()
     {
         return false;
     }
 
-    function isAdmin()
+    public function isAdmin()
     {
         return false;
     }
 
-    function isProjectAdmin()
+    public function isProjectAdmin()
     {
         return false;
     }

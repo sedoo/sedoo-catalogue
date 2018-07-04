@@ -8,7 +8,7 @@ class projet extends entry
     public $cn;
     public $description;
 
-    function __construct($dn = null, $attrs = null)
+    public function __construct($dn = null, $attrs = null)
     {
         if (isset($dn)) {
             parent::__construct($dn);

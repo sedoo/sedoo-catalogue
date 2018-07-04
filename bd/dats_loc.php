@@ -11,7 +11,7 @@ class dats_loc
     public $dataset;
     public $gcmd_location_keyword;
 
-    function new_dats_loc($tab)
+    public function new_dats_loc($tab)
     {
         $this->dats_id = $tab[0];
         $this->gcmd_loc_id = $tab[1];
@@ -26,7 +26,7 @@ class dats_loc
         }
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -39,13 +39,13 @@ class dats_loc
         return $liste;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from dats_loc order by dats_id";
         return $this->getByQuery($query);
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from dats_loc where " . "dats_id = " . $this->dats_id . " and gcmd_loc_id = " . $this->gcmd_loc_id;
         $bd = new bdConnect();
@@ -56,7 +56,7 @@ class dats_loc
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         $query = "insert into dats_loc (dats_id,gcmd_loc_id) " . "values (" . $this->dats_id . "," . $this->gcmd_loc_id . ")";
         $bd->exec($query);

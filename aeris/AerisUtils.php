@@ -4,7 +4,7 @@ require_once("aeris/conf.php");
 
 class AerisUtils
 {
-    static function portalDatasetToAerisDataset($datsId, $programName = PROGRAM_NAME, $collectionName = DEFAULT_COLLECTION)
+    public static function portalDatasetToAerisDataset($datsId, $programName = PROGRAM_NAME, $collectionName = DEFAULT_COLLECTION)
     {
         if ($programName == null) {
             echo "WARN program is null<br/>";
@@ -21,7 +21,7 @@ class AerisUtils
      * $collectionName: nom de la collection Aeris
      * $test: true pour envoyer au catalogue aeris (false par défaut)
      */
-    static function datasetToAeris($datsId, $test = false, $collectionName = DEFAULT_COLLECTION)
+    public static function datasetToAeris($datsId, $test = false, $collectionName = DEFAULT_COLLECTION)
     {
         $dataset = self::portalDatasetToAerisDataset($datsId, PROGRAM_NAME, $collectionName);
         if (isset($dataset)) {
@@ -42,7 +42,7 @@ class AerisUtils
      * $filter: true pour ne conserver que les jeux marqués atmosphère (false par défaut)
      * $collectionName: nom de la collection Aeris ($projectName par défaut)
      */
-    static function projectToAeris($projectName, $test = false, $filter = false, $collectionName = null)
+    public static function projectToAeris($projectName, $test = false, $filter = false, $collectionName = null)
     {
         
         if ($collectionName == null) {

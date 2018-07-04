@@ -31,7 +31,7 @@ class portalUser extends entry
     public $supervisor_name;
     public $supervisor_affiliation;
     
-    function __construct($dn = null, $attrs = null)
+    public function __construct($dn = null, $attrs = null)
     {
         if (isset($dn)) {
             parent::__construct($dn);
@@ -44,7 +44,7 @@ class portalUser extends entry
     
     public $attrs;
     
-    function initUser($attrs)
+    public function initUser($attrs)
     {
         global $MainProjects, $project_name;
         $this->attrs = $attrs;
@@ -136,7 +136,7 @@ class portalUser extends entry
         }
     }
     
-    function toString($withDn = false)
+    public function toString($withDn = false)
     {
         if (isset($this->memberOf) && !empty($this->memberOf)) {
             foreach ($this->memberOf as $group) {
@@ -162,9 +162,9 @@ class portalUser extends entry
     }
 
   /*
-   * function printUser(){ echo 'DN: '.$this->dn.'<br>'; echo 'Name: '.$this->cn.'<br>'; echo 'Mail: '.$this->mail.'<br>'; echo 'Affiliation: '.$this->affiliation.'<br>'; echo 'Address: '.$this->street.'<br>'; echo 'Zip Code: '.$this->zipCode.'<br>'; echo 'City: '.$this->city.'<br>'; echo 'Country: '.$this->country.'<br>'; echo 'Telephone: '.$this->phoneNumber.'<br>'; echo 'Abstract: '.$this->abstract.'<br>'; }
+   * public function printUser(){ echo 'DN: '.$this->dn.'<br>'; echo 'Name: '.$this->cn.'<br>'; echo 'Mail: '.$this->mail.'<br>'; echo 'Affiliation: '.$this->affiliation.'<br>'; echo 'Address: '.$this->street.'<br>'; echo 'Zip Code: '.$this->zipCode.'<br>'; echo 'City: '.$this->city.'<br>'; echo 'Country: '.$this->country.'<br>'; echo 'Telephone: '.$this->phoneNumber.'<br>'; echo 'Abstract: '.$this->abstract.'<br>'; }
    */
-    function printRegisteredUser()
+    public function printRegisteredUser()
     {
         $this->printUser();
         echo 'Password:' . $this->userPassword . '<br>';
@@ -174,12 +174,12 @@ class portalUser extends entry
         }
     }
     
-    function getUserDn()
+    public function getUserDn()
     {
         return 'mail=' . $this->mail . ',' . PEOPLE_BASE;
     }
     
-    function isRoot()
+    public function isRoot()
     {
         if (isset($this->memberOf) && !empty($this->memberOf)) {
             foreach ($this->memberOf as $group) {
@@ -195,7 +195,7 @@ class portalUser extends entry
   /*
    * Teste si l'utilisateur est membre d'un des groupes du tableau $groups.
    */
-    function isMemberOf($groups)
+    public function isMemberOf($groups)
     {
         $i = 0;
         if (isset($this->memberOf) && !empty($this->memberOf)) {
@@ -212,7 +212,7 @@ class portalUser extends entry
         }
     }
 
-    function isAdmin()
+    public function isAdmin()
     {
         global $project_name, $MainProjects;
 
@@ -226,7 +226,7 @@ class portalUser extends entry
         }
     }
 
-    function isportalAdmin()
+    public function isportalAdmin()
     {
         return $this->isMemberOf(array(
         strtolower(MainProject) . 'Adm',
@@ -234,7 +234,7 @@ class portalUser extends entry
         ));
     }
 
-    function isprojectAdmin()
+    public function isprojectAdmin()
     {
         global $project_name;
         if (isset($project_name) && !empty($project_name)) {
@@ -250,7 +250,7 @@ class portalUser extends entry
   /*
    * Retourne un tableau contenant tous les attributs.
    */
-    function getUserEntry()
+    public function getUserEntry()
     {
         $entree["objectClass"][0] = USER_CLASS;
         $entree["cn"] = $this->cn;
@@ -274,7 +274,7 @@ class portalUser extends entry
         return $entree;
     }
     
-    function getRegisteredUserEntry()
+    public function getRegisteredUserEntry()
     {
         $entree = $this->getUserEntry();
         $entree["userPassword"] = $this->userPassword;

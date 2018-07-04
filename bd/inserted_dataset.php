@@ -16,7 +16,7 @@ class inserted_dataset
     public $vars;
     public $places;
 
-    function new_inserted_dataset($tab, $varId = null, $placeId = null)
+    public function new_inserted_dataset($tab, $varId = null, $placeId = null)
     {
         $this->ins_dats_id = $tab[0];
         $this->ins_dats_name = $tab[1];
@@ -28,31 +28,31 @@ class inserted_dataset
         $this->get_places($varId);
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from inserted_dataset order by date_last_update desc;";
         return $this->getByQuery($query);
     }
 
-    function getByProjects($projectIds)
+    public function getByProjects($projectIds)
     {
         $query = "SELECT inserted_dataset.* FROM inserted_dataset JOIN dats_data USING (ins_dats_id) JOIN dats_proj USING (dats_id) WHERE project_id in ($projectIds) ORDER BY date_last_update DESC";
         return $this->getByQuery($query);
     }
 
-    function getByDatsId($id)
+    public function getByDatsId($id)
     {
         $query = "SELECT * FROM inserted_dataset WHERE ins_dats_id in (SELECT ins_dats_id FROM dats_data WHERE dats_id = $id);";
         return $this->getByQuery($query);
     }
 
-    function getByDatsIds($ids)
+    public function getByDatsIds($ids)
     {
         $query = "SELECT * FROM inserted_dataset WHERE ins_dats_id in (SELECT ins_dats_id FROM dats_data WHERE dats_id IN ($ids));";
         return $this->getByQuery($query);
     }
 
-    function existsForDatsId($id)
+    public function existsForDatsId($id)
     {
         $query = "SELECT * FROM dats_data WHERE dats_id = $id LIMIT 1";
         $bd = new bdConnect();
@@ -60,7 +60,7 @@ class inserted_dataset
         return ($resultat = $bd->get_data($query));
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -73,7 +73,7 @@ class inserted_dataset
         return $liste;
     }
 
-    function getByVarId($varId)
+    public function getByVarId($varId)
     {
         $query = "SELECT * FROM inserted_dataset WHERE ins_dats_id in (SELECT DISTINCT ins_dats_id FROM data_availability WHERE var_id = $varId);";
         $bd = new bdConnect();
@@ -87,7 +87,7 @@ class inserted_dataset
         return $liste;
     }
 
-    function getById($id, $varId = null, $placeId = null)
+    public function getById($id, $varId = null, $placeId = null)
     {
         if (!isset($id) || empty($id)) {
             return null;

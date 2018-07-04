@@ -5,7 +5,7 @@ require_once "bd/journal.php";
 class suscribe_form extends login_form
 {
 
-    function createForm()
+    public function createForm()
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -17,7 +17,7 @@ class suscribe_form extends login_form
         }
     }
 
-    function addAbo($datsId)
+    public function addAbo($datsId)
     {
         try {
             $aboIds = unserialize($_SESSION['loggedUserAbos']);

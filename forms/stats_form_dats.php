@@ -11,7 +11,7 @@ class stats_form_dats extends login_form
     public $dats;
     public $projectName;
 
-    function createForm($datsId, $projectName)
+    public function createForm($datsId, $projectName)
     {
         if (isset($_SESSION['loggedUser'])) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -28,7 +28,7 @@ class stats_form_dats extends login_form
         return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) . "?p&pageId=10&type=$type&datsId=$datsId";
     }
 
-    function display()
+    public function display()
     {
         if ($this->isAdmin($this->projectName) || $this->isPi($this->dats)) {
             echo '<h1>' . $this->dats->dats_title . '</h1><br><br>';
@@ -95,7 +95,7 @@ class stats_form_dats extends login_form
         }
     }
 
-    function displaySubscriptions()
+    public function displaySubscriptions()
     {
         $journal = new journal();
         $journal = $journal->getAbosByDats($this->dats->dats_id);
@@ -111,7 +111,7 @@ class stats_form_dats extends login_form
         }
     }
 
-    function displayUpdates()
+    public function displayUpdates()
     {
         $journal = new journal();
         $journal = $journal->getByDataset($this->dats->dats_id, TYPE_NEW . ',' . TYPE_UPDATE);
@@ -122,7 +122,7 @@ class stats_form_dats extends login_form
         echo '</table>';
     }
 
-    function displayDownloadsHistory()
+    public function displayDownloadsHistory()
     {
         $query = 'select date from journal where type_journal_id = ' . TYPE_NEW . ' and dats_id = ' . $this->datsId . ";";
         $bd = new bdConnect();
@@ -153,7 +153,7 @@ class stats_form_dats extends login_form
         $this->displayDownloadsByUsers();
     }
 
-    function displayDownloadsByUsers()
+    public function displayDownloadsByUsers()
     {
         $query = 'select contact, count(*) from journal inner join dataset using (dats_id) where type_journal_id = ' . TYPE_DL . ' and dats_id = ' . $this->dats->dats_id . " group by dats_id,dats_title,contact order by count desc, contact;";
         $bd = new bdConnect();

@@ -4,7 +4,7 @@ require_once "forms/base_form.php";
 class sat_form extends base_form
 {
 
-    function createForm()
+    public function createForm()
     {
         $this->createFormBase();
         $this->addElement('reset', 'reset', 'Reset');
@@ -52,7 +52,7 @@ class sat_form extends base_form
         $this->getElement('data_format_0')->setLabel("Original data format");
     }
 
-    function createFormSat($i)
+    public function createFormSat($i)
     {
         $this->addElement('text', 'new_satellite_' . $i, 'Satellite name');
         $this->applyFilter('new_satellite_' . $i, 'trim');
@@ -68,7 +68,7 @@ class sat_form extends base_form
         $this->createFormInstru($i);
     }
 
-    function createFormInstru($i)
+    public function createFormInstru($i)
     {
         $array = array();
         $array[0] = "";
@@ -97,17 +97,17 @@ class sat_form extends base_form
         $this->applyFilter('new_instrument_' . $i, 'trim');
     }
 
-    function addSat()
+    public function addSat()
     {
         $this->createFormSat($this->dataset->nbSites - 1);
     }
 
-    function addProjet()
+    public function addProjet()
     {
         $this->createFormProject($this->dataset->nbProj - 1);
     }
 
-    function initForm()
+    public function initForm()
     {
         $this->initFormBase();
       // Coverage
@@ -149,7 +149,7 @@ class sat_form extends base_form
         }
     }
 
-    function saveForm()
+    public function saveForm()
     {
         $this->saveFormBase();
       // Coverage
@@ -205,7 +205,7 @@ class sat_form extends base_form
         }
     }
 
-    function addValidationRules()
+    public function addValidationRules()
     {
         $this->registerRule('validDate', 'function', 'validDate');
         $this->registerRule('validPeriod', 'function', 'validPeriod');
@@ -333,7 +333,7 @@ class sat_form extends base_form
         }
     }
 
-    function displayErrorsInstrument($i)
+    public function displayErrorsInstrument($i)
     {
         $this->displayErrors(array(
         'satellite_' . $i,
@@ -344,7 +344,7 @@ class sat_form extends base_form
         ));
     }
 
-    function displayErrorsCoverage()
+    public function displayErrorsCoverage()
     {
         $this->displayErrors(array(
         'dats_date_begin',
@@ -361,14 +361,14 @@ class sat_form extends base_form
         ));
     }
 
-    function displayErrorsSatDataDescr()
+    public function displayErrorsSatDataDescr()
     {
         $this->displayErrors(array(
         'dats_title',
         ));
     }
 
-    function displayForm()
+    public function displayForm()
     {
         $this->addValidationRules();
         $this->initForm();

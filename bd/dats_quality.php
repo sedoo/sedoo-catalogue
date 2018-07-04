@@ -60,7 +60,7 @@ class dats_quality
     public $cptVarMax;
     public $commentVar;
 
-    function init($dats)
+    public function init($dats)
     {
         $this->dats = $dats;
 
@@ -73,7 +73,7 @@ class dats_quality
         $this->initParams($dats);
     }
 
-    function getScore()
+    public function getScore()
     {
         $score = 0;
 
@@ -88,49 +88,49 @@ class dats_quality
         return round($score);
     }
 
-    function getScoreVar()
+    public function getScoreVar()
     {
       //Params => 20
         return (($this->cptVarMax == 0) ? 0 : ($this->cptVar * 20 / $this->cptVarMax));
     }
 
-    function getScoreSite()
+    public function getScoreSite()
     {
       //Sites => 15
         return (($this->cptSiteMax == 0) ? 0 : ($this->cptSite * 15 / $this->cptSiteMax));
     }
 
-    function getScoreUse()
+    public function getScoreUse()
     {
       //Use constraints => 10
         return $this->cptUse * 10 / $this->cptUseMax;
     }
 
-    function getScoreSensor()
+    public function getScoreSensor()
     {
       //Instruments => 15
         return (($this->cptSensorMax == 0) ? 0 : ($this->cptSensor * 15 / $this->cptSensorMax));
     }
 
-    function getScoreDates()
+    public function getScoreDates()
     {
       //Dates => 15
         return $this->cptDates * 15 / $this->cptDatesMax;
     }
 
-    function getScoreCore()
+    public function getScoreCore()
     {
       //Core info => 15
         return $this->cptCore * 15 / $this->cptCoreMax;
     }
 
-    function getScoreInfo()
+    public function getScoreInfo()
     {
       //Opt info => 10
         return $this->cptInfo * 10 / $this->cptInfoMax;
     }
 
-    function initParams($dats)
+    public function initParams($dats)
     {
         $nbParams = count($dats->dats_variables);
         $this->commentVar = "Info: $nbParams variable(s)\n";
@@ -166,7 +166,7 @@ class dats_quality
         }
     }
 
-    function initSites($dats)
+    public function initSites($dats)
     {
         $nbSites = count($dats->sites);
         $this->commentSite = "Info: $nbSites site(s)\n";
@@ -193,7 +193,7 @@ class dats_quality
         }
     }
 
-    function initInstruments($dats)
+    public function initInstruments($dats)
     {
         $nbInstrus = count($dats->dats_sensors);
         $this->commentSensor = "Info: $nbInstrus sensors\n";
@@ -237,7 +237,7 @@ class dats_quality
         }
     }
 
-    function initUse($dats)
+    public function initUse($dats)
     {
 
         $this->commentUse = '';
@@ -252,7 +252,7 @@ class dats_quality
         }
     }
 
-    function initCore($dats)
+    public function initCore($dats)
     {
         $this->commentCore = "";
         $this->cptCore = $this->cptCoreMax = 3;
@@ -278,7 +278,7 @@ class dats_quality
         }
     }
 
-    function initInfos($dats)
+    public function initInfos($dats)
     {
         $this->commentInfo = "";
         $this->cptInfo = $this->cptInfoMax = 7;
@@ -312,7 +312,7 @@ class dats_quality
         }
     }
 
-    function initDates($dats)
+    public function initDates($dats)
     {
         $this->commentDates = '';
         $this->cptDates = $this->cptDatesMax = 5;
@@ -330,7 +330,7 @@ class dats_quality
         }
     }
 
-    function display($datsType)
+    public function display($datsType)
     {
 
         echo '<table><tr><th colspan="2" align="center" >';

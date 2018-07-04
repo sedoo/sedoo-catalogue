@@ -31,7 +31,7 @@ class place
 
     public $sensor_environment;
 
-    function new_place($tab)
+    public function new_place($tab)
     {
         $this->place_id = $tab[0];
         $this->pla_place_id = $tab[1];
@@ -60,7 +60,7 @@ class place
         }
     }
 
-    function toString()
+    public function toString()
     {
         $result = 'Site: ' . (($this->gcmd_plateform_keyword) ? $this->gcmd_plateform_keyword->gcmd_plat_name . ' > ' : '') . $this->place_name;
 
@@ -77,13 +77,13 @@ class place
         return $result;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from place order by place_name";
         return $this->getByQuery($query);
     }
 
-    function getChildrenSites($parent, $type = 0)
+    public function getChildrenSites($parent, $type = 0)
     {
         $where = "where place_level is not null and pla_place_id = $parent";
         if ($type > 0) {
@@ -93,7 +93,7 @@ class place
         return $this->getByQuery($query);
     }
 
-    function getByLevel($level = 1, $parent = 0, $type = 0)
+    public function getByLevel($level = 1, $parent = 0, $type = 0)
     {
         $where = "where place_level = $level";
 
@@ -109,13 +109,13 @@ class place
         return $this->getByQuery($query);
     }
 
-    function getAllInSitu()
+    public function getAllInSitu()
     {
         $query = "select * from place_insitu order by place_name";
         return $this->getByQuery($query);
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new place();
@@ -130,7 +130,7 @@ class place
         return $place;
     }
 
-    function getPlaceNameById($id)
+    public function getPlaceNameById($id)
     {
         $query = "select place_name from place where place_id = " . $id;
         $bd = new bdConnect();
@@ -138,7 +138,7 @@ class place
         return $resultat;
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -151,7 +151,7 @@ class place
         return $liste;
     }
 
-    function existeComplet()
+    public function existeComplet()
     {
         $where = "where lower(place_name) = lower('" . (str_replace("'", "\'", $this->place_name)) . "')";
 
@@ -184,7 +184,7 @@ class place
         return false;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from place where " .
         "lower(place_name) = lower('" . (str_replace("'", "\'", $this->place_name)) . "')";
@@ -197,7 +197,7 @@ class place
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from place where place_id = " . $this->place_id;
         $bd = new bdConnect();
@@ -208,7 +208,7 @@ class place
         return false;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
         if (isset($this->boundings) && $this->bound_id != -1) {
             $this->boundings->insert($bd);
@@ -247,7 +247,7 @@ class place
         return $this->place_id;
     }
 
-    function chargeFormModelCategsNew($form, $label, $titre)
+    public function chargeFormModelCategsNew($form, $label, $titre)
     {
         $gcmd = new gcmd_plateform_keyword();
         $type = $gcmd->getByName(model_dataset::GCMD_CATEG);
@@ -267,7 +267,7 @@ class place
 
   //Encore utilisé par va dataset
   //TODO remplacer par le nouveau
-    function chargeFormModelCategs($form, $label, $titre)
+    public function chargeFormModelCategs($form, $label, $titre)
     {
         $gcmd = new gcmd_plateform_keyword();
         $types = $gcmd->getByIds(MODEL_CATEGORIES);
@@ -284,7 +284,7 @@ class place
         return $s;
     }
 
-    function chargeFormSiteLevels($form, $label, $titre)
+    public function chargeFormSiteLevels($form, $label, $titre)
     {
         global $project_name;
         $array_type[0] = "";
@@ -324,7 +324,7 @@ class place
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre, $indice)
+    public function chargeForm($form, $label, $titre, $indice)
     {
         $liste = $this->getAllInSitu();
 
@@ -345,14 +345,14 @@ class place
         return $s;
     }
 
-    function chargeFormModNew($form, $label, $titre)
+    public function chargeFormModNew($form, $label, $titre)
     {
         return $this->chargeFormByType($form, $label, $titre, model_dataset::GCMD_CATEG, "updateMod();");
     }
 
   //Encore utilisé par va dataset
   //TODO remplacer par le nouveau
-    function chargeFormMod($form, $label, $titre, $onchange = "updateMod();")
+    public function chargeFormMod($form, $label, $titre, $onchange = "updateMod();")
     {
         $query = 'SELECT DISTINCT ON (place_name) * from place where gcmd_plat_id in (' . GCMD_PLAT_MODEL . ') AND place_level IS NULL order by place_name';
         $liste = $this->getByQuery($query);
@@ -366,7 +366,7 @@ class place
         return $s;
     }
 
-    function chargeFormInstruvadataset($form, $label = "instru_place_", $titre = "instru_place")
+    public function chargeFormInstruvadataset($form, $label = "instru_place_", $titre = "instru_place")
     {
         $liste = $this->getAllInSitu();
         for ($i = 0; $i < count($liste); $i++) {
@@ -379,7 +379,7 @@ class place
         return $s;
     }
 
-    function chargeFormSatCategs($form, $label, $titre)
+    public function chargeFormSatCategs($form, $label, $titre)
     {
         $gcmd = new gcmd_plateform_keyword();
         $type = $gcmd->getByName("Satellites");
@@ -394,12 +394,12 @@ class place
         return $s;
     }
 
-    function chargeFormSat($form, $i, $label = 'satellite_', $titre = 'Satellite')
+    public function chargeFormSat($form, $i, $label = 'satellite_', $titre = 'Satellite')
     {
         return $this->chargeFormByType($form, $label . $i, $titre, 'Satellites', 'updateSat(' . $i . ');');
     }
 
-    function chargeFormRegion($form, $label, $titre, $simpleVersion = false)
+    public function chargeFormRegion($form, $label, $titre, $simpleVersion = false)
     {
         if ($simpleVersion) {
             $boxesNames = "['new_area','west_bound_0','east_bound_0','north_bound_0','south_bound_0']";
@@ -411,7 +411,7 @@ class place
         return $this->chargeFormByType($form, $label, $titre, "Geographic Regions", "fillBoxes('" . $label . "'," . $boxesNames . ",'place'," . $columnsNames . ");");
     }
 
-    function chargeFormByType($form, $label, $titre, $type, $onchange)
+    public function chargeFormByType($form, $label, $titre, $type, $onchange)
     {
         $query = "select * from place where gcmd_plat_id in (select gcmd_plat_id from gcmd_plateform_keyword where gcmd_plat_name ilike '%" . $type . "%') AND place_level IS NULL order by place_name";
         $liste = $this->getByQuery($query);
@@ -426,7 +426,7 @@ class place
         return $s;
     }
 
-    function chargeFormByTypeVadataset($form, $label, $titre, $type, $onchange)
+    public function chargeFormByTypeVadataset($form, $label, $titre, $type, $onchange)
     {
         $query = "select * from place where gcmd_plat_id in (select gcmd_plat_id from gcmd_plateform_keyword where gcmd_plat_name ilike '%" . $type . "%') AND place_level IS NULL order by place_name";
         $liste = $this->getByQuery($query);

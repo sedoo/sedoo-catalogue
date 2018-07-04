@@ -29,7 +29,7 @@ class _Dataset
     public $ins_date;
     public $last_update;
 
-    function _Dataset($url, $id, $name, $dateDeb, $dateFin, $uids, $sgbd, $role, $ins_date, $last_update)
+    public function _Dataset($url, $id, $name, $dateDeb, $dateFin, $uids, $sgbd, $role, $ins_date, $last_update)
     {
         $this->dats_id = $id;
         $this->url = '/' . $url;
@@ -50,14 +50,14 @@ class Plateforme
     public $name; // Nom du domaine
     public $count;
     
-    function Plateforme($id, $name)
+    public function Plateforme($id, $name)
     {
         $this->name = $name;
         $this->id = $id;
         $this->count = 0;
     }
     
-    function addDataset($url, $id, $name, $dateDeb, $dateFin, $uids, $sgbd, $role, $ins_date, $last_update)
+    public function addDataset($url, $id, $name, $dateDeb, $dateFin, $uids, $sgbd, $role, $ins_date, $last_update)
     {
         $this->ds[$this->count] = new _Dataset($url, $id, $name, $dateDeb, $dateFin, $uids, $sgbd, $role, $ins_date, $last_update);
         $this->count += 1;
@@ -312,6 +312,7 @@ function fillProjectsTab($Project_Name = null)
         $Dats_Projects[$project_name] = getDatasetsByProject($Projects[$project_name]);
     }
 }
+
 function displayPageByProject()
 {
     global $Dats_Projects, $project_name, $Projects, $root;
@@ -330,6 +331,7 @@ function displayPageByProject()
     reset($Dats_Projects);
     echo "</div></div>";
 }
+
 function displayPage()
 {
     global $Dats_Projects, $project_name, $root;
@@ -395,7 +397,7 @@ function displayPage()
 		 </div>
 		 <script src='/utils/jquery-ui-1.9.2/jquery-1.8.3.js'></script>
 		 <script type='text/javascript'>
-		 jQuery(document).ready(function ($) {
+		 jQuery(document).ready(public function ($) {
 		 	$('#tabs').tab();
 		 });
 		 </script>

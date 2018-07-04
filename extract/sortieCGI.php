@@ -26,7 +26,6 @@ function send_to_cgi_fichiers($requeteXml, &$retour)
     }
 }
 
-
 function do_post_request($url, $data, $optional_headers = null, $timeout = 5)
 {
     $params = array('http' => array(

@@ -17,7 +17,7 @@ class data_availability
 
     public $period;
 
-    function new_data_availability($tab)
+    public function new_data_availability($tab)
     {
         $this->ins_dats_id = $tab[0];
         $this->var_id = $tab[1];
@@ -30,7 +30,7 @@ class data_availability
         $this->period = $tab[8];
     }
 
-    function getByDatsVarPlace($ins_dats_id, $var_id, $place_id, $year = null)
+    public function getByDatsVarPlace($ins_dats_id, $var_id, $place_id, $year = null)
     {
         if ($year) {
             $whereYear = "AND date_end >= '$year-01-01' and date_begin <= '$year-12-31'";

@@ -7,7 +7,7 @@ class projectPDF extends FPDF
     public $text_indent = 0;
     public $titre;
     
-    function projectPdf($titre = 'Instrument Form')
+    public function projectPdf($titre = 'Instrument Form')
     {
         parent::__construct();
         $this->titre = $titre;
@@ -16,7 +16,7 @@ class projectPDF extends FPDF
         $this->AliasNbPages();
     }
     
-    function addTitre($titre)
+    public function addTitre($titre)
     {
         $this->SetLineWidth(0.2);
         $this->SetFont('Arial', 'B', 16);
@@ -24,7 +24,7 @@ class projectPDF extends FPDF
     }
 
   // Pied de page
-    function Footer()
+    public function Footer()
     {
         $this->SetY(-10);
         $this->SetFont('Arial', '', 8);
@@ -34,7 +34,7 @@ class projectPDF extends FPDF
         $this->Cell(0, 6, 'Page ' . $this->PageNo() . '/{nb}', 0, 0, 'R');
     }
     
-    function addSection($titre)
+    public function addSection($titre)
     {
         if ($this->getY() > 230) {
             $this->AddPage();
@@ -49,12 +49,12 @@ class projectPDF extends FPDF
       // $this->ln();
     }
     
-    function newLine()
+    public function newLine()
     {
         $this->ln();
     }
     
-    function indent($i)
+    public function indent($i)
     {
         if ($i > 0) {
             $posX = $this->getX();
@@ -62,13 +62,13 @@ class projectPDF extends FPDF
         }
     }
     
-    function addImage($image)
+    public function addImage($image)
     {
         $this->ln();
         $this->Image(str_replace(' ', '%20', $image), null, null, 190);
     }
     
-    function addSousSection($titre, $data = array(), $attr = null)
+    public function addSousSection($titre, $data = array(), $attr = null)
     {
         if (isset($data)) {
             if ($this->getY() > 250) {
@@ -90,7 +90,7 @@ class projectPDF extends FPDF
         }
     }
     
-    function addText($str)
+    public function addText($str)
     {
         $this->setFont('Arial', '', 10);
         $this->indent($this->text_indent);
@@ -98,7 +98,7 @@ class projectPDF extends FPDF
         $this->Multicell(0, 6, $str);
     }
     
-    function addList($list, $attr = null)
+    public function addList($list, $attr = null)
     {
         foreach ($list as $item) {
             if (isset($attr)) {
@@ -109,7 +109,7 @@ class projectPDF extends FPDF
         }
     }
     
-    function addLabelList($label, $list, $attr = null)
+    public function addLabelList($label, $list, $attr = null)
     {
         $str = '';
         foreach ($list as $item) {
@@ -122,7 +122,7 @@ class projectPDF extends FPDF
         $this->addLabelValue($label, substr($str, 1));
     }
     
-    function addLabelValue($label, $value, $hideIfEmpty = true)
+    public function addLabelValue($label, $value, $hideIfEmpty = true)
     {
         $value = trim($value);
         if ((isset($value) && !empty($value)) || !$hideIfEmpty) {

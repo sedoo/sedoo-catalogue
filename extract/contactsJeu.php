@@ -10,7 +10,7 @@ class contactsJeu
 
     public $contacts;
 
-    function contactsJeu($xmlElt)
+    public function contactsJeu($xmlElt)
     {
         $this->datsId = (string) $xmlElt->dataset_id;
         $this->datsTitle = (string) $xmlElt->dataset_title;
@@ -20,7 +20,7 @@ class contactsJeu
         }
     }
 
-    function toHtml()
+    public function toHtml()
     {
         $url = $_SERVER['REQUEST_URI'] . "&datsId=$this->datsId";
         echo "<a href='$url'>$this->datsTitle</a>";

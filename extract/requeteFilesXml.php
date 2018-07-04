@@ -14,7 +14,7 @@ class requeteFilesXml
     public $files;
     
 
-    function requeteFilesXml($user, $projectName, $dataset, $racine)
+    public function requeteFilesXml($user, $projectName, $dataset, $racine)
     {
         if ($projectName == 'Overall') {
             $this->projectName = MainProject;
@@ -28,12 +28,12 @@ class requeteFilesXml
         $this->files = array();
     }
     
-    function addFile($file)
+    public function addFile($file)
     {
         $this->files[] = $file;
     }
         
-    function toXml()
+    public function toXml()
     {
         $xml = simplexml_load_file(XML_FICHIERS_TEMPLATE);
 

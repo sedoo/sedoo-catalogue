@@ -15,7 +15,7 @@ class param
     public $unit;
     public $hasData = false;
 
-    function new_param($tab)
+    public function new_param($tab)
     {
         $this->var_id = $tab[0];
         $this->unit_id = $tab[1];
@@ -35,7 +35,7 @@ class param
         }
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = "select * from param order by param_code";
         $bd = new bdConnect();
@@ -49,13 +49,13 @@ class param
         return $liste;
     }
 
-    function getByProjects($projects)
+    public function getByProjects($projects)
     {
         $query = "SELECT q1.*, ins_dats_id FROM (SELECT * FROM param) AS q1 LEFT JOIN (SELECT DISTINCT var_id,ins_dats_id FROM inserted_dataset JOIN dats_data USING (ins_dats_id) JOIN dats_proj USING (dats_id) JOIN data_availability USING (ins_dats_id) JOIN param USING (var_id) WHERE project_id in ($projects)) AS q2 USING (var_id) ORDER BY param_code";
         return $this->getByQuery($query);
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return null;
@@ -70,19 +70,19 @@ class param
         return $var;
     }
 
-    function getByGcmdId($ids)
+    public function getByGcmdId($ids)
     {
         $query = "SELECT * FROM param WHERE var_id in (SELECT var_id FROM variable WHERE gcmd_id in ($ids));";
         return $this->getByQuery($query);
     }
 
-    function getByDatsId($id)
+    public function getByDatsId($id)
     {
         $query = "SELECT * FROM param WHERE var_id in (SELECT DISTINCT var_id FROM data_availability WHERE ins_dats_id IN (SELECT ins_dats_id FROM inserted_dataset WHERE ins_dats_id in (SELECT ins_dats_id FROM dats_data WHERE dats_id IN ($id))));";
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();

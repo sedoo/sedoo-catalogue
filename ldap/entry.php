@@ -5,12 +5,12 @@ class entry
 
     public $dn;
 
-    function __construct($dn)
+    public function __construct($dn)
     {
         $this->dn = $dn;
     }
 
-    function toString()
+    public function toString()
     {
         return "DN: $this->dn\n";
     }

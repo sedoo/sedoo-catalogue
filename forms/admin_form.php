@@ -16,7 +16,7 @@ class admin_form extends login_form
     public $registeredUsersByProject;
     public $participants;
 
-    function createForm()
+    public function createForm()
     {
         global $project_name, $MainProjects;
         if (isset($_SESSION['loggedUser'])) {
@@ -68,7 +68,7 @@ class admin_form extends login_form
     }
 
   /* *** Actions **** */
-    function registerUser($i)
+    public function registerUser($i)
     {
         global $project_name;
         $ldapConn = new ldapConnect();
@@ -156,7 +156,7 @@ class admin_form extends login_form
         }
     }
   
-    function sendMailRejet($userEmail, $adminEmail)
+    public function sendMailRejet($userEmail, $adminEmail)
     {
         global $project_name;
       // Envoi du mail
@@ -165,13 +165,13 @@ class admin_form extends login_form
         sendMailSimple(ROOT_EMAIL, "[$project_name-DATABASE] Rejected User", "User $userEmail has been rejected", ROOT_EMAIL);
     }
 
-    function getProjectAdminEmail($project_name)
+    public function getProjectAdminEmail($project_name)
     {
       //TODO
         return ROOT_EMAIL;
     }
 
-    function rejectUser($i)
+    public function rejectUser($i)
     {
         global $project_name;
         $ldapConn = new ldapConnect();
@@ -194,7 +194,7 @@ class admin_form extends login_form
         }
     }
 
-    function restoreUser($i)
+    public function restoreUser($i)
     {
         global $project_name;
         $ldapConn = new ldapConnect();
@@ -216,7 +216,7 @@ class admin_form extends login_form
         }
     }
 
-    function updateUser($i)
+    public function updateUser($i)
     {
         global $project_name;
         $ldapConn = new ldapConnect();
@@ -275,7 +275,7 @@ class admin_form extends login_form
         }
     }
 
-    function unregisterUser($i)
+    public function unregisterUser($i)
     {
         global $project_name;
         $ldapConn = new ldapConnect();
@@ -313,7 +313,7 @@ class admin_form extends login_form
         }
     }
 
-    function deleteUser($i)
+    public function deleteUser($i)
     {
         $ldapConn = new ldapConnect();
         $user = $this->rejectedRequests[$i];
@@ -335,28 +335,28 @@ class admin_form extends login_form
     }
 
   /* *** Création des éléments de formulaire **** */
-    function createPendingRequestsForm()
+    public function createPendingRequestsForm()
     {
         for ($i = 1; $i <= count($this->pendingRequests); $i++) {
             $this->createPendingRequestForm($i);
         }
     }
 
-    function createRejectedRequestsForm()
+    public function createRejectedRequestsForm()
     {
         for ($i = 1; $i <= count($this->rejectedRequests); $i++) {
             $this->createRejectedRequestForm($i);
         }
     }
 
-    function createRegisteredUsersForm()
+    public function createRegisteredUsersForm()
     {
         for ($i = 1; $i <= count($this->registeredUsers); $i++) {
             $this->createRegisteredUserForm($i);
         }
     }
 
-    function createPendingRequestForm($i)
+    public function createPendingRequestForm($i)
     {
         global $project_name;
         $groupes = $this->getUsersGroup($project_name, true);
@@ -366,13 +366,13 @@ class admin_form extends login_form
         $this->addElement('submit', 'bouton_reject_' . $i, 'Reject');
     }
 
-    function createRejectedRequestForm($i)
+    public function createRejectedRequestForm($i)
     {
         $this->addElement('submit', 'bouton_restore_' . $i, 'Restore');
         $this->addElement('submit', 'bouton_delete_' . $i, 'Delete');
     }
 
-    function getUsersGroup($project, $noDefault = false)
+    public function getUsersGroup($project, $noDefault = false)
     {
         if ($noDefault) {
             $groupes[-1] = "-- Choose a status --";
@@ -386,7 +386,7 @@ class admin_form extends login_form
         return $groupes;
     }
 
-    function createRegisteredUserForm($i)
+    public function createRegisteredUserForm($i)
     {
         global $project_name;
         $user = $this->registeredUsers[$i];
@@ -403,22 +403,22 @@ class admin_form extends login_form
     }
 
   /* *** Affichage des listes **** */
-    function displayRejectedUser($i, $user)
+    public function displayRejectedUser($i, $user)
     {
         $this->displayUser($i, $user, false, true);
     }
 
-    function displayPendingRequest($i, $user)
+    public function displayPendingRequest($i, $user)
     {
         $this->displayUser($i, $user);
     }
 
-    function displayRegisteredUser($i, $user, $project = null)
+    public function displayRegisteredUser($i, $user, $project = null)
     {
         $this->displayUser($i, $user, true, false, $project);
     }
 
-    function displayDate($dateStr = null)
+    public function displayDate($dateStr = null)
     {
         try {
             list($year, $month, $day) = sscanf($dateStr, "%4u%2u%2u");
@@ -429,7 +429,7 @@ class admin_form extends login_form
         }
     }
 
-    function searchUser()
+    public function searchUser()
     {
         $cpt = 1;
         $str = ucfirst($_POST['search']);
@@ -445,7 +445,7 @@ class admin_form extends login_form
         return 1;
     }
 
-    function displayUsersListHeader($first = 1, $nb = USERS_PER_PAGE, $registered = false, $rejected = false, $project = null)
+    public function displayUsersListHeader($first = 1, $nb = USERS_PER_PAGE, $registered = false, $rejected = false, $project = null)
     {
         if ($project == null) {
             if ($registered) {
@@ -507,7 +507,7 @@ class admin_form extends login_form
         }
     }
 
-    function displayUser($i, $user, $registered = false, $rejected = false, $project = null)
+    public function displayUser($i, $user, $registered = false, $rejected = false, $project = null)
     {
         global $MainProjects, $project_name;
         if (isset($user)) {
@@ -617,7 +617,7 @@ class admin_form extends login_form
         }
     }
 
-    function displayParticipantsList()
+    public function displayParticipantsList()
     {
         echo '<table>';
         if (isset($this->participants)) {
@@ -646,7 +646,7 @@ class admin_form extends login_form
         echo '</table>';
     }
 
-    function displayPendingRequestsList()
+    public function displayPendingRequestsList()
     {
         echo '<table>';
         if (isset($this->pendingRequests)) {
@@ -660,7 +660,7 @@ class admin_form extends login_form
         echo '</table>';
     }
 
-    function displayRejectedRequestsList()
+    public function displayRejectedRequestsList()
     {
         echo '<table>';
         if (isset($this->rejectedRequests)) {
@@ -677,7 +677,7 @@ class admin_form extends login_form
   /**
    * @todo comprendre pourquoi if ($project == null)
    */
-    function displayRegisteredUsersList($first = 1, $nb = USERS_PER_PAGE, $project = null)
+    public function displayRegisteredUsersList($first = 1, $nb = USERS_PER_PAGE, $project = null)
     {
         if ($project == null) {
             echo '<table>';
@@ -715,12 +715,12 @@ class admin_form extends login_form
         }
     }
 
-    function displayRegisteredUsersListByProject($projects)
+    public function displayRegisteredUsersListByProject($projects)
     {
         $first = null;
         if (isset($projects)) {
             echo '<script>
-					$(function() {
+					$(public function() {
 						$( "#tabs" ).tabs();
 					});
 				</script>';
@@ -742,7 +742,7 @@ class admin_form extends login_form
     }
 
   /* *** Lecture dans l'annuaire **** */
-    function readPendingRequestsList()
+    public function readPendingRequestsList()
     {
         global $project_name;
         try {
@@ -755,7 +755,7 @@ class admin_form extends login_form
             $this->mailAdmin('ERREUR', 'Exception lors de la récupération des pendingRequests.', $e);
         }
     }
-    function readRejectedRequestsList()
+    public function readRejectedRequestsList()
     {
         global $project_name;
         try {
@@ -768,7 +768,7 @@ class admin_form extends login_form
             $this->mailAdmin('ERREUR', 'Exception lors de la récupération des rejectedRequests.', $e);
         }
     }
-    function readParticipantsList()
+    public function readParticipantsList()
     {
         global $project_name;
         try {
@@ -781,7 +781,7 @@ class admin_form extends login_form
             $this->mailAdmin('ERREUR', 'Exception lors de la récupération des participants.', $e);
         }
     }
-    function readRegisteredUsersList()
+    public function readRegisteredUsersList()
     {
         global $project_name;
         try {
@@ -808,7 +808,7 @@ class admin_form extends login_form
             $this->mailAdmin('ERREUR', 'Exception lors de la récupération des registeredUsers.', $e);
         }
     }
-    function readRegisteredUsersListByProject($project)
+    public function readRegisteredUsersListByProject($project)
     {
         try {
             $ldap = new ldapConnect();

@@ -22,7 +22,7 @@ class requeteXml
     public $variables;
     public $user;
 
-    function requeteXml($user, $projectName)
+    public function requeteXml($user, $projectName)
     {
         $this->projectName = $projectName;
         $this->user = $user;
@@ -39,7 +39,7 @@ class requeteXml
         $this->variables = array();
     }
 
-    static function readXml($xml)
+    public static function readXml($xml)
     {
         $xml = simplexml_load_string($xml);
         $user = new portalUser();
@@ -78,7 +78,7 @@ class requeteXml
         return $requete;
     }
 
-    function toString()
+    public function toString()
     {
         return "Period: $this->dateMin - $this->dateMax
 				Zone: $this->latMin, $this->latMax, $this->lonMin, $this->lonMax
@@ -89,7 +89,7 @@ class requeteXml
 				Compression: $this->compression";
     }
 
-    function toXml()
+    public function toXml()
     {
         $xml = simplexml_load_file(XML_TEMPLATE);
 

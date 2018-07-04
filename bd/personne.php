@@ -21,7 +21,7 @@ class personne
     public $contact_type_id;
     public $contact_type;
 
-    function new_contact($name, $mail, $organismName)
+    public function new_contact($name, $mail, $organismName)
     {
         $this->pers_name = $name;
         $this->pers_email_1 = $mail;
@@ -29,7 +29,7 @@ class personne
         $this->organism->org_sname = $organismName;
     }
 
-    function new_personne($tab)
+    public function new_personne($tab)
     {
         $this->pers_id = $tab[0];
         $this->org_id = $tab[1];
@@ -51,7 +51,7 @@ class personne
         }
     }
 
-    function toString()
+    public function toString()
     {
         $result = "Contact: " . $this->pers_name;
         if (isset($this->pers_email_1) && !empty($this->pers_email_1)) {
@@ -70,18 +70,18 @@ class personne
         return $result;
     }
 
-    function isPI()
+    public function isPI()
     {
         return $this->contact_type_id == 1;
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = 'select * from personne order by pers_name';
         return $this->getByQuery($query);
     }
 
-    function getByQuery($query)
+    public function getByQuery($query)
     {
         $bd = new bdConnect();
         $liste = array();
@@ -94,7 +94,7 @@ class personne
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new personne();
@@ -109,7 +109,7 @@ class personne
         return $pers;
     }
 
-    function existe()
+    public function existe()
     {
         $query = "select * from personne where " .
         "lower(pers_name) = lower('" . str_replace("'", "\'", $this->pers_name) . "')";
@@ -121,7 +121,7 @@ class personne
         return false;
     }
 
-    function idExiste()
+    public function idExiste()
     {
         $query = "select * from personne where pers_id = " . $this->pers_id;
         $bd = new bdConnect();
@@ -133,7 +133,7 @@ class personne
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre, $indice)
+    public function chargeForm($form, $label, $titre, $indice)
     {
 
         $liste = $this->getAll();
@@ -151,7 +151,7 @@ class personne
         return $s;
     }
 
-    function insert(&$bd)
+    public function insert(&$bd)
     {
 
       //Insertion de l'organisme
