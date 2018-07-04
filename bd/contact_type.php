@@ -12,13 +12,13 @@ class contact_type
     public $contact_type_id;
     public $contact_type_name;
 
-    function new_contact_type($tab)
+    public function new_contact_type($tab)
     {
         $this->contact_type_id = $tab[0];
         $this->contact_type_name = $tab[1];
     }
 
-    function getAll()
+    public function getAll()
     {
         $query = 'select * from contact_type order by contact_type_id';
         $bd = new bdConnect();
@@ -32,7 +32,7 @@ class contact_type
         return $liste;
     }
 
-    function getById($id)
+    public function getById($id)
     {
         if (!isset($id) || empty($id)) {
             return new contact_type();
@@ -48,7 +48,7 @@ class contact_type
         return $contact_type;
     }
 
-    function getByName($name)
+    public function getByName($name)
     {
         $query = "select * from contact_type where lower(contact_type_name) = '" . strtolower($name) . "'";
         $contact_type = null;
@@ -61,7 +61,7 @@ class contact_type
     }
 
   //creer element select pour formulaire
-    function chargeForm($form, $label, $titre)
+    public function chargeForm($form, $label, $titre)
     {
 
         $liste = $this->getAll();
