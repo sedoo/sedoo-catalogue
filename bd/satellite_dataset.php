@@ -64,7 +64,7 @@ class satellite_dataset extends base_dataset
     {
         $this->sats = array();
 
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             $this->dats_sensors[$i]->sensor->get_sensor_places();
             $place = new place();
             $this->sats[$i] = $place->getById($this->dats_sensors[$i]->sensor->sensor_places[0]->place->place_id);
@@ -87,7 +87,7 @@ class satellite_dataset extends base_dataset
     {
         if (isset($this->dats_sensors[0]->sensor->sensor_id) && !empty($this->dats_sensors[0]->sensor->sensor_id)) {
             $this->bdConn->exec("delete from sensor_place where sensor_id = " . $this->dats_sensors[0]->sensor->sensor_id);
-            for ($i = 0; $i < count($this->dats_variables); $i++) {
+            for ($i = 0, $size = count($this->dats_variables); $i < $size; $i++) {
                 if (isset($this->dats_variables[$i]->variable->var_id) && !empty($this->dats_variables[$i]->variable->var_id)) {
                     $this->bdConn->exec("delete from sensor_var where var_id = " . $this->dats_variables[$i]->variable->var_id . " and sensor_id = " . $this->dats_sensors[0]->sensor->sensor_id);
                 }
@@ -126,7 +126,7 @@ class satellite_dataset extends base_dataset
 
     private function insert_sats()
     {
-        for ($i = 0; $i < count($this->sats); $i++) {
+        for ($i = 0, $size = count($this->sats); $i < $size; $i++) {
             if ($this->sats[$i]->place_id == 0) {
                 $this->sats[$i]->insert($this->bdConn);
             }
@@ -146,7 +146,7 @@ class satellite_dataset extends base_dataset
 
     private function insert_sensor_places_sat()
     {
-        for ($i = 0; $i < count($this->sats); $i++) {
+        for ($i = 0, $size = count($this->sats); $i < $size; $i++) {
             if ($this->sats[$i]->place_id != -1 && $this->dats_sensors[$i]->sensor->sensor_id != -1) {
                 $this->dats_sensors[$i]->sensor->sensor_places[0] = new sensor_place();
                 $this->dats_sensors[$i]->sensor->sensor_places[0]->sensor_id = $this->dats_sensors[$i]->sensor->sensor_id;
@@ -163,7 +163,7 @@ class satellite_dataset extends base_dataset
         $result .= 'Data type: ' . $this->dataType->place_name . "\n";
         $result .= 'Area: ' . $this->sites[0]->place_name . "\n";
 
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             $result .= $this->sats[$i]->toString() . "\n";
             $result = '\nSat: ' . $this->sats[$i]->place_name;
 
@@ -220,7 +220,7 @@ class satellite_dataset extends base_dataset
 
         if (isset($this->dats_sensors) && !empty($this->dats_sensors)) {
             echo '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Instrument' . ((count($this->dats_sensors) > 1) ? 's' : '') . '</strong></th></tr>';
-            for ($i = 0; $i < count($this->dats_sensors); $i++) {
+            for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
                 if (count($this->dats_sensors) > 1) {
                     echo '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Instrument ' . ($i + 1) . '</strong></td></tr>';
                 }
@@ -310,7 +310,7 @@ class satellite_dataset extends base_dataset
 
         if (isset($this->dats_sensors) && !empty($this->dats_sensors)) {
             $dataset_infos .= '</td></tr><tr style = \'page-break-inside: avoid;\'><th colspan="4" align="center"><strong>Instrument' . ((count($this->dats_sensors) > 1) ? 's' : '') . '</strong></th></tr>';
-            for ($i = 0; $i < count($this->dats_sensors); $i++) {
+            for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
                 if (count($this->dats_sensors) > 1) {
                     $dataset_infos .= '<tr style = \'page-break-inside: avoid;\'><td colspan="4" align="center"><strong>Instrument ' . ($i + 1) . '</strong></td></tr>';
                 }

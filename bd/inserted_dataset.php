@@ -65,7 +65,7 @@ class inserted_dataset
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new inserted_dataset();
                 $liste[$i]->new_inserted_dataset($resultat[$i]);
             }
@@ -79,7 +79,7 @@ class inserted_dataset
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new inserted_dataset();
                 $liste[$i]->new_inserted_dataset($resultat[$i], $varId);
             }

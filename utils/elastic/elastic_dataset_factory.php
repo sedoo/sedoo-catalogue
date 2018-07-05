@@ -34,19 +34,19 @@ class elastic_dataset_factory{
 				$datsJson->periodName = $dats->period->period_name;
 			}
 				
-			for ($i = 0; $i < count($dats->projects); $i++){
+			for ($i = 0, $size = count($dats->projects); $i < $size; $i++){
 				if (isset($dats->projects[$i])){
 					$datsJson->projects[$i] = $dats->projects[$i]->toString();
 				}
 			}
 			
-			for ($i = 0; $i < count($dats->originators); $i++){
+			for ($i = 0, $size = count($dats->originators); $i < $size; $i++){
 				$datsJson->contacts[$i] = array();
 				$datsJson->contacts[$i]['name'] = $dats->originators[$i]->pers_name;
 				$datsJson->contacts[$i]['organisation'] = $dats->originators[$i]->organism->getName();
 			}
 				
-			for ($i = 0; $i < count($dats->dats_variables); $i++){
+			for ($i = 0, $size = count($dats->dats_variables); $i < $size; $i++){
 				$datsJson->variables[$i] = array();
 				if ( !empty($dats->dats_variables[$i]->variable->var_name ) ){
 					$datsJson->variables[$i]['name'] = $dats->dats_variables[$i]->variable->var_name;
@@ -59,7 +59,7 @@ class elastic_dataset_factory{
 				}
 			}
 
-			for ($i = 0; $i < count($dats->dats_sensors);$i++){
+			for ($i = 0, $size = count($dats->dats_sensors); $i < $size;$i++){
 				if (isset($dats->dats_sensors[$i]->sensor->gcmd_instrument_keyword) ){
 					$datsJson->sensors[$i]['gcmd'] = $dats->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name;
 				}
@@ -75,7 +75,7 @@ class elastic_dataset_factory{
 			}
 			
 			$indicePlace = 0;
-			for ($i = 0; $i < count($dats->sites); $i++){
+			for ($i = 0, $size = count($dats->sites); $i < $size; $i++){
 												
 				$datsJson->places[$indicePlace]['name'] = $dats->sites[$i]->place_name;
 				if ( isset($dats->sites[$i]->gcmd_plateform_keyword) ){
@@ -96,7 +96,7 @@ class elastic_dataset_factory{
 		/*	switch (get_class($dats)){
 				case self::SATELLITE_DATASET_CLASS:
 					//Satellites
-					for ($i = 0; $i < count($dats->sats); $i++) {
+					for ($i = 0, $size = count($dats->sats); $i < $size; $i++) {
 						$datsJson->places[$indicePlace]['name'] = $dats->sats[$i]->place_name;
 						if ( isset($dats->sats[$i]->gcmd_plateform_keyword) ){
 							$datsJson->places[$indicePlace]['gcmd'] = $dats->sats[$i]->gcmd_plateform_keyword->gcmd_plat_name;

@@ -24,7 +24,7 @@ class archive_form extends login_form
 
             $dts = new dataset();
             $liste = $dts->getOnlyTitles("select dats_id,dats_title FROM dataset WHERE dats_id IN ($this->projects) AND (is_archived IS NULL OR NOT is_archived) ORDER BY dats_title");
-            for ($i = 0; $i < count($liste); $i++) {
+            for ($i = 0, $size = count($liste); $i < $size; $i++) {
                 $j = $liste[$i]->dats_id;
                 $array[$j] = $liste[$i]->dats_title;
             }

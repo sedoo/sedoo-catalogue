@@ -145,7 +145,7 @@ class site_form extends base_site_form
             $indiceTableVar = 0;
             $indiceTableVarCalc = 0;
             if (isset($this->dataset->dats_sensors[$i]->sensor->sensor_vars) && !empty($this->dataset->dats_sensors[$i]->sensor->sensor_vars)) {
-                for ($j = 0; $j < count($this->dataset->dats_sensors[$i]->sensor->sensor_vars); $j++) {
+                for ($j = 0, $size = count($this->dataset->dats_sensors[$i]->sensor->sensor_vars); $j < $size; $j++) {
                     $suffix = "";
                     $prefixMsg = "";
 
@@ -249,7 +249,7 @@ class site_form extends base_site_form
                 $indiceTableVar = 0;
                 $indiceTableVarCalc = 0;
                 if (isset($dataset->dats_sensors[$i]->sensor->sensor_vars) && !empty($dataset->dats_sensors[$i]->sensor->sensor_vars)) {
-                    for ($j = 0; $j < count($dataset->dats_sensors[$i]->sensor->sensor_vars); $j++) {
+                    for ($j = 0, $size = count($dataset->dats_sensors[$i]->sensor->sensor_vars); $j < $size; $j++) {
                         $suffix = "";
                         echo 'flag_param_calcule = ' . $dataset->dats_sensors[$i]->sensor->sensor_vars[$j]->flag_param_calcule . '<br>';
 

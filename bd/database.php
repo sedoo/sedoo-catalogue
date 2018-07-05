@@ -51,7 +51,7 @@ class database
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new database();
                 $liste[$i]->new_database($resultat[$i]);
             }
@@ -89,7 +89,7 @@ class database
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new database();
                 $liste[$i]->new_database($resultat[$i]);
             }
@@ -126,7 +126,7 @@ class database
 
         $liste = $this->getAll();
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->database_id;
             $array[$j] = $liste[$i]->database_name;
         }

@@ -196,7 +196,7 @@ class stats_form extends login_form
         $requetes = array();
         $requetes[0][0] = 0;
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $year = $resultat[$i][0];
                 $month = $resultat[$i][1];
                 $nbRequetes = $resultat[$i][2];
@@ -218,7 +218,7 @@ class stats_form extends login_form
         $bd = new bdConnect();
         $requetes = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $contact = $resultat[$i][0];
                 $nbRequetes = $resultat[$i][1];
                 $requetes[$contact] = $nbRequetes;
@@ -233,7 +233,7 @@ class stats_form extends login_form
         $bd = new bdConnect();
         $requetes = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $type = $resultat[$i][0];
                 $nbRequetes = $resultat[$i][1];
                 $requetes[$type] = $nbRequetes;
@@ -248,7 +248,7 @@ class stats_form extends login_form
         $bd = new bdConnect();
         $requetes = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $datsId = $resultat[$i][0];
                 $datsTitle = $resultat[$i][1];
                 $nbRequetes = $resultat[$i][2];

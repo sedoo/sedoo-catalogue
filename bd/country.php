@@ -24,7 +24,7 @@ class country
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new country();
                 $liste[$i]->new_country($resultat[$i]);
             }
@@ -52,7 +52,7 @@ class country
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new country();
                 $liste[$i]->new_country($resultat[$i]);
             }
@@ -97,7 +97,7 @@ class country
 
         $liste = $this->getAll();
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->country_id;
             $array[$j] = $liste[$i]->country_name;
         }

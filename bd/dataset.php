@@ -232,7 +232,7 @@ class dataset
 
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new dataset();
                 $liste[$i]->newDatasetOnlyTitle($resultat[$i]);
             }
@@ -249,7 +249,7 @@ class dataset
             $result .= 'Dataset doi: ' . $this->dats_doi . "\n";
         }
         $result .= "Projects:\n";
-        for ($i = 0; $i < count($this->projects); $i++) {
+        for ($i = 0, $size = count($this->projects); $i < $size; $i++) {
             if (isset($this->projects[$i])) {
                 $result .= '- ' . $this->projects[$i]->toString() . "\n";
             }
@@ -271,7 +271,7 @@ class dataset
         }
         $result .= "\n";
 
-        for ($i = 0; $i < count($this->originators); $i++) {
+        for ($i = 0, $size = count($this->originators); $i < $size; $i++) {
             $result .= $this->originators[$i]->toString() . "\n";
         }
         $result .= "\nAbstract: " . $this->dats_abstract . "\n";
@@ -288,15 +288,15 @@ class dataset
             $result .= 'Data policy: ' . $this->data_policy->data_policy_name . "\n";
         }
         $result .= "Data formats:\n";
-        for ($i = 0; $i < count($this->data_formats); $i++) {
+        for ($i = 0, $size = count($this->data_formats); $i < $size; $i++) {
             $result .= '- ' . $this->data_formats[$i]->data_format_name . "\n";
         }
         $result .= "\nRequired data formats:\n";
-        for ($i = 0; $i < count($this->required_data_formats); $i++) {
+        for ($i = 0, $size = count($this->required_data_formats); $i < $size; $i++) {
             $result .= '- ' . $this->required_data_formats[$i]->data_format_name . "\n";
         }
 
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             if ($this->dats_sensors[$i]->sensor_id != '') {
                 $result .= "\nInstrument:\n";
                 $result .= $this->dats_sensors[$i]->toString();
@@ -306,7 +306,7 @@ class dataset
 
         $result .= "\n\n";
 
-        for ($i = 0; $i < count($this->sites); $i++) {
+        for ($i = 0, $size = count($this->sites); $i < $size; $i++) {
             if ($this->sites[$i + 1]->place_id != '') {
                 $result .= $this->sites[$i]->toString() . "\n";
                 if (isset($this->sites[$i]->pla_place_id) && $this->sites[$i]->pla_place_id > 0) {
@@ -320,7 +320,7 @@ class dataset
         }
 
         $result .= "\n\n";
-        for ($i = 0; $i < count($this->dats_variables); $i++) {
+        for ($i = 0, $size = count($this->dats_variables); $i < $size; $i++) {
             if ($this->dats_variables[$i]->variable->var_id > 0) {
                 $result .= $this->dats_variables[$i]->toString() . "\n";
             }
@@ -363,7 +363,7 @@ class dataset
 
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new dataset();
                 $liste[$i]->new_dataset($resultat[$i]);
             }
@@ -420,7 +420,7 @@ class dataset
         if (isset($this->dataset_types) && !empty($this->dataset_types)) {
             $dtype = new dataset_type();
             $dtype = $dtype->getByType($type);
-            for ($i = 0; $i < count($this->dataset_types); $i++) {
+            for ($i = 0, $size = count($this->dataset_types); $i < $size; $i++) {
                 if ($this->dataset_types[$i]->dats_type_id == $dtype->dats_type_id) {
                     return true;
                 }
@@ -450,7 +450,7 @@ class dataset
             if (!$this->isSatelliteDataset()) {
                 if (isset($this->dats_sensors[0]->sensor->sensor_id) && !empty($this->dats_sensors[0]->sensor->sensor_id)) {
                     $this->bdConn->exec("delete from sensor_place where sensor_id = " . $this->dats_sensors[0]->sensor->sensor_id);
-                    for ($i = 0; $i < count($this->dats_variables); $i++) {
+                    for ($i = 0, $size = count($this->dats_variables); $i < $size; $i++) {
                         if (isset($this->dats_variables[$i]->variable->var_id) && !empty($this->dats_variables[$i]->variable->var_id)) {
                             $this->bdConn->exec("delete from sensor_var where var_id = " . $this->dats_variables[$i]->variable->var_id . " and sensor_id = " . $this->dats_sensors[0]->sensor->sensor_id);
                         }
@@ -459,7 +459,7 @@ class dataset
             }
 
             if ($this->isValueAddedDataset()) {
-                for ($i = 0; $i < count($this->dats_sensors); $i++) {
+                for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
                     if (isset($this->dats_sensors[$i]->sensor->sensor_id) && !empty($this->dats_sensors[$i]->sensor->sensor_id)) {
                         $this->bdConn->exec("delete from sensor_place where sensor_id = " . $this->dats_sensors[$i]->sensor->sensor_id);
                     }
@@ -817,7 +817,7 @@ class dataset
     public function insert_dataset_types()
     {
         if (isset($this->dataset_types) && !empty($this->dataset_types)) {
-            for ($i = 0; $i < count($this->dataset_types); $i++) {
+            for ($i = 0, $size = count($this->dataset_types); $i < $size; $i++) {
                 if ($this->dataset_types[$i]->dats_type_id >= 0) {
                     if ($this->dataset_types[$i]->dats_type_id == 0) {
                         $this->dataset_types[$i]->insert($this->bdConn);
@@ -835,7 +835,7 @@ class dataset
 
     public function insert_data_formats()
     {
-        for ($i = 0; $i < count($this->data_formats); $i++) {
+        for ($i = 0, $size = count($this->data_formats); $i < $size; $i++) {
             if ($this->data_formats[$i]->data_format_id != -1) {
                 if ($this->data_formats[$i]->data_format_id == 0) {
                     $this->data_formats[$i]->insert($this->bdConn);
@@ -849,7 +849,7 @@ class dataset
             }
         }
 
-        for ($i = 0; $i < count($this->required_data_formats); $i++) {
+        for ($i = 0, $size = count($this->required_data_formats); $i < $size; $i++) {
             if ($this->required_data_formats[$i]->data_format_id > 0) {
                 $ddf = new dats_data_format();
                 $ddf->dats_id = $this->dats_id;
@@ -863,7 +863,7 @@ class dataset
   // modif by lolo
     public function insert_dats_var()
     {
-        for ($i = 0; $i < count($this->dats_variables); $i++) {
+        for ($i = 0, $size = count($this->dats_variables); $i < $size; $i++) {
             if (isset($this->dats_variables[$i]->unit) && $this->dats_variables[$i]->unit_id == 0) {
                 $this->dats_variables[$i]->unit->insert($this->bdConn);
             }
@@ -892,7 +892,7 @@ class dataset
 
     public function insert_dats_originators()
     {
-        for ($i = 0; $i < count($this->originators); $i++) {
+        for ($i = 0, $size = count($this->originators); $i < $size; $i++) {
             $do = new dats_originator();
             $do->dats_id = $this->dats_id;
             $do->pers_id = $this->originators[$i]->pers_id;
@@ -905,7 +905,7 @@ class dataset
 
     public function insert_originators()
     {
-        for ($i = 0; $i < count($this->originators); $i++) {
+        for ($i = 0, $size = count($this->originators); $i < $size; $i++) {
             if ($this->originators[$i]->pers_id == 0) {
                 $this->originators[$i]->insert($this->bdConn);
             }
@@ -921,9 +921,9 @@ class dataset
         if ($this->isValueAddedDataset()) {
             $this->insert_sensor_places_Vadataset();
         } else {
-            for ($j = 0; $j < count($this->dats_sensors); $j++) {
+            for ($j = 0, $size = count($this->dats_sensors); $j < $size; $j++) {
                 if ($this->dats_sensors[$j]->sensor->sensor_id > 0) {
-                    for ($i = 0; $i < count($this->sites); $i++) {
+                    for ($i = 0, $size = count($this->sites); $i < $size; $i++) {
                         if ($this->sites[$i]->place_id != -1 && $this->sites[$i]->place_id != '') {
                             $this->dats_sensors[$j]->sensor_places[$i] = new sensor_place();
                             $this->dats_sensors[$j]->sensor_places[$i]->sensor_id = $this->dats_sensors[$j]->sensor->sensor_id;
@@ -954,7 +954,7 @@ class dataset
 
     public function insert_sensor_places_satmod()
     {
-        for ($i = 1; $i < count($this->sites); $i++) {
+        for ($i = 1, $size = count($this->sites); $i < $size; $i++) {
             if ($this->sites[$i]->place_id != -1 && $this->dats_sensors[$i - 1]->sensor->sensor_id != -1 && strlen($this->sites[$i]->place_id) > 0 && strlen($this->dats_sensors[$i - 1]->sensor->sensor_id) > 0) {
                 $this->dats_sensors[$i - 1]->sensor_places[0] = new sensor_place();
                 $this->dats_sensors[$i - 1]->sensor_places[0]->sensor_id = $this->dats_sensors[$i - 1]->sensor->sensor_id;
@@ -967,7 +967,7 @@ class dataset
   // add by nizar
     public function insert_sensor_places_Vadataset()
     {
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             if ($this->sites[$i]->place_id != -1 && $this->dats_sensors[$i]->sensor->sensor_id != -1 && strlen($this->sites[$i]->place_id) > 0 && strlen($this->dats_sensors[$i]->sensor->sensor_id) > 0) {
                 $this->dats_sensors[$i]->sensor_places[0] = new sensor_place();
                 $this->dats_sensors[$i]->sensor_places[0]->sensor_id = $this->dats_sensors[$i]->sensor_id;
@@ -990,9 +990,9 @@ class dataset
   // modif by lolo, plusieurs sensors
     public function insert_sensor_vars()
     {
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             if ($this->dats_sensors[$i]->sensor->sensor_id > 0) {
-                for ($j = 0; $j < count($this->dats_sensors[$i]->sensor->sensor_vars); $j++) {
+                for ($j = 0, $size = count($this->dats_sensors[$i]->sensor->sensor_vars); $j < $size; $j++) {
                     if (!empty($this->dats_sensors[$i]->sensor->sensor_vars[$j]->variable->var_id) && $this->dats_sensors[$i]->sensor->sensor_vars[$j]->variable->var_id != -1) {
                         $this->dats_sensors[$i]->sensor->sensor_vars[$j]->sensor_id = $this->dats_sensors[$i]->sensor->sensor_id;
                         $this->dats_sensors[$i]->sensor->sensor_vars[$j]->var_id = $this->dats_sensors[$i]->sensor->sensor_vars[$j]->variable->var_id;
@@ -1007,7 +1007,7 @@ class dataset
   // modif by lolo
     public function insert_sensors()
     {
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             if (isset($this->dats_sensors[$i])) {
                 if (isset($this->dats_sensors[$i]->sensor) && $this->dats_sensors[$i]->sensor->sensor_id == 0) {
                     $this->dats_sensors[$i]->sensor_id = $this->dats_sensors[$i]->sensor->insert($this->bdConn);
@@ -1024,7 +1024,7 @@ class dataset
 
     public function insert_sites()
     {
-        for ($i = 0; $i < count($this->sites); $i++) {
+        for ($i = 0, $size = count($this->sites); $i < $size; $i++) {
             if (isset($this->sites[$i]->place_id) && $this->sites[$i]->place_id == 0 && strlen($this->sites[$i]->place_id) > 0) {
                 $this->sites[$i]->insert($this->bdConn);
             }
@@ -1060,7 +1060,7 @@ class dataset
 
     public function insert_projects()
     {
-        for ($i = 0; $i < count($this->projects); $i++) {
+        for ($i = 0, $size = count($this->projects); $i < $size; $i++) {
             if ($this->projects[$i]->project_id != 0) {
                 $dp = new dats_proj();
                 $dp->dats_id = $this->dats_id;
@@ -1199,7 +1199,7 @@ class dataset
             $this->sites[0] = $places[0];
         }
 
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             $this->dats_sensors[$i]->sensor->get_sensor_places();
             $this->sites[$i + 1] = $place->getById($this->dats_sensors[$i]->sensor->sensor_places[0]->place->place_id);
         }
@@ -1242,7 +1242,7 @@ class dataset
             $place = new place();
             $this->sites = $place->getByQuery($query);
 
-            for ($i = 0; $i < count($this->sites); $i++) {
+            for ($i = 0, $size = count($this->sites); $i < $size; $i++) {
                 if (isset($this->sites[$i]->place_level) && !empty($this->sites[$i]->place_level)) {
                   // Site prédéfini
                     $emptySite = new place();
@@ -1257,9 +1257,9 @@ class dataset
   // modif by lolo
     public function get_sensor_environments()
     {
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             if ($this->dats_sensors[$i]->sensor->sensor_id > 0) {
-                for ($j = 0; $j < count($this->sites); $j++) {
+                for ($j = 0, $size = count($this->sites); $j < $size; $j++) {
                     if ($this->sites[$j]->place_id > 0) {
                         $sp = new sensor_place();
                         $sp = $sp->getByIds($this->sites[$j]->place_id, $this->dats_sensors[$i]->sensor->sensor_id);
@@ -1283,11 +1283,11 @@ class dataset
   // modif by lolo
     public function get_sensor_vars()
     {
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             if ($this->dats_sensors[$i]->sensor->sensor_id > 0) {
                 $this->dats_sensors[$i]->sensor->sensor_vars = array();
                 $nbVars = 0;
-                for ($j = 0; $j < count($this->dats_variables); $j++) {
+                for ($j = 0, $size = count($this->dats_variables); $j < $size; $j++) {
                     if ($this->dats_variables[$j]->variable->var_id > 0) {
                         $sv = new sensor_var();
                         $sv = $sv->getByIds($this->dats_variables[$j]->var_id, $this->dats_sensors[$i]->sensor_id);
@@ -1316,7 +1316,7 @@ class dataset
         $query = "select * from dats_var where dats_id = " . $this->dats_id;
         $dats_var = new dats_var();
         $this->dats_variables = $dats_var->getByQuery($query);
-        for ($i = 0; $i < count($this->dats_variables); $i++) {
+        for ($i = 0, $size = count($this->dats_variables); $i < $size; $i++) {
             $this->dats_variables[$i]->getUnit();
             $this->dats_variables[$i]->getVariable();
             $this->dats_variables[$i]->getVerticalLevelType();

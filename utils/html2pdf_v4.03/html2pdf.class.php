@@ -892,7 +892,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
 
             // for each element of the parsing => load the action
             $res = null;
-            for ($sub->_parsePos; $sub->_parsePos<count($sub->parsingHtml->code); $sub->_parsePos++) {
+            for ($sub->_parsePos, $size = count($sub->parsingHtml->code); $sub->_parsePos < $size; $sub->_parsePos++) {
                 $action = $sub->parsingHtml->code[$sub->_parsePos];
                 $res = $sub->_executeAction($action);
                 if (!$res) break;
@@ -1189,7 +1189,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
         protected function _makeHTMLcode()
         {
             // foreach elements of the parsing
-            for ($this->_parsePos=0; $this->_parsePos<count($this->parsingHtml->code); $this->_parsePos++) {
+            for ($this->_parsePos = 0, $size = count($this->parsingHtml->code); $this->_parsePos < $size ; $this->_parsePos++) {
 
                 // get the action to do
                 $action = $this->parsingHtml->code[$this->_parsePos];
@@ -2025,7 +2025,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
             $actions = array();
 
             // for actions
-            for ($k=0; $k<count($match[0]); $k++) {
+            for ($k = 0, $size = count($match[0]); $k < $size; $k++) {
 
                 // get the name of the action
                 $name = strtolower($match[1][$k]);
@@ -2114,9 +2114,9 @@ if (!defined('__CLASS_HTML2PDF__')) {
 
             // for each cell without colspan, we get the max width for each column
             $sw = array();
-            for ($x=0; $x<count($corr[0]); $x++) {
+            for ($x = 0, $size = count($corr[0]); $x < $size; $x++) {
                 $m=0;
-                for ($y=0; $y<count($corr); $y++) {
+                for ($y = 0, $size = count($corr); $y < $size; $y++) {
                     if (isset($corr[$y][$x]) && is_array($corr[$y][$x]) && $corr[$y][$x][2]==1) {
                         $m = max($m, $cases[$corr[$y][$x][1]][$corr[$y][$x][0]]['w']);
                     }
@@ -2125,8 +2125,8 @@ if (!defined('__CLASS_HTML2PDF__')) {
             }
 
             // for each cell with colspan, we adapt the width of each column
-            for ($x=0; $x<count($corr[0]); $x++) {
-                for ($y=0; $y<count($corr); $y++) {
+            for ($x = 0, $size = count($corr[0]); $x < $size; $x++) {
+                for ($y = 0, $size = count($corr); $y < $size; $y++) {
                     if (isset($corr[$y][$x]) && is_array($corr[$y][$x]) && $corr[$y][$x][2]>1) {
 
                         // sum the max width of each column in colspan
@@ -2143,8 +2143,8 @@ if (!defined('__CLASS_HTML2PDF__')) {
             }
 
             // set the new width, for each cell
-            for ($x=0; $x<count($corr[0]); $x++) {
-                for ($y=0; $y<count($corr); $y++) {
+            for ($x = 0, $size = count($corr[0]); $x < $size; $x++) {
+                for ($y = 0, $size = count($corr); $y < $size; $y++) {
                     if (isset($corr[$y][$x]) && is_array($corr[$y][$x])) {
                         // without colspan
                         if ($corr[$y][$x][2]==1) {
@@ -2163,9 +2163,9 @@ if (!defined('__CLASS_HTML2PDF__')) {
 
             // for each cell without rowspan, we get the max height for each line
             $sh = array();
-            for ($y=0; $y<count($corr); $y++) {
+            for ($y = 0, $size = count($corr); $y < $size; $y++) {
                 $m=0;
-                for ($x=0; $x<count($corr[0]); $x++) {
+                for ($x = 0, $size = count($corr[0]); $x < $size; $x++) {
                     if (isset($corr[$y][$x]) && is_array($corr[$y][$x]) && $corr[$y][$x][3]==1) {
                         $m = max($m, $cases[$corr[$y][$x][1]][$corr[$y][$x][0]]['h']);
                     }
@@ -2174,8 +2174,8 @@ if (!defined('__CLASS_HTML2PDF__')) {
             }
 
             // for each cell with rowspan, we adapt the height of each line
-            for ($y=0; $y<count($corr); $y++) {
-                for ($x=0; $x<count($corr[0]); $x++) {
+            for ($y = 0, $size = count($corr); $y < $size; $y++) {
+                for ($x = 0, $size = count($corr[0]); $x < $size; $x++) {
                     if (isset($corr[$y][$x]) && is_array($corr[$y][$x]) && $corr[$y][$x][3]>1) {
 
                         // sum the max height of each line in rowspan
@@ -2192,8 +2192,8 @@ if (!defined('__CLASS_HTML2PDF__')) {
             }
 
             // set the new height, for each cell
-            for ($y=0; $y<count($corr); $y++) {
-                for ($x=0; $x<count($corr[0]); $x++) {
+            for ($y = 0, $size = count($corr); $y < $size; $y++) {
+                for ($x = 0, $size = count($corr[0]); $x < $size; $x++) {
                     if (isset($corr[$y][$x]) && is_array($corr[$y][$x])) {
                         // without rowspan
                         if ($corr[$y][$x][3]==1) {
@@ -2394,7 +2394,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
             if ($this->_isForOneLine) return false;
 
             $this->_subHEADER = array();
-            for ($this->_parsePos; $this->_parsePos<count($this->parsingHtml->code); $this->_parsePos++) {
+            for ($this->_parsePos, $size = count($this->parsingHtml->code); $this->_parsePos < $size; $this->_parsePos++) {
                 $action = $this->parsingHtml->code[$this->_parsePos];
                 if ($action['name']=='page_header') $action['name']='page_header_sub';
                 $this->_subHEADER[] = $action;
@@ -2418,7 +2418,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
             if ($this->_isForOneLine) return false;
 
             $this->_subFOOTER = array();
-            for ($this->_parsePos; $this->_parsePos<count($this->parsingHtml->code); $this->_parsePos++) {
+            for ($this->_parsePos, $size = count($this->parsingHtml->code); $this->_parsePos < $size; $this->_parsePos++) {
                 $action = $this->parsingHtml->code[$this->_parsePos];
                 if ($action['name']=='page_footer') $action['name']='page_footer_sub';
                 $this->_subFOOTER[] = $action;
@@ -2907,7 +2907,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
             $this->parsingCss->analyse('fieldset', $param);
 
             // get height of LEGEND element and make fieldset corrections
-            for ($tempPos = $this->_parsePos + 1; $tempPos<count($this->parsingHtml->code); $tempPos++) {
+            for ($tempPos = $this->_parsePos + 1, $size = count($this->parsingHtml->code); $tempPos < $size; $tempPos++) {
                 $action = $this->parsingHtml->code[$tempPos];
                 if ($action['name'] == 'fieldset') break;
                 if ($action['name'] == 'legend' && !$action['close']) {
@@ -2918,7 +2918,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
                     $sub->parsingHtml->code = $this->parsingHtml->getLevel($tempPos - 1);
 
                     $res = null;
-                    for ($sub->_parsePos = 0; $sub->_parsePos<count($sub->parsingHtml->code); $sub->_parsePos++) {
+                    for ($sub->_parsePos = 0, $size = count($sub->parsingHtml->code); $sub->_parsePos < $size; $sub->_parsePos++) {
                         $action = $sub->parsingHtml->code[$sub->_parsePos];
                         $sub->_executeAction($action);
 
@@ -4739,7 +4739,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
             if ($this->_subPart) {
                 HTML2PDF::$_tables[$param['num']]['thead']['tr'][0] = HTML2PDF::$_tables[$param['num']]['tr_curr'];
                 HTML2PDF::$_tables[$param['num']]['thead']['code'] = array();
-                for ($pos=$this->_tempPos; $pos<count($this->parsingHtml->code); $pos++) {
+                for ($pos=$this->_tempPos, $size = count($this->parsingHtml->code); $pos < $size; $pos++) {
                     $action = $this->parsingHtml->code[$pos];
                     if (strtolower($action['name'])=='thead') $action['name'] = 'thead_sub';
                     HTML2PDF::$_tables[$param['num']]['thead']['code'][] = $action;
@@ -4798,7 +4798,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
             if ($this->_subPart) {
                 HTML2PDF::$_tables[$param['num']]['tfoot']['tr'][0] = HTML2PDF::$_tables[$param['num']]['tr_curr'];
                 HTML2PDF::$_tables[$param['num']]['tfoot']['code'] = array();
-                for ($pos=$this->_tempPos; $pos<count($this->parsingHtml->code); $pos++) {
+                for ($pos=$this->_tempPos, $size = count($this->parsingHtml->code); $pos < $size; $pos++) {
                     $action = $this->parsingHtml->code[$pos];
                     if (strtolower($action['name'])=='tfoot') $action['name'] = 'tfoot_sub';
                     HTML2PDF::$_tables[$param['num']]['tfoot']['code'][] = $action;
@@ -5088,7 +5088,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
                     foreach (HTML2PDF::$_tables[$param['num']][$mode]['tr'] as $tr) {
                         // hauteur de la ligne tr
                         $h = 0;
-                        for ($i=0; $i<count(HTML2PDF::$_tables[$param['num']]['cases'][$tr]); $i++)
+                        for ($i = 0, $size = count(HTML2PDF::$_tables[$param['num']]['cases'][$tr]); $i < $size; $i++)
                             if (HTML2PDF::$_tables[$param['num']]['cases'][$tr][$i]['rowspan']==1)
                                 $h = max($h, HTML2PDF::$_tables[$param['num']]['cases'][$tr][$i]['h']);
                         HTML2PDF::$_tables[$param['num']][$mode]['height']+= $h;
@@ -5132,7 +5132,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
                 $height = $h0;
 
                 // we get the height of each line
-                for ($k=0; $k<count(HTML2PDF::$_tables[$param['num']]['cases']); $k++) {
+                for ($k = 0, $size = count(HTML2PDF::$_tables[$param['num']]['cases']); $k < $size; $k++) {
 
                     // if it is a TR of the thead or of the tfoot => skip
                     if (in_array($k, HTML2PDF::$_tables[$param['num']]['thead']['tr'])) continue;
@@ -5141,7 +5141,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
                     // height of the line
                     $th = 0;
                     $h = 0;
-                    for ($i=0; $i<count(HTML2PDF::$_tables[$param['num']]['cases'][$k]); $i++) {
+                    for ($i = 0, $size = count(HTML2PDF::$_tables[$param['num']]['cases'][$k]); $i < $size; $i++) {
                         $h = max($h, HTML2PDF::$_tables[$param['num']]['cases'][$k][$i]['h']);
 
                         if (HTML2PDF::$_tables[$param['num']]['cases'][$k][$i]['rowspan']==1)
@@ -5263,7 +5263,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
 
                 // Y after the row
                 $ty=null;
-                for ($ii=0; $ii<count(HTML2PDF::$_tables[$param['num']]['cases'][HTML2PDF::$_tables[$param['num']]['tr_curr']-1]); $ii++) {
+                for ($ii=0, $size = count(HTML2PDF::$_tables[$param['num']]['cases'][HTML2PDF::$_tables[$param['num']]['tr_curr']-1]); $ii < $size; $ii++) {
                     $ty = max($ty, HTML2PDF::$_tables[$param['num']]['cases'][HTML2PDF::$_tables[$param['num']]['tr_curr']-1][$ii]['h']);
                 }
 
@@ -5381,7 +5381,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
 
                 // Y of the current line
                 $ty=null;
-                for ($ii=0; $ii<count(HTML2PDF::$_tables[$param['num']]['cases'][HTML2PDF::$_tables[$param['num']]['tr_curr']-1]); $ii++) {
+                for ($ii = 0, $size = count(HTML2PDF::$_tables[$param['num']]['cases'][HTML2PDF::$_tables[$param['num']]['tr_curr']-1]); $ii < $size; $ii++) {
                     if (HTML2PDF::$_tables[$param['num']]['cases'][HTML2PDF::$_tables[$param['num']]['tr_curr']-1][$ii]['rowspan']==1) {
                         $ty = HTML2PDF::$_tables[$param['num']]['cases'][HTML2PDF::$_tables[$param['num']]['tr_curr']-1][$ii]['h'];
                     }
@@ -6375,7 +6375,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
                 $path = array_values($path);
 
                 $actions = array();
-                for ($k=0; $k<count($path); $k+=2) {
+                for ($k = 0, $size = count($path); $k < $size; $k+=2) {
                     $actions[] = array(
                         ($k ? 'L' : 'M') ,
                         $this->parsingCss->ConvertToMM($path[$k+0], $this->_isInDraw['w']),
@@ -6421,7 +6421,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
                 $path = array_values($path);
 
                 $actions = array();
-                for ($k=0; $k<count($path); $k+=2) {
+                for ($k = 0, $size = count($path); $k < $size; $k+=2) {
                     $actions[] = array(
                         ($k ? 'L' : 'M') ,
                         $this->parsingCss->ConvertToMM($path[$k+0], $this->_isInDraw['w']),
@@ -6475,7 +6475,7 @@ if (!defined('__CLASS_HTML2PDF__')) {
                 $actions = array();
                 $action = array();
                 $lastAction = null; // last action found
-                for ($k=0; $k<count($path);true) {
+                for ($k = 0, $size = count($path); $k < $size;true) {
 
                     // for this actions, we can not have multi coordonate
                     if (in_array($lastAction, array('z', 'Z'))) {

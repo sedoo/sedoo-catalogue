@@ -278,7 +278,7 @@ class portalUser extends entry
     {
         $entree = $this->getUserEntry();
         $entree["userPassword"] = $this->userPassword;
-        for ($i = 0; $i < count($this->memberOf); $i++) {
+        for ($i = 0, $size = count($this->memberOf); $i < $size; $i++) {
             $entree["memberOf"][$i] = $this->memberOf[$i];
         }
 

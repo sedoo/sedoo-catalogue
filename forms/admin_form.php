@@ -337,21 +337,21 @@ class admin_form extends login_form
   /* *** Création des éléments de formulaire **** */
     public function createPendingRequestsForm()
     {
-        for ($i = 1; $i <= count($this->pendingRequests); $i++) {
+        for ($i = 1, $size = count($this->pendingRequests); $i <= $size; $i++) {
             $this->createPendingRequestForm($i);
         }
     }
 
     public function createRejectedRequestsForm()
     {
-        for ($i = 1; $i <= count($this->rejectedRequests); $i++) {
+        for ($i = 1, $size = count($this->rejectedRequests); $i <= $size; $i++) {
             $this->createRejectedRequestForm($i);
         }
     }
 
     public function createRegisteredUsersForm()
     {
-        for ($i = 1; $i <= count($this->registeredUsers); $i++) {
+        for ($i = 1, $size = count($this->registeredUsers); $i <= $size; $i++) {
             $this->createRegisteredUserForm($i);
         }
     }
@@ -665,7 +665,7 @@ class admin_form extends login_form
         echo '<table>';
         if (isset($this->rejectedRequests)) {
             $this->displayUsersListHeader(1, 0, false, true);
-            for ($i = 1; $i <= count($this->rejectedRequests); $i++) {
+            for ($i = 1, $size = count($this->rejectedRequests); $i <= $size; $i++) {
                 $this->displayRejectedUser($i, $this->rejectedRequests[$i], true);
             }
         } else {
@@ -689,7 +689,7 @@ class admin_form extends login_form
                     $first = 1;
                 }
                 $this->displayUsersListHeader($first, $nb, true);
-                for ($i = $first; $i <= min(count($this->registeredUsers), $first + $nb - 1); $i++) {
+                for ($i = $first, $size = min(count($this->registeredUsers), $first + $nb - 1); $i <= $size; $i++) {
                     $this->displayRegisteredUser($i, $this->registeredUsers[$i]);
                 }
             } else {
@@ -705,7 +705,7 @@ class admin_form extends login_form
                 if ($first > count($this->registeredUsersByProject[$project])) {
                     $first = 1;
                 }
-                for ($i = $first; $i <= min(count($this->registeredUsersByProject[$project]), $first + $nb - 1); $i++) {
+                for ($i = $first, $size = min(count($this->registeredUsersByProject[$project]), $first + $nb - 1); $i <= $size; $i++) {
                     $this->displayRegisteredUser($i, $this->registeredUsersByProject[$project][$i], $project);
                 }
             } else {
@@ -789,7 +789,7 @@ class admin_form extends login_form
             $ldap->openAdm();
             $this->registeredUsers = $ldap->listEntries(PEOPLE_BASE, '(&(objectClass=' . strtolower($project_name) . 'User)(objectClass=registeredUser)(' . strtolower($project_name) . 'Status=' . STATUS_ACCEPTED . '))', strtolower($project_name) . 'User', 'sn');
 
-            for ($i = 1; $i <= count($this->registeredUsers); $i++) {
+            for ($i = 1, $size = count($this->registeredUsers); $i <= $size; $i++) {
                 $this->registeredUsers[$i]->otherGroups = array();
                 foreach ($this->groupList as $group) {
                     if (in_array($group->id, $this->registeredUsers[$i]->memberOf)) {
@@ -814,7 +814,7 @@ class admin_form extends login_form
             $ldap = new ldapConnect();
             $ldap->openAdm();
             $this->registeredUsersByProject[$project] = $ldap->listEntries(PEOPLE_BASE, '(&(objectClass=' . strtolower($project) . 'User)(objectClass=registeredUser)(' . strtolower($project) . 'Status=' . STATUS_ACCEPTED . '))', strtolower($project) . 'User', 'sn');
-            for ($i = 1; $i <= count($this->registeredUsersByProject[$project]); $i++) {
+            for ($i = 1, $size = count($this->registeredUsersByProject[$project]); $i <= $size; $i++) {
                 $this->registeredUsersByProject[$project][$i]->otherGroups = array();
                 foreach ($this->groupList as $group) {
                     if (in_array($group->id, $this->registeredUsersByProject[$project][$i]->memberOf)) {

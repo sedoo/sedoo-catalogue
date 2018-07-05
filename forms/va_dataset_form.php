@@ -459,7 +459,7 @@ class va_dataset_form extends base_form
             }
 
             if (isset($var)) {
-                for ($i = $var; $i < (count($this->dataset->sites) - 1); $i++) {
+                for ($i = $var, $size = (count($this->dataset->sites) - 1); $i < $size; $i++) {
                     $this->sites[$i] = $this->sites[$i + 1];
                     $this->dats_sensors[$i] = $this->dats_sensors[$i + 1];
                 }
@@ -487,7 +487,7 @@ class va_dataset_form extends base_form
             }
 
             if (isset($var)) {
-                for ($i = $var; $i < (count($this->dataset->sites) - 1); $i++) {
+                for ($i = $var, $size = (count($this->dataset->sites) - 1); $i < $size; $i++) {
                     $this->sites[$i] = $this->sites[$i + 1];
                     $this->dats_sensors[$i] = $this->dats_sensors[$i + 1];
                 }
@@ -516,7 +516,7 @@ class va_dataset_form extends base_form
             }
 
             if (isset($var)) {
-                for ($i = $var; $i < (count($this->dataset->sites) - 1); $i++) {
+                for ($i = $var, $size = (count($this->dataset->sites) - 1); $i < $size; $i++) {
                     $this->sites[$i] = $this->sites[$i + 1];
                     $this->dats_sensors[$i] = $this->dats_sensors[$i + 1];
                 }

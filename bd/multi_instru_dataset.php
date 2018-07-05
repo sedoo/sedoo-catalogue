@@ -125,7 +125,7 @@ class multi_instru_dataset extends base_dataset
         }
 
         echo '</td></tr><tr><th colspan="4" align="center"><strong>Instrument information</strong></th></tr>';
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             $nb = $i + 1;
             echo '</td></tr><tr><th colspan="4" align="center"><strong>Instrument ' . $nb . '</strong></th></tr>';
             if (isset($this->dats_sensors[$i]->sensor->gcmd_instrument_keyword)) {

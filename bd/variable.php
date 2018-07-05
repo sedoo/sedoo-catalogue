@@ -54,7 +54,7 @@ class variable
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new variable();
                 $liste[$i]->new_variable($resultat[$i]);
             }
@@ -130,7 +130,7 @@ class variable
 
         $liste = $this->getAll();
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->var_id;
             $array[$j] = $liste[$i]->var_name;
         }

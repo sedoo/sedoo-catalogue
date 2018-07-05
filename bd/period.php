@@ -29,7 +29,7 @@ class period
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new period();
                 $liste[$i]->new_period($resultat[$i]);
             }
@@ -57,7 +57,7 @@ class period
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new period();
                 $liste[$i]->new_period($resultat[$i]);
             }
@@ -100,7 +100,7 @@ class period
 
         $liste = $this->getByProject($projectName);
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->period_id;
             $array[$j] = $liste[$i]->period_name;
         }
@@ -112,7 +112,7 @@ class period
     {
         $liste = $this->getByProject($projectName);
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->period_id;
             $array[$j] = $liste[$i]->period_name;
         }

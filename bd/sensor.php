@@ -106,7 +106,7 @@ class sensor
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new sensor();
                 $liste[$i]->new_sensor($resultat[$i]);
             }
@@ -310,7 +310,7 @@ class sensor
         $query = "select * from sensor_place where sensor_id = " . $this->sensor_id;
         $sensor_place = new sensor_place();
         $this->sensor_places = $sensor_place->getByQuery($query);
-        for ($i = 0; $i < count($this->sensor_places); $i++) {
+        for ($i = 0, $size = count($this->sensor_places); $i < $size; $i++) {
             $this->sensor_places[$i]->getPlace();
         }
     }

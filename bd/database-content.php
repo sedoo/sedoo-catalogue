@@ -66,7 +66,7 @@ class Plateforme
 
 function searchPlateforme($plateformes, $id)
 {
-    for ($i = 0; $i < count($plateformes); $i++) {
+    for ($i = 0, $size = count($plateformes); $i < $size; $i++) {
         if ($plateformes[$i]->id == $id) {
             return $plateformes[$i];
         }

@@ -24,7 +24,7 @@ class status_progress
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new status_progress();
                 $liste[$i]->new_status_progress($resultat[$i]);
             }
@@ -52,7 +52,7 @@ class status_progress
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new status_progress();
                 $liste[$i]->new_status_progress($resultat[$i]);
             }
@@ -97,7 +97,7 @@ class status_progress
 
         $liste = $this->getAll();
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->status_progress_id;
             $array[$j] = $liste[$i]->status_progress_name;
         }

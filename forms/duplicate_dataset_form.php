@@ -17,7 +17,7 @@ class duplicate_dataset_form extends base_form
         $dts = new dataset();
         $liste = $dts->getOnlyTitles("select dats_id,dats_title from dataset order by dats_title");
         $array[0] = "-- Datasets list --";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->dats_id;
             $array[$j] = $liste[$i]->dats_title;
         }

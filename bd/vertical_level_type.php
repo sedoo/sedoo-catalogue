@@ -24,7 +24,7 @@ class vertical_level_type
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new vertical_level_type();
                 $liste[$i]->new_vertical_level_type($resultat[$i]);
             }
@@ -52,7 +52,7 @@ class vertical_level_type
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new vertical_level_type();
                 $liste[$i]->new_vertical_level_type($resultat[$i]);
             }
@@ -97,7 +97,7 @@ class vertical_level_type
 
         $liste = $this->getAll();
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->vert_level_type_id;
             $array[$j] = $liste[$i]->vert_level_type_name;
         }

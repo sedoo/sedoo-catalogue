@@ -63,7 +63,7 @@ class journal_form extends login_form
 
         $dts = new dataset();
         $liste = $dts->getOnlyTitles('select dats_id,dats_title from dataset order by dats_title');
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->dats_id;
             $array[$j] = $liste[$i]->dats_title;
         }

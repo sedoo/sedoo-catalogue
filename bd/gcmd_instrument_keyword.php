@@ -39,7 +39,7 @@ class gcmd_instrument_keyword
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new gcmd_instrument_keyword();
                 $liste[$i]->new_gcmd_instrument_keyword($resultat[$i]);
             }
@@ -100,7 +100,7 @@ class gcmd_instrument_keyword
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new gcmd_instrument_keyword();
                 $liste[$i]->new_gcmd_instrument_keyword($resultat[$i]);
             }
@@ -145,7 +145,7 @@ class gcmd_instrument_keyword
 
         $liste = $this->getAll();
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->gcmd_sensor_id;
             $array[$j] = $liste[$i]->gcmd_sensor_name;
         }
@@ -158,7 +158,7 @@ class gcmd_instrument_keyword
     {
 
         $liste = $this->getAll();
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->gcmd_sensor_id;
             $array[$j] = $liste[$i]->gcmd_sensor_name;
         }
@@ -176,7 +176,7 @@ class gcmd_instrument_keyword
         $query = "select * from gcmd_instrument_keyword where gcm_gcmd_id is null order by gcmd_sensor_name";
         $liste_topic = $this->getByQuery($query);
 
-        for ($i = 0; $i < count($liste_topic); $i++) {
+        for ($i = 0, $size = count($liste_topic); $i < $size; $i++) {
             $j = $liste_topic[$i]->gcmd_sensor_id;
 
             $array_topic[$j] = $liste_topic[$i]->gcmd_sensor_name;
@@ -185,14 +185,14 @@ class gcmd_instrument_keyword
             $liste_categ = $this->getByQuery($query2);
             $array_categorie[$j][0] = "-- Level 2 --";
 
-            for ($k = 0; $k < count($liste_categ); $k++) {
+            for ($k = 0, $size = count($liste_categ); $k < $size; $k++) {
                 $l = $liste_categ[$k]->gcmd_sensor_id;
                 $array_categorie[$j][$l] = $liste_categ[$k]->gcmd_sensor_name;
 
                 $query3 = "select * from gcmd_instrument_keyword where gcm_gcmd_id = " . $l . " order by gcmd_sensor_name";
                 $liste_instr = $this->getByQuery($query3);
                 $array_variable[$j][$l][0] = "-- Level 3 --";
-                for ($m = 0; $m < count($liste_instr); $m++) {
+                for ($m = 0, $size = count($liste_instr); $m < $size; $m++) {
                     $n = $liste_instr[$m]->gcmd_sensor_id;
                     $array_variable[$j][$l][$n] = $liste_instr[$m]->gcmd_sensor_name;
                 }

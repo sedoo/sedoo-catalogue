@@ -666,7 +666,7 @@ class HTML_TreeMenu_DHTML extends HTML_TreeMenu_Presentation
        * Loop through subnodes
        */
         if (isset($this->menu->items)) {
-            for ($i = 0; $i < count($this->menu->items); $i++) {
+            for ($i = 0, $size = count($this->menu->items); $i < $size; $i++) {
                 $html .= $this->_nodeToHTML($this->menu->items[$i], $menuObj);
             }
         }
@@ -741,7 +741,7 @@ class HTML_TreeMenu_DHTML extends HTML_TreeMenu_Presentation
        * Loop through subnodes
        */
         if (!empty($nodeObj->items)) {
-            for ($i = 0; $i < count($nodeObj->items); $i++) {
+            for ($i = 0, $size = count($nodeObj->items); $i < $size; $i++) {
                 $html .= $this->_nodeToHTML($nodeObj->items[$i], $return, $return . '_' . ($i + 1), $currentDepth + 1, $maxDepthPrefix);
             }
         }
@@ -824,7 +824,7 @@ class HTML_TreeMenu_Listbox extends HTML_TreeMenu_Presentation
        * Loop through subnodes
        */
         if (isset($this->menu->items)) {
-            for ($i = 0; $i < count($this->menu->items); $i++) {
+            for ($i = 0, $size = count($this->menu->items); $i < $size; $i++) {
                 $nodeHTML .= $this->_nodeToHTML($this->menu->items[$i]);
             }
         }
@@ -854,7 +854,7 @@ class HTML_TreeMenu_Listbox extends HTML_TreeMenu_Presentation
        * Loop through subnodes
        */
         if (isset($node->items)) {
-            for ($i = 0; $i < count($node->items); $i++) {
+            for ($i = 0, $size = count($node->items); $i < $size; $i++) {
                 $html .= $this->_nodeToHTML($node->items[$i], $prefix . str_repeat($this->indentChar, $this->indentNum));
             }
         }

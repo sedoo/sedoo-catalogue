@@ -289,7 +289,7 @@ class base_form_multi extends login_form
 
       //Contacts
         if (isset($this->dataset->originators) && !empty($this->dataset->originators)) {
-            for ($i = 0; $i < count($this->dataset->originators); $i++) {
+            for ($i = 0, $size = count($this->dataset->originators); $i < $size; $i++) {
                 $this->initFormPersonne($i);
             }
         }
@@ -326,7 +326,7 @@ class base_form_multi extends login_form
 
       //DATA FORMATS
         if (isset($this->dataset->data_formats) && !empty($this->dataset->data_formats)) {
-            for ($i = 0; $i < count($this->dataset->data_formats); $i++) {
+            for ($i = 0, $size = count($this->dataset->data_formats); $i < $size; $i++) {
                 if (isset($this->dataset->data_formats[$i]) && !empty($this->dataset->data_formats[$i])) {
                     $this->getElement('data_format_' . $i)->setSelected($this->dataset->data_formats[$i]->data_format_id);
                     $this->getElement('new_data_format_' . $i)->setValue($this->dataset->data_formats[$i]->data_format_name);

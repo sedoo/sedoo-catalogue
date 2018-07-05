@@ -24,7 +24,7 @@ class type_journal
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new type_journal();
                 $liste[$i]->new_type_journal($resultat[$i]);
             }
@@ -78,7 +78,7 @@ class type_journal
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new type_journal();
                 $liste[$i]->new_type_journal($resultat[$i]);
             }
@@ -90,7 +90,7 @@ class type_journal
     public function chargeForm($form, $label, $titre, $ids)
     {
         $liste = $this->getByIds($ids);
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->id;
             $array[$j] = $liste[$i]->name;
         }

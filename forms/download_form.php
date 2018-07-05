@@ -57,7 +57,7 @@ class download_form extends login_form
     public function saveForm()
     {
         echo 'Selected:';
-        for ($i = 0; $i < count($this->filesList); $i++) {
+        for ($i = 0, $size = count($this->filesList); $i < $size; $i++) {
             if ($this->getElement('file_' . $i)->getChecked()) {
                 echo '<br>- ' . $this->filesList[$i];
             }
@@ -317,7 +317,7 @@ class download_form extends login_form
         echo '<tr><th colspan = "4" align="center" >';
         echo $this->getElement('bouton_addAll')->toHTML();
         echo '</th></tr>';
-        for ($i = 0; $i < count($this->filesList); $i++) {
+        for ($i = 0, $size = count($this->filesList); $i < $size; $i++) {
             $isSelected = $this->isAlreadyInSelection($this->path . '/' . $this->filesList[$i]);
             echo '<tr>';
             if (is_dir($this->path . '/' . $this->filesList[$i])) {
@@ -526,7 +526,7 @@ class download_form extends login_form
     
     public function addToSelection()
     {
-        for ($i = 0; $i < count($this->filesList); $i++) {
+        for ($i = 0, $size = count($this->filesList); $i < $size; $i++) {
             if ($this->getElement('file_' . $i)->getChecked()) {
                 $this->addItemToSelection($i);
             }

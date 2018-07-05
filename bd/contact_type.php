@@ -24,7 +24,7 @@ class contact_type
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new contact_type();
                 $liste[$i]->new_contact_type($resultat[$i]);
             }
@@ -65,7 +65,7 @@ class contact_type
     {
 
         $liste = $this->getAll();
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->contact_type_id;
             $array[$j] = $liste[$i]->contact_type_name;
         }

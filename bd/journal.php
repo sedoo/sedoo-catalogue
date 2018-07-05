@@ -261,7 +261,7 @@ class journal
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new journal();
                 $liste[$i]->new_journal($resultat[$i]);
             }

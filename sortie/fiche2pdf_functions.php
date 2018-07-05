@@ -106,7 +106,7 @@ function writeInstrumentInfoSat(&$dataset, &$out)
 {
     $out->addSection('Instrument' . ((count($dataset->dats_sensors) > 2) ? 's' : ''));
     $out->newLine();
-    for ($i = 0; $i < count($dataset->dats_sensors); $i++) {
+    for ($i = 0, $size = count($dataset->dats_sensors); $i < $size; $i++) {
         if (count($dataset->dats_sensors) > 1) {
             $out->addSousSection('Sensor');
         }
@@ -121,7 +121,7 @@ function writeInstrumentInfoSat(&$dataset, &$out)
 
 function writeInstrumentInfoSite(&$dataset, &$out)
 {
-    for ($i = 0; $i < count($dataset->dats_sensors); $i++) {
+    for ($i = 0, $size = count($dataset->dats_sensors); $i < $size; $i++) {
         $titre = 'Instrument ' . ($i + 1);
         if (isset($dataset->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name) && !empty($dataset->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name)) {
             $titre .= ' (' . $dataset->dats_sensors[$i]->sensor->gcmd_instrument_keyword->gcmd_sensor_name . ')';

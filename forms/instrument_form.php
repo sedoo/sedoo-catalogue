@@ -166,7 +166,7 @@ class instrument_form extends base_form
         $indiceTableVar = 0;
         $indiceTableVarCalc = 0;
         if (isset($this->dataset->dats_variables) && !empty($this->dataset->dats_variables)) {
-            for ($i = 0; $i < count($this->dataset->dats_variables); $i++) {
+            for ($i = 0, $size = count($this->dataset->dats_variables); $i < $size; $i++) {
                 $suffix = "";
                 $prefixMsg = "";
 
@@ -241,7 +241,7 @@ class instrument_form extends base_form
 
       //SITES
         if (isset($dataset->sites) && !empty($dataset->sites)) {
-            for ($i = 0; $i < count($dataset->sites); $i++) {
+            for ($i = 0, $size = count($dataset->sites); $i < $size; $i++) {
                 $this->initFormSiteBoundings($i);
 
                 if (isset($dataset->sites[$i]->gcmd_location_keyword) && !empty($dataset->sites[$i]->gcmd_location_keyword)) {
@@ -288,7 +288,7 @@ class instrument_form extends base_form
         $indiceTableVar = 0;
         $indiceTableVarCalc = 0;
         if (isset($dataset->dats_variables) && !empty($dataset->dats_variables)) {
-            for ($i = 0; $i < count($dataset->dats_variables); $i++) {
+            for ($i = 0, $size = count($dataset->dats_variables); $i < $size; $i++) {
                 $suffix = "";
 
                 if ($dataset->dats_variables[$i]->flag_param_calcule == 1) {
@@ -545,7 +545,7 @@ class instrument_form extends base_form
         }
         $tab_gcmd_id = $this->exportValue("sensor_gcmd_");
 
-        for ($i = 0; $i < count($tab_gcmd_id); $i++) {
+        for ($i = 0, $size = count($tab_gcmd_id); $i < $size; $i++) {
             $gcmd_id = $tab_gcmd_id[$i];
             if (isset($gcmd_id) && !empty($gcmd_id)) {
                 $dataset->dats_sensors[0]->sensor->gcmd_sensor_id = $gcmd_id;

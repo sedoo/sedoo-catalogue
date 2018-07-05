@@ -204,7 +204,7 @@ class site_form_simple extends base_form
                 }
                 // Variables
                 if (isset($dataset->dats_sensors[$i]->sensor->sensor_vars) && !empty($dataset->dats_sensors[$i]->sensor->sensor_vars)) {
-                    for ($j = 0; $j < count($dataset->dats_sensors[$i]->sensor->sensor_vars); $j++) {
+                    for ($j = 0, $size = count($dataset->dats_sensors[$i]->sensor->sensor_vars); $j < $size; $j++) {
                         $this->initFormVariableSensor($i, $j);
                     }
                 }

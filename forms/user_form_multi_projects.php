@@ -171,7 +171,7 @@ class user_form_new extends login_form
                         $this->mailAdmin('ERREUR', 'Exception lors de la récupération des projets.', $e);
                     }
 
-                    for ($i = 1; $i <= count($projectList); $i++) {
+                    for ($i = 1, $size = count($projectList); $i <= $size; $i++) {
                         $this->projects[$proj][$i] = $projectList[$i]->cn . ' - ' . $projectList[$i]->description;
                         $this->addElement('checkbox', $proj . '_wg_' . $i, $this->projects[$proj][$i]);
                     }
@@ -411,7 +411,7 @@ class user_form_new extends login_form
                             }
                         }
                         echo "<tr class='ui-state-highlight'><td colspan='2'><span>Do you participate in one of the $proj working groups ?</span></td><td><span>";
-                        for ($i = 1; $i <= count($this->projects[$proj]); $i++) {
+                        for ($i = 1, $size = count($this->projects[$proj]); $i <= $size; $i++) {
                             echo '<br>' . $this->getElement($proj . '_wg_' . $i)->toHTML() . '&nbsp;' . $this->getElement($proj . '_wg_' . $i)->getLabel();
                         }
                         echo '</span></td></tr>';
@@ -516,7 +516,7 @@ class user_form_new extends login_form
                 } else {
                     $this->demande->otherUser[$proj]->abstract = $this->exportValue('abstract');
                 }
-                for ($i = 1; $i <= count($this->projects[$proj]); $i++) {
+                for ($i = 1, $size = count($this->projects[$proj]); $i <= $size; $i++) {
                     if ($this->getElement($proj . '_wg_' . $i)->getChecked()) {
                         $this->demande->otherUser[$proj]->wg[] = $this->projects[$proj][$i];
                     }

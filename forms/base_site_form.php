@@ -489,7 +489,7 @@ class base_site_form extends login_form
 
       //Contacts
         if (isset($this->dataset->originators) && !empty($this->dataset->originators)) {
-            for ($i = 0; $i < count($this->dataset->originators); $i++) {
+            for ($i = 0, $size = count($this->dataset->originators); $i < $size; $i++) {
                 $this->initFormPersonne($i);
             }
         }
@@ -526,7 +526,7 @@ class base_site_form extends login_form
 
       //DATA FORMATS
         if (isset($this->dataset->data_formats) && !empty($this->dataset->data_formats)) {
-            for ($i = 0; $i < count($this->dataset->data_formats); $i++) {
+            for ($i = 0, $size = count($this->dataset->data_formats); $i < $size; $i++) {
                 if (isset($this->dataset->data_formats[$i]) && !empty($this->dataset->data_formats[$i])) {
                     $this->getElement('data_format_' . $i)->setSelected($this->dataset->data_formats[$i]->data_format_id);
                     $this->getElement('new_data_format_' . $i)->setValue($this->dataset->data_formats[$i]->data_format_name);
@@ -749,7 +749,7 @@ class base_site_form extends login_form
         $indice = 0;
         for ($i = 0; $i < $nbSensors; $i++) {
             if (isset($dataset->dats_sensors[$i]->sensor->sensor_vars) && !empty($dataset->dats_sensors[$i]->sensor->sensor_vars)) {
-                for ($j = 0; $j < count($dataset->dats_sensors[$i]->sensor->sensor_vars); $j++) {
+                for ($j = 0, $size = count($dataset->dats_sensors[$i]->sensor->sensor_vars); $j < $size; $j++) {
                     if ($dataset->dats_sensors[$i]->sensor->sensor_vars[$j]->variable->var_id != -1) {
                         $dataset->dats_variables[$indice] = new dats_var();
                         $dataset->dats_variables[$indice]->variable = &$dataset->dats_sensors[$i]->sensor->sensor_vars[$j]->variable;

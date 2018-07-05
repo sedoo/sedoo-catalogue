@@ -103,7 +103,7 @@ class extraction_form extends map_form
         $dts = new dataset();
         $liste = $dts->getOnlyTitles($query);
         $array = array();
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $id = $liste[$i]->dats_id;
             $array[$id] = $liste[$i]->dats_title;
         }
@@ -148,7 +148,7 @@ class extraction_form extends map_form
         }
 
         $array = array();
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $id = $liste[$i]->var_id;
             $array[$id] = printParamName($liste[$i]->var);
         }

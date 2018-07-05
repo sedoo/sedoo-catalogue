@@ -27,7 +27,7 @@ class unit
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new unit();
                 $liste[$i]->new_unit($resultat[$i]);
             }
@@ -67,7 +67,7 @@ class unit
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new unit();
                 $liste[$i]->new_unit($resultat[$i]);
             }
@@ -128,7 +128,7 @@ class unit
 
         $liste = $this->getAll();
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->unit_id;
             $array[$j] = $liste[$i]->toString(); //unit_name;
         }

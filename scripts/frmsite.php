@@ -160,7 +160,7 @@ if ($form->isCat()) {
     $tab_sensors = &$form->dataset->dats_sensors;
     $tab_nbVars = array();
     $tab_nbCalcVars = array();
-    for ($i = 0; $i < count($tab_sensors); $i++) {
+    for ($i = 0, $size = count($tab_sensors); $i < $size; $i++) {
         $tab_nbVars[$i] = $tab_sensors[$i]->nbVars;
         $tab_nbCalcVars[$i] = $tab_sensors[$i]->nbCalcVars;
     }

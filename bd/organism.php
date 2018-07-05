@@ -57,7 +57,7 @@ class organism
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new organism();
                 $liste[$i]->new_organism($resultat[$i]);
             }
@@ -110,7 +110,7 @@ class organism
 
         $liste = $this->getAll();
         $array[0] = null;
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->org_id;
 
             if (isset($liste[$i]->org_sname) && !empty($liste[$i]->org_sname)) {

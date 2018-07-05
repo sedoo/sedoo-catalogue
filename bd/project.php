@@ -60,7 +60,7 @@ class project
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new project();
                 $liste[$i]->new_project($resultat[$i]);
             }
@@ -133,7 +133,7 @@ class project
 
         $liste_proj = $this->getByQuery($query);
 
-        for ($i = 0; $i < count($liste_proj); $i++) {
+        for ($i = 0, $size = count($liste_proj); $i < $size; $i++) {
             $j = $liste_proj[$i]->project_id;
             $array_proj[$j] = $liste_proj[$i]->project_name;
 
@@ -142,14 +142,14 @@ class project
 
             $query2 = "select * from project where pro_project_id = " . $j . " order by project_name";
             $sous_proj = $this->getByQuery($query2);
-            for ($k = 0; $k < count($sous_proj); $k++) {
+            for ($k = 0, $size = count($sous_proj); $k < $size; $k++) {
                 $l = $sous_proj[$k]->project_id;
                 $array_sous_proj[$j][$l] = $sous_proj[$k]->project_name;
 
                 $array_sous_proj2[$j][$l][0] = "--Sub_project_2--";
                 $query3 = "select * from project where pro_project_id = " . $l . " order by project_name";
                 $sous_proj2 = $this->getByQuery($query3);
-                for ($m = 0; $m < count($sous_proj2); $m++) {
+                for ($m = 0, $size = count($sous_proj2); $m < $size; $m++) {
                     $n = $sous_proj2[$m]->project_id;
                     $array_sous_proj2[$j][$l][$n] = $sous_proj2[$m]->project_name;
                 }

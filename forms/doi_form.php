@@ -131,7 +131,7 @@ class doi_form extends login_form
         $this->datasetxml[0] = "";
         $this->projet = array();
         $array[0] = "------------------ Dataset List ------------------";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->dats_id;
             $array[$j] = $liste[$i]->dats_title;
         }

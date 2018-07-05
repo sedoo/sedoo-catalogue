@@ -24,7 +24,7 @@ class data_format
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new data_format();
                 $liste[$i]->new_data_format($resultat[$i]);
             }
@@ -65,7 +65,7 @@ class data_format
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new data_format();
                 $liste[$i]->new_data_format($resultat[$i]);
             }
@@ -115,7 +115,7 @@ class data_format
 
         $liste = $this->getAll();
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->data_format_id;
             $array[$j] = $liste[$i]->data_format_name;
         }
@@ -131,7 +131,7 @@ class data_format
 
         $liste = $this->getByQuery($query);
         $array[0] = "Original data format";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->data_format_id;
             $array[$j] = $liste[$i]->data_format_name;
         }

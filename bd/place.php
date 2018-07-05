@@ -143,7 +143,7 @@ class place
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new place();
                 $liste[$i]->new_place($resultat[$i]);
             }
@@ -329,7 +329,7 @@ class place
         $liste = $this->getAllInSitu();
 
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->place_id;
             $array[$j] = $liste[$i]->place_name;
         }
@@ -357,7 +357,7 @@ class place
         $query = 'SELECT DISTINCT ON (place_name) * from place where gcmd_plat_id in (' . GCMD_PLAT_MODEL . ') AND place_level IS NULL order by place_name';
         $liste = $this->getByQuery($query);
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->place_id;
             $array[$j] = $liste[$i]->place_name;
         }
@@ -369,7 +369,7 @@ class place
     public function chargeFormInstruvadataset($form, $label = "instru_place_", $titre = "instru_place")
     {
         $liste = $this->getAllInSitu();
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->place_id;
             $array[$j] = $liste[$i]->place_name;
         }
@@ -416,7 +416,7 @@ class place
         $query = "select * from place where gcmd_plat_id in (select gcmd_plat_id from gcmd_plateform_keyword where gcmd_plat_name ilike '%" . $type . "%') AND place_level IS NULL order by place_name";
         $liste = $this->getByQuery($query);
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->place_id;
             $array[$j] = $liste[$i]->place_name;
         }
@@ -431,7 +431,7 @@ class place
         $query = "select * from place where gcmd_plat_id in (select gcmd_plat_id from gcmd_plateform_keyword where gcmd_plat_name ilike '%" . $type . "%') AND place_level IS NULL order by place_name";
         $liste = $this->getByQuery($query);
         $x = 0;
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->place_id;
             $array[$j] = $liste[$i]->place_name;
             if (i == 0) {

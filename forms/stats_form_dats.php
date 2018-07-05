@@ -137,7 +137,7 @@ class stats_form_dats extends login_form
         $query = 'select date from journal inner join dataset using (dats_id) where type_journal_id = ' . TYPE_DL . ' and dats_id = ' . $this->dats->dats_id . " order by date;";
         $bd = new bdConnect();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = $startI; $i < count($resultat) + $startI; $i++) {
+            for ($i = $startI, $size = count($resultat) + $startI; $i < $size; $i++) {
                 $date = $resultat[$i - $startI][0];
                 $datax[$i] = strtotime($date);
                 $datay[$i] = $i + 1 - $startI;
@@ -159,7 +159,7 @@ class stats_form_dats extends login_form
         $bd = new bdConnect();
         if ($resultat = $bd->get_data($query)) {
             $liste = '<table>';
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $contact = $resultat[$i][0];
                 $nbRequetes = $resultat[$i][1];
                 $liste .= "<tr><td>$contact</td><td>$nbRequetes</td></tr>";

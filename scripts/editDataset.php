@@ -306,7 +306,7 @@ function editSatelliteDataset(&$dataset, $project_name, $queryArgs = array())
         echo "<tr><td><strong>Purpose</strong></td><td colspan='3'>" . $dataset->dats_purpose . "</td></tr>";
         echo "<tr><td><strong>References</strong></td><td colspan='3'>" . $dataset->dats_reference . "</td></tr>";
         echo '</td></tr><tr><th colspan="4" align="center"><strong>Instrument' . ((count($dataset->dats_sensors) > 1) ? 's' : '') . '</strong></th></tr>';
-        for ($i = 0; $i < count($dataset->dats_sensors); $i++) {
+        for ($i = 0, $size = count($dataset->dats_sensors); $i < $size; $i++) {
             if (count($dataset->dats_sensors) > 1) {
                 echo '<tr><td colspan="4" align="center"><strong>Instrument ' . ($i + 1) . '</strong></td></tr>';
             }
@@ -718,7 +718,7 @@ function editInSituDatasetSite(&$dataset, $project_name, $queryArgs = array())
         }
 
         echo '</td></tr><tr><th colspan="4" align="center"><strong>Instrument information</strong></th></tr>';
-        for ($i = 0; $i < count($dataset->dats_sensors); $i++) {
+        for ($i = 0, $size = count($dataset->dats_sensors); $i < $size; $i++) {
             $nb = $i + 1;
             echo '</td></tr><tr><th colspan="4" align="center"><strong>Instrument ' . $nb . '</strong></th></tr>';
           //echo 'TEST';

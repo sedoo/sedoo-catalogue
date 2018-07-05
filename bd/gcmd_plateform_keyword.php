@@ -46,7 +46,7 @@ class gcmd_plateform_keyword
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new gcmd_plateform_keyword();
                 $liste[$i]->new_gcmd_plateform_keyword($resultat[$i]);
             }
@@ -79,7 +79,7 @@ class gcmd_plateform_keyword
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new gcmd_plateform_keyword();
                 $liste[$i]->new_gcmd_plateform_keyword($resultat[$i]);
             }
@@ -130,7 +130,7 @@ class gcmd_plateform_keyword
         $bd = new bdConnect();
         $liste = array();
         if ($resultat = $bd->get_data($query)) {
-            for ($i = 0; $i < count($resultat); $i++) {
+            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
                 $liste[$i] = new gcmd_plateform_keyword();
                 $liste[$i]->new_gcmd_plateform_keyword($resultat[$i]);
             }
@@ -174,7 +174,7 @@ class gcmd_plateform_keyword
 
         $liste = $this->getAllInSitu();
         $array[0] = "";
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->gcmd_plat_id;
             $array[$j] = $liste[$i]->gcmd_plat_name;
         }
@@ -186,7 +186,7 @@ class gcmd_plateform_keyword
     {
 
         $liste = $this->getAllInSitu();
-        for ($i = 0; $i < count($liste); $i++) {
+        for ($i = 0, $size = count($liste); $i < $size; $i++) {
             $j = $liste[$i]->gcmd_plat_id;
             $array[$j] = $liste[$i]->gcmd_plat_name;
         }
@@ -202,7 +202,7 @@ class gcmd_plateform_keyword
         $query = "select * from gcmd_plateform_keyword where gcm_gcmd_id is null order by gcmd_plat_name";
         $liste_topic = $this->getByQuery($query);
 
-        for ($i = 0; $i < count($liste_topic); $i++) {
+        for ($i = 0, $size = count($liste_topic); $i < $size; $i++) {
             $j = $liste_topic[$i]->gcmd_plat_id;
 
             $array_topic[$j] = $liste_topic[$i]->gcmd_plat_name;
@@ -211,14 +211,14 @@ class gcmd_plateform_keyword
             $liste_categ = $this->getByQuery($query2);
             $array_categorie[$j][0] = "-- Term --";
 
-            for ($k = 0; $k < count($liste_categ); $k++) {
+            for ($k = 0, $size = count($liste_categ); $k < $size; $k++) {
                 $l = $liste_categ[$k]->gcmd_plat_id;
                 $array_categorie[$j][$l] = $liste_categ[$k]->gcmd_plat_name;
 
                 $query3 = "select * from gcmd_plateform_keyword where gcm_gcmd_id = " . $l . " order by gcmd_plat_name";
                 $liste_param = $this->getByQuery($query3);
                 $array_variable[$j][$l][0] = "-- Var_level1 --";
-                for ($m = 0; $m < count($liste_param); $m++) {
+                for ($m = 0, $size = count($liste_param); $m < $size; $m++) {
                     $n = $liste_param[$m]->gcmd_plat_id;
                     $array_variable[$j][$l][$n] = $liste_param[$m]->gcmd_plat_name;
                 }

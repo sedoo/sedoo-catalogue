@@ -90,7 +90,7 @@ function addDataset(&$node, $dts, $projectName)
 function get_av_datasets(&$node, &$datasets)
 {
     if (isset($node->items) && count($node->items) > 0) {
-        for ($i = 0; $i < count($node->items); $i++) {
+        for ($i = 0, $size = count($node->items); $i < $size; $i++) {
             get_av_datasets($node->items[$i], $datasets);
         }
     } else {

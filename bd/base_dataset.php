@@ -289,8 +289,8 @@ abstract class base_dataset implements iDataset
     {
         $query = "select * from dats_var where dats_id = " . $this->dats_id;
         $dats_var = new dats_var();
-        $this->dats_variables = $dats_var->getByQuery($query);
-        for ($i = 0; $i < count($this->dats_variables); $i++) {
+        $this->dats_variables = $dats_var->getByQuery($query); 
+        for ($i = 0, $size = count($this->dats_variables); $i < $size; $i++) {
             $this->dats_variables[$i]->getUnit();
             $this->dats_variables[$i]->getVariable();
             $this->dats_variables[$i]->getVerticalLevelType();
@@ -319,11 +319,11 @@ abstract class base_dataset implements iDataset
    */
     protected function get_sensor_vars()
     {
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             if ($this->dats_sensors[$i]->sensor->sensor_id > 0) {
                 $this->dats_sensors[$i]->sensor->sensor_vars = array();
                 $nbVars = 0;
-                for ($j = 0; $j < count($this->dats_variables); $j++) {
+                for ($j = 0, $size = count($this->dats_variables); $j < $size; $j++) {
                     if ($this->dats_variables[$j]->variable->var_id > 0) {
                         $sv = new sensor_var();
                         $sv = $sv->getByIds($this->dats_variables[$j]->var_id, $this->dats_sensors[$i]->sensor_id);
@@ -360,9 +360,9 @@ abstract class base_dataset implements iDataset
    */
     protected function get_sensor_environments()
     {
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             if ($this->dats_sensors[$i]->sensor->sensor_id > 0) {
-                for ($j = 0; $j < count($this->sites); $j++) {
+                for ($j = 0, $size = count($this->sites); $j < $size; $j++) {
                     if ($this->sites[$j]->place_id > 0) {
                         $sp = new sensor_place();
                         $sp = $sp->getByIds($this->sites[$j]->place_id, $this->dats_sensors[$i]->sensor->sensor_id);
@@ -771,7 +771,7 @@ abstract class base_dataset implements iDataset
 
     private function insert_originators()
     {
-        for ($i = 0; $i < count($this->originators); $i++) {
+        for ($i = 0, $size = count($this->originators); $i < $size; $i++) {
             if ($this->originators[$i]->pers_id == 0) {
                 $this->originators[$i]->insert($this->bdConn);
             }
@@ -780,7 +780,7 @@ abstract class base_dataset implements iDataset
 
     private function insert_projects()
     {
-        for ($i = 0; $i < count($this->projects); $i++) {
+        for ($i = 0, $size = count($this->projects); $i < $size; $i++) {
             if ($this->projects[$i]->project_id != 0) {
                 $dp = new dats_proj();
                 $dp->dats_id = $this->dats_id;
@@ -809,7 +809,7 @@ abstract class base_dataset implements iDataset
 
     private function insert_dats_originators()
     {
-        for ($i = 0; $i < count($this->originators); $i++) {
+        for ($i = 0, $size = count($this->originators); $i < $size; $i++) {
             $do = new dats_originator();
             $do->dats_id = $this->dats_id;
             $do->pers_id = $this->originators[$i]->pers_id;
@@ -822,7 +822,7 @@ abstract class base_dataset implements iDataset
 
     private function insert_data_formats()
     {
-        for ($i = 0; $i < count($this->data_formats); $i++) {
+        for ($i = 0, $size = count($this->data_formats); $i < $size; $i++) {
             if ($this->data_formats[$i]->data_format_id != -1) {
                 if ($this->data_formats[$i]->data_format_id == 0) {
                     $this->data_formats[$i]->insert($this->bdConn);
@@ -836,7 +836,7 @@ abstract class base_dataset implements iDataset
             }
         }
 
-        for ($i = 0; $i < count($this->required_data_formats); $i++) {
+        for ($i = 0, $size = count($this->required_data_formats); $i < $size; $i++) {
             if ($this->required_data_formats[$i]->data_format_id > 0) {
                 $ddf = new dats_data_format();
                 $ddf->dats_id = $this->dats_id;
@@ -850,7 +850,7 @@ abstract class base_dataset implements iDataset
     private function insert_dataset_types()
     {
         if (isset($this->dataset_types) && !empty($this->dataset_types)) {
-            for ($i = 0; $i < count($this->dataset_types); $i++) {
+            for ($i = 0, $size = count($this->dataset_types); $i < $size; $i++) {
                 if ($this->dataset_types[$i]->dats_type_id >= 0) {
                     if ($this->dataset_types[$i]->dats_type_id == 0) {
                         $this->dataset_types[$i]->insert($this->bdConn);
@@ -868,7 +868,7 @@ abstract class base_dataset implements iDataset
 
     private function insert_sensors()
     {
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dats_sensors); $i < $size; $i++) {
             if (isset($this->dats_sensors[$i])) {
                 if (isset($this->dats_sensors[$i]->sensor) && $this->dats_sensors[$i]->sensor->sensor_id == 0) {
                     $this->dats_sensors[$i]->sensor_id = $this->dats_sensors[$i]->sensor->insert($this->bdConn);
@@ -885,7 +885,7 @@ abstract class base_dataset implements iDataset
 
     private function insert_dats_var()
     {
-        for ($i = 0; $i < count($this->dats_variables); $i++) {
+        for ($i = 0, $size = count($this->dats_variables); $i < $size; $i++) {
             if (isset($this->dats_variables[$i]->unit) && $this->dats_variables[$i]->unit_id == 0) {
                 $this->dats_variables[$i]->unit->insert($this->bdConn);
             }
@@ -909,9 +909,9 @@ abstract class base_dataset implements iDataset
 
     private function insert_sensor_vars()
     {
-        for ($i = 0; $i < count($this->dats_sensors); $i++) {
+        for ($i = 0, $size = count($this->dataset_types); $i < $size; $i++) {
             if ($this->dats_sensors[$i]->sensor->sensor_id > 0) {
-                for ($j = 0; $j < count($this->dats_sensors[$i]->sensor->sensor_vars); $j++) {
+                for ($j = 0, $size = count($this->dats_sensors); $j < $size; $j++) {
                     if (!empty($this->dats_sensors[$i]->sensor->sensor_vars[$j]->variable->var_id) && $this->dats_sensors[$i]->sensor->sensor_vars[$j]->variable->var_id != -1) {
                         $this->dats_sensors[$i]->sensor->sensor_vars[$j]->sensor_id = $this->dats_sensors[$i]->sensor->sensor_id;
                         $this->dats_sensors[$i]->sensor->sensor_vars[$j]->var_id = $this->dats_sensors[$i]->sensor->sensor_vars[$j]->variable->var_id;
@@ -933,7 +933,7 @@ abstract class base_dataset implements iDataset
         }
         $result .= 'Creator: ' . $this->dats_creator . "\n";
         $result .= "Projects:\n";
-        for ($i = 0; $i < count($this->projects); $i++) {
+        for ($i = 0, $size = count($this->dats_variables); $i < $size; $i++) {
             if (isset($this->projects[$i])) {
                 $result .= '- ' . $this->projects[$i]->toString() . "\n";
             }
@@ -955,7 +955,7 @@ abstract class base_dataset implements iDataset
         }
         $result .= "\n";
 
-        for ($i = 0; $i < count($this->originators); $i++) {
+        for ($i = 0, $size = count($this->originators); $i < $size; $i++) {
             $result .= $this->originators[$i]->toString() . "\n";
         }
         $result .= "\nAbstract: " . $this->dats_abstract . "\n";
@@ -972,16 +972,16 @@ abstract class base_dataset implements iDataset
             $result .= 'Data policy: ' . $this->data_policy->data_policy_name . "\n";
         }
         $result .= "Data formats:\n";
-        for ($i = 0; $i < count($this->data_formats); $i++) {
+        for ($i = 0, $size = count($this->data_formats); $i < $size; $i++) {
             $result .= '- ' . $this->data_formats[$i]->data_format_name . "\n";
         }
         $result .= "\nRequired data formats:\n";
-        for ($i = 0; $i < count($this->required_data_formats); $i++) {
+        for ($i = 0, $size = count($this->required_data_formats); $i < $size; $i++) {
             $result .= '- ' . $this->required_data_formats[$i]->data_format_name . "\n";
         }
 
         $result .= "\n\n";
-        for ($i = 0; $i < count($this->dats_variables); $i++) {
+        for ($i = 0, $size = count($this->dats_variables); $i < $size; $i++) {
             if ($this->dats_variables[$i]->variable->var_id > 0) {
                 $result .= $this->dats_variables[$i]->toString() . "\n";
             }
