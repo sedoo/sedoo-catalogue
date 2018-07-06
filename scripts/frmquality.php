@@ -67,7 +67,7 @@ function datstype($value, $project_name)
 {
     $projects = 'SELECT DISTINCT dats_id FROM dats_proj WHERE project_id IN (' . get_filtre_projets($project_name) . ')';
     $dts = new dataset();
-    $query = "";
+
     if ($value > 0) {
         $liste_dats = $dts->getByQuery("SELECT * FROM dataset LEFT JOIN dats_type using (dats_id) WHERE dats_id IN ($projects) AND is_requested IS NULL AND dats_type_id in ($value)  ORDER BY dats_title ");
         echo '<table class="quality"><tr><th align="center">Dataset</th><th>Dataset description</th><th>Dates</th><th>Use constraints</th><th>Sites</th><th>Params</th><th>Total</th></tr>';

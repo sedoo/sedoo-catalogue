@@ -16,7 +16,7 @@ if (isset($_POST['logout'])) {
     $form_login->createLoginForm();
     $form_login->displayLoginButton();
 } elseif (isset($user) && !empty($user)) {
-    $form_logout->displayForm($user, $project_name);
+    $form_logout->displayForm($user);
 } else {
     include 'loginGeneral.php';
 }

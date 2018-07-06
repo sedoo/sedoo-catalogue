@@ -412,7 +412,7 @@ class dataset
     {
         $bd = new bdConnect();
         $query = "SELECT * FROM dats_data WHERE dats_id = " . $this->dats_id . " LIMIT 1";
-        return ($resultat = $bd->get_data($query));
+        return $bd->get_data($query);
     }
 
     public function datasetTypeEquals($type)

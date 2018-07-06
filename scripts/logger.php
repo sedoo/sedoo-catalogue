@@ -9,7 +9,7 @@ $a = 1;
 
 function ecrire_log($message, $level)
 {
-    global $prefix, $a;
+    global $prefix;
     error_log($prefix[$level] . $message . "\n", 3, LOG_FILE);
 }
 

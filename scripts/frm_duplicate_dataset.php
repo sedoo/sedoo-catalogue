@@ -3,7 +3,7 @@
 require_once "forms/duplicate_dataset_form.php";
 
 $dupli_dataset_form = new duplicate_dataset_form();
-$dupli_dataset_form->createForm($project_name);
+$dupli_dataset_form->createForm();
 
 if (isset($_SESSION['loggedUser']) && !empty($_SESSION['loggedUser'])) {
     $dupli_dataset_form->user = unserialize($_SESSION['loggedUser']);

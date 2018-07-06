@@ -103,7 +103,6 @@ class va_dataset_form extends base_form
 
     public function initForm($Modif = false)
     {
-        $dataset = &$this->dataset;
         $this->initFormBase();
         $this->initFormGrid();
         $this->initFormGeoCoverageVaDataset();
@@ -378,9 +377,7 @@ class va_dataset_form extends base_form
 
     public function createFormSite($i)
     {
-
         $this->dataset->sites[$i + 1] = new place();
-        $place = &$this->dataset->sites[$i + 1];
         $key = new gcmd_plateform_keyword();
         $key_select = $key->chargeFormvadataset($this, 'gcmd_plat_key_' . $i, 'Platform type');
         $this->addElement($key_select);
@@ -554,7 +551,7 @@ class va_dataset_form extends base_form
             $this->getElement('new_data_policy')->setAttribute('onfocus', 'blur()');
         }
         $this->addRule('new_data_policy', 'Data use information: Data policy exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
-        $attrs = array();
+
         if (isset($this->dataset->database) && !empty($this->dataset->database) && $this->dataset->database->database_id > 0) {
             $this->disableElement('new_database');
             $this->disableElement('new_db_url');
@@ -733,7 +730,6 @@ class va_dataset_form extends base_form
                         $sensor = new sensor();
                         $listeInstrus = $sensor->getByPlace($this->dataset->sites[$i + 1]->place_id);
                         foreach ($listeInstrus as $instru) {
-                              $array[$instru->sensor_id] = $instru->sensor_model;
                             if (empty($this->dataset->dats_sensors[$i + 1]->sensor->sensor_id) && $instru->sensor_model == $this->dataset->dats_sensors[$i + 1]->sensor->sensor_model) {
                                 $this->dataset->dats_sensors[$i + 1]->sensor->sensor_id = $instru->sensor_id;
                             }

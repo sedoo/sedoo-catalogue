@@ -12,7 +12,7 @@ class duplicate_dataset_form extends base_form
     public $duplicated_dats_id;
     public $duplicated_dats_title;
 
-    function createForm($project_name)
+    public function createForm()
     {
         $dts = new dataset();
         $liste = $dts->getOnlyTitles("select dats_id,dats_title from dataset order by dats_title");
@@ -28,7 +28,7 @@ class duplicate_dataset_form extends base_form
         $this->addElement('submit', 'bouton_duplicate', 'duplicate');
     }
 
-    function displayForm()
+    public function displayForm()
     {
         echo '<h1>Duplicate dataset</h1>';
         if (!empty($this->_errors)) {
@@ -36,7 +36,7 @@ class duplicate_dataset_form extends base_form
                 echo '<span class="danger">' . $error . '</span><br>';
             }
         }
-        echo '<form action="' . $reqUri . '" method="post" id="frmjnl" name="frmjnl" >';
+        echo '<form action="" method="post" id="frmjnl" name="frmjnl" >';
         echo '<table>';
         echo '<tr><td><strong>' . $this->getElement('dataset')->getLabel() . '</strong></td><td>' . $this->getElement('dataset')->toHTML() . '</td></tr>';
         echo '<tr><td><strong>' . $this->getElement('title')->getLabel() . '</strong></td><td>' . $this->getElement('title')->toHTML() . '</td></tr>';
@@ -45,7 +45,7 @@ class duplicate_dataset_form extends base_form
         echo '</form>';
     }
 
-    function duplicate_dataset()
+    public function duplicate_dataset()
     {
         $this->duplicated_dats_title = $this->exportValue('title');
         $bd = new bdConnect();
@@ -59,18 +59,18 @@ class duplicate_dataset_form extends base_form
         }
     }
 
-    function reset_form()
+    public function reset_form()
     {
         unset($this->duplicated_dats_title);
         unset($this->duplicated_dats_id);
     }
 
-    function get_id()
+    public function get_id()
     {
         return $this->duplicated_dats_id;
     }
 
-    function get_title()
+    public function get_title()
     {
         return $this->duplicated_dats_title;
     }

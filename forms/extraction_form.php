@@ -65,7 +65,7 @@ class extraction_form extends map_form
             $this->registerRule('validDate', 'function', 'validDate');
             $this->registerRule('validPeriod', 'function', 'validPeriod');
             $this->registerRule('validInterval', 'function', 'validInterval');
-            $this->createFormParams($gcmd_id, $dats_ids);
+            $this->createFormParams($dats_ids);
             $this->createFormDatasets($dats_ids);
             $this->createFormCompression();
             $this->createFormFormat();
@@ -129,19 +129,11 @@ class extraction_form extends map_form
         }
     }
 
-    public function createFormParams($gcmd_id, $dats_ids)
+    public function createFormParams($dats_ids)
     {
         $p = new param();
-        if (isset($gcmd_id) && $gcmd_id > 0) {
-            $gcmd = new gcmd_science_keyword();
-            $gcmd = $gcmd->getById($gcmd_id);
-            $gcmd_ids = $gcmd_id;
-            $liste = $gcmd->getChildren(true);
-            foreach ($liste as $g) {
-                $gcmd_ids .= ',' . $g->gcmd_id;
-            }
-            $liste = $p->getByGcmdId($gcmd_ids);
-        } elseif (isset($dats_ids) && !empty($dats_ids)) {
+        
+        if (isset($dats_ids) && !empty($dats_ids)) {
             $liste = $p->getByDatsId($dats_ids);
         } else {
             $liste = $p->getAll();

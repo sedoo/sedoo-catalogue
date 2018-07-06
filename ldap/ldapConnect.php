@@ -93,7 +93,6 @@ class ldapConnect
 
     public function getEntry($dn, $retClass = null)
     {
-        global $MainProjects;
         if (!isset($retClass)) {
             $retClass = strtolower(MainProject) . 'User';
         }
@@ -106,9 +105,6 @@ class ldapConnect
             $entry = ldap_first_entry($this->ldapconn, $result);
             $attrs = ldap_get_attributes($this->ldapconn, $entry);
             $dn = ldap_get_dn($this->ldapconn, $entry);
-          // if(in_array($retClass,$MainProjects))
-          //   $user = new projectUser ( $dn, $attrs );
-          // else
             $user = new portalUser($dn, $attrs);
 
             return $user;
@@ -118,7 +114,6 @@ class ldapConnect
 
     public function login($dn, $password, $objClass = REGISTERED_USER_CLASS, $retClass = null)
     {
-        global $MainProjects;
         if (!isset($retClass) && empty($retClass)) {
             $retClass = strtolower(MainProject) . 'User';
         }
@@ -129,10 +124,6 @@ class ldapConnect
                 $entry = ldap_first_entry($this->ldapconn, $result);
                 $attrs = ldap_get_attributes($this->ldapconn, $entry);
                 $dn = ldap_get_dn($this->ldapconn, $entry);
-                $class = str_replace("User", "", $retClass);
-                // if(in_array($class,$MainProjects))
-                //   $user = new projectUser ( $dn, $attrs );
-                // else
                 $user = new portalUser($dn, $attrs);
                 return $user;
             } else {
@@ -168,7 +159,6 @@ class ldapConnect
                 }
                 $cpt = 1;
                 $entry = ldap_first_entry($this->ldapconn, $result);
-                $info = ldap_get_entries($this->ldapconn, $result); // test
 
                 while ($entry) {
                     $attrs = ldap_get_attributes($this->ldapconn, $entry);
@@ -245,7 +235,7 @@ class ldapConnect
                     next($attr);
                     return true;
                 } else {
-                    $this->logErreur("Echec de la modification de l'entrée " . $dn . " -----> attribut : " . key($at));
+                    $this->logErreur("Echec de la modification de l'entrée " . $dn . " -----> attribut : " . key($attr));
                     return false;
                 }
             }

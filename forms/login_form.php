@@ -18,7 +18,7 @@ class login_form extends HTML_QuickForm
   /**
    * Test si l'utilisateur connecté est le pi de $dats.
    */
-    public function isPi($dats, $projectName)
+    public function isPi($dats)
     {
         if (isset($dats)) {
             foreach ($dats->dats_originators as $pi) {
@@ -30,7 +30,7 @@ class login_form extends HTML_QuickForm
         return false;
     }
     
-    public function isCreator($dats, $projectName)
+    public function isCreator($dats)
     {
         if (isset($dats)) {
             $this->user = unserialize($_SESSION['loggedUser']);
@@ -66,7 +66,6 @@ class login_form extends HTML_QuickForm
     
     public function isProjectAdmin()
     {
-        global $project_name;
         if ($this->isLogged()) {
             return ($this->user->isProjectAdmin() || $this->user->isRoot());
         } else {
@@ -89,7 +88,7 @@ class login_form extends HTML_QuickForm
             if (!isset($dats)) {
                 return true;
             } else {
-                return ($this->user->isRoot() || $this->isPi($dats, $projectName) || $this->isCreator($dats, $projectName) || $this->isAdmin($dats, $projectName));
+                return ($this->user->isRoot() || $this->isPi($dats) || $this->isCreator($dats) || $this->isAdmin($dats, $projectName));
             }
         } else {
             return false;
@@ -110,7 +109,7 @@ class login_form extends HTML_QuickForm
         return isset($this->user);
     }
     
-    public function genPassword($seed, $length)
+    public function genPassword($length)
     {
         $alphabet = "azertyuiopqsdfghjkmwxcvbnAWQZXSECDRVFTBGYNHUJKLPM23456789_-";
         $passwd = '';
@@ -120,7 +119,7 @@ class login_form extends HTML_QuickForm
         return $passwd;
     }
     
-    public function sendMailNewPassword($mail, $passwd, $project)
+    public function sendMailNewPassword($mail, $passwd)
     {
         $texte = "Dear database user,\n\n" . "A new password has been generated.\n" . "Your username is: $mail";
         $texte .= "\nYour password is: " . $passwd;
@@ -240,11 +239,11 @@ class login_form extends HTML_QuickForm
                 $ldap = new ldapConnect();
                 $ldap->openAdm();
                 if ($ldap->exists($ldap->getUserDn($mail))) {
-                    $newpassword = $this->genPassword(time(), 6);
+                    $newpassword = $this->genPassword(6);
                     $hashMd5 = md5($newpassword);
                     $md5Ldap = ldap_md5($newpassword);
                     if ($ldap->modifyAttribute($ldap->getUserDn($mail), "userPassword", $md5Ldap)) {
-                        $this->sendMailNewPassword($mail, $newpassword, $project);
+                        $this->sendMailNewPassword($mail, $newpassword);
                         if ($newpassword) {
                             $infos = "L'utilisateur $mail a changé son mot de passe.\n\nmd5: $hashMd5 \nmd5 (ldap): " . $md5Ldap . "\nmdp: $newpassword";
                             sendMailSimple(Portal_Contact_Email, "[$project] New Password", $infos, ROOT_EMAIL);

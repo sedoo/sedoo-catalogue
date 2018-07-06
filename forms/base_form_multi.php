@@ -545,12 +545,11 @@ class base_form_multi extends login_form
         }
         $this->addRule('new_data_policy', 'Data use information: Data policy exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
 
-        $attrs = array();
         if (isset($this->dataset->database) && !empty($this->dataset->database) && $this->dataset->database->database_id > 0) {
             $this->disableElement('new_database');
             $this->disableElement('new_db_url');
-        } else {
         }
+        
         $this->addRule('new_database', 'Data use information: Database name exceeds the maximum length allowed (250 characters)', 'maxlength', 250);
         $this->addRule('new_db_url', 'Data use information: Database url exceeds the maximum length allowed (250 characters)', 'maxlength', 250);
 

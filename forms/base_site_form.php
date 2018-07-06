@@ -28,7 +28,7 @@ class base_site_form extends login_form
 
     public $dataset;
 
-    function createLoginForm()
+    public function createLoginForm()
     {
         global $project_name;
       //User déjà loggé sur le site de référence
@@ -55,7 +55,7 @@ class base_site_form extends login_form
         }
     }
 
-    function createFormBase()
+    public function createFormBase()
     {
 
         $this->addElement('hidden', 'dats_id');
@@ -90,13 +90,13 @@ class base_site_form extends login_form
         $this->addElement('submit', 'bouton_save', 'Save');
     }
 
-    function disableElement($elementName)
+    public function disableElement($elementName)
     {
         $this->getElement($elementName)->setAttribute('onfocus', 'blur()');
         $this->getElement($elementName)->setAttribute('style', 'background-color: transparent;');
     }
 
-    function addvalidationRulesBase()
+    public function addvalidationRulesBase()
     {
         $this->registerRule('validDate', 'function', 'validDate');
         $this->registerRule('validPeriod', 'function', 'validPeriod');
@@ -122,16 +122,15 @@ class base_site_form extends login_form
 
         if (isset($this->dataset->data_policy) && !empty($this->dataset->data_policy) && $this->dataset->data_policy->data_policy_id > 0) {
             $this->getElement('new_data_policy')->setAttribute('onfocus', 'blur()');
-        } else {
-        }
+        } 
+
         $this->addRule('new_data_policy', 'Data use information: Data policy exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
 
-        $attrs = array();
         if (isset($this->dataset->database) && !empty($this->dataset->database) && $this->dataset->database->database_id > 0) {
             $this->disableElement('new_database');
             $this->disableElement('new_db_url');
-        } else {
-        }
+        } 
+
         $this->addRule('new_database', 'Data use information: Database name exceeds the maximum length allowed (250 characters)', 'maxlength', 250);
         $this->addRule('new_db_url', 'Data use information: Database url exceeds the maximum length allowed (250 characters)', 'maxlength', 250);
 
@@ -140,7 +139,6 @@ class base_site_form extends login_form
             $this->addRule('data_format_' . $i, 'Data use information: Format name ' . ($i + 1) . ' exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
             if (isset($this->dataset->data_formats[$i]) && !empty($this->dataset->data_formats[$i]) && $this->dataset->data_formats[$i]->data_format_id > 0) {
                 $this->disableElement('new_data_format_' . $i);
-            } else {
             }
         }
 
@@ -164,7 +162,6 @@ class base_site_form extends login_form
                 $this->disableElement('email1_' . $i);
                 $this->disableElement('email2_' . $i);
                 $this->disableElement('organism_' . $i);
-            } else {
             }
 
             if (isset($this->dataset->originators[$i]->organism) && !empty($this->dataset->originators[$i]->organism) && $this->dataset->originators[$i]->organism->org_id > 0) {
@@ -180,7 +177,7 @@ class base_site_form extends login_form
         }
     }
 
-    function initFormSiteBoundings()
+    public function initFormSiteBoundings()
     {
         if (isset($this->dataset->sites[0]->boundings) && !empty($this->dataset->sites[0]->boundings)) {
             $this->getElement('west_bound')->setValue($this->dataset->sites[0]->boundings->west_bounding_coord);
@@ -192,7 +189,7 @@ class base_site_form extends login_form
         $this->getElement('place_alt_max')->setValue($this->dataset->sites[0]->place_elevation_max);
     }
 
-    function disableSiteBoundings()
+    public function disableSiteBoundings()
     {
         $this->disableElement('west_bound');
         $this->disableElement('east_bound');
@@ -202,7 +199,7 @@ class base_site_form extends login_form
         $this->disableElement('place_alt_max');
     }
 
-    function saveFormSiteBoundings()
+    public function saveFormSiteBoundings()
     {
         $this->dataset->sites[0]->place_elevation_min = $this->exportValue('place_alt_min');
         $this->dataset->sites[0]->place_elevation_max = $this->exportValue('place_alt_max');
@@ -238,7 +235,7 @@ class base_site_form extends login_form
         }
     }
 
-    function addValidationRulesSiteBoundings($prefixMsg)
+    public function addValidationRulesSiteBoundings($prefixMsg)
     {
         $this->addRule('west_bound', $prefixMsg . ': West bounding coordinate must be numeric', 'numeric');
         $this->addRule('west_bound', $prefixMsg . ': West bounding coordinate is incorrect', 'number_range', array(-180, 180));
@@ -259,14 +256,14 @@ class base_site_form extends login_form
         $this->addRule(array('south_bound', 'north_bound'), $prefixMsg . ': North bound coordinate must be greater than South bound', 'validInterval');
     }
 
-    function addValidationRulesResolution($prefixMsg = 'Instrument')
+    public function addValidationRulesResolution($prefixMsg = 'Instrument')
     {
         $this->addRule('sensor_resol_temp', $prefixMsg . ': Observation frequency exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
         $this->addRule('sensor_vert_resolution', $prefixMsg . ': Vertical coverage exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
         $this->addRule('sensor_horiz_resolution', $prefixMsg . ': Horizontal coverage exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
     }
 
-    function addValidationRulesVariable($i, $j, $suffix, $prefixMsg)
+    public function addValidationRulesVariable($i, $j, $suffix, $prefixMsg)
     {
         $this->addRule('sensor_precision_' . $suffix, $prefixMsg . ': Sensor precision exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
         $this->addRule('new_variable_' . $suffix, $prefixMsg . ': Name exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
@@ -292,28 +289,28 @@ class base_site_form extends login_form
         $this->addRule('sensor_precision_' . $suffix, $prefixMsg . ': Keyword or name is required when precision is specified', 'validParam', array($this, $suffix));
     }
 
-    function createFormSensorKeyword($i)
+    public function createFormSensorKeyword($i)
     {
         $key = new gcmd_instrument_keyword();
         $key_select = $key->chargeForm($this, 'sensor_gcmd_' . $i, 'Instrument type');
         $this->addElement($key_select);
     }
 
-    function createFormPeriod($projectName)
+    public function createFormPeriod($projectName)
     {
         $per = new period();
         $per_select = $per->chargeForm($this, 'period', 'Period', $projectName);
         $this->addElement($per_select);
     }
 
-    function createFormProject($i)
+    public function createFormProject($i)
     {
         $proj = new project();
         $proj_select = $proj->chargeForm($this, 'project_' . $i, 'Project ' . ($i + 1));
         $this->addElement($proj_select);
     }
 
-    function createFormDataPolicy()
+    public function createFormDataPolicy()
     {
         $dp = new data_policy();
         $dp_select = $dp->chargeForm($this, 'data_policy', 'Data policy');
@@ -321,7 +318,7 @@ class base_site_form extends login_form
         $this->addElement('text', 'new_data_policy', 'new data policy');
     }
 
-    function createFormDatabase()
+    public function createFormDatabase()
     {
         $db = new database();
         $db_select = $db->chargeForm($this, 'database', 'Database');
@@ -331,7 +328,7 @@ class base_site_form extends login_form
         $this->addElement('text', 'new_db_url', 'Database url');
     }
 
-    function createFormDataFormat($i)
+    public function createFormDataFormat($i)
     {
         $dformat = new data_format();
         $dformat_select = $dformat->chargeForm($this, 'data_format_' . $i, 'Data format ' . ($i + 1), $i);
@@ -339,7 +336,7 @@ class base_site_form extends login_form
         $this->addElement('text', 'new_data_format_' . $i, 'new data format: ');
     }
 
-    function createFormOrganisme($indice)
+    public function createFormOrganisme($indice)
     {
         $org = new organism();
         $org_select = $org->chargeForm($this, 'organism_' . $indice, 'Organism short name', $indice);
@@ -350,7 +347,7 @@ class base_site_form extends login_form
         $this->addElement('text', 'org_url_' . $indice, 'URL', $indice);
     }
 
-    function createFormPersonne($indice)
+    public function createFormPersonne($indice)
     {
         $pers = new personne();
         $pers_select = $pers->chargeForm($this, 'pi_' . $indice, 'Contact Name', $indice);
@@ -368,7 +365,7 @@ class base_site_form extends login_form
         $this->createFormOrganisme($indice);
     }
 
-    function createFormSiteBoundings()
+    public function createFormSiteBoundings()
     {
         $this->addElement('text', 'west_bound', 'West bounding coordinate (°)');
         $this->addElement('text', 'east_bound', 'East bounding coordinate (°)');
@@ -379,7 +376,7 @@ class base_site_form extends login_form
         $this->addElement('text', 'place_alt_max', 'Altitude max (m)');
     }
 
-    function createFormGeoCoverage()
+    public function createFormGeoCoverage()
     {
         $area = new place();
         $area_select = $area->chargeFormRegion($this, 'area', 'Area name');
@@ -389,7 +386,7 @@ class base_site_form extends login_form
         $this->createFormSiteBoundings(0);
     }
 
-    function initFormGeoCoverage()
+    public function initFormGeoCoverage()
     {
         if (isset($this->dataset->sites) && !empty($this->dataset->sites)) {
             if (isset($this->dataset->sites[0]) && !empty($this->dataset->sites[0])) {
@@ -401,7 +398,7 @@ class base_site_form extends login_form
         }
     }
 
-    function saveFormGeoCoverage()
+    public function saveFormGeoCoverage()
     {
         $this->dataset->sites = array();
         $this->dataset->sites[0] = new place();
@@ -418,7 +415,7 @@ class base_site_form extends login_form
         }
     }
 
-    function addValidationRulesGeoCoverage()
+    public function addValidationRulesGeoCoverage()
     {
         $this->addRule('area', 'Coverage: area name is required', 'couple_not_null', array($this, 'new_area'));
         if (isset($this->dataset->sites[0]) && !empty($this->dataset->sites[0]) && $this->dataset->sites[0]->place_id > 0) {
@@ -430,7 +427,7 @@ class base_site_form extends login_form
         }
     }
 
-    function createFormResolution($i)
+    public function createFormResolution($i)
     {
         $this->addElement('text', 'sensor_resol_temp_' . $i, 'Temporal');
         $this->applyFilter('sensor_resol_temp_' . $i, 'trim');
@@ -440,7 +437,7 @@ class base_site_form extends login_form
         $this->applyFilter('sensor_horiz_resolution_' . $i, 'trim');
     }
 
-    function createFormVariable($i, $j, $type = '')
+    public function createFormVariable($i, $j, $type = '')
     {
 
         $key = new gcmd_science_keyword();
@@ -473,7 +470,7 @@ class base_site_form extends login_form
         $this->addElement('text', 'var_date_max_' . $type . $i . '_' . $j, 'Date end (yyyy-mm-jj)', $options);
     }
 
-    function initFormBase()
+    public function initFormBase()
     {
 
       //DATASET
@@ -535,7 +532,7 @@ class base_site_form extends login_form
         }
     }
 
-    function initFormPersonne($i)
+    public function initFormPersonne($i)
     {
         $this->getElement('pi_' . $i)->setSelected($this->dataset->originators[$i]->pers_id);
         $this->getElement('pi_name_' . $i)->setValue($this->dataset->originators[$i]->pers_name);
@@ -549,14 +546,14 @@ class base_site_form extends login_form
         $this->getElement('contact_type_' . $i)->setSelected($this->dataset->originators[$i]->contact_type_id);
     }
 
-    function initFormResolution($i)
+    public function initFormResolution($i)
     {
         $this->getElement('sensor_resol_temp_' . $i)->setValue($this->dataset->dats_sensors[$i]->sensor_resol_temp);
         $this->getElement('sensor_vert_resolution_' . $i)->setValue($this->dataset->dats_sensors[$i]->sensor_vert_resolution);
         $this->getElement('sensor_horiz_resolution_' . $i)->setValue($this->dataset->dats_sensors[$i]->sensor_lat_resolution);
     }
 
-    function initFormVariable($i, $j, $nb, $suffix)
+    public function initFormVariable($i, $j, $nb, $suffix)
     {
         if (isset($this->dataset->dats_sensors[$i]->sensor->sensor_vars[$j]) && !empty($this->dataset->dats_sensors[$i]->sensor->sensor_vars[$j]) && ($this->dataset->dats_sensors[$i]->sensor->sensor_vars[$j]->var_id > 0)) {
             echo "variable : " . $suffix . $i . "_" . $j . "<br>";
@@ -592,7 +589,7 @@ class base_site_form extends login_form
         }
     }
 
-    function saveFormBase()
+    public function saveFormBase()
     {
 
         $this->dataset->dats_id = $this->exportValue('dats_id');
@@ -669,7 +666,7 @@ class base_site_form extends login_form
         }
     }
 
-    function saveFormPersonne($i)
+    public function saveFormPersonne($i)
     {
         $this->dataset->originators[$i] = new personne();
         $pers_id = $this->exportValue('pi_' . $i);
@@ -692,7 +689,7 @@ class base_site_form extends login_form
         $this->dataset->originators[$i]->org_id = &$this->dataset->originators[$i]->organism->org_id;
     }
 
-    function saveFormResolution($i)
+    public function saveFormResolution($i)
     {
         $this->dataset->dats_sensors[$i]->sensor_resol_temp = $this->exportValue('sensor_resol_temp_' . $i);
         $this->dataset->dats_sensors[$i]->sensor_vert_resolution = $this->exportValue('sensor_vert_resolution_' . $i);
@@ -700,7 +697,7 @@ class base_site_form extends login_form
         $this->dataset->dats_sensors[$i]->sensor_lon_resolution = $this->exportValue('sensor_horiz_resolution_' . $i);
     }
 
-    function saveFormVariables($i, $nb, $flag = 0, $suffix = '', $incr = 0)
+    public function saveFormVariables($i, $nb, $flag = 0, $suffix = '', $incr = 0)
     {
 
         $dataset = &$this->dataset;
@@ -741,7 +738,7 @@ class base_site_form extends login_form
         return $indice;
     }
 
-    function saveDatsVars($nbSensors)
+    public function saveDatsVars($nbSensors)
     {
         $dataset = &$this->dataset;
         unset($dataset->dats_vars);
@@ -772,7 +769,7 @@ class base_site_form extends login_form
         }
     }
 
-    function getErrorMessage($elementName)
+    public function getErrorMessage($elementName)
     {
         $errorMsg = $this->getElementError($elementName);
         if (!isset($errorMsg) || empty($errorMsg)) {
@@ -787,7 +784,7 @@ class base_site_form extends login_form
         }
     }
 
-    function getErrorMessages($elementNames)
+    public function getErrorMessages($elementNames)
     {
         $result = '';
         foreach ($elementNames as $elementName) {
@@ -796,7 +793,7 @@ class base_site_form extends login_form
         return $result;
     }
 
-    function displayErrors($elementNames)
+    public function displayErrors($elementNames)
     {
         $messages = $this->getErrorMessages($elementNames);
         if (isset($messages) && !empty($messages)) {
@@ -804,23 +801,23 @@ class base_site_form extends login_form
         }
     }
 
-    function displayErrorsContact($i)
+    public function displayErrorsContact($i)
     {
         $this->displayErrors(array('pi_' . $i, 'pi_name_' . $i, 'email1_' . $i, 'email2_' . $i, 'organism_' . $i, 'org_fname_' . $i, 'org_sname_' . $i, 'org_url_' . $i));
     }
 
-    function displayErrorsParams($suffix)
+    public function displayErrorsParams($suffix)
     {
         $this->displayErrors(array('new_variable_' . $suffix, 'unit_' . $suffix, 'new_unit_' . $suffix, 'new_unit_code_' . $suffix,
         'sensor_precision_' . $suffix, 'var_date_min_' . $suffix, 'var_date_max_' . $suffix, 'methode_acq_' . $suffix));
     }
 
-    function displayErrorsGeneralInfo()
+    public function displayErrorsGeneralInfo()
     {
         $this->displayErrors(array('dats_title', 'dats_date_begin', 'dats_date_end'));
     }
 
-    function displayErrorsUseInfo()
+    public function displayErrorsUseInfo()
     {
         $elementNames = array('new_data_policy', 'new_database', 'new_db_url');
         for ($i = 0; $i < $this->dataset->nbFormats; $i++) {
@@ -829,7 +826,7 @@ class base_site_form extends login_form
         $this->displayErrors($elementNames);
     }
 
-    function displayDataDescrForm()
+    public function displayDataDescrForm()
     {
         echo '<tr><th colspan="4" align="center"><a name="a_descr" ></a><strong>Site description</strong></td></tr>';
         echo '<tr><td>' . $this->getElement('dats_abstract')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_abstract')->toHTML() . '</td></tr>';
@@ -837,7 +834,7 @@ class base_site_form extends login_form
         echo '<tr><td>' . $this->getElement('dats_reference')->getLabel() . '</td><td colspan="3">' . $this->getElement('dats_reference')->toHTML() . '</td></tr>';
     }
 
-    function displayPersonForm($i)
+    public function displayPersonForm($i)
     {
         echo '<tr><td><span class="info">' . $this->getElement('contact_type_' . $i)->getLabel() . '</span></td><td colspan="3">' . $this->getElement('contact_type_' . $i)->toHTML();
         if ($i == 0) {
@@ -858,7 +855,7 @@ class base_site_form extends login_form
         echo '<td>' . $this->getElement('org_url_' . $i)->getLabel() . '</td><td>' . $this->getElement('org_url_' . $i)->toHTML() . '</td></tr>';
     }
 
-    function displaySiteBoundingsForm()
+    public function displaySiteBoundingsForm()
     {
         echo '<tr><td>' . $this->getElement('west_bound')->getLabel() . '</td><td>' . $this->getElement('west_bound')->toHTML() . '</td>';
         echo '<td>' . $this->getElement('east_bound')->getLabel() . '</td><td>' . $this->getElement('east_bound')->toHTML() . '</td></tr>';
@@ -868,7 +865,7 @@ class base_site_form extends login_form
         echo '<td>' . $this->getElement('place_alt_max')->getLabel() . '</td><td>' . $this->getElement('place_alt_max')->toHTML() . '</td></tr>';
     }
     
-    function displayDataResolutionForm()
+    public function displayDataResolutionForm()
     {
         echo '<tr><td colspan="4" align="center"><strong>Data resolution</strong><br></td></tr>';
         echo '<tr><td>' . $this->getElement('sensor_horiz_resolution')->getLabel() . '</td><td>' . $this->getElement('sensor_horiz_resolution')->toHTML() . '</td>';
@@ -876,7 +873,7 @@ class base_site_form extends login_form
         echo '<tr><td>' . $this->getElement('sensor_resol_temp')->getLabel() . '</td><td>' . $this->getElement('sensor_resol_temp')->toHTML() . '</td><td colspan="2"></td></tr>';
     }
     
-    function displayGeoCoverageForm()
+    public function displayGeoCoverageForm()
     {
         echo '<tr><td colspan="4" align="center"><strong>Geographic Coverage</strong></td></tr>';
         echo '<tr><td><span class="info">' . $this->getElement('area')->getLabel() . '</span></td><td colspan="3">' . $this->getElement('area')->toHTML();
@@ -885,7 +882,7 @@ class base_site_form extends login_form
         $this->displaySiteBoundingsForm(0);
     }
 
-    function displayParamForm($i, $j, $withDates = false)
+    public function displayParamForm($i, $j, $withDates = false)
     {
 
         echo '<tr><td>' . $this->getElement('gcmd_science_key_' . $i . '_' . $j)->getLabel() . '</td><td colspan="3">' . $this->getElement('gcmd_science_key_' . $i . '_' . $j)->toHTML() . '</td></tr>';
@@ -901,7 +898,7 @@ class base_site_form extends login_form
         echo '<tr><td>' . $this->getElement('sensor_precision_' . $i . '_' . $j)->getLabel() . '</td><td>' . $this->getElement('sensor_precision_' . $i . '_' . $j)->toHTML() . '</td><td colspan="2"></td></tr>';
     }
 
-    function displayFormBegin($frmname)
+    public function displayFormBegin($frmname)
     {
         echo '<div id="errors" class="danger"></div><br>';
         if (strpos($_SERVER['REQUEST_URI'], '?datsId')) {
@@ -918,7 +915,7 @@ class base_site_form extends login_form
         echo '<tr><td colspan="4" align="center"><a href="?datsId=-10">Reset</a></td></tr>';
     }
 
-    function displayFormEnd()
+    public function displayFormEnd()
     {
         echo '<tr><td colspan="4" align="center">' . $this->getElement('bouton_save')->toHTML() . '</td></tr></table>';
         echo '</form>';

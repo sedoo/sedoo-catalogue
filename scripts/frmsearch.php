@@ -92,10 +92,6 @@ function makeWhereVar($f)
 
 function makeWhereBoundings($f)
 {
-    $where_lat_min = null;
-    $where_lat_max = null;
-    $where_lon_min = null;
-    $where_lon_max = null;
     $where_boundings = null;
     $minLatDefault = 250000;
     $maxLatDefault = 500000;
@@ -228,8 +224,6 @@ function listDatasetsBySensor($f, $project_name)
 {
     $cptDts = 0;
     $order_by = "order by dats_title asc";
-    $where_insitu = "dats_id not in (select distinct dats_id from dats_type)";
-    $where_satmod = "dats_id in (select distinct dats_id from dats_type)";
     $where_date_begin = makeWhereDateBegin($f);
     $where_date_end = makeWhereDateEnd($f);
     $where_boundings = makeWhereBoundings($f);

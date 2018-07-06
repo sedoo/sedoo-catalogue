@@ -19,7 +19,6 @@ function fiche2pdf_new($datsId)
 
 function genPDF($content, $fileTitle)
 {
-    global $project_name, $root;
     ob_end_clean();
     $stylesheet = file_get_contents('css/layout_text.css', FILE_USE_INCLUDE_PATH);
     $stylesheet .= file_get_contents('css/aide.css', FILE_USE_INCLUDE_PATH);

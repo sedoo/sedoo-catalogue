@@ -205,7 +205,7 @@ function lirePlateforme($db)
 
 function getDatasetsByProject($Project, $isPDF = false)
 {
-    global $Projects, $project_name, $hote, $db_user, $db_name, $db;
+    global $Projects, $project_name, $db;
     $server_resp = '';
     $elements = $Projects;
     while ($element = current($elements)) {
@@ -254,7 +254,7 @@ function getDatasetsByProject($Project, $isPDF = false)
 
 function genPDF($Project_Name = null)
 {
-    global $Dats_Projects, $project_name, $Projects, $root;
+    global $project_name, $Projects, $root;
     $root = $_SERVER['DOCUMENT_ROOT'];
     ob_end_clean();
     $stylesheet = file_get_contents('Bootstrap-Style/css/bootstrap.css', FILE_USE_INCLUDE_PATH);
@@ -298,7 +298,7 @@ EOD;
     $pdf->addPage($Content);
     $pdf->send($pro_name . "_database_content_" . date("Y-m-d H:i:s") . ".pdf", 'D');
 }
-function fillProjectsTab($Project_Name = null)
+function fillProjectsTab()
 {
     global $Projects, $project_name, $Dats_Projects;
     reset($Projects);

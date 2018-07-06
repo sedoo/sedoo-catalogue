@@ -37,7 +37,7 @@ elseif (isset($_POST['bouton_login'])) {
         } elseif (isset($form->user)) {
             $formLogout = new logout_form();
             $formLogout->createForm();
-            $formLogout->displayForm($form->user, $project_name);
+            $formLogout->displayForm($form->user);
         }
     }
     $form->saveErrors();

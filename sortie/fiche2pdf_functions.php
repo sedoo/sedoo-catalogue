@@ -302,7 +302,7 @@ function writeSite(&$dataset, &$out)
 function writeGeoInfo(&$dataset, &$out)
 {
     $out->addSection('Geographic information');
-    $cpt = 1;
+
     foreach ($dataset->sites as $site) {
         $out->addSousSection(printLocationName($site));
         writeLocation($site, $out);

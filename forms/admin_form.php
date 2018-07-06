@@ -84,7 +84,7 @@ class admin_form extends login_form
             if (isset($user->userPassword) && !empty($user->userPassword)) {
                 $passwd = null;
             } else {
-                $passwd = $this->genPassword(time(), 6);
+                $passwd = $this->genPassword(6);
                 $hashMd5 = md5($passwd);
                 $nvAttrs["objectClass"] = REGISTERED_USER_CLASS;
                 $nvAttrs["userPassword"] = ldap_md5($passwd);
@@ -165,7 +165,7 @@ class admin_form extends login_form
         sendMailSimple(ROOT_EMAIL, "[$project_name-DATABASE] Rejected User", "User $userEmail has been rejected", ROOT_EMAIL);
     }
 
-    public function getProjectAdminEmail($project_name)
+    public function getProjectAdminEmail()
     {
       //TODO
         return ROOT_EMAIL;
@@ -389,7 +389,6 @@ class admin_form extends login_form
     public function createRegisteredUserForm($i)
     {
         global $project_name;
-        $user = $this->registeredUsers[$i];
         $groupes = $this->getUsersGroup($project_name);
         $group_select = &$this->createElement('select', 'editable_group_' . $i, '', $groupes);
         $this->addElement($group_select);
@@ -509,7 +508,7 @@ class admin_form extends login_form
 
     public function displayUser($i, $user, $registered = false, $rejected = false, $project = null)
     {
-        global $MainProjects, $project_name;
+        global $MainProjects;
         if (isset($user)) {
             echo '<tr><td align="left" colspan="2"><strong>' . $user->cn . '</strong><br/>';
             if ($registered) {

@@ -8,7 +8,7 @@ require_once "mail.php";
 class Contact_Users_form extends HTML_QuickForm
 {
 
-    public function createForm($project)
+    public function createForm()
     {
         $this->addElement('textarea', 'EditionArea', 'Message', array('cols' => 50, 'rows' => 8));
         $this->addRule('EditionArea', 'You have to write your message first', 'required');

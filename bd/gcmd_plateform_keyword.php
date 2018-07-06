@@ -34,7 +34,7 @@ class gcmd_plateform_keyword
             $this->gcmd_parent = $this->getById($this->gcm_gcmd_id);
         }
 
-        if (isset($this->thesaurus_id) && $empty($this->thesaurus_id)) {
+        if (isset($this->thesaurus_id) && !empty($this->thesaurus_id)) {
             $thesaurus = new thesaurus();
             $this->thesaurus = $thesaurus->getById($this->thesaurus_id);
         }

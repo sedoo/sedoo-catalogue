@@ -314,7 +314,7 @@ class instrument_form extends base_form
         'south_bound_' . $i, 'place_alt_min_' . $i, 'place_alt_max_' . $i, 'sensor_environment_' . $i));
     }
 
-    public function displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul)
+    public function displayForm($nb_site)
     {
         global $project_name;
         $this->addValidationRules();
@@ -523,7 +523,7 @@ class instrument_form extends base_form
         echo '</form>';
     }
 
-    public function saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul)
+    public function saveForm($nb_site, $nb_variable, $nb_variable_calcul)
     {
         $dataset = &$this->dataset;
 
@@ -651,8 +651,6 @@ class instrument_form extends base_form
 
         $this->saveFormVariables($nb_variable);
         $this->saveFormVariables($nb_variable_calcul, 1, 'calcul', $nb_variable);
-
-        $nb_vars = count($dataset->dats_variables);
     }
 
     public function addFormat()

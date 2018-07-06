@@ -35,7 +35,7 @@ class profile_form extends login_form
                 return false;
             }
         } catch (Exception $e) {
-            $this->mailAdmin('ERREUR', "Erreur lors du changement de mot de passe.", $e, $user);
+            $this->mailAdmin('ERREUR', "Erreur lors du changement de mail.", $e, $this->user);
             return false;
         }
     }
@@ -67,7 +67,7 @@ class profile_form extends login_form
                 return false;
             }
         } catch (Exception $e) {
-            $this->mailAdmin('ERREUR', "Erreur lors du changement de mot de passe.", $e, $user);
+            $this->mailAdmin('ERREUR', "Erreur lors du changement de mot de passe.", $e, $this->user);
             return false;
         }
     }
@@ -101,7 +101,7 @@ class profile_form extends login_form
     
     public function displayProfile()
     {
-        global $project_name, $MainProjects;
+        global $MainProjects;
         echo '<table>';
         if (isset($this->user->affiliation) && !empty($this->user->affiliation)) {
             echo '<tr><th colspan="4" align="center"><strong>Institution</strong></th></tr>';

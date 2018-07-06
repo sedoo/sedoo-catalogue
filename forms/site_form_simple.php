@@ -654,8 +654,8 @@ class site_form_simple extends base_form
         $dataset = &$this->dataset;
         unset($dataset->dats_vars);
         $dataset->dats_vars = array();
-        $ids = array();
         $indice = 0;
+        
         for ($i = 0; $i < $dataset->nbSensors; $i++) {
             for ($j = 0; $j < $dataset->dats_sensors[$i]->nbVars; $j++) {
                 if (isset($dataset->dats_sensors[$i]->sensor->sensor_vars[$j])) {

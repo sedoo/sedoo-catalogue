@@ -263,7 +263,7 @@ class satellite_dataset extends base_dataset
 
             displayUtils::displayDataUse($this);
         }
-        echo "</td></tr><td colspan=\"4\" align=\"center\"><input type=\"submit\" value=\"Update this dataset\" onclick=\"location.href='" . $rubrique_cible . "?datsId=" . $this->dats_id . "'\"/>";
+        echo "</td></tr><td colspan=\"4\" align=\"center\"><input type=\"submit\" value=\"Update this dataset\" onclick=\"location.href='?datsId=" . $this->dats_id . "'\"/>";
         echo "</td></tr></table>";
     }
 

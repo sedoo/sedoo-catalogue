@@ -229,7 +229,7 @@ class treeByPlat
         $dts = new dataset();
         $dts_list = $dts->getOnlyTitles($query);
         foreach ($dts_list as $dt) {
-            addDataset($node, $dt, $projectName);
+            addDataset($node, $dt, MainProject);
             $this->cptDats++;
         }
         if (count($dts_list) > 0) {

@@ -54,7 +54,7 @@ class dats_place
         $query = "select * from dats_place where " .
         "dats_id = " . $this->dats_id . " and place_id = " . $this->place_id;
         $bd = new bdConnect();
-        if ($resultat = $bd->get_data($query)) {
+        if ($bd->get_data($query)) {
             return true;
         }
         return false;

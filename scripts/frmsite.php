@@ -171,22 +171,22 @@ if ($form->isCat()) {
 
     for ($i = 0; $i < $nb_sensors; $i++) {
         if (isset($_POST['bouton_add_variable_' . $i])) {
-            $form->saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
 
             $tab_nbVars[$i]++;
             $form->dataset->dats_sensors[$i]->nbVars = &$tab_nbVars[$i];
             $form->addVariable($i);
-            $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $_SESSION['dataset'] = serialize($form->dataset);
             $bouton_add_var_pressed = true;
             break;
         } elseif (isset($_POST['bouton_add_variable_calcul_' . $i])) {
-            $form->saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
 
             $tab_nbCalcVars[$i]++;
             $form->dataset->dats_sensors[$i]->nbCalcVars = &$tab_nbCalcVars[$i];
             $form->addVariableCalcul($i);
-            $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $_SESSION['dataset'] = serialize($form->dataset);
             $bouton_add_var_pressed = true;
             break;
@@ -195,26 +195,26 @@ if ($form->isCat()) {
 
     if (!$bouton_add_var_pressed) {
         if (isset($_POST['upload'])) {
-            $form->saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $form->dataset->image = uploadImg("upload_image");
-            $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $_SESSION['dataset'] = serialize($form->dataset);
         } elseif (isset($_POST['delete'])) {
-            $form->saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             if (isset($form->dataset->image) && !empty($form->dataset->image)) {
                 unlink($form->dataset->image);
                 $form->dataset->image = null;
             }
-            $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $_SESSION['dataset'] = serialize($form->dataset);
         } elseif (isset($_POST['bouton_add_pi'])) {
-            $form->saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $form->dataset->nbPis++;
             $form->addPi();
-            $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $_SESSION['dataset'] = serialize($form->dataset);
         } elseif (isset($_POST['bouton_add_sensor'])) {
-            $form->saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $nb_sensors++;
             $form->dataset->nbSensors = $nb_sensors;
             $form->dataset->dats_sensors[$form->dataset->nbSensors - 1] = new dats_sensor();
@@ -223,22 +223,22 @@ if ($form->isCat()) {
             $tab_nbVars[$form->dataset->nbSensors - 1] = 1;
             $tab_nbCalcVars[$form->dataset->nbSensors - 1] = 1;
             $form->addSensor();
-            $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $_SESSION['dataset'] = serialize($form->dataset);
         } elseif (isset($_POST['bouton_add_format'])) {
-            $form->saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $form->dataset->nbFormats++;
             $form->addFormat();
-            $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $_SESSION['dataset'] = serialize($form->dataset);
         } elseif (isset($_POST['bouton_add_projet'])) {
-            $form->saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $form->dataset->nbProj++;
             $form->addProjet();
-            $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $_SESSION['dataset'] = serialize($form->dataset);
         } elseif (isset($_POST['bouton_save'])) {
-            $form->saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
             $form->saveDatsVars($nb_sensors);
             $form->addValidationRules();
 
@@ -263,15 +263,15 @@ if ($form->isCat()) {
                         $form->dataset->dats_id = 0;
                     }
 
-                    $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+                    $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
                     $_SESSION['dataset'] = serialize($form->dataset);
                 }
             } else {
-                $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+                $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
                 $_SESSION['dataset'] = serialize($form->dataset);
             }
         } else {
-            $form->displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars);
+            $form->displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars);
         }
     }
 } else {

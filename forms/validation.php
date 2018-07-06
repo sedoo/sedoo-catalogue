@@ -89,7 +89,7 @@ function contact_organism_required($element, $value, $args)
     $org_sname = $args[0]->exportValue("org_sname_" . $args[1]);
     $org_fname = $args[0]->exportValue("org_fname_" . $args[1]);
 
-    if (!empty($value) && ($org == 0) && empty($org_sname) && empty($org_sname)) {
+    if (!empty($value) && ($org == 0) && empty($org_sname) && empty($org_fname)) {
         return false;
     } else {
         return true;

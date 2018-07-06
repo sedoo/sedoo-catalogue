@@ -15,7 +15,7 @@ class logout_form extends HTML_QuickForm
         $this->addElement('submit', 'logout', 'logout');
     }
 
-    public function displayForm($user, $project)
+    public function displayForm($user)
     {
         global $project_name;
         echo '<form method="post" action="' . $_SERVER['REQUEST_URI'] . '" >';

@@ -86,7 +86,7 @@ class dats_role
     public static function addDatsRole(&$bd, $datsId, $roleId)
     {
         $queryExists = "select * from dats_role where role_id = $roleId and dats_id = $datsId;";
-        if ($resultat = $bd->get_data($queryExists)) {
+        if ($bd->get_data($queryExists)) {
             echo 'dats_role déjà présente<br>';
             return false;
         } else {

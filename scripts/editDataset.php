@@ -607,7 +607,7 @@ function editModelDataset(&$dataset, $project_name, $queryArgs = array())
     }
 }
 
-function editDataset($datsId, $project_name, $display_archived = false, $queryArgs = array())
+function editDataset($datsId, $project_name, $display_archived = false)
 {
     if (isset($datsId) && !empty($datsId)) {
         $dataset = new dataset();

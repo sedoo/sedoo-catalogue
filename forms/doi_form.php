@@ -24,7 +24,7 @@ class doi_form extends login_form
         }
     }
     
-    public function isNotValid($xml, $project_name, $id)
+    public function isNotValid($xml)
     {
         $xmle = simplexml_load_string($xml);
 
@@ -107,14 +107,13 @@ class doi_form extends login_form
         $projects = getProjects($dats_id);
         $Doi['projects'] = getProjectsName($projects);
         $varxml = createDoiXml($dats_id, $xmlstr, $project_name);
-        $liste =
         $dom = new DOMDocument('1.0', 'UTF-8');
         $dom->preserveWhiteSpace = false;
         $dom->formatOutput = true;
         $dom->loadXML($varxml->asXML());
         $test = $dom->saveXML();
         $Doi['xml'] = $test;
-        $Doi['xml_error'] = $this->isNotValid($Doi['xml'], $project_name, $dats_id);
+        $Doi['xml_error'] = $this->isNotValid($Doi['xml']);
         return $Doi;
     }
 
@@ -125,9 +124,8 @@ class doi_form extends login_form
 
         $query = "SELECT dats_id, dats_title FROM dataset WHERE dats_id IN ($projects) AND dats_doi IS NULL ORDER BY dats_title";
         $liste = $dts->getOnlyTitles($query);
-        $datasetxml[0] = "";
+
         $this->datasetxmlerror = array();
-        $varxml;
         $this->datasetxml[0] = "";
         $this->projet = array();
         $array[0] = "------------------ Dataset List ------------------";

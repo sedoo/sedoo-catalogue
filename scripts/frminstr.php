@@ -170,70 +170,70 @@ if ($form->isCat($form->dataset, $project_name)) {
     $form->createForm($project_name);
 
     if (isset($_POST['upload_doc_button'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         $form->dataset->attFile = uploadDoc("upload_doc");
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['delete_doc_button'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         if (isset($form->dataset->attFile) && !empty($form->dataset->attFile)) {
             unlink(ATT_FILES_PATH . '/' . $form->dataset->attFile);
             $form->dataset->attFile = null;
         }
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['upload'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         $form->dataset->image = uploadImg("upload_image");
 
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['delete'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         if (isset($form->dataset->image) && !empty($form->dataset->image)) {
             unlink(WEB_PATH . $form->dataset->image);
             $form->dataset->image = null;
         }
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['bouton_add_pi'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         $form->dataset->nbPis++;
         $form->addPi($nb_pi);
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['bouton_add_site'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         $form->dataset->nbSites++;
         $form->addSite($nb_site);
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['bouton_add_variable'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         $form->dataset->nbVars++;
         $form->addVariable($nb_variable);
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['bouton_add_variable_calcul'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         $form->dataset->nbCalcVars++;
         $form->addVariableCalcul($nb_variable_calcul);
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['bouton_add_format'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         $form->dataset->nbFormats++;
         $form->addFormat();
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['bouton_add_projet'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         $form->dataset->nbProj++;
         $form->addProjet();
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
         $_SESSION['dataset'] = serialize($form->dataset);
     } elseif (isset($_POST['bouton_save'])) {
-        $form->saveForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->saveForm($nb_site, $nb_variable, $nb_variable_calcul);
         $form->addValidationRules();
 
         if ($form->validate()) {
@@ -286,12 +286,12 @@ if ($form->isCat($form->dataset, $project_name)) {
                 //     return;
                 //   }
                 //   $d = new doi_form();
-                //   if ($d->isNotValid($xmld, $project_name, $dats_id) == false) {
+                //   if ($d->isNotValid($xmld) == false) {
                 //     // Enregistrement dans la base datacite
                 //     createDoi($doi, $url, $xmld);
                 //   } else {
                 //     $messageError = 'http://' . $_SERVER['HTTP_HOST'] . '/' . $project_name . "/?editDatsId=$dats_id" . "\r\n";
-                //     $messageError .= $d->isNotValid($xmld, $project_name, $dats_id);
+                //     $messageError .= $d->isNotValid($xmld);
                 //     $mailsAdmins = Portal_Contact_Email;
                 //     $sujet = 'DOI XML - Errors were found during the update dataset';
                 //     $text = $messageError;
@@ -313,15 +313,15 @@ if ($form->isCat($form->dataset, $project_name)) {
                 if (!$dts->idExiste()) {
                     $form->dataset->dats_id = 0;
                 }
-                $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+                $form->displayForm($nb_site);
                 $_SESSION['dataset'] = serialize($form->dataset);
             }
         } else {
-            $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+            $form->displayForm($nb_site);
             $_SESSION['dataset'] = serialize($form->dataset);
         }
     } else {
-        $form->displayForm($nb_pi, $nb_site, $nb_variable, $nb_variable_calcul);
+        $form->displayForm($nb_site);
     }
 } elseif ($form->isLogged()) {
     echo "<a href='/$project_name/'>&lt;&lt;&nbsp;Return</a><br/>";

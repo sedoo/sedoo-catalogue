@@ -76,7 +76,6 @@ class archive_form extends login_form
 
         $dts = new dataset();
         $jnl = new journal();
-        $query = "";
         $liste_dats = $dts->getByQuery("SELECT * FROM dataset WHERE dats_id IN ($this->projects) AND is_archived ORDER BY dats_title");
 
         echo '<table><tr><th align="center">Dataset</th><th align="center">Date</th><th align="center">Comment</th></tr>';

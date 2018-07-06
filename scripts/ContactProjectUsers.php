@@ -2,7 +2,7 @@
 require_once "forms/Contact_Users_form.php";
 
 $ContactUsersform = new Contact_Users_form();
-$ContactUsersform->createForm($project_name);
+$ContactUsersform->createForm();
 
 if (isset($_POST['bouton_send'])) {
     if ($ContactUsersform->validate()) {

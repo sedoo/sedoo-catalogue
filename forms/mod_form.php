@@ -199,16 +199,15 @@ class mod_form extends base_form
 
         if (isset($this->dataset->data_policy) && !empty($this->dataset->data_policy) && $this->dataset->data_policy->data_policy_id > 0) {
             $this->getElement('new_data_policy')->setAttribute('onfocus', 'blur()');
-        } else {
-        }
+        } 
+        
         $this->addRule('new_data_policy', 'Data use information: Data policy exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
 
-        $attrs = array();
         if (isset($this->dataset->database) && !empty($this->dataset->database) && $this->dataset->database->database_id > 0) {
             $this->disableElement('new_database');
             $this->disableElement('new_db_url');
-        } else {
-        }
+        } 
+        
         $this->addRule('new_database', 'Data use information: Database name exceeds the maximum length allowed (250 characters)', 'maxlength', 250);
         $this->addRule('new_db_url', 'Data use information: Database url exceeds the maximum length allowed (250 characters)', 'maxlength', 250);
 
@@ -217,8 +216,7 @@ class mod_form extends base_form
             $this->addRule('data_format_' . $i, 'Data use information: Format name ' . ($i + 1) . ' exceeds the maximum length allowed (100 characters)', 'maxlength', 100);
             if (isset($this->dataset->data_formats[$i]) && !empty($this->dataset->data_formats[$i]) && $this->dataset->data_formats[$i]->data_format_id > 0) {
                 $this->disableElement('new_data_format_' . $i);
-            } else {
-            }
+            } 
         }
 
       //Contacts
@@ -241,8 +239,8 @@ class mod_form extends base_form
                 $this->disableElement('email1_' . $i);
                 $this->disableElement('email2_' . $i);
                 $this->disableElement('organism_' . $i);
-            } else {
-            }
+            } 
+            
 
             if (isset($this->dataset->originators[$i]->organism) && !empty($this->dataset->originators[$i]->organism) && $this->dataset->originators[$i]->organism->org_id > 0) {
                 $this->disableElement('org_sname_' . $i);

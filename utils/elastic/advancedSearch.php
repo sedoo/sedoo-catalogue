@@ -20,7 +20,7 @@ if(isset($_REQUEST['datsId']) && !empty($_REQUEST['datsId'])){
 	
 	parse_str ( $_SERVER ["QUERY_STRING"], $query_array );
 	unset ( $query_array ['datsId'] );
-	editDataset($datsId, $project_name, false, $query_array);
+	editDataset($datsId, $project_name, false);
 }else if ( array_key_exists('terms',$_REQUEST) ){
 	//GET
 	$q = $_REQUEST['terms'];

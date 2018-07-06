@@ -542,7 +542,6 @@ class base_form extends login_form
         $pers = new personne();
         $pers_select = $pers->chargeForm($this, 'pi_' . $indice, 'Name', $indice);
         $this->addElement($pers_select);
-        $attrs = '';
         $this->addElement('text', 'pi_name_' . $indice, 'new (lastname firstname): ');
         $this->applyFilter('pi_name_' . $indice, 'trim');
         $this->addElement('text', 'email1_' . $indice, 'email1');

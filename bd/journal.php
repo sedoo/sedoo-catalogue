@@ -97,7 +97,6 @@ class journal
     {
         $journal = new journal();
         $types = TYPE_NEW . ',' . TYPE_UPDATE;
-        $orderBy = 'order by date desc';
         $query = "select * from journal where type_journal_id in ($types) and dats_id in (select distinct dats_id from dats_proj where project_id in ($projets)) and publier and age(date) < '$interval' order by date desc";
         return $journal->getByQuery($query);
     }

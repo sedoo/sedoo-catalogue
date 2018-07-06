@@ -6,7 +6,10 @@ require_once "ldap/portalUser.php";
 require_once "countries.php";
 require_once "mail.php";
 
-// class user_form_new extends HTML_QuickForm{
+/**
+ * Formulaire de création d'utilisateur
+ * cf. User-Account-Creation
+ */
 class user_form_new extends login_form
 {
 
@@ -236,15 +239,7 @@ class user_form_new extends login_form
     
     public function addProjectAbstract()
     {
-        global $project_name, $MainProjects;
         $this->user = unserialize($_SESSION['loggedUser']);
-      // foreach ( $MainProjects as $proj ) {
-      //   $this->addElement ( 'textarea', $proj . '_abstract', 'Description of Work (more information if any) ', array (
-      //       'cols' => 50,
-      //       'rows' => 4
-      //   ) );
-      //   $this->applyFilter ( $proj . '_abstract', 'trim' );
-      // }
     }
     
     public function displayPortalDataPolicy($isPortalForm = false)
@@ -310,7 +305,6 @@ class user_form_new extends login_form
     
     public function displayFormRegister($update = false, $isPortalForm = false)
     {
-        global $MainProjects;
         echo '<table><tr><td colspan="3" align="center"><span class="info">Mandatory fields are in blue</span></td></tr>';
         echo '<tr><td><span class="info">' . $this->getElement('firstname')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('firstname')->toHTML() . '</td></tr>';
         echo '<tr><td><span class="info">' . $this->getElement('lastname')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('lastname')->toHTML() . '</td></tr>';
@@ -326,13 +320,6 @@ class user_form_new extends login_form
         echo '<tr><td><span class="info">' . $this->getElement('mail')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('mail')->toHTML() . '</td></tr>';
         echo '<tr><td colspan="3" align="center"><strong>Planned Work</strong></span></td></tr>';
         echo '<tr><td><span class="info">' . $this->getElement('abstract')->getLabel() . '</span></td><td colspan="2">' . $this->getElement('abstract')->toHTML() . '</td></tr>';
-        if ($update == true) {
-          // foreach ( $MainProjects as $proj ) {
-          //   if (array_key_exists ( strtolower ( $proj ) . 'ApplicationDate', $this->user->attrs [strtolower ( $proj )] ) || array_key_exists ( strtolower ( $proj ) . 'ApplicationDate', $this->user->attrs )) {
-          //     echo '<tr><td><span> Work in ' . $proj . ' (more information if any)  </span></td><td colspan="2">' . $this->getElement ( $proj  . '_abstract' )->toHTML () . '</td></tr>';
-          //   }
-          // }
-        }
         echo '<tr><td colspan="3" align="center"><strong>Supervisor</strong></td></tr>';
         echo '<tr><td colspan="3" >If you are a student, please indicate the name and the affiliation of your supervisor.</td></tr>';
         echo '<tr><td>' . $this->getElement('supervisor_name')->getLabel() . '</td><td colspan="2">' . $this->getElement('supervisor_name')->toHTML() . '</td></tr>';
@@ -456,17 +443,7 @@ class user_form_new extends login_form
         echo "&nbsp;" . $this->getElement('bouton_modify')->toHTML();
         echo '</form>';
     }
-    
-    private function displayFormLogin()
-    {
-        echo '<table>';
-        echo '<tr><td><span class="info">' . $this->getElement('mail')->getLabel() . '</span></td><td>' . $this->getElement('mail')->toHTML() . '</td></tr>';
-        echo '<tr><td><span class="info">' . $this->getElement('password')->getLabel() . '</span></td><td>' . $this->getElement('password')->toHTML() . '</td></tr>';
-        echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_login_reg')->toHTML() . '</td></tr>';
-        echo '<tr><td colspan="2" align="center">' . $this->getElement('bouton_forgot')->toHTML() . '</td></tr>';
-        echo '</table>';
-    }
-    
+      
     public function saveForm($isPortalForm = false)
     {
         $this->demande = new portalUser();
@@ -658,7 +635,7 @@ class user_form_new extends login_form
             }
         } catch (Exception $e) {
             echo "<span class='danger'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></span><br>";
-            $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande[$proj]);
+            $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande);
             return false;
         }
     }
@@ -670,8 +647,7 @@ class user_form_new extends login_form
         $this->user = unserialize($_SESSION['loggedUser']);
         try {
             $entry = $this->demande->getUserEntry();
-            $passwd = $this->genPassword(time(), 6);
-            $hashMd5 = md5($passwd);
+            $passwd = $this->genPassword(6);
             $entry["objectClass"][] = REGISTERED_USER_CLASS;
             $entry["userPassword"] = ldap_md5($passwd);
             $entry["homeDirectory"] = PORTAL_DEPOT;
@@ -692,7 +668,7 @@ class user_form_new extends login_form
             }
         } catch (Exception $e) {
             echo "<span class='danger'><strong>The user directory is temporarily unavailable. Please contact the administrator.</strong></span><br>";
-            $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande[$proj]);
+            $this->mailAdmin('ERREUR', "Erreur lors de l'enregistrement d'1 utilisateur.", $e, $this->demande);
             return false;
         }
     }
@@ -785,19 +761,6 @@ class user_form_new extends login_form
         }
     }
     
-    private function updateProjectUser($ldap, $proj)
-    {
-        $entree = $this->demande->otherUser[$proj]->getProjectUserEntry();
-        array_shift($entree["objectClass"]); // Supprime 'user'
-        foreach ($this->exclAttrs as $exclAttr) {
-            unset($entree[$exclAttr]);
-        }
-        if (in_array('studentSupervisorName', $this->exclAttrs) || in_array('studentSupervisorAffiliation', $this->exclAttrs)) {
-            unset($entree["objectClass"]);
-            $entree["objectClass"] = strtolower($proj) . 'User';
-        }
-    }
-
   /*
    * Teste si toutes les checkboxes du groupe sont cochées.
    */
@@ -945,7 +908,6 @@ class user_form_new extends login_form
   // Nv
     public function initForm($user, $update)
     {
-        global $MainProjects;
         $this->getElement('mail')->setValue($user->mail);
         $this->exclAttrs[] = 'altMail';
         $this->exclAttrs[] = 'mail';
@@ -953,10 +915,12 @@ class user_form_new extends login_form
         $this->getElement('firstname')->setValue(trim(ucfirst(str_replace(strtolower($user->lastname), '', strtolower($user->cn)))));
         $this->exclAttrs[] = 'cn';
         $this->exclAttrs[] = 'sn';
+
         if ($user->affiliation) {
             $this->getElement('affiliation')->setValue($user->affiliation);
             $this->exclAttrs[] = 'o';
         }
+
         if ($user->country) {
             $this->getElement('country')->setValue($user->country);
             $this->exclAttrs[] = 'c';
@@ -966,44 +930,35 @@ class user_form_new extends login_form
             $this->getElement('city')->setValue($user->city);
             $this->exclAttrs[] = 'l';
         }
+
         if ($user->zipCode) {
             $this->getElement('zip')->setValue($user->zipCode);
             $this->exclAttrs[] = 'postalCode';
         }
+
         if ($user->street) {
             $this->getElement('street')->setValue($user->street);
             $this->exclAttrs[] = 'street';
         }
+
         if ($user->abstract) {
             $this->getElement('abstract')->setValue($user->abstract);
             $this->exclAttrs[] = 'description';
         }
+
         if ($user->supervisor_name) {
             $this->getElement('supervisor_name')->setValue($user->supervisor_name);
             $this->exclAttrs[] = 'studentSupervisorName';
         }
+
         if ($user->supervisor_affiliation) {
             $this->getElement('supervisor_affiliation')->setValue($user->supervisor_affiliation);
             $this->exclAttrs[] = 'studentSupervisorAffiliation';
         }
+        
         if ($user->phoneNumber) {
             $this->getElement('phone')->setValue($user->phoneNumber);
             $this->exclAttrs[] = 'telephoneNumber';
-        }
-        if ($update == true) {
-          // foreach ($MainProjects as $proj){
-          //   if (isset ( $this->user->attrs [strtolower($proj).'Abstract'] ) || isset ( $this->user->attrs [strtolower($proj)] [strtolower($proj).'Abstract'] )) {
-          //     if (isset ( $this->user->attrs [strtolower($proj).'Abstract'] )) {
-          //       if (is_array ( $this->user->attrs [strtolower($proj).'Abstract'] ))
-          //         $this->getElement ( $proj.'_abstract' )->setValue ( $this->user->attrs [strtolower($proj).'Abstract'] [0] );
-          //       else
-          //         $this->getElement ( $proj.'_abstract' )->setValue ( $this->user->attrs [strtolower($proj).'Abstract'] );
-          //     } elseif ($this->user->attrs [strtolower($proj)] [strtolower($proj).'Abstract']) {
-          //       $this->getElement ( $proj.'_abstract' )->setValue ( $this->user->attrs [strtolower($proj)] [strtolower($proj).'Abstract'] );
-          //     }
-          //     $this->exclAttrs [] = strtolower($proj).'Abstract';
-          //   }
-          // }
         }
     }
 }

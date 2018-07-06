@@ -60,7 +60,7 @@ class multi_instru_dataset extends base_dataset
 
     public function toString()
     {
-        $result = $this->base_dataset_to_string();
+        $this->base_dataset_to_string();
     }
 
     public function display($project_name)

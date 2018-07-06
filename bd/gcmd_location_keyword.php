@@ -130,7 +130,6 @@ class gcmd_location_keyword
    */
     function chargeFormLoc($form, $label, $titre)
     {
-        global $project_name;
         $array_topic[0] = "-- Level 1 --";
         $array_categorie[0][0] = "-- Level 2 --";
         $array_variable[0][0][0] = "-- Level 3 --";

@@ -170,7 +170,7 @@ class groups_form extends login_form
             }
         }
         if ($this->group) {
-            echo '<form action="' . $reqUri . '" method="post" name="frmusers" id="frmusers" >';
+            echo '<form action="" method="post" name="frmusers" id="frmusers" >';
             echo '<table><tr><th colspan="3" align="center">' . $this->group->cn . ' (' . count($this->list) . ')</th></tr>';
             echo "<tr><td>$i</td><td>" . $this->getElement("mail_new")->toHTML() . '</td><td>' . $this->getElement("add")->toHTML() . '</td></tr>';
             if ($this->list) {

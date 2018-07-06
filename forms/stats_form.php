@@ -136,7 +136,6 @@ class stats_form extends login_form
             $ldapbind = ldap_bind($ldapconn, $this->user->dn, $this->user->userPassword);
             if ($ldapbind) {
                 $entries = ldap_search($ldapconn, PEOPLE_BASE, '(&(objectClass=' . REGISTERED_USER_CLASS . ')(objectClass=' . $userClass . ")($statusAttr=" . STATUS_ACCEPTED . '))', array("mail", $regDateAttr, "memberOf", "c"));
-                $cpt = 1;
                 $entry = ldap_first_entry($ldapconn, $entries);
                 while ($entry) {
                     $attrs = ldap_get_attributes($ldapconn, $entry);
@@ -282,7 +281,7 @@ class stats_form extends login_form
         return parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) . "?adm&pageId=7&type=$type&proj=$project_name&stype=$stype$spipAttrs";
     }
 
-    public function display($datsId = 0)
+    public function display()
     {
         if (isset($_REQUEST['type']) && !empty($_REQUEST['type'])) {
             $type = $_REQUEST['type'];
@@ -363,7 +362,7 @@ class stats_form extends login_form
     {
         $requetes = $this->getNbRequetesByDataset();
         echo '<table>';
-        foreach ($requetes as $mail => $jeu) {
+        foreach ($requetes as $jeu) {
             echo '<tr><td>' . $jeu['titre'] . '</td><td>' . $jeu['nbRequetes'] . '</td></tr>';
         }
         echo '</table>';
@@ -382,7 +381,6 @@ class stats_form extends login_form
 
     public function displayNbRequetesByMonth()
     {
-        global $project_name;
         $requetes = $this->getNbRequetesByMonth();
         $graph = getGraphByYear($requetes, $this->yDeb);
         displayGraph($graph, "graph_req_year_" . $this->projectName . ".png");

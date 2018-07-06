@@ -269,7 +269,7 @@ class download_form extends login_form
         if ($archive) {
             echo '<br><span class="success"><strong>Request successfull.&nbsp;Click <a href="/download.php?file=' . $archive . '">here</a>&nbsp;to download.</strong></span><br><br>';
         }
-        echo '<form action="' . $reqUri . '" method="post" name="frmdl" id="frmdl" >';
+        echo '<form action="" method="post" name="frmdl" id="frmdl" >';
         echo '<div style="float: left;position: relative;max-width:380px;">';
         $this->displayDirectory();
         echo '</div><div style="position: relative;float:right;max-width:260px;">';
@@ -302,12 +302,9 @@ class download_form extends login_form
     
     public function displayDirectory()
     {
-        $reqUri = $this->getReqUri();
         $reqUriNoPath = $this->getReqUri(false);
         echo '<table style="table-layout:auto;" ><tr>';
         $parent = $this->getRelativepath(dirname($this->path), $this->pathJeu);
-
-        $onclick = 'onclick="document.forms[\'frmdl\'].submit();"';
 
         if ($this->path != $this->pathJeu) {
             echo '<th colspan = "4" ><a href="' . $reqUriNoPath . '&path=' . $parent . '&project_name=' . $this->projectName . '"><img src="/img/folder_up_petit.png" style="border:0px;" /></a>&nbsp;&nbsp;<strong>Current Directory:&nbsp;' . $this->getRelativepath($this->path, $this->pathJeu) . '</strong></th></tr>';
@@ -444,7 +441,6 @@ class download_form extends login_form
     
     public function displaySelection($archive = null)
     {
-        $reqUri = $this->getReqUri();
         echo $this->getElement('email_notif_hidden')->toHTML();
         echo '<table style="table-layout:auto;" >';
         echo '<tr><th colspan="3"><strong>Data Basket</strong></th></tr>';
@@ -473,7 +469,7 @@ class download_form extends login_form
         $archiveName = uniqid();
         $archiveFile = DATA_PATH_DL . '/' . $archiveName . '.zip';
         $archive = new ZipArchiveTest();
-        $ret = $archive->open($archiveFile);
+        $archive->open($archiveFile);
         $archive->setWorkingDir($this->pathJeu);
         foreach (array_keys($this->selection) as $i) {
             $this->addToArchiveTmp($archive, $this->selection[$i]);
@@ -546,10 +542,8 @@ class download_form extends login_form
   /**
    * Détermine si file est dans la sous-arborescence de dir
    *
-   * @param
-   *          $file
-   * @param
-   *          $dir
+   * @param $file
+   * @param $dir
    * @return boolean
    */
     public function isChild($file, $dir)
@@ -599,7 +593,6 @@ class download_form extends login_form
             if ($elts[0] == '00') {
                 $msg = "<span class='success'>Request successfully sent. The result will be send to you by email.</span>";
             } elseif ($elts[0] == '01') {
-                $archiveName = null;
                 $downloadUrl = trim($elts[1]);
                 header("Location: $downloadUrl");
                 $msg = "<span class='success'>Request successfully sent. Click <a href='$downloadUrl'>here</a> if you are no automatically redirected to the download page.</span>";

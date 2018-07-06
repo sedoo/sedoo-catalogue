@@ -10,7 +10,7 @@ require_once "forms/base_site_form.php";
 class site_form extends base_site_form
 {
 
-    function createForm($projectName)
+    public function createForm($projectName)
     {
         global $project_name;
         if (!isset($projectName)) {
@@ -34,7 +34,7 @@ class site_form extends base_site_form
         $this->addElement('submit', 'bouton_save', 'Save');
     }
 
-    function createFormManufacturer($i)
+    public function createFormManufacturer($i)
     {
         $man = new manufacturer();
         $man_select = $man->chargeForm($this, 'manufacturer_' . $i, 'Manufacturer', '_' . $i);
@@ -43,7 +43,7 @@ class site_form extends base_site_form
         $this->addElement('text', 'new_manufacturer_url_' . $i, 'Manufacturer web site');
     }
 
-    function createFormSite()
+    public function createFormSite()
     {
 
         $place = new place();
@@ -61,7 +61,7 @@ class site_form extends base_site_form
         $this->addElement('submit', 'delete', 'Delete');
     }
 
-    function createFormSensor($i)
+    public function createFormSensor($i)
     {
         $this->createFormManufacturer($i);
         $this->createFormSensorKeyword($i);
@@ -99,10 +99,10 @@ class site_form extends base_site_form
         $this->addElement('submit', 'bouton_add_variable_calcul_' . $i, 'Add a derived parameter', array('onclick' => "document.getElementById('frmsite').action += '#a_param_calcul_" . $i . "'"));
     }
 
-  /*
+  /**
    * Ajoute aux éléments du formulaires des attributs et/ou des regles de validation en fonction de la valeur d'autres champs.
    */
-    function addValidationRules()
+    public function addValidationRules()
     {
 
         $this->addvalidationRulesBase();
@@ -170,7 +170,7 @@ class site_form extends base_site_form
         $this->addValidationRulesSiteBoundings('Site ');
     }
 
-    function initForm()
+    public function initForm()
     {
         $dataset = &$this->dataset;
 
@@ -268,20 +268,20 @@ class site_form extends base_site_form
         }
     }
 
-    function displayErrorsInstru($i)
+    public function displayErrorsInstru($i)
     {
         $this->displayErrors(array('sensor_gcmd_' . $i, 'new_manufacturer_' . $i, 'new_manufacturer_url_' . $i, 'sensor_model_' . $i, 'sensor_calibration_' . $i,
         'sensor_resol_temp_' . $i, 'sensor_vert_resolution_' . $i, 'sensor_horiz_resolution_' . $i, 'sensor_url_' . $i, 'sensor_latitude_' . $i,
         'sensor_longitude_' . $i, 'sensor_altitude_' . $i, 'sensor_environment_' . $i));
     }
 
-    function displayErrorsSite()
+    public function displayErrorsSite()
     {
         $this->displayErrors(array('gcmd_plat_key', 'place', 'new_place', 'west_bound', 'east_bound', 'north_bound',
         'south_bound', 'place_alt_min', 'place_alt_max'));
     }
 
-    function displayForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars)
+    public function displayForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars)
     {
 
         $this->addValidationRules();
@@ -434,7 +434,7 @@ class site_form extends base_site_form
         echo '</form>';
     }
 
-    function saveForm($nb_pi, $nb_sensors, $tab_nbVars, $tab_nbCalcVars)
+    public function saveForm($nb_sensors, $tab_nbVars, $tab_nbCalcVars)
     {
         $dataset = &$this->dataset;
 
@@ -543,32 +543,32 @@ class site_form extends base_site_form
         $dataset->period_id = &$dataset->period->period_id;
     }
 
-    function addPi()
+    public function addPi()
     {
         $this->createFormPersonne($this->dataset->nbPis - 1);
     }
 
-    function addFormat()
+    public function addFormat()
     {
         $this->createFormDataFormat($this->dataset->nbFormats - 1);
     }
 
-    function addProjet()
+    public function addProjet()
     {
         $this->createFormProject($this->dataset->nbProj - 1);
     }
 
-    function addSensor()
+    public function addSensor()
     {
         $this->createFormSensor($this->dataset->nbSensors - 1);
     }
 
-    function addVariable($i)
+    public function addVariable($i)
     {
         $this->createFormVariable($i, $this->dataset->dats_sensors[$i]->nbVars - 1, '');
     }
 
-    function addVariableCalcul($i)
+    public function addVariableCalcul($i)
     {
         $this->createFormVariable($i, $this->dataset->dats_sensors[$i]->nbCalcVars - 1, 'calcul');
     }
