@@ -114,7 +114,7 @@ function initRoles($db)
 {
     $roles = array();
     if ($res = pg_query($db, "SELECT * FROM role;")) {
-        for ($i = 0; $i < pg_num_rows($res); $i++) {
+        for ($i = 0, $size = pg_num_rows($res); $i < $size; $i++) {
             $ar = pg_fetch_row($res);
             $roles[$ar[0]] = $ar[1];
         }
@@ -194,7 +194,7 @@ function lirePlateforme($db)
 {
     $plateformes = array();
     if ($res = pg_query($db, "SELECT * FROM gcmd_plateform_keyword;")) {
-        for ($i = 0; $i < pg_num_rows($res); $i++) {
+        for ($i = 0, $size = pg_num_rows($res); $i < $size; $i++) {
             $ar = pg_fetch_row($res);
             $plateformes[$i] = new Plateforme($ar[0], $ar[1]);
         }
@@ -218,7 +218,7 @@ function getDatasetsByProject($Project, $isPDF = false)
     $plateformes = lirePlateforme($db);
     $requete = "SELECT dats_id, dats_title, dats_date_begin, dats_date_end FROM dataset WHERE dats_id IN (SELECT DISTINCT dats_id FROM url WHERE url_type !='map') AND dats_id IN (SELECT DISTINCT dats_id FROM dats_proj WHERE project_id IN (" . $Projects[MainProject] . "));";
     if ($res = pg_query($db, $requete)) {
-        for ($i = 0; $i < pg_num_rows($res); $i++) {
+        for ($i = 0, $size = pg_num_rows($res); $i < $size; $i++) {
             $result = pg_fetch_row($res);
             $res1 = pg_query($db, "SELECT pers_name FROM dats_originators, personne" . " WHERE dats_id = $result[0] AND
   	             dats_originators.pers_id =personne.pers_id");

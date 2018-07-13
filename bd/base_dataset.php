@@ -836,7 +836,7 @@ abstract class base_dataset implements iDataset
             }
         }
 
-        for ($i = 0, $size = count($this->required_data_formats); $i < $size; $i++) {
+        for ($i = 0, $size2 = count($this->required_data_formats); $i < $size2; $i++) {
             if ($this->required_data_formats[$i]->data_format_id > 0) {
                 $ddf = new dats_data_format();
                 $ddf->dats_id = $this->dats_id;

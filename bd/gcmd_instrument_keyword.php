@@ -185,14 +185,14 @@ class gcmd_instrument_keyword
             $liste_categ = $this->getByQuery($query2);
             $array_categorie[$j][0] = "-- Level 2 --";
 
-            for ($k = 0, $size = count($liste_categ); $k < $size; $k++) {
+            for ($k = 0, $size2 = count($liste_categ); $k < $size2; $k++) {
                 $l = $liste_categ[$k]->gcmd_sensor_id;
                 $array_categorie[$j][$l] = $liste_categ[$k]->gcmd_sensor_name;
 
                 $query3 = "select * from gcmd_instrument_keyword where gcm_gcmd_id = " . $l . " order by gcmd_sensor_name";
                 $liste_instr = $this->getByQuery($query3);
                 $array_variable[$j][$l][0] = "-- Level 3 --";
-                for ($m = 0, $size = count($liste_instr); $m < $size; $m++) {
+                for ($m = 0, $size3 = count($liste_instr); $m < $size3; $m++) {
                     $n = $liste_instr[$m]->gcmd_sensor_id;
                     $array_variable[$j][$l][$n] = $liste_instr[$m]->gcmd_sensor_name;
                 }

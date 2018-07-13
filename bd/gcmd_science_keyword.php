@@ -140,14 +140,14 @@ class gcmd_science_keyword
             $liste_categ = $this->getByQuery($query2);
             $array_categorie[$j][0] = "-- Term --";
 
-            for ($k = 0, $size = count($liste_categ); $k < $size; $k++) {
+            for ($k = 0, $size2 = count($liste_categ); $k < $size2; $k++) {
                 $l = $liste_categ[$k]->gcmd_id;
                 $array_categorie[$j][$l] = $liste_categ[$k]->gcmd_name;
 
                 $query3 = "select * from gcmd_science_keyword where gcm_gcmd_id = " . $l . " order by gcmd_name";
                 $liste_param = $this->getByQuery($query3);
                 $array_variable[$j][$l][0] = "-- Var_level1 --";
-                for ($m = 0, $size = count($liste_param); $m < $size; $m++) {
+                for ($m = 0, $size3 = count($liste_param); $m < $size3; $m++) {
                     $n = $liste_param[$m]->gcmd_id;
                     $array_variable[$j][$l][$n] = $liste_param[$m]->gcmd_name;
 
@@ -157,7 +157,7 @@ class gcmd_science_keyword
                         $array_variable2[$j][$l][$n][0] = "-- Var_level2 --";
                     }
 
-                    for ($o = 0, $size = count($liste_param2); $o < $size; $o++) {
+                    for ($o = 0, $size4 = count($liste_param2); $o < $size4; $o++) {
                         $p = $liste_param2[$o]->gcmd_id;
                         $array_variable2[$j][$l][$n][$p] = $liste_param2[$o]->gcmd_name;
                     }

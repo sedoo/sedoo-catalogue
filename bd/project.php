@@ -122,6 +122,14 @@ class project
         return false;
     }
 
+    /**
+     * Construit un input de type 'hierselect' avec trois niveaux de 'select'
+     *
+     * @param [type] $form
+     * @param [type] $label
+     * @param [type] $titre
+     * @return void
+     */
     public function chargeForm($form, $label, $titre)
     {
 
@@ -136,20 +144,21 @@ class project
         for ($i = 0, $size = count($liste_proj); $i < $size; $i++) {
             $j = $liste_proj[$i]->project_id;
             $array_proj[$j] = $liste_proj[$i]->project_name;
-
+            
             $array_sous_proj[$j][0] = "--Sub_project--";
             $array_sous_proj2[$j][0][0] = "--Sub_project_2--";
 
             $query2 = "select * from project where pro_project_id = " . $j . " order by project_name";
             $sous_proj = $this->getByQuery($query2);
-            for ($k = 0, $size = count($sous_proj); $k < $size; $k++) {
+
+            for ($k = 0, $size2 = count($sous_proj); $k < $size2; $k++) {
                 $l = $sous_proj[$k]->project_id;
                 $array_sous_proj[$j][$l] = $sous_proj[$k]->project_name;
 
                 $array_sous_proj2[$j][$l][0] = "--Sub_project_2--";
                 $query3 = "select * from project where pro_project_id = " . $l . " order by project_name";
                 $sous_proj2 = $this->getByQuery($query3);
-                for ($m = 0, $size = count($sous_proj2); $m < $size; $m++) {
+                for ($m = 0, $size3 = count($sous_proj2); $m < $size3; $m++) {
                     $n = $sous_proj2[$m]->project_id;
                     $array_sous_proj2[$j][$l][$n] = $sous_proj2[$m]->project_name;
                 }

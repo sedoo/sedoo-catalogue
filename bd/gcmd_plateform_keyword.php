@@ -211,14 +211,14 @@ class gcmd_plateform_keyword
             $liste_categ = $this->getByQuery($query2);
             $array_categorie[$j][0] = "-- Term --";
 
-            for ($k = 0, $size = count($liste_categ); $k < $size; $k++) {
+            for ($k = 0, $size2 = count($liste_categ); $k < $size2; $k++) {
                 $l = $liste_categ[$k]->gcmd_plat_id;
                 $array_categorie[$j][$l] = $liste_categ[$k]->gcmd_plat_name;
 
                 $query3 = "select * from gcmd_plateform_keyword where gcm_gcmd_id = " . $l . " order by gcmd_plat_name";
                 $liste_param = $this->getByQuery($query3);
                 $array_variable[$j][$l][0] = "-- Var_level1 --";
-                for ($m = 0, $size = count($liste_param); $m < $size; $m++) {
+                for ($m = 0, $size3 = count($liste_param); $m < $size3; $m++) {
                     $n = $liste_param[$m]->gcmd_plat_id;
                     $array_variable[$j][$l][$n] = $liste_param[$m]->gcmd_plat_name;
                 }
