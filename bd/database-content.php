@@ -264,39 +264,37 @@ function genPDF($Project_Name = null)
     }
 
     $project_content = getDatasetsByProject($Projects[$pro_name], true);
-    $Content = <<<EOD
-	              <html>
-					<head>
-						<title>" . MainProject . " Database Content</title>
-						<style type ="text/css">
-							$stylesheet
-						</style>
-					</head>
-					<body>
-						<div class='container'>
-							<br>
-							<p class='navbar-text navbar-left'><h2 style='color: #31708f; text-align : center;'>" . MainProject . " Database Content</h2></p><br>
-							<br><br>
-							$project_content
-	                    </div>
-					</body>
-				</html>
+    $content = '<html><head>';
+    $content .= '<title>' . MainProject . ' Database Content</title>';
+    $content .= <<<EOD
+            <style type ="text/css">
+                $stylesheet
+            </style>
+        </head>
+        <body>
+            <div class='container'>
+                <br>
+                <p class='navbar-text navbar-left'><h2 style='color: #31708f; text-align : center;'>
 EOD;
+    $content .= MainProject . " Database Content</h2></p><br><br><br>$project_content</div></body></html>";
+
     $pdf = new WkHtmlToPdf(array(
-    'encoding' => 'UTF-8',
-    'zoom' => '0.75',
-    'page-size' => 'A3',
-    'orientation' => 'landscape',
-    'binPath' => WKHTML_BIN_PATH,
-    'margin-top' => 10,
-    'margin-right' => 10,
-    'margin-bottom' => 10,
-    'margin-left' => 10,
-    'no-background',
-    'outline-depth' => '2',
+        'encoding' => 'UTF-8',
+        'zoom' => '0.75',
+        'page-size' => 'A3',
+        'orientation' => 'landscape',
+        'binPath' => WKHTML_BIN_PATH,
+        'margin-top' => 10,
+        'margin-right' => 10,
+        'margin-bottom' => 10,
+        'margin-left' => 10,
+        'no-background',
+        // 'outline-depth' => '2',
     ));
-    $pdf->addPage($Content);
-    $pdf->send($pro_name . "_database_content_" . date("Y-m-d H:i:s") . ".pdf", 'D');
+    $pdf->addPage($content);
+    $pdf->send($pro_name . "_database_content_" . date("Y-m-d H:i:s") . ".pdf");
+    var_dump($pdf);
+    die();
 }
 function fillProjectsTab()
 {
