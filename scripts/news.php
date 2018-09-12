@@ -14,11 +14,11 @@ $liste = journal::getNews('2 mons', $projets);
 foreach ($liste as $ligne) {
     echo '<p>';
     if ($ligne->type_id == TYPE_NEW) {
-        echo '<span class="pink_tag">NEW ';
+        echo '<span class="pink_tag">NEW</span>';
     } elseif ($ligne->type_id == TYPE_UPDATE) {
-        echo '<span class="lightpink_tag">UPDATE ';
+        echo '<span class="lightpink_tag">UPDATE</span>';
     }
-    echo $ligne->date->format('Y-m-d') . '</span>';
+    echo '<strong>' . $ligne->date->format('Y-m-d') . '</strong>';
     echo printDataset($ligne->dataset);
     echo '<br><dfn>' . nl2br($ligne->comment) . '</dfn>';
     echo '</p>';

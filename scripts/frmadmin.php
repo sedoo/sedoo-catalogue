@@ -71,7 +71,7 @@ if ($form->isAdmin()) {
             } elseif (isset($_POST["bouton_delete_$reqId"])) {
                 if ($form->deleteUser($reqId)) {
                 } else {
-                    echo "<span class='danger'><strong>An eror occurred</strong></span><br>";
+                    echo "<span class='danger'><strong>An error occurred</strong></span><br>";
                 }
             }
         }

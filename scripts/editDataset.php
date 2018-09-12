@@ -85,11 +85,11 @@ function editDataAvailability(&$dataset, $projectName, $queryArgs = array())
             foreach ($journal as $jEntry) {
                 echo '<p>';
                 if ($jEntry->type_id == TYPE_NEW) {
-                    echo '<span class="pink_tag">ISSUE ';
+                    echo '<span class="pink_tag">ISSUE</span>';
                 } elseif ($jEntry->type_id == TYPE_UPDATE) {
-                    echo '<span class="lightpink_tag">UPDATE ';
+                    echo '<span class="lightpink_tag">UPDATE</span>';
                 }
-                echo $jEntry->date->format('Y-m-d') . '</span>';
+                echo '<strong>' . $jEntry->date->format('Y-m-d') . '</strong>';
                 if (isset($jEntry->comment) && !empty($jEntry->comment)) {
                     echo $jEntry->comment;
                 }
@@ -625,11 +625,11 @@ function editDataset($datsId, $project_name, $display_archived = false)
                     foreach ($journal as $jEntry) {
                         echo '<p>';
                         if ($jEntry->type_id == TYPE_ARCHIVE) {
-                            echo '<span class="blue_tag">ARCHIVE ';
+                            echo '<span class="blue_tag">ARCHIVE</span>';
                         } elseif ($jEntry->type_id == TYPE_UNARCHIVE) {
-                            echo '<span class="lightblue_tag">UNARCHIVE ';
+                            echo '<span class="lightblue_tag">UNARCHIVE</span>';
                         }
-                        echo $jEntry->date->format('Y-m-d') . '</span>';
+                        echo '<strong>' . $jEntry->date->format('Y-m-d') . '</strong>';
                         if (isset($jEntry->comment) && !empty($jEntry->comment)) {
                                 echo $jEntry->comment;
                         }

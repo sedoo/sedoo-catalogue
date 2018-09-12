@@ -395,7 +395,7 @@ function displayPage()
 		 </div>
 		 <script src='/utils/jquery-ui-1.9.2/jquery-1.8.3.js'></script>
 		 <script type='text/javascript'>
-		 jQuery(document).ready(public function ($) {
+		 jQuery(document).ready(function ($) {
 		 	$('#tabs').tab();
 		 });
 		 </script>

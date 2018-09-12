@@ -719,7 +719,7 @@ class admin_form extends login_form
         $first = null;
         if (isset($projects)) {
             echo '<script>
-					$(public function() {
+					$(function() {
 						$( "#tabs" ).tabs();
 					});
 				</script>';
