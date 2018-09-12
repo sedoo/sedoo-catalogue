@@ -886,19 +886,21 @@ function editInSituDataset(&$dataset, $project_name, $queryArgs = array())
             }
         }
         echo '</td></tr>';
-      //Cherche s'il y a des params dérivés
-        foreach ($dataset->dats_variables as $dats_var) {
-            if ($dats_var->flag_param_calcule == 1) {
-            }
-        }
-        echo '<tr><th colspan="4" align="center"><strong>Derived parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</strong></th></tr>';
-        $cpt = 1;
-        foreach ($dataset->dats_variables as $dats_var) {
-            if ($dats_var->flag_param_calcule == 1) {
-                if (count($dataset->dats_variables) > 1) {
-                    echo '<tr><td colspan="4" align="center"><strong>Derived parameter ' . ($cpt++) . '</strong></td></tr>';
+        //Cherche s'il y a des params dérivés
+        $derivedParametersCount = count(array_filter($dataset->dats_variables, function($param) use ($dataset) {
+            return $param->flag_param_calcule == 1;
+        }));
+
+        if ($derivedParametersCount > 0) {
+            echo '<tr><th colspan="4" align="center"><strong>Derived parameter' . ((count($dataset->dats_variables) > 1) ? 's' : '') . '</strong></th></tr>';
+            $cpt = 1;
+            foreach ($dataset->dats_variables as $dats_var) {
+                if ($dats_var->flag_param_calcule == 1) {
+                    if (count($dataset->dats_variables) > 1) {
+                        echo '<tr><td colspan="4" align="center"><strong>Derived parameter ' . ($cpt++) . '</strong></td></tr>';
+                    }
+                    editParameter($dats_var);
                 }
-                editParameter($dats_var);
             }
         }
         editDataUse($dataset, false);
