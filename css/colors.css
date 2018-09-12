@@ -1,0 +1,117 @@
+/*****
+* main color bleu aeris: #4765a0;
+*/
+
+h1,
+h2,
+h3,
+blockquote,
+[role="legend"],
+.main-navigation ul ul li:first-child,
+.main-navigation .nav-menu > .current_page_item > a,
+.main-navigation .nav-menu > .current-menu-item > a,
+.main-navigation .nav-menu > .current_page_ancestor > a,
+.main-navigation .nav-menu > .current-menu-ancestor > a {
+	border-color: #4765a0; 
+}
+
+a,
+.main-navigation .nav-menu > li > a:hover,
+.main-navigation .nav-menu > li > a:focus,
+.main-navigation .nav-menu > .current_page_item > a,
+.main-navigation .nav-menu > .current-menu-item > a,
+.main-navigation .nav-menu > .current_page_ancestor > a,
+.main-navigation .nav-menu > .current-menu-ancestor > a
+ {
+	color: #4765a0;
+}
+
+[role="leftMenu"] section h2 {
+	background: #4765a0;
+}
+
+a:hover,
+a:focus,
+a:active {
+	color: #009FDE;
+}
+
+.site-branding h1 {
+	background-color: rgba(50, 76, 128, 0.5);
+}
+
+[data-color="Blue"],
+[data-color="Green"],
+[data-color="Purple"],
+[data-color="Orange"] {
+	font-size: 1.5em;
+}
+/* dataLink */
+[data-color="Blue"] {
+	color: #1F7E9E;
+}
+/* bdLink */
+[data-color="Green"] {
+	color: #B6CC49;
+}
+/* extDataLink */
+[data-color="Purple"] {
+	color: #392b58;
+}
+/* qlLink */
+[data-color="Orange"] {
+	color: #DD9946;
+}
+
+.pink_tag,
+.lightpink_tag,
+.blue_tag, 
+.lightblue_tag {
+	display: inline-block;
+	margin-bottom: 5px;
+	padding: 2px 11px;
+    border-radius: 4px;
+    color: white;    
+}
+
+.pink_tag {
+	background: #e56399;
+}
+.lightpink_tag {
+	background: #DF95B3;
+}
+
+.blue_tag {
+	background: #1C5D75;
+}
+.lightblue_tag {
+	background: #288d9f;
+}
+
+.btn_tag {
+background: #f0f0f0 none repeat scroll 0 0;
+border: 1px solid rgb(170, 170, 170);
+border-radius: 4px;
+color: rgb(0, 0, 0);
+display: inline-block;
+margin: 5px;
+padding: 2px 11px;
+text-align: center;
+text-decoration: none;
+}
+
+.warning {
+	color: orange;
+}
+
+.danger {
+	color: red;
+}
+
+.success {
+	color: green;
+}
+
+.info {
+	color: #467AA7;
+}

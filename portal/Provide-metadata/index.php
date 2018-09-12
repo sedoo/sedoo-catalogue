@@ -1,0 +1,76 @@
+<?php
+if (!isset($_SESSION)) {
+    session_start();
+}
+require_once 'conf/conf.php';
+require_once 'conf/define-project.php'; //Cerdanya
+$project_url = "/";
+$titreMilieu = "Provide metadata";
+ob_start();
+?>
+<div class="column1-unit">
+    <br>
+    <br>
+    <div>
+        <p>
+            The <?php echo MainProject; ?> database offers data providers the possibility to add or
+            update metadata describing the datasets they are responsible for.
+            Sharing information about the data is indeed a very important step to
+            foster collaboration. Data access information (url link, procedure…)
+            and use constraints are part of the metadata.
+            <br>
+            <br>
+            To <strong>add new metadata description</strong>, please fill the relevant online form:
+        </p>
+        <ul>
+            <?php if (constant('HasInsituProducts') == 'true') :?>
+                <li>
+                    <a href='/portal/In-Situ-Instrument-Registration'>Instrument form</a>
+                    if you are responsible for an observation dataset. If you need to
+                    document several datasets that share information, please contact us.
+                    We can duplicate the filled forms and avoid you to fill many times
+                    the same information.
+                </li>
+            <?php endif; ?>
+
+            <?php if (constant('HasMultiInsituProducts') == 'true') : ?>
+                <li><a href='/portal/In-Situ-Site-Registration'>Site or multi-instrumented platform form</a>: if you have installed several instruments on one single location.</li>
+            <?php endif; ?>
+
+            <?php if (constant('HasModelOutputs') == 'true') : ?>
+                <li><a href='/portal/Model-Data'>Model outputs</a> if you would like to share model outputs</li>
+            <?php endif; ?>
+
+            <?php if (constant('HasSatelliteProducts') == 'true') : ?>
+                <li><a href='/portal/Satellite-Data'>Satellite products</a>: describe your satellite data</li>
+            <?php endif; ?>
+
+            <?php if (constant('HasValueAddedProducts') == 'true') : ?>
+                <li>
+                    <a href='/portal/Value-Added-Dataset'>Value-added dataset</a> if you would like to share a product, that results from the combination of many data sources.
+                </li>
+            <?php endif; ?>
+        </ul>
+        <p>
+            If metadata are already available and can be either automatically
+            harvested or delivered in a convenient format (such as xml), please
+            contact us.
+            <br>
+            <br>
+            To <strong>update your metadata</strong>, browse the <?php echo MainProject; ?> catalogue, edit your dataset description by 
+            clicking on its title, and then click on the update button located at the bottom of the page.
+            <br>
+            <br>
+            <?php if (defined('Portal_Contact_Email')) : ?>
+                Do not hesitate to contact us in case of any difficulty:
+                <strong><?= Portal_Contact_Email; ?></strong>.
+            <?php endif; ?>
+            <br>
+        </p>
+    </div>
+</div>
+
+<?php
+$milieu = ob_get_clean();
+include "template.php";
+?>

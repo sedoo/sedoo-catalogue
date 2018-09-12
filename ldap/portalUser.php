@@ -1,0 +1,272 @@
+<?php
+require_once "conf/conf.php";
+require_once "ldap/constants.php";
+require_once "ldap/entry.php";
+
+class portalUser extends entry
+{
+
+    public $lastname;
+    public $firstname;
+    public $cn;
+    public $mail;
+    public $affiliation;
+    public $street;
+    public $zipCode;
+    public $city;
+    public $country;
+    public $phoneNumber;
+    public $abstract;
+    public $altMail;
+    public $otherUser;
+    public $applicationDate;
+    public $registrationDate;
+
+  // Utilisateurs enregistrés uniquement
+    public $memberOf;
+    public $userPassword;
+    public $userPasswords;
+    public $otherGroups;
+    public $editableGroup;
+    public $supervisor_name;
+    public $supervisor_affiliation;
+    
+    public function __construct($dn = null, $attrs = null)
+    {
+        if (isset($dn)) {
+            parent::__construct($dn);
+        }
+
+        if (isset($attrs)) {
+            $this->initUser($attrs);
+        }
+    }
+    
+    public $attrs;
+    
+    public function initUser($attrs)
+    {
+        $this->attrs = $attrs;
+
+      // Attributs obligatoires
+        $this->mail = $attrs["mail"][0];
+        $this->cn = $attrs["cn"][0];
+
+      // Attributs optionels
+        if (isset($attrs["sn"]) && !empty($attrs["sn"])) {
+            $this->lastname = $attrs["sn"][0];
+        }
+        if (isset($attrs["altMail"]) && !empty($attrs["altMail"])) {
+            $this->altMail = $attrs["altMail"][0];
+        }
+        if (isset($attrs["o"]) && !empty($attrs["o"])) {
+            $this->affiliation = $attrs["o"][0];
+        }
+        if (isset($attrs["street"]) && !empty($attrs["street"])) {
+            $this->street = $attrs["street"][0];
+        }
+        if (isset($attrs["postalCode"]) && !empty($attrs["postalCode"])) {
+            $this->zipCode = $attrs["postalCode"][0];
+        }
+        if (isset($attrs["l"]) && !empty($attrs["l"])) {
+            $this->city = $attrs["l"][0];
+        }
+        if (isset($attrs["c"]) && !empty($attrs["c"])) {
+            $this->country = $attrs["c"][0];
+        }
+        if (isset($attrs["telephoneNumber"]) && !empty($attrs["telephoneNumber"])) {
+            $this->phoneNumber = $attrs["telephoneNumber"][0];
+        }
+        if (isset($attrs["description"]) && !empty($attrs["description"])) {
+            $this->abstract = $attrs["description"][0];
+        }
+
+      // Students
+        if (isset($attrs["studentSupervisorName"]) && !empty($attrs["studentSupervisorName"])) {
+            $this->supervisor_name = $attrs["studentSupervisorName"][0];
+        }
+        if (isset($attrs["studentSupervisorAffiliation"]) && !empty($attrs["studentSupervisorAffiliation"])) {
+            $this->supervisor_affiliation = $attrs["studentSupervisorAffiliation"][0];
+        }
+
+      // Registered
+        if (isset($attrs["memberOf"]) && !empty($attrs["memberOf"])) {
+            for ($i = 0; $i < $attrs["memberOf"]["count"]; $i++) {
+                $this->memberOf[$i] = $attrs["memberOf"][$i];
+            }
+        }
+        if (isset($attrs["userPassword"]) && !empty($attrs["userPassword"])) {
+            $this->userPassword = $attrs["userPassword"][0];
+            for ($i = 0; $i < $attrs["userPassword"]["count"]; $i++) {
+                $this->userPasswords[$i] = $attrs["userPassword"][$i];
+            }
+        }
+        if (isset($attrs[strtolower(MainProject) . 'ApplicationDate']) && !empty($attrs[strtolower(MainProject) . 'ApplicationDate'])) {
+            $d = $attrs[strtolower(MainProject) . 'ApplicationDate'][0];
+            $this->applicationDate = $d;
+        } else {
+            $minDate = new DateTime("now");
+        }
+        if (isset($attrs[strtolower(MainProject) . 'RegistrationDate']) && !empty($attrs[strtolower(MainProject) . 'RegistrationDate'])) {
+            $d = $attrs[strtolower(MainProject) . 'RegistrationDate'][0];
+            $this->registrationDate = $d;
+        } else {
+            $minDate = new DateTime("now");
+        }
+    }
+    
+    public function toString($withDn = false)
+    {
+        if (isset($this->memberOf) && !empty($this->memberOf)) {
+            foreach ($this->memberOf as $group) {
+                $groups .= "\n- $group";
+            }
+        }
+
+        $result = ($withDn) ? parent::toString() : '' . "Name: $this->cn\n" . "Mail: $this->mail\n" . "altMail: $this->altMail\n" . "Affiliation: $this->affiliation\n" . "Address: $this->street\n" . "Zip Code: $this->zipCode\n" . "City: $this->city\n" . "Country: $this->country\n" . "Telephone: $this->phoneNumber\n" . "Abstract: $this->abstract\n";
+
+        if (isset($groups) && !empty($groups)) {
+            $result .= "Group(s): $groups\n";
+        }
+
+        if (isset($this->userPassword) && !empty($this->userPassword)) {
+            $result .= "Password: $this->userPassword\n";
+        }
+
+        if (isset($this->supervisor_name) && !empty($this->supervisor_name)) {
+            $result .= "Supervisor Name: $this->supervisor_name\n" . "Supervisor Affiliation: $this->supervisor_affiliation\n";
+        }
+
+        return $result;
+    }
+
+  /*
+   * public function printUser(){ echo 'DN: '.$this->dn.'<br>'; echo 'Name: '.$this->cn.'<br>'; echo 'Mail: '.$this->mail.'<br>'; echo 'Affiliation: '.$this->affiliation.'<br>'; echo 'Address: '.$this->street.'<br>'; echo 'Zip Code: '.$this->zipCode.'<br>'; echo 'City: '.$this->city.'<br>'; echo 'Country: '.$this->country.'<br>'; echo 'Telephone: '.$this->phoneNumber.'<br>'; echo 'Abstract: '.$this->abstract.'<br>'; }
+   */
+    public function printRegisteredUser()
+    {
+        $this->printUser();
+        echo 'Password:' . $this->userPassword . '<br>';
+        echo 'Group(s): <br>';
+        foreach ($this->memberOf as $group) {
+            echo '- ' . $group . '<br>';
+        }
+    }
+    
+    public function getUserDn()
+    {
+        return 'mail=' . $this->mail . ',' . PEOPLE_BASE;
+    }
+    
+    public function isRoot()
+    {
+        if (isset($this->memberOf) && !empty($this->memberOf)) {
+            foreach ($this->memberOf as $group) {
+                // echo $group.'<br>';
+                if ($group == 'root') {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+  /*
+   * Teste si l'utilisateur est membre d'un des groupes du tableau $groups.
+   */
+    public function isMemberOf($groups)
+    {
+        $i = 0;
+        if (isset($this->memberOf) && !empty($this->memberOf)) {
+            foreach ($this->memberOf as $group) {
+                if (false !== array_search($group, $groups)) {
+                    $i++;
+                }
+            }
+        }
+        if ($i > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function isAdmin()
+    {
+        global $project_name;
+
+        if ($project_name == strtolower(MainProject)) { 
+            return $this->isMemberOf(array(
+            strtolower($project_name) . 'Adm',
+            'root',
+            ));
+        } else {
+            return $this->isRoot();
+        }
+    }
+
+    public function isportalAdmin()
+    {
+        return $this->isMemberOf(array(
+        strtolower(MainProject) . 'Adm',
+        'root',
+        ));
+    }
+
+    public function isprojectAdmin()
+    {
+        global $project_name;
+        if (isset($project_name) && !empty($project_name)) {
+            return $this->isMemberOf(array(
+            strtolower($project_name) . 'Adm',
+            'root',
+            ));
+        } else {
+            return $this->isRoot();
+        }
+    }
+
+  /*
+   * Retourne un tableau contenant tous les attributs.
+   */
+    public function getUserEntry()
+    {
+        $entree["objectClass"][0] = USER_CLASS;
+        $entree["cn"] = $this->cn;
+        $entree["sn"] = $this->lastname;
+        $entree["mail"] = $this->mail;
+        $entree["altMail"] = $this->altMail;
+        $entree["description"] = $this->abstract;
+        $entree["street"] = $this->street;
+        $entree["telephoneNumber"] = $this->phoneNumber;
+        $entree["postalCode"] = $this->zipCode;
+        $entree["o"] = $this->affiliation;
+        $entree["l"] = $this->city;
+        $entree["c"] = $this->country;
+
+        if (isset($this->supervisor_name) && !empty($this->supervisor_name)) {
+            $entree["objectClass"][] = STUDENT_CLASS;
+            $entree["studentSupervisorName"] = $this->supervisor_name;
+            $entree["studentSupervisorAffiliation"] = $this->supervisor_affiliation;
+        }
+
+        return $entree;
+    }
+    
+    public function getRegisteredUserEntry()
+    {
+        $entree = $this->getUserEntry();
+        $entree["userPassword"] = $this->userPassword;
+        for ($i = 0, $size = count($this->memberOf); $i < $size; $i++) {
+            $entree["memberOf"][$i] = $this->memberOf[$i];
+        }
+
+        if (isset($this->supervisor_name) && !empty($this->supervisor_name)) {
+            $entree["objectClass"][] = STUDENT_CLASS;
+            $entree["studentSupervisorName"] = $this->supervisor_name;
+            $entree["studentSupervisorAffiliation"] = $this->supervisor_affiliation;
+        }
+
+        return $entree;
+    }
+}
