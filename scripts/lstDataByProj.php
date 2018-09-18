@@ -1,25 +1,20 @@
 <?php
-
 require_once 'bd/project.php';
 require_once 'scripts/lstDataUtils.php';
 require_once 'scripts/TreeMenu.php';
 require_once 'conf/conf.php';
-
 $tree = new HTML_TreeMenu();
-
 if (constant('HasCampaignSearch') == 'true' || in_array($project_name, $MainProjects)) {
     echo '<h1>Campaigns list</h1>';
 } else {
     echo '<h1>Projects list</h1>';
 }
 include 'legende.php';
-
 if ($project_name && $project_name != strtolower(MainProject)) {
     $query = "SELECT * FROM project WHERE pro_project_id IS NULL AND project_name = '$project_name' ORDER BY project_name";
 } else {
     $query = "SELECT * FROM project WHERE pro_project_id IS NULL ORDER BY project_name";
 }
-
 $proj = new project();
 $proj_list = $proj->getByQuery($query);
 foreach ($proj_list as $p) {

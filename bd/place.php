@@ -1,6 +1,6 @@
 <?php
 /*
- * GB, Modif 9 aout 2011 : ajout place_level à la table
+ * AM, Modif 17 aout 2018 : suppression place_level, pla_place_id, enfants, parent_place à la table
  */
  	require_once("bd/bdConnect.php");
 	require_once("bd/conf.php");
@@ -19,7 +19,6 @@
  		var $place_elevation_max;
  		var $boundings;
  		var $gcmd_plateform_keyword;
- 		var $enfants;
  		
  		var $gcmd_location_keyword;
  		var $gcmd_loc_id;

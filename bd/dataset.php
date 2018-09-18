@@ -2,8 +2,6 @@
 
 require_once "bd/bdConnect.php";
 require_once "scripts/logger.php";
-require_once "bd/status_final.php";
-require_once "bd/status_progress.php";
 require_once "bd/boundings.php";
 require_once "bd/organism.php";
 require_once "bd/period.php";
@@ -18,6 +16,7 @@ require_once "bd/dats_proj.php";
 require_once "bd/data_format.php";
 require_once "bd/data_policy.php";
 require_once "bd/database.php";
+require_once "bd/licence.php";
 require_once "bd/sensor.php";
 require_once "bd/unit.php";
 require_once "bd/sensor_place.php";
@@ -32,8 +31,6 @@ require_once "sedoo-metadata/sedoo_metadata_utils.php";
 class dataset
 {
     public $dats_id;
-    public $status_final_id;
-    public $status_progress_id;
     public $database_id;
     public $period_id;
     public $data_policy_id;
@@ -42,8 +39,6 @@ class dataset
     public $dats_title;
     public $dats_pub_date;
     public $dats_version;
-    public $dats_process_level;
-    public $dats_other_cit;
     public $dats_abstract;
     public $dats_purpose;
     public $dats_elevation_min;
@@ -53,9 +48,7 @@ class dataset
     public $dats_use_constraints;
     public $dats_access_constraints;
     public $dats_reference;
-    public $dats_quality;
-    public $status_final;
-    public $status_progress;
+    public $lineage;
     public $dats_doi;
     public $boundings;
     public $organism;
@@ -77,8 +70,9 @@ class dataset
     public $is_archived;
     public $dats_funding;
     public $dats_dmetmaj;
-    public $code;
     public $dats_uuid;
+    public $licence_id;
+    public $licence;
 
   // Pour l'affichage
     public $nbPis;
@@ -110,44 +104,37 @@ class dataset
     public function new_dataset($tab)
     {
         $this->dats_id = $tab[0];
-        $this->status_final_id = $tab[1];
-        $this->database_id = $tab[2];
-        $this->period_id = $tab[3];
-        $this->status_progress_id = $tab[4];
-        $this->bound_id = $tab[5];
-        $this->data_policy_id = $tab[6];
-        $this->org_id = $tab[7];
-        $this->dats_title = $tab[8];
-        $this->dats_pub_date = $tab[9];
-        $this->dats_version = $tab[10];
-        $this->dats_process_level = $tab[11];
-        $this->dats_other_cit = $tab[12];
-        $this->dats_abstract = $tab[13];
-        $this->dats_purpose = $tab[14];
-        $this->dats_elevation_min = $tab[15];
-        $this->dats_elevation_max = $tab[16];
-        $this->dats_date_begin = $tab[17];
-        $this->dats_date_end = $tab[18];
-        $this->dats_use_constraints = $tab[19];
-        $this->dats_access_constraints = $tab[20];
-        $this->dats_reference = $tab[21];
-        $this->dats_quality = $tab[22];
-        $this->image = $tab[23];
-        $this->dats_doi = $tab[27];
-        $this->dats_date_end_not_planned = $tab[24];
-        $this->is_requested = $tab[26];
-        $this->attFile = $tab[28];
-        $this->dats_creator = $tab[29];
-        $this->is_archived = $tab[30];
-        $this->dats_funding = $tab[31];
-        $this->dats_dmetmaj = $tab[32];
-        $this->code = $tab[33];
-        $this->dats_uuid = $tab[34];
+        $this->database_id = $tab[1];
+        $this->period_id = $tab[2];
+        $this->bound_id = $tab[3];
+        $this->data_policy_id = $tab[4];
+        $this->org_id = $tab[5];
+        $this->dats_title = $tab[6];
+        $this->dats_pub_date = $tab[7];
+        $this->dats_version = $tab[8];
+        $this->dats_abstract = $tab[9];
+        $this->dats_purpose = $tab[10];
+        $this->dats_elevation_min = $tab[11];
+        $this->dats_elevation_max = $tab[12];
+        $this->dats_date_begin = $tab[13];
+        $this->dats_date_end = $tab[14];
+        $this->dats_use_constraints = $tab[15];
+        $this->dats_access_constraints = $tab[16];
+        $this->dats_reference = $tab[17];
+        $this->lineage = $tab[18];
+        $this->image = $tab[19];
+        $this->dats_doi = $tab[20];
+        $this->dats_date_end_not_planned = $tab[21];
+        $this->is_requested = $tab[22];
+        $this->attFile = $tab[23];
+        $this->dats_creator = $tab[24];
+        $this->is_archived = $tab[25];
+        $this->dats_funding = $tab[26];
+        $this->dats_dmetmaj = $tab[27];
+        $this->dats_uuid = $tab[28];
+	$this->licence_id = $tab[29];
 
-        if (isset($this->status_final_id) && !empty($this->status_final_id)) {
-            $status = new status_final();
-            $this->status_final = $status->getById($this->status_final_id);
-        }
+        
         if (isset($this->database_id) && !empty($this->database_id)) {
             $db = new database();
             $this->database = $db->getById($this->database_id);
@@ -155,10 +142,6 @@ class dataset
         if (isset($this->data_policy_id) && !empty($this->data_policy_id)) {
             $db = new data_policy();
             $this->data_policy = $db->getById($this->data_policy_id);
-        }
-        if (isset($this->status_progress_id) && !empty($this->status_progress_id)) {
-            $status = new status_progress();
-            $this->status_progress = $status->getById($this->status_progress_id);
         }
         if (isset($this->bound_id) && !empty($this->bound_id)) {
             $bound = new boundings();
@@ -171,6 +154,10 @@ class dataset
         if (isset($this->period_id) && !empty($this->period_id)) {
             $per = new period();
             $this->period = $per->getById($this->period_id);
+        }
+        if (isset($this->licence_id) && !empty($this->licence_id)) {
+            $lic = new licence();
+            $this->licence = $lic->getById($this->licence_id);
         }
 
         $this->get_dataset_types();
@@ -309,13 +296,13 @@ class dataset
         for ($i = 0, $size = count($this->sites); $i < $size; $i++) {
             if ($this->sites[$i + 1]->place_id != '') {
                 $result .= $this->sites[$i]->toString() . "\n";
-                if (isset($this->sites[$i]->pla_place_id) && $this->sites[$i]->pla_place_id > 0) {
+                /*if (isset($this->sites[$i]->pla_place_id) && $this->sites[$i]->pla_place_id > 0) {
                     $result .= 'Parent id: ' . $this->sites[$i]->pla_place_id . "\n";
                 }
 
                 if (isset($this->sites[$i]->parent_place)) {
                     $result .= 'Parent ' . $this->sites[$i]->parent_place->toString() . "\n";
-                }
+                }*/
             }
         }
 
@@ -499,16 +486,6 @@ class dataset
             } else {
                 $query .= ",data_policy_id=null";
             }
-            if (isset($this->status_final_id) && !empty($this->status_final_id)) {
-                $query .= ",status_final_id=" . $this->status_final_id;
-            } else {
-                $query .= ",status_final_id=null";
-            }
-            if (isset($this->status_progress_id) && !empty($this->status_progress_id)) {
-                $query .= ",status_progress_id=" . $this->status_progress_id;
-            } else {
-                $query .= ",status_progress_id=null";
-            }
             if (isset($this->period_id) && !empty($this->period_id)) {
                 $query .= ",period_id=" . $this->period_id;
             } else {
@@ -518,16 +495,6 @@ class dataset
                 $query .= ",dats_version='" . str_replace("'", "\'", $this->dats_version) . "'";
             } else {
                 $query .= ",dats_version=null";
-            }
-            if (isset($this->dats_process_level) && !empty($this->dats_process_level)) {
-                $query .= ",dats_process_level='" . str_replace("'", "\'", $this->dats_process_level) . "'";
-            } else {
-                $query .= ",dats_process_level=null";
-            }
-            if (isset($this->dats_other_cit) && !empty($this->dats_other_cit)) {
-                $query .= ",dats_other_cit='" . str_replace("'", "\'", $this->dats_other_cit) . "'";
-            } else {
-                $query .= ",dats_other_cit=null";
             }
             if (isset($this->dats_abstract) && !empty($this->dats_abstract)) {
                 $query .= ",dats_abstract='" . str_replace("'", "\'", $this->dats_abstract) . "'";
@@ -564,10 +531,10 @@ class dataset
             } else {
                 $query .= ",dats_reference=null";
             }
-            if (isset($this->dats_quality) && !empty($this->dats_quality)) {
-                $query .= ",dats_quality='" . str_replace("'", "\'", $this->dats_quality) . "'";
+            if (isset($this->lineage) && !empty($this->lineage)) {
+                $query .= ",lineage='" . str_replace("'", "\'", $this->lineage) . "'";
             } else {
-                $query .= ",dats_quality=null";
+                $query .= ",lineage=null";
             }
             if (isset($this->dats_elevation_min) && !empty($this->dats_elevation_min)) {
                 $query .= ",dats_elevation_min=" . $this->dats_elevation_min;
@@ -593,6 +560,11 @@ class dataset
                 $query .= ",dats_att_file='" . str_replace("'", "\'", $this->attFile) . "'";
             } else {
                 $query .= ",dats_att_file=null";
+            }
+	    if (isset($this->licence_id) && !empty($this->licence_id)) {
+                $query .= ",licence_id=" . $this->licence_id;
+            } else {
+                $query .= ",licence_id=null";
             }
 
             $query .= " where dats_id=" . $this->dats_id;
@@ -698,14 +670,6 @@ class dataset
                 $query_insert .= ",dats_version";
                 $query_values .= ",'" . str_replace("'", "\'", $this->dats_version) . "'";
             }
-            if (isset($this->dats_process_level) && !empty($this->dats_process_level)) {
-                $query_insert .= ",dats_process_level";
-                $query_values .= ",'" . str_replace("'", "\'", $this->dats_process_level) . "'";
-            }
-            if (isset($this->dats_other_cit) && !empty($this->dats_other_cit)) {
-                $query_insert .= ",dats_other_cit";
-                $query_values .= ",'" . str_replace("'", "\'", $this->dats_other_cit) . "'";
-            }
             if (isset($this->dats_abstract) && !empty($this->dats_abstract)) {
                 $query_insert .= ",dats_abstract";
                 $query_values .= ",'" . str_replace("'", "\'", $this->dats_abstract) . "'";
@@ -734,9 +698,9 @@ class dataset
                 $query_insert .= ",dats_reference";
                 $query_values .= ",'" . str_replace("'", "\'", $this->dats_reference) . "'";
             }
-            if (isset($this->dats_quality) && !empty($this->dats_quality)) {
-                $query_insert .= ",dats_quality";
-                $query_values .= ",'" . str_replace("'", "\'", $this->dats_quality) . "'";
+            if (isset($this->lineage) && !empty($this->lineage)) {
+                $query_insert .= ",lineage";
+                $query_values .= ",'" . str_replace("'", "\'", $this->lineage) . "'";
             }
             if (isset($this->dats_elevation_min) && !empty($this->dats_elevation_min)) {
                 $query_insert .= ",dats_elevation_min";
@@ -928,11 +892,11 @@ class dataset
                             $this->dats_sensors[$j]->sensor_places[$i] = new sensor_place();
                             $this->dats_sensors[$j]->sensor_places[$i]->sensor_id = $this->dats_sensors[$j]->sensor->sensor_id;
                             $this->dats_sensors[$j]->sensor_places[$i]->place_id = $this->sites[$i]->place_id;
-                        } elseif ($this->sites[$i]->pla_place_id > 0) {
+                        } /*elseif ($this->sites[$i]->pla_place_id > 0) {
                             $this->dats_sensors[$j]->sensor_places[$i] = new sensor_place();
                             $this->dats_sensors[$j]->sensor_places[$i]->sensor_id = $this->dats_sensors[$j]->sensor->sensor_id;
                             $this->dats_sensors[$j]->sensor_places[$i]->place_id = $this->sites[$i]->pla_place_id;
-                        }
+                        }*/
 
                         if (isset($this->dats_sensors[$j]->sensor_places[$i])) {
                               $sensor_environment = $this->sites[$i]->sensor_environment;
@@ -1035,10 +999,10 @@ class dataset
                         $query = "update place set place_name = '" . $this->sites[$i]->place_name . "' where place_id = " . $this->sites[$i]->place_id;
                         $this->bdConn->exec($query);
                     }
-                    if (isset($this->sites[$i]->pla_place_id) && !empty($this->sites[$i]->pla_place_id)) {
+                    /*if (isset($this->sites[$i]->pla_place_id) && !empty($this->sites[$i]->pla_place_id)) {
                         $query = "update place set pla_place_id = " . $this->sites[$i]->pla_place_id . ",gcmd_plat_id = " . $this->sites[$i]->gcmd_plat_id . " where place_id = " . $this->sites[$i]->place_id;
                         $this->bdConn->exec($query);
-                    }
+                    }*/
                 }
             }
 
@@ -1211,9 +1175,9 @@ class dataset
             $this->get_sites_sat();
         }
         if ($this->isValueAddedDataset()) {
-            $query1 = "select place_id,pla_place_id,bound_id,gcmd_plat_id,place_name,place_elevation_min,place_elevation_max,sensor_id from place left join sensor_place using (place_id) where place_id in " . "(select distinct place_id from dats_place where dats_id = " . $this->dats_id . ") AND gcmd_plat_id in (1,8) AND sensor_id in (select sensor_id from dats_sensor where dats_id = " . $this->dats_id . ") order by gcmd_plat_id ASC";
-            $query2 = "SELECT place_id,pla_place_id,bound_id,gcmd_plat_id,place_name,place_elevation_min,place_elevation_max,sensor_id from place left join sensor_place using (place_id)  where place_id in " . "(select distinct place_id from dats_place where dats_id = " . $this->dats_id . ") AND gcmd_plat_id in (" . GCMD_PLAT_MODEL . ") AND sensor_id in (select sensor_id from dats_sensor where dats_id = " . $this->dats_id . ") order by gcmd_plat_id ASC";
-            $query3 = "select place_id,pla_place_id,bound_id,gcmd_plat_id,place_name,place_elevation_min,place_elevation_max,sensor_id from place left join sensor_place using (place_id) where place_id in " . "(select distinct place_id from dats_place where dats_id = " . $this->dats_id . ") AND gcmd_plat_id not in (" . GCMD_PLAT_EXCLUDE_INSITU . ") AND sensor_id in (select sensor_id from dats_sensor where dats_id = " . $this->dats_id . ") order by gcmd_plat_id ASC";
+            $query1 = "select place_id,bound_id,gcmd_plat_id,place_name,place_elevation_min,place_elevation_max,sensor_id from place left join sensor_place using (place_id) where place_id in " . "(select distinct place_id from dats_place where dats_id = " . $this->dats_id . ") AND gcmd_plat_id in (1,8) AND sensor_id in (select sensor_id from dats_sensor where dats_id = " . $this->dats_id . ") order by gcmd_plat_id ASC";
+            $query2 = "SELECT place_id,bound_id,gcmd_plat_id,place_name,place_elevation_min,place_elevation_max,sensor_id from place left join sensor_place using (place_id)  where place_id in " . "(select distinct place_id from dats_place where dats_id = " . $this->dats_id . ") AND gcmd_plat_id in (" . GCMD_PLAT_MODEL . ") AND sensor_id in (select sensor_id from dats_sensor where dats_id = " . $this->dats_id . ") order by gcmd_plat_id ASC";
+            $query3 = "select place_id,bound_id,gcmd_plat_id,place_name,place_elevation_min,place_elevation_max,sensor_id from place left join sensor_place using (place_id) where place_id in " . "(select distinct place_id from dats_place where dats_id = " . $this->dats_id . ") AND gcmd_plat_id not in (" . GCMD_PLAT_EXCLUDE_INSITU . ") AND sensor_id in (select sensor_id from dats_sensor where dats_id = " . $this->dats_id . ") order by gcmd_plat_id ASC";
             $places1 = new place();
             $this->sites = $places1->getByQuery($query1);
             $nbSatForm = count($this->sites);

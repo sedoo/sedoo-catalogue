@@ -55,6 +55,11 @@ class project
         return $this->getByQuery($query);
     }
 
+	function getByProjectName($projectName){
+ 		$query = "SELECT * FROM project WHERE project_name='$projectName' ORDER BY project_name";
+ 		return $this->getByQuery($query);
+ 	}
+
     public function getByQuery($query)
     {
         $bd = new bdConnect();

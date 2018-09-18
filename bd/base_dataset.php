@@ -8,8 +8,6 @@
 
 require_once "bd/bdConnect.php";
 require_once "scripts/logger.php";
-require_once "bd/status_final.php";
-require_once "bd/status_progress.php";
 require_once "bd/boundings.php";
 require_once "bd/organism.php";
 require_once "bd/period.php";
@@ -28,6 +26,7 @@ require_once "bd/sensor.php";
 require_once "bd/unit.php";
 require_once "bd/sensor_place.php";
 require_once "bd/place.php";
+require_once "bd/licence.php";
 require_once "bd/variable.php";
 require_once "bd/sensor_var.php";
 require_once "scripts/mail.php";
@@ -42,8 +41,6 @@ abstract class base_dataset implements iDataset{
 	const GCMD_GEO_COVERAGE = 'Geographic Regions';
 
     public $dats_id;
-    public $status_final_id;
-    public $status_progress_id;
     public $database_id;
     public $period_id;
     public $data_policy_id;
@@ -64,8 +61,6 @@ abstract class base_dataset implements iDataset{
     public $dats_access_constraints;
     public $dats_reference;
     public $dats_quality;
-    public $status_final;
-    public $status_progress;
     public $dats_doi;
     public $boundings;
     public $organism;
@@ -91,8 +86,9 @@ abstract class base_dataset implements iDataset{
 
     public $dats_funding;
     public $dats_dmetmaj;
-    public $code;
     public $dats_uuid;
+    public $licence_id;
+    public $licence;
 
   //Pour l'affichage
     public $nbPis;
@@ -126,50 +122,36 @@ abstract class base_dataset implements iDataset{
     protected function init_base_dataset($tab)
     {
         $this->dats_id = $tab[0];
-        $this->status_final_id = $tab[1];
-        $this->database_id = $tab[2];
-        $this->period_id = $tab[3];
-        $this->status_progress_id = $tab[4];
-        $this->bound_id = $tab[5];
-        $this->data_policy_id = $tab[6];
-        $this->org_id = $tab[7];
-        $this->dats_title = $tab[8];
-        $this->dats_pub_date = $tab[9];
-        $this->dats_version = $tab[10];
-        $this->dats_process_level = $tab[11];
-        $this->dats_other_cit = $tab[12];
-        $this->dats_abstract = $tab[13];
-        $this->dats_purpose = $tab[14];
-        $this->dats_elevation_min = $tab[15];
-        $this->dats_elevation_max = $tab[16];
-        $this->dats_date_begin = $tab[17];
-        $this->dats_date_end = $tab[18];
-        $this->dats_use_constraints = $tab[19];
-        $this->dats_access_constraints = $tab[20];
-        $this->dats_reference = $tab[21];
-        $this->dats_quality = $tab[22];
-        $this->image = $tab[23];
-        $this->dats_doi = $tab[27];
+        $this->database_id = $tab[1];
+        $this->period_id = $tab[2];
+        $this->bound_id = $tab[3];
+        $this->data_policy_id = $tab[4];
+        $this->org_id = $tab[5];
+        $this->dats_title = $tab[6];
+        $this->dats_pub_date = $tab[7];
+        $this->dats_version = $tab[8];
+        $this->dats_abstract = $tab[9];
+        $this->dats_purpose = $tab[10];
+        $this->dats_elevation_min = $tab[11];
+        $this->dats_elevation_max = $tab[12];
+        $this->dats_date_begin = $tab[13];
+        $this->dats_date_end = $tab[14];
+        $this->dats_use_constraints = $tab[15];
+        $this->dats_access_constraints = $tab[16];
+        $this->dats_reference = $tab[17];
+        $this->lineage = $tab[18];
+        $this->image = $tab[19];
+        $this->dats_doi = $tab[20];
+        $this->dats_date_end_not_planned = $tab[21];
+        $this->is_requested = $tab[22];
+        $this->attFile = $tab[23];
+        $this->dats_creator = $tab[24];
+        $this->is_archived = $tab[25];
+        $this->dats_funding = $tab[26];
+        $this->dats_dmetmaj = $tab[27];
+        $this->dats_uuid = $tab[28];
+	$this->licence_id = $tab[29];
 
-        $this->dats_date_end_not_planned = $tab[24];
-
-        $this->is_requested = $tab[26];
-
-        $this->attFile = $tab[28];
-
-        $this->dats_creator = $tab[29];
-
-        $this->is_archived = $tab[30];
-
-        $this->dats_funding = $tab[31];
-        $this->dats_dmetmaj = $tab[32];
-        $this->code = $tab[33];
-        $this->dats_uuid = $tab[34];
-
-        if (isset($this->status_final_id) && !empty($this->status_final_id)) {
-            $status = new status_final();
-            $this->status_final = $status->getById($this->status_final_id);
-        }
         if (isset($this->database_id) && !empty($this->database_id)) {
             $db = new database();
             $this->database = $db->getById($this->database_id);
@@ -177,10 +159,6 @@ abstract class base_dataset implements iDataset{
         if (isset($this->data_policy_id) && !empty($this->data_policy_id)) {
             $db = new data_policy();
             $this->data_policy = $db->getById($this->data_policy_id);
-        }
-        if (isset($this->status_progress_id) && !empty($this->status_progress_id)) {
-            $status = new status_progress();
-            $this->status_progress = $status->getById($this->status_progress_id);
         }
         if (isset($this->bound_id) && !empty($this->bound_id)) {
             $bound = new boundings();
@@ -473,14 +451,6 @@ abstract class base_dataset implements iDataset{
             $query_insert .= ",dats_doi";
             $query_values .= ",'" . $this->dats_doi . "'";
         }
-        if (isset($this->status_final_id) && !empty($this->status_final_id)) {
-            $query_insert .= ",status_final_id";
-            $query_values .= "," . $this->status_final_id;
-        }
-        if (isset($this->status_progress_id) && !empty($this->status_progress_id)) {
-            $query_insert .= ",status_progress_id";
-            $query_values .= "," . $this->status_progress_id;
-        }
         if (isset($this->org_id) && !empty($this->org_id)) {
             $query_insert .= ",org_id";
             $query_values .= "," . $this->org_id;
@@ -659,16 +629,6 @@ abstract class base_dataset implements iDataset{
             $query .= ",data_policy_id=" . $this->data_policy_id;
         } else {
             $query .= ",data_policy_id=null";
-        }
-        if (isset($this->status_final_id) && !empty($this->status_final_id)) {
-            $query .= ",status_final_id=" . $this->status_final_id;
-        } else {
-            $query .= ",status_final_id=null";
-        }
-        if (isset($this->status_progress_id) && !empty($this->status_progress_id)) {
-            $query .= ",status_progress_id=" . $this->status_progress_id;
-        } else {
-            $query .= ",status_progress_id=null";
         }
         if (isset($this->period_id) && !empty($this->period_id)) {
             $query .= ",period_id=" . $this->period_id;
