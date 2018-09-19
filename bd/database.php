@@ -6,133 +6,151 @@
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
 
-require_once "bd/bdConnect.php";
+require_once("bd/bdConnect.php");
+ 
+ 	class database
+	{
+		var $database_id;
+		var $database_name;
+		var $database_url;
+		var $database_pers;
+		var $database_org;
+		var $database_email;
+		
+		function new_database($tab)
+		{
+			$this->database_id = $tab[0];
+			$this->database_name = $tab[1];
+			$this->database_url = $tab[2];
+			$this->database_pers = $tab[3];
+			$this->database_org = $tab[4];
+			$this->database_email = $tab[5];
+		}
+		
+		function toString(){
+			return $this->database_name.(($this->database_url)?',url: '.$this->database_url:'');
+		}
+		
+		
+    	function insert(& $bd)
+    	{
+    		if (!$this->existe()){
+    			$query_insert = "insert into database (database_name";
+    			$query_values =	"values ('".str_replace("'","\'",$this->database_name)."'";
 
-class database
-{
-    public $database_id;
-    public $database_name;
-    public $database_url;
+    			if (isset($this->database_url) && !empty($this->database_url))
+    			{
+    				$query_insert .= ",database_url,database_pers,database_org,database_email";
+    				$query_values .= ",'".$this->database_url."','".$this->database_pers."','".$this->database_org."','".$this->database_email."'";
+    			}
+     	 	
+    			$query = $query_insert.") ".$query_values.")";
 
-    public function new_database($tab)
-    {
-        $this->database_id = $tab[0];
-        $this->database_name = $tab[1];
-        $this->database_url = $tab[2];
-    }
+    			$bd->exec($query);
+    			$this->database_id = $bd->getLastId("database_database_id_seq");
+    		}
+    		return $this->database_id;
+    	}
 
-    public function toString()
-    {
-        return $this->database_name . (($this->database_url) ? ',url: ' . $this->database_url : '');
-    }
+		function getAll()
+ 		{
+ 			$query = "select * from database order by database_name";
+      		$bd = new bdConnect;
+      		$liste = array();
+      		if ($resultat = $bd->get_data($query))
+      		{
+        		for ($i=0; $i<count($resultat);$i++)
+        		{
+          			$liste[$i] = new database;
+          			$liste[$i]->new_database($resultat[$i]);
+        		}
+      		}
+      		return $liste;
+ 		}
+ 		
+ 		function getById($id)
+    	{
+      		if (!isset($id) || empty($id))
+        		return new database;
 
-    public function insert(&$bd)
-    {
-        if (!$this->existe()) {
-            $query_insert = "INSERT INTO database (database_name";
-            $query_values = "VALUES ('" . str_replace("'", "\'", $this->database_name) . "'";
+      		$query = "select * from database where database_id = ".$id;
+      		$bd = new bdConnect;
+      		if ($resultat = $bd->get_data($query))
+      		{
+        		$per = new database;
+        		$per->new_database($resultat[0]);
+      		}
+      		return $per;
+    	}
+    
+	function getByDatsId($datsId){
+		$liste = $this->getByQuery("SELECT database.* FROM dataset JOIN database using (database_id) WHERE dats_id = $datsId");
+		if (empty($liste)){
+			return null;
+		}else{
+			return $liste[0];
+		}
+	}
+	
+    	function getByQuery($query)
+    	{
+      		$bd = new bdConnect;
+      		$liste = array();
+      		if ($resultat = $bd->get_data($query))
+      		{
+        		for ($i=0; $i<count($resultat);$i++)
+        		{
+          			$liste[$i] = new database;
+          			$liste[$i]->new_database($resultat[$i]);
+        		}
+      		}
+      		return $liste;
+    	}
 
-            if (isset($this->database_url) && !empty($this->database_url)) {
-                $query_insert .= ",database_url";
-                $query_values .= ",'" . $this->database_url . "'";
-            }
+    	function existe()
+    	{
+        	$query = "select * from database where " .
+        			"lower(database_name) = lower('".(str_replace("'","\'",$this->database_name))."')";
+        	//echo $query."<br>";
+        	$bd = new bdConnect;
+        	if ($resultat = $bd->get_data($query))
+        	{
+          		$this->database_id = $resultat[0][0];
+          		return true;
+        	}
+        	return false;
+    	}
 
-            $query = $query_insert . ") " . $query_values . ")";
+    	function idExiste()
+    	{
+        	$query = "select * from database where database_id = ".$this->database_id;
+        	//echo $query."<br>";
+        	$bd = new bdConnect;
+        	if ($resultat = $bd->get_data($query))
+        	{
+          		$this->database_name = $resultat[0][1];
+          		return true;
+        	}
+        	return false;
+    	}
+    	
+    	//creer element select pour formulaire
+    	function chargeForm($form,$label,$titre)
+    	{
 
-            $bd->exec($query);
-            $this->database_id = $bd->getLastId("database_database_id_seq");
-        }
-        return $this->database_id;
-    }
+      		$liste = $this->getAll();
+      		$array[0] = "";
+      		for ($i = 0; $i < count($liste); $i++)
+        	{
+          		$j = $liste[$i]->database_id;
+          		$array[$j] = $liste[$i]->database_name;
+          		//echo 'array['.$j.'] = '.$array[$j].'<br>';
+        	}
+        	        	
+        	$s = & $form->createElement('select',$label,$titre,$array,array('onchange' => "fillBoxes('".$label."',['new_database','new_db_url'],'database',['database_name','database_url']);"));
+        	
+      		return $s;
+    	}
+	}
+?>
 
-    public function getAll()
-    {
-        $query = "SELECT * FROM database ORDER BY database_name";
-        $bd = new bdConnect();
-        $liste = array();
-        if ($resultat = $bd->get_data($query)) {
-            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
-                $liste[$i] = new database();
-                $liste[$i]->new_database($resultat[$i]);
-            }
-        }
-        return $liste;
-    }
-
-    public function getById($id)
-    {
-        if (!isset($id) || empty($id)) {
-            return new database();
-        }
-
-        $query = "SELECT * FROM database WHERE database_id = " . $id;
-        $bd = new bdConnect();
-        if ($resultat = $bd->get_data($query)) {
-            $per = new database();
-            $per->new_database($resultat[0]);
-        }
-        return $per;
-    }
-
-    public function getByDatsId($datsId)
-    {
-        $liste = $this->getByQuery("SELECT database.* FROM dataset JOIN database using (database_id) WHERE dats_id = $datsId");
-        if (empty($liste)) {
-            return null;
-        } else {
-            return $liste[0];
-        }
-    }
-
-    public function getByQuery($query)
-    {
-        $bd = new bdConnect();
-        $liste = array();
-        if ($resultat = $bd->get_data($query)) {
-            for ($i = 0, $size = count($resultat); $i < $size; $i++) {
-                $liste[$i] = new database();
-                $liste[$i]->new_database($resultat[$i]);
-            }
-        }
-        return $liste;
-    }
-
-    public function existe()
-    {
-        $query = "select * from database where " .
-        "lower(database_name) = lower('" . (str_replace("'", "\'", $this->database_name)) . "')";
-        $bd = new bdConnect();
-        if ($resultat = $bd->get_data($query)) {
-            $this->database_id = $resultat[0][0];
-            return true;
-        }
-        return false;
-    }
-
-    public function idExiste()
-    {
-        $query = "select * from database where database_id = " . $this->database_id;
-        $bd = new bdConnect();
-        if ($resultat = $bd->get_data($query)) {
-            $this->database_name = $resultat[0][1];
-            return true;
-        }
-        return false;
-    }
-
-  //creer element select pour formulaire
-    public function chargeForm($form, $label, $titre)
-    {
-
-        $liste = $this->getAll();
-        $array[0] = "";
-        for ($i = 0, $size = count($liste); $i < $size; $i++) {
-            $j = $liste[$i]->database_id;
-            $array[$j] = $liste[$i]->database_name;
-        }
-
-        $s = &$form->createElement('select', $label, $titre, $array, array('onchange' => "fillBoxes('" . $label . "',['new_database','new_db_url'],'database',['database_name','database_url']);"));
-
-        return $s;
-    }
-}

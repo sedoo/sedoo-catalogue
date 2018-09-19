@@ -6,7 +6,6 @@
  * Window - Preferences - PHPeclipse - PHP - Code Templates
  */
 require_once "bd/bdConnect.php";
-require_once "bd/country.php";
 require_once "bd/contact_type.php";
 require_once "bd/organism.php";
 

@@ -293,8 +293,6 @@ EOD;
     ));
     $pdf->addPage($content);
     $pdf->send($pro_name . "_database_content_" . date("Y-m-d H:i:s") . ".pdf");
-    var_dump($pdf);
-    die();
 }
 function fillProjectsTab()
 {

@@ -43,7 +43,7 @@ function addGcmd(&$parent, $gcmd, $project_name)
             $emptyNode = false;
         }
     }
-    
+
     $var = new variable();
     $query = "select * from variable where gcmd_id = $gcmd->gcmd_id and var_name is not null and var_name != '' order by var_name";
     $liste_var = $var->getByQuery($query);

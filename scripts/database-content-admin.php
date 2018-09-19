@@ -8,8 +8,8 @@ if (!$db = pg_connect("host=" . $hote . " user=" . $db_user . " dbname=" . $db_n
 displayPageByProject();
 
 // foreach ($MainProjects as $pro) {
-if (isset($_POST['button_' . $project_name])) {
-    genPDF($project_name);
+if (isset($_POST['button_' . MainProject])) {
+    genPDF(MainProject);
 }
 // }
 

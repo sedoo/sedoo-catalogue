@@ -8,7 +8,6 @@ require_once 'lstDataUtils.php';
 
 class treeByPlat
 {
-
     public $treeMenu;
     public $withDataOnly;
     public $dataType;
@@ -47,30 +46,24 @@ class treeByPlat
         } else {
             $whereDataType = 'and dats_type_id is null';
         }
-
         if ($this->withDataOnly) {
             $whereDataOnly = 'and dats_id in (select distinct dats_id from url)';
         } else {
             $whereDataOnly = '';
         }
-
         if ($this->filter) {
             $whereFilter = "and ($this->filter)";
         } else {
             $whereFilter = '';
         }
-
         if ($siteId > 0) {
             $query_dp = "select distinct dats_id from dats_place where place_id in (select place_id from place where place_id = $siteId or (pla_place_id = $siteId and place_level is null))";
         } else {
             $query_dp = "select distinct dats_id from dats_place where place_id in (select place_id from place where gcmd_plat_id = $platId and (pla_place_id is null or pla_place_id not in (select place_id from place where place_level is not null and gcmd_plat_id in ($platId,14))) and place_level is null)";
         }
-
         $query = "select dats_id, dats_title from dataset left join dats_type using (dats_id) where dats_id in (select distinct dats_id from dats_proj where project_id in ($this->projects)) and dats_id in ($query_dp) and is_requested is null $whereDataOnly $whereDataType $whereFilter order by dats_title";
-
         $dts = new dataset();
         $dts_list = $dts->getOnlyTitles($query);
-
         $cptLocal = 0;
         foreach ($dts_list as $dt) {
             if ($this->dataType == 1) {
@@ -83,13 +76,10 @@ class treeByPlat
                 addDataset($node, $dt, $this->project_name, $this->search);
                 $cptLocal++;
             }
-
             $this->cptDats++;
         }
-
         return $cptLocal;
     }
-
     function isEmptyTypeTab()
     {
         $gcmd = new gcmd_plateform_keyword();
@@ -113,7 +103,6 @@ class treeByPlat
             } else {
                 $sites1 = $p->getByLevel(3, 0, $plat->gcmd_plat_id);
             }
-
             foreach ($sites1 as $site1) {
                 $site1_ids[] = $site1->place_id;
                 $sites2 = $p->getChildrenSites($site1->place_id);
@@ -133,43 +122,35 @@ class treeByPlat
         if (isset($site1_ids) && !empty($site1_ids)) {
             $sites_ids = implode(",", $site1_ids) . ',';
         }
-
         if (isset($site2_ids) && !empty($site2_ids)) {
             $sites_ids .= implode(",", $site2_ids) . ',';
         }
-
         if (isset($site3_ids) && !empty($site3_ids)) {
             $sites_ids .= implode(",", $site3_ids) . ',';
         }
-
         if (isset($site4_ids) && !empty($site4_ids)) {
             $sites_ids .= implode(",", $site4_ids);
         }
-
         $plat_ids = implode(",", $ids);
         $plat_ids = rtrim($plat_ids, ",");
         $sites_ids = rtrim($sites_ids, ",");
         $dats_type_ids = array(0, 1, 2, 3);
-
         foreach ($dats_type_ids as $type_id) {
             if ($type_id > 0) {
                 $whereDataType = "and dats_type_id = $type_id ";
             } else {
                 $whereDataType = "and dats_type_id is null";
             }
-
             if ($this->withDataOnly) {
                 $whereDataOnly = 'and dats_id in (select distinct dats_id from url)';
             } else {
                 $whereDataOnly = '';
             }
-
             if ($this->filter) {
                 $whereFilter = "and ($this->filter)";
             } else {
                 $whereFilter = '';
             }
-
             if ($sites_ids != null) {
                 $query_dp1 = "select distinct dats_id from dats_place where place_id in (select place_id from place where place_id in (
 				$sites_ids ) or (pla_place_id in (
@@ -177,7 +158,6 @@ class treeByPlat
             } else {
                 $query_dp1 = 0;
             }
-
             $query_dp2 = "select distinct dats_id from dats_place where place_id in (select place_id from place where gcmd_plat_id in ($plat_ids) and (pla_place_id is null or pla_place_id not in (select place_id from place where place_level is not null and gcmd_plat_id in ($plat_ids,14))) and place_level is null)";
             $query = "select dats_id, dats_title from dataset left join dats_type using (dats_id) where dats_id in (select distinct dats_id from dats_proj where project_id in ($this->projects)) and ( dats_id in ($query_dp1) or dats_id in ($query_dp2) ) and is_requested is null $whereDataOnly $whereDataType $whereFilter order by dats_title";
             $dts = new dataset();
@@ -206,7 +186,6 @@ class treeByPlat
             $dts_list = null;
         }
     }
-
     function addOthers(&$parent)
     {
         $node = new HTML_TreeNode(array(
@@ -224,7 +203,6 @@ class treeByPlat
         } else {
             $whereFilter = '';
         }
-
         $query = "SELECT dats_id,dats_title FROM dataset LEFT JOIN dats_type USING (dats_id) WHERE dats_id in (select distinct dats_id from dats_proj where project_id in ($this->projects)) AND dats_id not in (select distinct dats_id from dats_place) AND is_requested is null $whereDataType $whereFilter order by dats_title";
         $dts = new dataset();
         $dts_list = $dts->getOnlyTitles($query);
@@ -272,14 +250,12 @@ class treeByPlat
     private function addPlatformsFromType(&$root, $gcmd)
     {
         $platId = $gcmd->gcmd_plat_id;
-
         $p = new place();
         if (stripos($gcmd->gcmd_plat_name, 'buoys') === false) {
             $sites1 = $p->getByLevel(1, 0, $platId);
         } else {
             $sites1 = $p->getByLevel(3, 0, $platId);
         }
-
         $cpt0 = 0;
         foreach ($sites1 as $site1) {
             $node1 = new HTML_TreeNode(array(
@@ -328,14 +304,12 @@ class treeByPlat
                 $cpt0++;
             }
         }
-
         if ($cpt0 > 0) {
             if (stripos($gcmd->gcmd_plat_name, 'Network') === false) {
                 $others = 'Other sites';
             } else {
                 $others = 'Other networks';
             }
-
             $node0 = new HTML_TreeNode(array(
             'text' => "<span>$others</span>",
             ));

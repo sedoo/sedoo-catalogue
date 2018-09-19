@@ -1,50 +1,43 @@
 <?php
 /*
- * GB, Modif 9 aout 2011 : ajout place_level à la table
+ * AM, Modif 17 septembre 2018 : suppression place_level, pla_place_id, enfants, parent_place à la table
  */
 require_once "bd/bdConnect.php";
 require_once "bd/conf.php";
 require_once "bd/gcmd_plateform_keyword.php";
 require_once "bd/boundings.php";
 require_once "scripts/common.php";
+require_once ("bd/gcmd_location_keyword.php");
 
 class place
 {
     public $place_id;
-    public $pla_place_id;
     public $bound_id;
     public $gcmd_plat_id;
     public $place_name;
     public $place_elevation_min;
     public $place_elevation_max;
-    public $parent_place;
     public $boundings;
     public $gcmd_plateform_keyword;
-    public $enfants;
-
-    public $place_level;
-
+    public $gcmd_location_keyword;
+    public $gcmd_loc_id;
     public $west_bounding_coord;
     public $east_bounding_coord;
     public $north_bounding_coord;
     public $south_bounding_coord;
-
     public $sensor_environment;
 
     public function new_place($tab)
     {
         $this->place_id = $tab[0];
-        $this->pla_place_id = $tab[1];
-        $this->bound_id = $tab[2];
-        $this->gcmd_plat_id = $tab[3];
-        $this->place_name = $tab[4];
-        $this->place_elevation_min = intAlt2double($tab[5]);
-        $this->place_elevation_max = intAlt2double($tab[6]);
-        $this->place_level = $tab[7];
-
-        if (isset($this->pla_place_id) && !empty($this->pla_place_id)) {
-            $this->parent_place = $this->getById($this->pla_place_id);
-        }
+        $this->bound_id = $tab[1];
+        $this->gcmd_plat_id = $tab[2];
+        $this->place_name = $tab[3];
+        $this->place_elevation_min = intAlt2double($tab[4]);
+        $this->place_elevation_max = intAlt2double($tab[5]);
+        $this->wmo_code = $tab[6];
+		$this->gcmd_loc_id = $tab[7];
+        
         if (isset($this->bound_id) && !empty($this->bound_id)) {
             $bound = new boundings();
             $this->boundings = $bound->getById($this->bound_id);
@@ -80,16 +73,6 @@ class place
     public function getAll()
     {
         $query = "select * from place order by place_name";
-        return $this->getByQuery($query);
-    }
-
-    public function getChildrenSites($parent, $type = 0)
-    {
-        $where = "where place_level is not null and pla_place_id = $parent";
-        if ($type > 0) {
-            $where .= " and gcmd_plat_id = $type";
-        }
-        $query = "select * from place $where order by place_name";
         return $this->getByQuery($query);
     }
 

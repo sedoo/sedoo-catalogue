@@ -1,5 +1,4 @@
 <?php
-
 require_once 'bd/project.php';
 require_once 'scripts/lstDataUtils.php';
 require_once 'scripts/TreeMenu.php';
