@@ -12,7 +12,6 @@ class instrument_form extends base_form
 
     public function createForm()
     {
-        global $project_name;
         $this->createFormBase();
         $this->setDefaults(array('project_0' => '1'));
         $this->addElement('reset', 'reset', 'Reset');
@@ -21,7 +20,7 @@ class instrument_form extends base_form
         $this->addElement('submit', 'bouton_add_format', 'Add a data format', array('onclick' => "document.getElementById('frminstr').action += '#a_data_format'"));
         $this->addElement('submit', 'bouton_add_pi', 'Add a contact', array('onclick' => "document.getElementById('frminstr').action += '#a_contact'"));
         $this->addElement('submit', 'bouton_add_variable', 'Add a measured parameter', array('onclick' => "document.getElementById('frminstr').action += '#a_param'"));
-        $this->createFormPeriod($project_name);
+        $this->createFormPeriod(MainProject);
         $this->createFormSensor();
         $this->addElement('file', 'upload_doc', 'Attached document');
         $this->addElement('submit', 'upload_doc_button', 'Upload');
