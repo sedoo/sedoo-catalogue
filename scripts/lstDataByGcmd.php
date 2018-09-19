@@ -43,7 +43,7 @@ function addGcmd(&$parent, $gcmd, $project_name)
             $emptyNode = false;
         }
     }
-
+    
     $var = new variable();
     $query = "select * from variable where gcmd_id = $gcmd->gcmd_id and var_name is not null and var_name != '' order by var_name";
     $liste_var = $var->getByQuery($query);
@@ -57,7 +57,7 @@ function addGcmd(&$parent, $gcmd, $project_name)
         usort($node->items, "nodeCompare");
     }
 
-    $proj_ids = get_filtre_projets($project_name);
+    $proj_ids = get_filtre_projets(MainProject);
     if (isset($proj_ids) && !empty($proj_ids)) {
         $query = "select dats_id, dats_title from dataset where dats_id in (select distinct dats_id from dats_var where var_id in (select var_id from variable where gcmd_id = $gcmd->gcmd_id and (var_name is null or var_name = ''))) and dats_id in (select distinct dats_id from dats_proj where project_id in (" . $proj_ids . ")) AND (is_archived is null OR NOT is_archived) order by dats_title";
         $d = new dataset();
