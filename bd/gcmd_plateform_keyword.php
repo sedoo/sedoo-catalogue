@@ -22,7 +22,7 @@ class gcmd_plateform_keyword
     public $gcmd_parent;
     public $enfants;
 
-    public function __construct($tab = [])
+    public function new_gcmd_plateform_keyword($tab)
     {
         $this->gcmd_plat_id = $tab[0];
         $this->gcmd_plat_name = $tab[1];
@@ -132,9 +132,8 @@ class gcmd_plateform_keyword
         $liste = [];
         if ($resultat = $bd->get_data($query)) {
             for ($i = 0, $size = count($resultat); $i < $size; $i++) {
-                // $liste[$i] = new gcmd_plateform_keyword();
-                $liste[$i] = new self($resultat[$i]);
-                // $liste[$i]->new_gcmd_plateform_keyword($resultat[$i]);
+                $liste[$i] = new gcmd_plateform_keyword();
+                $liste[$i]->new_gcmd_plateform_keyword($resultat[$i]);
             }
         }
         return $liste;
