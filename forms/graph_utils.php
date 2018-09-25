@@ -167,22 +167,23 @@ function getGraphRoles($requetes)
     return getPieGraph($data, $labels);
 }
 
-function getGraphCountries($requetes) {
+function getGraphCountries($requetes)
+{
 
     $nbOthers = 0;
 
-    foreach ( $requetes ['c'] as $c => $nb ) {
-            if ( $nb > 3){
-                    $cName = countries::getDisplayName ( $c );
-                    $data [] = $nb;
-                    $labels [] = "$cName ($nb)";
-            }else{
-                    $nbOthers += $nb;
-            }
+    foreach ($requetes ['c'] as $c => $nb) {
+        if ($nb > 3) {
+                $cName = countries::getDisplayName($c);
+                $data [] = $nb;
+                $labels [] = "$cName ($nb)";
+        } else {
+                $nbOthers += $nb;
+        }
     }
-    if ($nbOthers > 0){
-            $data [] = $nbOthers;
-            $labels [] = "Other countries ($nbOthers)";
+    if ($nbOthers > 0) {
+        $data [] = $nbOthers;
+        $labels [] = "Other countries ($nbOthers)";
     }
-    return getPieGraph ( $data, $labels );
+    return getPieGraph($data, $labels);
 }
