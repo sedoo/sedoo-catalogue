@@ -40,8 +40,7 @@ $gcmd = new gcmd_instrument_keyword();
 echo "<h1>Instrument types list</h1>";
 
 include 'legende.php';
-
-$projects = get_filtre_projets($project_name);
+$projects = get_filtre_projets(MainProject);
 $query = "select * from gcmd_instrument_keyword where gcmd_sensor_id in (select distinct gcmd_sensor_id from sensor where sensor_id in (select distinct sensor_id from dats_sensor where dats_id in (select distinct dats_id from dats_proj where project_id in ($projects)))) order by gcmd_sensor_name";
 $sensor_list = $gcmd->getByQuery($query);
 $tree = new HTML_TreeMenu();
