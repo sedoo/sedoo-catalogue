@@ -42,8 +42,8 @@ class sat_form extends base_form
         $this->getElement('new_db_url')->setLabel("Data center url");
         $this->getElement('dats_use_constraints')->setLabel("Access and use constraints");
 
-        $place = new place();
-        $categ_select = $place->chargeFormSatCategs($this, 'sat_categ', 'Data type');
+        $gcmd_plateform_keyword = new gcmd_plateform_keyword();
+        $categ_select = $gcmd_plateform_keyword->chargeFormSat($this, 'sat_categ', 'Data type');
         $this->addElement($categ_select);
 
         $this->getElement('sensor_resol_temp')->setLabel('Temporal (yyyy-mm-dd hh:mm:ss)');

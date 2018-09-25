@@ -76,19 +76,9 @@ class place
         return $this->getByQuery($query);
     }
 
-    public function getByLevel($level = 1, $parent = 0, $type = 0)
+    public function getByType($type = 0)
     {
-        $where = "where place_level = $level";
-
-        if ($parent > 0) {
-            $where .= " and pla_place_id = $parent";
-        }
-        if ($type > 0) {
-            $where .= " and gcmd_plat_id = $type ";
-        }
-
-        $query = "select * from place $where order by place_name";
-
+        $query = "select * from place where gcmd_plat_id = $type order by place_name";
         return $this->getByQuery($query);
     }
 
@@ -230,24 +220,6 @@ class place
         return $this->place_id;
     }
 
-    public function chargeFormModelCategsNew($form, $label, $titre)
-    {
-        $gcmd = new gcmd_plateform_keyword();
-        $type = $gcmd->getByName(model_dataset::GCMD_CATEG);
-    
-        $lev1 = $this->getByLevel(1, 0, $type->gcmd_plat_id);
-        foreach ($lev1 as $item1) {
-            $array_lev1[$item1->place_id] = $item1->place_name;
-            $lev2 = $this->getByLevel(2, $item1->place_id, $type->gcmd_plat_id);
-            foreach ($lev2 as $item2) {
-                $array_lev2[$item1->place_id][$item2->place_id] = $item2->place_name;
-            }
-        }
-        $s = &$form->createElement('hierselect', $label, $titre, null, '');
-        $s->setOptions(array($array_lev1, $array_lev2));
-        return $s;
-    }
-
   //Encore utilisé par va dataset
   //TODO remplacer par le nouveau
     public function chargeFormModelCategs($form, $label, $titre)
@@ -267,6 +239,9 @@ class place
         return $s;
     }
 
+    /**
+     * A supprimer
+     */
     public function chargeFormSiteLevels($form, $label, $titre)
     {
         global $project_name;
@@ -328,9 +303,9 @@ class place
         return $s;
     }
 
-    public function chargeFormModNew($form, $label, $titre)
+    public function chargeFormModelName($form, $label, $titre)
     {
-        return $this->chargeFormByType($form, $label, $titre, model_dataset::GCMD_CATEG, "updateMod();");
+        return $this->chargeFormByType($form, $label, $titre, GCMD_PLAT_MODEL, "updateMod();");
     }
 
   //Encore utilisé par va dataset
@@ -379,7 +354,7 @@ class place
 
     public function chargeFormSat($form, $i, $label = 'satellite_', $titre = 'Satellite')
     {
-        return $this->chargeFormByType($form, $label . $i, $titre, 'Satellites', 'updateSat(' . $i . ');');
+        return $this->chargeFormByType($form, $label . $i, $titre, GCMD_PLAT_SAT, 'updateSat(' . $i . ');');
     }
 
     public function chargeFormRegion($form, $label, $titre, $simpleVersion = false)
@@ -391,12 +366,12 @@ class place
             $boxesNames = "['new_area','west_bound_0','east_bound_0','north_bound_0','south_bound_0','place_alt_min_0','place_alt_max_0']";
             $columnsNames = "['place_name','west_bounding_coord','east_bounding_coord','north_bounding_coord','south_bounding_coord','place_elevation_min','place_elevation_max']";
         }
-        return $this->chargeFormByType($form, $label, $titre, "Geographic Regions", "fillBoxes('" . $label . "'," . $boxesNames . ",'place'," . $columnsNames . ");");
+        return $this->chargeFormByType($form, $label, $titre, GCMD_PLAT_GEO, "fillBoxes('" . $label . "'," . $boxesNames . ",'place'," . $columnsNames . ");");
     }
 
-    public function chargeFormByType($form, $label, $titre, $type, $onchange)
+    public function chargeFormByType($form, $label, $titre, $ids, $onchange)
     {
-        $query = "select * from place where gcmd_plat_id in (select gcmd_plat_id from gcmd_plateform_keyword where gcmd_plat_name ilike '%" . $type . "%') AND place_level IS NULL order by place_name";
+        $query = "select * from place where gcmd_plat_id in (select gcmd_plat_id from gcmd_plateform_keyword where gcmd_plat_id IN (" . $ids . ") OR gcm_gcmd_id IN (".$ids.")) order by place_name";
         $liste = $this->getByQuery($query);
         $array[0] = "";
         for ($i = 0, $size = count($liste); $i < $size; $i++) {
@@ -411,7 +386,7 @@ class place
 
     public function chargeFormByTypeVadataset($form, $label, $titre, $type, $onchange)
     {
-        $query = "select * from place where gcmd_plat_id in (select gcmd_plat_id from gcmd_plateform_keyword where gcmd_plat_name ilike '%" . $type . "%') AND place_level IS NULL order by place_name";
+        $query = "select * from place where gcmd_plat_id in (select gcmd_plat_id from gcmd_plateform_keyword where gcmd_plat_name ilike '%" . $type . "%') order by place_name";
         $liste = $this->getByQuery($query);
         $x = 0;
         for ($i = 0, $size = count($liste); $i < $size; $i++) {

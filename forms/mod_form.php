@@ -15,12 +15,13 @@ class mod_form extends base_form
         $this->addElement('submit', 'bouton_add_pi', 'Add a contact', array('onclick' => "document.getElementById('frmmod').action += '#a_contact'"));
 
         $place = new place();
-        $mod_select = $place->chargeFormModNew($this, 'model', 'Model name');
+        $mod_select = $place->chargeFormModelName($this, 'model', 'Model name');
         $this->addElement($mod_select);
         $this->addElement('text', 'new_model', 'Model name');
         $this->applyFilter('new_model', 'trim');
 
-        $categ_select = $place->chargeFormModelCategsNew($this, 'model_categ', 'Model type');
+        $gcmd_platform_keyword = new gcmd_plateform_keyword();
+        $categ_select = $gcmd_platform_keyword->chargeFormMod($this, 'model_categ', 'Model type');
         $this->addElement($categ_select);
 
         $array = array();

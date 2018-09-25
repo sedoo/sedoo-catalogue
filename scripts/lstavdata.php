@@ -1,3 +1,3 @@
 <?php
 require_once 'treeByPlat.php';
-treeByPlat::displayByDatsType($project_name, 'Available data', true);
+treeByPlat::displayByDatsType(MainProject, 'Available data', true);

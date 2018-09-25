@@ -19,14 +19,15 @@ $tree = new HTML_TreeMenu();
 $query = "select * from gcmd_science_keyword where gcmd_level = 2 order by gcmd_name";
 $liste_topic = $gcmd->getByQuery($query);
 foreach ($liste_topic as $topic) {
-    addGcmd($tree, $topic, $project_name);
+    addGcmd($tree, $topic, MainProject);
 }
-addOthers($tree, $project_name);
+addOthers($tree, MainProject);
 $treeMenu = new HTML_TreeMenu_DHTML($tree, array(
   'images' => '/scripts/images',
   'defaultClass' => 'treeMenuDefault',
 ));
 $treeMenu->printMenu();
+
 function addGcmd(&$parent, $gcmd, $project_name)
 {
     $node = new HTML_TreeNode(array(

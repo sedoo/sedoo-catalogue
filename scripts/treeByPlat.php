@@ -25,6 +25,7 @@ class treeByPlat
         $this->dataType = $dataType;
         $this->filter = $filter;
         $this->search = $search;
+        $this->projects = get_filtre_projets(MainProject);
     }
     
     function setFilter($filter)
@@ -37,7 +38,7 @@ class treeByPlat
         return $this->cptDats == 0;
     }
     
-    private function addDatasets(&$node, $platId, $siteId = 0)
+    private function addDatasets(&$node, $placeId)
     {
         if ($this->dataType > 0) {
             $whereDataType = "and dats_type_id = $this->dataType";
@@ -56,11 +57,12 @@ class treeByPlat
         } else {
             $whereFilter = '';
         }
-        if ($siteId > 0) {
-            $query_dp = "select distinct dats_id from dats_place where place_id in (select place_id from place where place_id = $siteId or (pla_place_id = $siteId and place_level is null))";
-        } else {
-            $query_dp = "select distinct dats_id from dats_place where place_id in (select place_id from place where gcmd_plat_id = $platId and (pla_place_id is null or pla_place_id not in (select place_id from place where place_level is not null and gcmd_plat_id in ($platId,14))) and place_level is null)";
-        }
+
+        // if ($siteId > 0) {
+        //     // $query_dp = "select distinct dats_id from dats_place where place_id in (select place_id from place where place_id = $siteId or (pla_place_id = $siteId))";
+        // } else {
+        $query_dp = "select distinct dats_id from dats_place where place_id = $placeId";
+        // }
         $query = "select dats_id, dats_title from dataset left join dats_type using (dats_id) where dats_id in (select distinct dats_id from dats_proj where project_id in ($this->projects)) and dats_id in ($query_dp) and is_requested is null $whereDataOnly $whereDataType $whereFilter order by dats_title";
         $dts = new dataset();
         $dts_list = $dts->getOnlyTitles($query);
@@ -189,7 +191,7 @@ class treeByPlat
     function addOthers(&$parent)
     {
         $node = new HTML_TreeNode(array(
-        'text' => 'Other',
+            'text' => 'Other',
         ));
         if ($this->dataType > 0) {
             $whereDataType = "AND dats_type_id = $this->dataType";
@@ -222,25 +224,24 @@ class treeByPlat
         ));
     }
     
-    function build($withOthers = true)
+    function build()
     {
         $this->cptDats = 0;
         $gcmd = new gcmd_plateform_keyword();
-        $query = 'SELECT * FROM gcmd_plateform_keyword WHERE gcmd_plat_id != 1 AND gcmd_plat_id != 23 ' . ' AND ( gcmd_plat_id IN (SELECT distinct gcmd_plat_id FROM place where place_id in (' . 'SELECT distinct place_id FROM dats_place WHERE dats_id IN (' . "SELECT distinct dats_id FROM dats_proj where project_id in ($this->projects)))) or gcmd_plat_id in (15,16,22,14) )" . ' ORDER BY gcmd_plat_name';
+        // $query = 'SELECT * FROM gcmd_plateform_keyword WHERE gcmd_plat_id != 1 AND gcmd_plat_id != 23 ' . ' AND ( gcmd_plat_id IN (SELECT distinct gcmd_plat_id FROM place where place_id in (' . 'SELECT distinct place_id FROM dats_place WHERE dats_id IN (' . "SELECT distinct dats_id FROM dats_proj where project_id in ($this->projects)))) or gcmd_plat_id in (15,16,22,14) )" . ' ORDER BY gcmd_plat_name';
+        $query = 'SELECT * FROM gcmd_plateform_keyword WHERE gcm_gcmd_id IS NULL AND gcmd_plat_id NOT IN ('.GCMD_PLAT_GEO.') ORDER BY gcmd_plat_name';
         $plat_list = $gcmd->getByQuery($query);
         $tree = new HTML_TreeMenu();
         foreach ($plat_list as $plat) {
             $racine = new HTML_TreeNode(array(
-            'text' => '<span>' . $plat->gcmd_plat_name . '</span>',
+                'text' => '<span>' . $plat->gcmd_plat_name . '</span>',
             ));
-            $cpt = $this->addPlatformsFromType($racine, $plat);
-            if ($cpt > 0) {
-                  $tree->addItem(clone $racine);
-            }
+            // $cpt = $this->addPlatformType($racine, $plat);
+            // if ($cpt > 0) {
+            //     $tree->addItem(clone $racine);
+            // }
         }
-        if ($withOthers) {
-            $this->addOthers($tree);
-        }
+        $this->addOthers($tree);
         $this->treeMenu = new HTML_TreeMenu_DHTML($tree, array(
         'images' => '/scripts/images',
         'defaultClass' => 'treeMenuDefault',
@@ -249,78 +250,32 @@ class treeByPlat
     
     private function addPlatformsFromType(&$root, $gcmd)
     {
-        $platId = $gcmd->gcmd_plat_id;
+        $cpt = 0;
         $p = new place();
-        if (stripos($gcmd->gcmd_plat_name, 'buoys') === false) {
-            $sites1 = $p->getByLevel(1, 0, $platId);
-        } else {
-            $sites1 = $p->getByLevel(3, 0, $platId);
+        $places = $p->getByType($gcmd->gcmd_plat_id);
+        foreach ($places as $place) {
+            $cpt += $this->addDatasets($root, $place->place_id);
         }
-        $cpt0 = 0;
-        foreach ($sites1 as $site1) {
-            $node1 = new HTML_TreeNode(array(
-            'text' => '<span>' . $site1->place_name . '</span>',
-            'expanded' => 'false',
+        return $cpt;
+    }
+
+    private function addPlatformType(&$root, $gcmd)
+    {
+        $cpt = 0;
+        $plat_list = $gcmd->getChildren(true);
+        if ($plat_list === []) {
+            return;
+        }
+        foreach ($plat_list as $plat) {
+            $racine = new HTML_TreeNode(array(
+                'text' => '<span>' . $plat->gcmd_plat_name . '</span>',
             ));
-            $cpt1 = 0;
-            $sites2 = $p->getChildrenSites($site1->place_id);
-            foreach ($sites2 as $site2) {
-                  $node2 = new HTML_TreeNode(array(
-                    'text' => '<span>' . $site2->place_name . '</span>',
-                  ));
-                  $cpt2 = 0;
-                  $sites3 = $p->getChildrenSites($site2->place_id);
-                foreach ($sites3 as $site3) {
-                      $node3 = new HTML_TreeNode(array(
-                        'text' => '<span>' . $site3->place_name . '</span>',
-                      ));
-                      $cpt3 = 0;
-                      $sites4 = $p->getChildrenSites($site3->place_id);
-                    foreach ($sites4 as $site4) {
-                                $node4 = new HTML_TreeNode(array(
-                                  'text' => '<span>' . $site4->place_name . '</span>',
-                                ));
-                        if ($cpt4 > 0) {
-                            $cpt3++;
-                            $node3->addItem(clone $node4);
-                        }
-                                $cpt4 = $this->addDatasets($node4, $platId, $site4->place_id);
-                    }
-                      $cpt3 += $this->addDatasets($node3, $platId, $site3->place_id);
-                    if ($cpt3 > 0) {
-                        $cpt2++;
-                        $node2->addItem(clone $node3);
-                    }
-                }
-                    $cpt2 += $this->addDatasets($node2, $platId, $site2->place_id);
-                if ($cpt2 > 0) {
-                    $cpt1++;
-                    $node1->addItem(clone $node2);
-                }
-            }
-            $cpt1 += $this->addDatasets($node1, $platId, $site1->place_id);
-            if ($cpt1 > 0) {
-                $root->addItem(clone $node1);
-                $cpt0++;
+            $cpt = $this->addPlatformType($racine, $plat);
+            if ($cpt > 0) {
+                $root->addItem(clone $racine);
             }
         }
-        if ($cpt0 > 0) {
-            if (stripos($gcmd->gcmd_plat_name, 'Network') === false) {
-                $others = 'Other sites';
-            } else {
-                $others = 'Other networks';
-            }
-            $node0 = new HTML_TreeNode(array(
-            'text' => "<span>$others</span>",
-            ));
-            $cpt1 = $this->addDatasets($node0, $platId, 0);
-            if ($cpt1 > 0) {
-                  $root->addItem($node0);
-            }
-        } else {
-            $cpt0 = $this->addDatasets($root, $platId, 0);
-        }
-        return $cpt0;
+        return $this->addPlatformsFromType($root, $gcmd);
     }
     
     static function getUrl($datsType)
@@ -342,7 +297,7 @@ class treeByPlat
         include 'legende.php';
 
         $selectedStyle = 'style="font-size:110%;font-weight:bold;"';
-        $arbre->isEmptyTypeTab();
+        // $arbre->isEmptyTypeTab();
         if ($datsType != -1) {
             echo '<table><tr>';
             if ($arbre->EmptyTab[0] == false) {

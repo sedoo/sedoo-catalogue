@@ -52,8 +52,8 @@ class sat_form_simple extends base_form
 
         $this->getElement('data_format_0')->setLabel("Original data format");
 
-        $place = new place();
-        $categ_select = $place->chargeFormSatCategs($this, 'sat_categ', 'Data type');
+        $gcmd_plateform_keyword = new gcmd_plateform_keyword();
+        $categ_select = $gcmd_plateform_keyword->chargeFormSat($this, 'sat_categ', 'Data type');
         $this->addElement($categ_select);
     }
 

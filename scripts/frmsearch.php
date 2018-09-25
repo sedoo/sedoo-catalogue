@@ -212,7 +212,7 @@ function listDatasetsByPlatform($f, $project_name)
     $arbre = new treeByPlat(false, -1, $query_dat, 1);
     $arbre->project_name = $project_name;
     $arbre->projects = get_filtre_projets($project_name);
-    $arbre->build(true);
+    $arbre->build();
     if ($arbre->isEmpty()) {
         return null;
     } else {

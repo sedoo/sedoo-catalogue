@@ -7,6 +7,7 @@
  */
 require_once "bd/bdConnect.php";
 require_once "bd/thesaurus.php";
+require_once "bd/conf.php";
 
 class gcmd_plateform_keyword
 {
@@ -21,7 +22,7 @@ class gcmd_plateform_keyword
     public $gcmd_parent;
     public $enfants;
 
-    public function new_gcmd_plateform_keyword($tab)
+    public function __construct($tab = [])
     {
         $this->gcmd_plat_id = $tab[0];
         $this->gcmd_plat_name = $tab[1];
@@ -56,14 +57,14 @@ class gcmd_plateform_keyword
 
     public function getChildren($recursive = false)
     {
-        $liste = array();
+        $liste = [];
         $this->readChildren($liste, $recursive);
         return $liste;
     }
 
     private function readChildren(&$liste, $recursive = false)
     {
-        $query = "SELECT * FROM gcmd_plateform_keyword WHERE gcm_gcmd_id = $this->gcmd_id ORDER BY gcmd_loc_name";
+        $query = "SELECT * FROM gcmd_plateform_keyword WHERE gcm_gcmd_id = $this->gcmd_plat_id ORDER BY gcmd_plat_name";
         $tmp = $this->getByQuery($query);
         if ($recursive && isset($tmp)) {
             foreach ($tmp as $child) {
@@ -128,11 +129,12 @@ class gcmd_plateform_keyword
     public function getByQuery($query)
     {
         $bd = new bdConnect();
-        $liste = array();
+        $liste = [];
         if ($resultat = $bd->get_data($query)) {
             for ($i = 0, $size = count($resultat); $i < $size; $i++) {
-                $liste[$i] = new gcmd_plateform_keyword();
-                $liste[$i]->new_gcmd_plateform_keyword($resultat[$i]);
+                // $liste[$i] = new gcmd_plateform_keyword();
+                $liste[$i] = new self($resultat[$i]);
+                // $liste[$i]->new_gcmd_plateform_keyword($resultat[$i]);
             }
         }
         return $liste;
@@ -199,7 +201,8 @@ class gcmd_plateform_keyword
         $array_topic[0] = "-- Topic --";
         $array_categorie[0][0] = "-- Term --";
         $array_variable[0][0][0] = "-- Var_level1 --";
-        $query = "select * from gcmd_plateform_keyword where gcm_gcmd_id is null order by gcmd_plat_name";
+        // TODO exclure les satellites et les modèles
+        $query = "select * from gcmd_plateform_keyword where gcm_gcmd_id is null AND gcmd_plat_id NOT IN (" . GCMD_PLAT_MODEL . ',' . GCMD_PLAT_SAT . ',' . GCMD_PLAT_GEO . ") order by gcmd_plat_name";
         $liste_topic = $this->getByQuery($query);
 
         for ($i = 0, $size = count($liste_topic); $i < $size; $i++) {
@@ -233,4 +236,46 @@ class gcmd_plateform_keyword
         ));
         return $s;
     }
+
+    public function chargeFormModSat($form, $label, $titre, $ids)
+    {
+        $array_topic[0] = "-- Topic --";
+        $array_categorie[0][0] = "-- Term --";
+        $query = "select * from gcmd_plateform_keyword where gcmd_plat_id IN (".$ids.") order by gcmd_plat_name";
+        $liste_topic = $this->getByQuery($query);
+
+        for ($i = 0, $size = count($liste_topic); $i < $size; $i++) {
+            $j = $liste_topic[$i]->gcmd_plat_id;
+
+            $array_topic[$j] = $liste_topic[$i]->gcmd_plat_name;
+
+            $query2 = "select * from gcmd_plateform_keyword where gcm_gcmd_id = " . $j . " order by gcmd_plat_name";
+            $liste_categ = $this->getByQuery($query2);
+            $array_categorie[$j][0] = "-- Term --";
+
+            for ($k = 0, $size2 = count($liste_categ); $k < $size2; $k++) {
+                $l = $liste_categ[$k]->gcmd_plat_id;
+                $array_categorie[$j][$l] = $liste_categ[$k]->gcmd_plat_name;
+            }
+        }
+
+        $s = &$form->createElement('hierselect', $label, $titre);
+        $s->setOptions(array(
+        $array_topic,
+        $array_categorie
+        ));
+        return $s;
+    }
+
+    public function chargeFormMod($form, $label, $titre)
+    {
+        return $this->chargeFormModSat($form, $label, $titre, GCMD_PLAT_MODEL);
+    }    
+
+    public function chargeFormSat($form, $label, $titre)
+    {
+        return $this->chargeFormModSat($form, $label, $titre, GCMD_PLAT_SAT);
+    }    
+
+
 }
